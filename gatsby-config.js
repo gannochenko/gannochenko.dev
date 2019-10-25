@@ -1,7 +1,7 @@
 module.exports = {
     siteMetadata: {
-        title: 'Grayscale promo',
-        description: 'Grayscale promo gatsby starter',
+        title: 'Gannochenko',
+        description: 'Gannochenko gatsby starter',
         author: '@awesome1888',
     },
     plugins: [

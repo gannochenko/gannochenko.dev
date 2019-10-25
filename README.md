@@ -18,26 +18,26 @@
 <br />
 <p align="center">
   <!--
-  <a href="https://github.com/awesome1888/grayscale-promo-gatsbyjs-starter">
+  <a href="https://github.com/awesome1888/gannochenko">
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
   -->
 
-  <h3 align="center">Grayscale promo &mdash; GatsbyJS starter</h3>
+  <h3 align="center">Gannochenko &mdash; Blog</h3>
 
   <p align="center">
     An awesome GatsbyJS template to build a smiple landing fast
     <!--
     <br />
-    <a href="https://github.com/awesome1888/grayscale-promo-gatsbyjs-starter"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/awesome1888/gannochenko"><strong>Explore the docs »</strong></a>
     -->
     <br />
     <br />
     <a href="https://gatsby-starter-grayscale-promo.netlify.com/">View Demo</a>
     ·
-    <a href="https://github.com/awesome1888/grayscale-promo-gatsbyjs-starter/issues">Report Bug</a>
+    <a href="https://github.com/awesome1888/gannochenko/issues">Report Bug</a>
     ·
-    <a href="https://github.com/awesome1888/grayscale-promo-gatsbyjs-starter/issues">Request Feature</a>
+    <a href="https://github.com/awesome1888/gannochenko/issues">Request Feature</a>
   </p>
 </p>
 
@@ -67,7 +67,7 @@
 [![Preview Screen Shot][product-screenshot]](https://example.com)
 -->
 
-This is a nice GatsbyJS starter I made after another static website.
+This is a nice Blog I made after another static website.
 
 ### Built With
 
@@ -113,7 +113,7 @@ yarn start;
 * analytics support
 * page auto-generation support
 
-See the [open issues](https://github.com/awesome1888/grayscale-promo-gatsbyjs-starter/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/awesome1888/gannochenko/issues) for a list of proposed features (and known issues).
 
 <!-- CONTRIBUTING -->
 ## Contributing
@@ -136,30 +136,30 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 Sergei Gannochenko - [Linkedin](https://www.linkedin.com/in/sergey-gannochenko/)
 
-Project Link: [https://github.com/awesome1888/grayscale-promo-gatsbyjs-starter](https://github.com/awesome1888/grayscale-promo-gatsbyjs-starter)
+Project Link: [https://github.com/awesome1888/gannochenko](https://github.com/awesome1888/gannochenko)
 
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
 
 Special thanks to:
 
-* [Another cool GatsbyJS starter I took some ideas from](https://github.com/damassi/gatsby-starter-typescript-rebass-netlifycms)
+* [Another cool Blog I took some ideas from](https://github.com/damassi/gatsby-starter-typescript-rebass-netlifycms)
 * [Unsplash](https://unsplash.com)
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/awesome1888/grayscale-promo-gatsbyjs-starter.svg?style=flat-square
-[contributors-url]: https://github.com/awesome1888/grayscale-promo-gatsbyjs-starter/graphs/contributors
-[language-shield]: https://img.shields.io/github/languages/top/awesome1888/grayscale-promo-gatsbyjs-starter.svg?style=flat-square
-[language-url]: https://github.com/awesome1888/grayscale-promo-gatsbyjs-starter
-[forks-shield]: https://img.shields.io/github/forks/awesome1888/grayscale-promo-gatsbyjs-starter.svg?style=flat-square
-[forks-url]: https://github.com/awesome1888/grayscale-promo-gatsbyjs-starter/network/members
-[stars-shield]: https://img.shields.io/github/stars/awesome1888/grayscale-promo-gatsbyjs-starter.svg?style=flat-square
-[stars-url]: https://github.com/awesome1888/grayscale-promo-gatsbyjs-starter/stargazers
-[issues-shield]: https://img.shields.io/github/issues/awesome1888/grayscale-promo-gatsbyjs-starter.svg?style=flat-square
-[issues-url]: https://github.com/awesome1888/grayscale-promo-gatsbyjs-starter/issues
-[license-shield]: https://img.shields.io/github/license/awesome1888/grayscale-promo-gatsbyjs-starter.svg?style=flat-square
-[license-url]: https://github.com/awesome1888/grayscale-promo-gatsbyjs-starter/blob/master/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/awesome1888/gannochenko.svg?style=flat-square
+[contributors-url]: https://github.com/awesome1888/gannochenko/graphs/contributors
+[language-shield]: https://img.shields.io/github/languages/top/awesome1888/gannochenko.svg?style=flat-square
+[language-url]: https://github.com/awesome1888/gannochenko
+[forks-shield]: https://img.shields.io/github/forks/awesome1888/gannochenko.svg?style=flat-square
+[forks-url]: https://github.com/awesome1888/gannochenko/network/members
+[stars-shield]: https://img.shields.io/github/stars/awesome1888/gannochenko.svg?style=flat-square
+[stars-url]: https://github.com/awesome1888/gannochenko/stargazers
+[issues-shield]: https://img.shields.io/github/issues/awesome1888/gannochenko.svg?style=flat-square
+[issues-url]: https://github.com/awesome1888/gannochenko/issues
+[license-shield]: https://img.shields.io/github/license/awesome1888/gannochenko.svg?style=flat-square
+[license-url]: https://github.com/awesome1888/gannochenko/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/sergey-gannochenko/
 [product-screenshot]: images/screenshot.png
