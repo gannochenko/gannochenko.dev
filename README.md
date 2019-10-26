@@ -12,7 +12,7 @@
 [![Language][language-shield]][language-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/ca134944-33b3-41ac-8d12-048fc8c20637/deploy-status)](https://app.netlify.com/sites/gatsby-starter-grayscale-promo/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/d28d71c8-155f-414d-8fac-bb0e3b254025/deploy-status)](https://app.netlify.com/sites/gatsby-starter-grayscale-promo/deploys)
 
 <!-- PROJECT LOGO -->
 <br />
@@ -102,7 +102,7 @@ yarn start;
 ### Deployment
 
 * Do project-wide replacement of `awesome1888` and `gatsby-starter-grayscale-promo` with your own GitHub username and repo name.
-* Setup [NetlifyCMS account](https://www.netlifycms.org/) and integrate it with your GitHub repo.
+* Setup [NetlifyCMS account](https://app.netlify.com) and integrate it with your GitHub repo.
 * Commit to the repo, see the changes online in a couple of minutes!
 * To edit the content, go to the `/admin` section of your website.
 
@@ -143,7 +143,6 @@ Project Link: [https://github.com/awesome1888/gannochenko](https://github.com/aw
 
 Special thanks to:
 
-* [Another cool Blog I took some ideas from](https://github.com/damassi/gatsby-starter-typescript-rebass-netlifycms)
 * [Unsplash](https://unsplash.com)
 
 <!-- MARKDOWN LINKS & IMAGES -->

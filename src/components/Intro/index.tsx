@@ -6,9 +6,18 @@ import {
     ImageOverlay,
     Arrow,
     Data,
-    Title,
-    SubTitle,
+    // Title,
+    // SubTitle,
+    DataColumn,
+    HelloBlock,
+    HelloLeft,
+    HelloRight,
+    NameBlock,
+    GreetingBlock,
+    SocialBar,
 } from './style';
+import { Avatar } from '../Avatar';
+import { Social } from '../Social';
 import { Query } from './query';
 import { Copyright } from '../Copyright';
 
@@ -36,18 +45,52 @@ export const Intro: FunctionComponent<{}> = () => {
                         />
                         <ImageOverlay />
                         <Data className="intro-data">
-                            <Title
-                                effect="fade-slide-left"
-                                effectTimeout={timeoutBase}
-                            >
-                                Gannochenko
-                            </Title>
-                            <SubTitle
-                                effect="fade-slide-bottom"
-                                effectTimeout={timeoutBase + 500}
-                            >
-                                Blog
-                            </SubTitle>
+                            <DataColumn>
+                                <HelloBlock>
+                                    <HelloLeft>
+                                        <Avatar />
+                                    </HelloLeft>
+                                    <HelloRight>
+                                        <NameBlock>
+                                            Sergei Gannochenko
+                                        </NameBlock>
+                                        <GreetingBlock>
+                                            JavaScript full-stack software
+                                            engineer in Berlin, Germany.
+                                        </GreetingBlock>
+                                        <SocialBar>
+                                            <Social
+                                                linkedin
+                                                src="https://www.linkedin.com/in/sergey-gannochenko"
+                                            />
+                                            <Social
+                                                twitter
+                                                src="https://twitter.com/Gannochenkoff"
+                                            />
+                                            <Social
+                                                medium
+                                                src="https://medium.com/@awesome1888"
+                                            />
+                                            <Social
+                                                github
+                                                src="https://github.com/awesome1888"
+                                            />
+                                        </SocialBar>
+                                    </HelloRight>
+                                </HelloBlock>
+                            </DataColumn>
+                            {/*<Title*/}
+                            {/*    effect="fade-slide-left"*/}
+                            {/*    effectTimeout={timeoutBase}*/}
+                            {/*>*/}
+                            {/*    Gannochenko*/}
+                            {/*</Title>*/}
+                            {/*<SubTitle*/}
+                            {/*    effect="fade-slide-bottom"*/}
+                            {/*    effectTimeout={timeoutBase + 500}*/}
+                            {/*>*/}
+                            {/*    Blog*/}
+                            {/*</SubTitle>*/}
                         </Data>
                         <Arrow
                             effectTimeout={timeoutBase + 1500}
