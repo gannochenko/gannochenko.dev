@@ -32,7 +32,7 @@ const StandardBlockComponent: FunctionComponent<Props> = props => {
                     fontSize={fontSize}
                 />
             )}
-            {graphics.length === 1 && (
+            {graphics.length === 1 && graphics[0].image && (
                 <ImageSingle>
                     <ImageWrap>
                         <Image
@@ -46,6 +46,10 @@ const StandardBlockComponent: FunctionComponent<Props> = props => {
                 <ImageGallery>
                     <ImageGalleryGrid>
                         {graphics.map((item, key) => {
+                            if (!item.image) {
+                                return null;
+                            }
+
                             timeout += 200;
                             return (
                                 <GalleryItem

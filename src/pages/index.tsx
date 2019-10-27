@@ -47,7 +47,7 @@ const getWidget = (node: Node) => {
     return StandardBlock;
 };
 
-const HomePage: FunctionComponent<Props> = ({ data }) => {
+const HomePage: FunctionComponent<Props> = ({ data = {} }) => {
     const { allMarkdownRemark: { nodes = [] } = {} } = data;
     return (
         <Layout>
@@ -76,13 +76,6 @@ export const query = graphql`
                 html
                 frontmatter {
                     graphics {
-                        image {
-                            childImageSharp {
-                                fluid(maxWidth: 1240, quality: 80) {
-                                    ...GatsbyImageSharpFluid_tracedSVG
-                                }
-                            }
-                        }
                         author
                         source
                         sourceText

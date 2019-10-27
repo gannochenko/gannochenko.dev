@@ -6,8 +6,6 @@ import {
     ImageOverlay,
     Arrow,
     Data,
-    // Title,
-    // SubTitle,
     DataColumn,
     HelloBlock,
     HelloLeft,
@@ -48,49 +46,40 @@ export const Intro: FunctionComponent<{}> = () => {
                             <DataColumn>
                                 <HelloBlock>
                                     <HelloLeft>
-                                        <Avatar />
+                                        <Avatar
+                                            effect="fade-slide-left"
+                                            effectTimeout={timeoutBase}
+                                        />
                                     </HelloLeft>
                                     <HelloRight>
                                         <NameBlock>
                                             Sergei Gannochenko
                                         </NameBlock>
                                         <GreetingBlock>
-                                            JavaScript full-stack software
-                                            engineer in Berlin, Germany.
+                                            Full-stack software engineer in
+                                            Berlin, Germany.
                                         </GreetingBlock>
                                         <SocialBar>
                                             <Social
-                                                linkedin
+                                                type="github"
+                                                src="https://github.com/awesome1888"
+                                            />
+                                            <Social
+                                                type="linkedin"
                                                 src="https://www.linkedin.com/in/sergey-gannochenko"
                                             />
                                             <Social
-                                                twitter
-                                                src="https://twitter.com/Gannochenkoff"
-                                            />
-                                            <Social
-                                                medium
+                                                type="medium"
                                                 src="https://medium.com/@awesome1888"
                                             />
                                             <Social
-                                                github
-                                                src="https://github.com/awesome1888"
+                                                type="twitter"
+                                                src="https://twitter.com/Gannochenkoff"
                                             />
                                         </SocialBar>
                                     </HelloRight>
                                 </HelloBlock>
                             </DataColumn>
-                            {/*<Title*/}
-                            {/*    effect="fade-slide-left"*/}
-                            {/*    effectTimeout={timeoutBase}*/}
-                            {/*>*/}
-                            {/*    Gannochenko*/}
-                            {/*</Title>*/}
-                            {/*<SubTitle*/}
-                            {/*    effect="fade-slide-bottom"*/}
-                            {/*    effectTimeout={timeoutBase + 500}*/}
-                            {/*>*/}
-                            {/*    Blog*/}
-                            {/*</SubTitle>*/}
                         </Data>
                         <Arrow
                             effectTimeout={timeoutBase + 1500}

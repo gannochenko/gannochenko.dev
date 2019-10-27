@@ -1,26 +1,17 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { Container, Image } from './style';
-import { StaticQuery, graphql } from 'gatsby';
+import { Query } from './query';
 
-export const Avatar = () => {
+import { Props } from './props';
+
+export const Avatar: FunctionComponent<Props> = ({ effect, effectTimeout }) => {
     return (
-        <StaticQuery
-            query={graphql`
-                query {
-                    file(relativePath: { eq: "avatar.jpg" }) {
-                        childImageSharp {
-                            sizes(maxWidth: 200, quality: 80) {
-                                ...GatsbyImageSharpSizes
-                            }
-                        }
-                    }
-                }
-            `}
-            render={data => (
-                <Container>
-                    <Image sizes={data.file.childImageSharp.sizes} />
+        <Query>
+            {data => (
+                <Container effect={effect} effectTimeout={effectTimeout}>
+                    <Image sizes={data.avatar.childImageSharp.fluid} />
                 </Container>
             )}
-        />
+        </Query>
     );
 };

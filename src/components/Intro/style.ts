@@ -5,16 +5,18 @@ import {
     central,
     bouncedAnimation,
     align,
-    icon,
+    rectangle,
+    backgroundCover,
     group,
 } from '@bucket-of-bolts/styled-companion';
+const arrow = require('./assets/arrow.svg') as string;
 import { media, cell, grid } from '../../style';
 import { withEffects, effect } from '../../lib/effects';
 
 export const Container = styled.div`
     position: relative;
     min-width: 320px;
-    font-family: Montserrat, sans-serif;
+    font-family: Raleway, sans-serif;
 `;
 
 export const BackgroundImage = styled(Img)`
@@ -42,7 +44,8 @@ export const Data = styled.div`
 `;
 
 export const Arrow = withEffects(styled.div`
-    ${icon('keyboard_arrow_down')};
+    ${backgroundCover(arrow)};
+    ${rectangle('72px', '53px', 0.7)}
     position: absolute;
     left: calc(50% - 2rem);
 
@@ -67,54 +70,17 @@ export const Arrow = withEffects(styled.div`
     ${props => effect(props)}
 `);
 
-//export const Title = withEffects(styled.h1`
-//     font-size: 4rem;
-//     font-weight: 600;
-//     letter-spacing: 0.4rem;
-//     ${media({
-//         xs: `
-//         font-size: 1.5rem;
-//         letter-spacing: 0.15rem;
-//     `,
-//     })};
-//     color: white;
-//     text-align: center;
-//     margin: 0;
-//
-//     // @ts-ignore
-//     ${props => effect(props)}
-// `);
-//
-// export const SubTitle = withEffects(styled.div`
-//     color: #fff;
-//     position: relative;
-//     text-align: center;
-//     font-size: 1.3rem;
-//     max-width: 60%;
-//     margin: 1rem 0 0 0;
-//     padding: 0;
-//     ${media({
-//         xs: `
-//         font-size: 1rem;
-//     `,
-//     })}
-//
-//     // @ts-ignore
-//     ${props => effect(props)}
-// `);
-
 export const DataColumn = styled.div`
-    ${align('center', 'left', 'column')}
+    ${align('center', 'left', 'column')};
     width: 100%;
     height: 100%;
     position: relative;
 `;
 
 export const HelloBlock = styled.div`
-  //color: ${props => props.theme.color.background};
-  color: #fff;
-  ${grid({ guttersW: { xs: '0', all: '1rem' }, guttersH: { xs: '1.5rem' } })}
-  ${align('center', 'left')}
+    color: #fff;
+    ${grid({ guttersW: { xs: '0', all: '1rem' }, guttersH: { xs: '1.5rem' } })}
+    ${align('center', 'left')}
   width: 100%;
 `;
 
@@ -134,6 +100,8 @@ export const GreetingBlock = styled.div`
 `;
 
 export const NameBlock = styled.div`
+    font-family: Raleway, sans-serif;
+    font-weight: 600;
     font-size: 1.5rem;
     letter-spacing: 0.05rem;
     ${media({ xs: 'text-align: center;' })}

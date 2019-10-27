@@ -30,7 +30,7 @@ module.exports = {
                     {
                         resolve: `gatsby-remark-relative-images`,
                         options: {
-                            name: 'graphics', // Must match the source name ^
+                            name: 'graphics',
                         },
                     },
                     {

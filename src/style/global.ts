@@ -3,9 +3,10 @@ import { theme } from './theme';
 import { fgColor } from '@bucket-of-bolts/styled-companion';
 
 export const GlobalStyle = createGlobalStyle`
-    @import url('https://fonts.googleapis.com/css?family=Montserrat');
+    //@import url('https://fonts.googleapis.com/css?family=Montserrat');
     @import url('https://fonts.googleapis.com/css?family=Roboto:300,400');
-    @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+    //@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+    @import url('https://fonts.googleapis.com/icon?family=Raleway:600');
 
     html {
         font-size: 20px;
@@ -21,11 +22,10 @@ export const GlobalStyle = createGlobalStyle`
         padding: 0 !important;
         margin: 0 !important;
         font-weight: 400;
-        line-height: 1.4;
-        font-size: 1rem;
-        letter-spacing: -0.05px;
         color: ${theme.color.text};
         font-family: Roboto, sans-serif;
+        line-height: 1.4;
+        letter-spacing: normal;
         min-width: 320px;
         background-color: ${theme.color.background};
         overflow-x: hidden;

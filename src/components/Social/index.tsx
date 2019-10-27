@@ -1,30 +1,29 @@
-import React from 'react';
-import facebookLogo from '../../images/facebook.svg';
-import twitterLogo from '../../images/twitter.svg';
-import mediumLogo from '../../images/medium.svg';
-import linkedinLogo from '../../images/linkedin.svg';
-import githubLogo from '../../images/github.svg';
-import { Image } from './style';
+import React, { FunctionComponent } from 'react';
+const facebookLogo = require('./assets/facebook.svg') as string;
+const twitterLogo = require('./assets/twitter.svg') as string;
+const mediumLogo = require('./assets/medium.svg') as string;
+const linkedinLogo = require('./assets/linkedin.svg') as string;
+const githubLogo = require('./assets/github.svg') as string;
 
-export const Social = ({
-    facebook,
-    twitter,
-    medium,
-    linkedin,
-    github,
-    src,
-}) => {
+import { Image } from './style';
+import { Props } from './props';
+
+export const Social: FunctionComponent<Props> = ({ type, src }) => {
     let logo = null;
-    if (facebook) {
+    if (type === 'facebook') {
         logo = facebookLogo;
-    } else if (twitter) {
+    } else if (type === 'twitter') {
         logo = twitterLogo;
-    } else if (medium) {
+    } else if (type === 'medium') {
         logo = mediumLogo;
-    } else if (linkedin) {
+    } else if (type === 'linkedin') {
         logo = linkedinLogo;
-    } else if (github) {
+    } else if (type === 'github') {
         logo = githubLogo;
+    }
+
+    if (!logo) {
+        return null;
     }
 
     if (src) {
