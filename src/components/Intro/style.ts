@@ -47,7 +47,7 @@ export const Arrow = withEffects(styled.div`
     ${backgroundCover(arrow)};
     ${rectangle('72px', '53px', 0.7)}
     position: absolute;
-    left: calc(50% - 2rem);
+    left: calc(50% - 1rem);
 
     cursor: pointer;
     bottom: 2.5rem;

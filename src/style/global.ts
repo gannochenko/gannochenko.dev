@@ -249,4 +249,23 @@ export const GlobalStyle = createGlobalStyle`
         margin-inline-start: 0;
         margin-inline-end: 0;
     }
+    
+    h1, h2, h3, h4 {
+      margin: 0;
+      &:not(:last-child) {
+        margin-bottom: 2rem;
+      }
+    }
+    
+    h1 {
+      font-size: 1.5rem;
+    }
+    
+    h2 {
+      font-size: 1.3rem;
+    }
+    
+    h3, h4 {
+      font-size: 1rem;
+    }
 `;

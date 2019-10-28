@@ -82,6 +82,7 @@ export const query = graphql`
                     }
                     widget
                     fontSize
+                    width
                     effect
                     effectTimeout
                 }

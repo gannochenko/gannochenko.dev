@@ -78,3 +78,8 @@ collections:
                 - { label: 'Large', value: 'large' }
             default: standard
             required: false
+          - label: Width
+            name: width
+            widget: string
+            default: auto
+            required: false

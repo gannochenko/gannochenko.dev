@@ -15,12 +15,13 @@ import { Copyright } from '../Copyright';
 import { withEffects } from '../../lib/effects';
 
 const StandardBlockComponent: FunctionComponent<Props> = props => {
-    let { fontSize = 'standard', graphics = [] } = props;
+    let { fontSize = 'standard', width = 'auto', graphics = [] } = props;
 
     const { html, effectTimeout } = props;
 
     graphics = graphics || [];
     fontSize = fontSize || 'standard';
+    width = width || 'auto';
 
     let timeout = effectTimeout || 0;
 
@@ -30,6 +31,7 @@ const StandardBlockComponent: FunctionComponent<Props> = props => {
                 <Inner
                     dangerouslySetInnerHTML={{ __html: html }}
                     fontSize={fontSize}
+                    width={width}
                 />
             )}
             {graphics.length === 1 && graphics[0].image && (

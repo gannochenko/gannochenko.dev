@@ -23,6 +23,8 @@ export const Inner = withTheme(styled.div`
     // @ts-ignore
     font-size: ${props => props.theme.font[props.fontSize]};
     font-weight: 300;
+    // @ts-ignore
+    width: ${props => props.width};
 `);
 
 export const ImageSingle = styled.div`
