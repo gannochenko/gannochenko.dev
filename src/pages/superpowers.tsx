@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { graphql, Link } from 'gatsby';
+import { graphql } from 'gatsby';
 
 import { Layout } from '../components/Layout';
 import { SEO } from '../components/SEO';
@@ -46,12 +46,11 @@ const getWidget = (node: Node) => {
     return StandardBlock;
 };
 
-const HomePage: FunctionComponent<Props> = ({ data = {} }) => {
+const SuperPowersPage: FunctionComponent<Props> = ({ data = {} }) => {
     const { allMarkdownRemark: { nodes = [] } = {} } = data;
     return (
-        <Layout shortHeader={false}>
-            <Link to="/superpowers/">Superpowers!!!</Link>
-            <SEO title="Home" keywords={['']} />
+        <Layout shortHeader>
+            <SEO title="SuperPowers" keywords={['']} />
             {nodes.map(node => {
                 const Widget = getWidget(node);
                 return (
@@ -68,7 +67,7 @@ const HomePage: FunctionComponent<Props> = ({ data = {} }) => {
 };
 
 export const query = graphql`
-    query HomePageQuery {
+    query SuperPowersPageQuery {
         allMarkdownRemark(sort: { fields: frontmatter___sort, order: ASC }) {
             nodes {
                 id
@@ -90,4 +89,4 @@ export const query = graphql`
     }
 `;
 
-export default HomePage;
+export default SuperPowersPage;

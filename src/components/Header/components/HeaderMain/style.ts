@@ -10,8 +10,8 @@ import {
     group,
 } from '@bucket-of-bolts/styled-companion';
 const arrow = require('./assets/arrow.svg') as string;
-import { media, cell, grid } from '../../style';
-import { withEffects, effect } from '../../lib/effects';
+import { media, cell, grid } from '../../../../style';
+import { withEffects, effect } from '../../../../lib/effects';
 
 export const Container = styled.div`
     position: relative;
