@@ -29,10 +29,8 @@ export interface EffectProperties {
 }
 export const eventEmitter = new EventEmitter();
 const IDGenerator = function*() {
-    let i = 0;
     while (true) {
-        i += 1;
-        yield i.toString();
+        yield (Math.random() * 100000000000000000).toString();
     }
 };
 
@@ -97,6 +95,7 @@ export const withEffects = (Component: any) => {
     return WithEffects;
 };
 
+// returns all items present on the current page
 const getItems = () =>
     document.querySelectorAll('.effects-node') as NodeListOf<
         ElementWithDataset
@@ -139,6 +138,7 @@ const onWindowUpdate = throttle(200, () => {
 });
 
 export const start = () => {
+    console.log('start!');
     window.addEventListener('resize', onWindowUpdate, true);
     window.addEventListener('scroll', onWindowUpdate, true);
 

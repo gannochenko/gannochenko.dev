@@ -63,10 +63,11 @@
         "develop": "rm -rf ./.cache/; gatsby develop --host=0.0.0.0",
         "format": "prettier --write src/**/*.{js,jsx}",
         "start": "yarn run develop",
-        "serve": "gatsby serve",
+        "serve": "gatsby serve --host=0.0.0.0",
         "test": "echo \"Write tests! -> https://gatsby.app/unit-testing\"",
         "lint": "eslint ./src/ --ext .jsx,.tsx",
-        "lint:fix": "eslint ./src/ --ext .ts,.tsx --fix"
+        "lint:fix": "eslint ./src/ --ext .ts,.tsx --fix",
+        "start:local": "yarn build; yarn serve"
     },
     "repository": {
         "type": "git",
