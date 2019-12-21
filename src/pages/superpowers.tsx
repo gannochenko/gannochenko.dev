@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { graphql } from 'gatsby';
+import { graphql, Link } from 'gatsby';
 
 import { Layout } from '../components/Layout';
 import { SEO } from '../components/SEO';
@@ -51,6 +51,7 @@ const SuperPowersPage: FunctionComponent<Props> = ({ data = {} }) => {
     return (
         <Layout shortHeader>
             <SEO title="SuperPowers" keywords={['']} />
+            <Link to="/">Back</Link>
             {nodes.map(node => {
                 const Widget = getWidget(node);
                 return (

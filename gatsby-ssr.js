@@ -4,6 +4,7 @@
  * See: https://www.gatsbyjs.org/docs/ssr-apis/
  */
 
-import { start } from './src/lib/effects';
+import { start, ids } from './src/lib/effects';
 
-start();
+console.log(ids);
+// start();

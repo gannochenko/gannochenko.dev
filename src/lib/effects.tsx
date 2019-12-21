@@ -36,103 +36,114 @@ const IDGenerator = function*() {
 
 export const idGenerator = IDGenerator();
 
+export const ids: string[] = [];
+
+const isSSR = () => !window;
+
 interface EffectPropss {
     children: any;
     effectTimeout?: number;
 }
 
-interface EffectState {
-    nodeId: string;
-    runEffect: boolean;
-}
+// interface EffectState {
+//     nodeId: string;
+//     runEffect: boolean;
+// }
 
-class Effect extends React.Component<EffectPropss, EffectState> {
-    constructor(props: EffectPropss) {
-        super(props);
-        this.state = {
-            nodeId: idGenerator.next().value,
-            runEffect: false,
-        };
-    }
-
-    componentDidMount() {
-        eventEmitter.on(EVENT_EFFECT_RUN, this.onEventFire);
-        console.log('ready = ' + this.state.nodeId);
-        setTimeout(
-            () => eventEmitter.emit(EVENT_ELEMENT_READY, [this.state.nodeId]),
-            100,
-        );
-    }
-
-    componentWillUnmount() {
-        eventEmitter.off(EVENT_EFFECT_RUN, this.onEventFire);
-    }
-
-    onEventFire = (id: string) => {
-        const { nodeId } = this.state;
-        const { effectTimeout } = this.props;
-
-        if (id.toString() === nodeId) {
-            setTimeout(() => this.setState({ runEffect: true }), effectTimeout);
-            eventEmitter.off(EVENT_EFFECT_RUN, this.onEventFire);
-        }
-    };
-
-    render() {
-        const { nodeId, runEffect } = this.state;
-
-        return (
-            <div data-hz={nodeId}>
-                {this.props.children({
-                    [EFFECT_DATA_ATTRIBUTE]: nodeId,
-                    className: 'effects-node',
-                    runEffect,
-                })}
-            </div>
-        );
-    }
-}
-
-// const Effect: FunctionComponent<EffectPropss> = ({
-//     children,
-//     effectTimeout = 0,
-// }) => {
-//     const nodeId = useMemo(() => {
-//         return idGenerator.next().value;
-//     }, []);
-//     const [runEffect, setRunEffect] = useState(false);
+// class Effect extends React.Component<EffectPropss, EffectState> {
+//     constructor(props: EffectPropss) {
+//         super(props);
+//         this.state = {
+//             nodeId: idGenerator.next().value,
+//             runEffect: false,
+//         };
+//     }
 //
-//     const onEventFire = (id: string) => {
-//         if (id.toString() === nodeId.toString()) {
-//             setTimeout(() => setRunEffect(true), effectTimeout);
-//             eventEmitter.off(EVENT_EFFECT_RUN, onEventFire);
+//     componentDidMount() {
+//         eventEmitter.on(EVENT_EFFECT_RUN, this.onEventFire);
+//         console.log('ready = ' + this.state.nodeId);
+//         setTimeout(
+//             () => eventEmitter.emit(EVENT_ELEMENT_READY, [this.state.nodeId]),
+//             100,
+//         );
+//     }
+//
+//     componentWillUnmount() {
+//         eventEmitter.off(EVENT_EFFECT_RUN, this.onEventFire);
+//     }
+//
+//     onEventFire = (id: string) => {
+//         const { nodeId } = this.state;
+//         const { effectTimeout } = this.props;
+//
+//         if (id.toString() === nodeId) {
+//             setTimeout(() => this.setState({ runEffect: true }), effectTimeout);
+//             eventEmitter.off(EVENT_EFFECT_RUN, this.onEventFire);
 //         }
 //     };
 //
-//     useEffect(() => {
-//         eventEmitter.on(EVENT_EFFECT_RUN, onEventFire);
-//         return () => {
-//             eventEmitter.off(EVENT_EFFECT_RUN, onEventFire);
-//         };
-//     }, [eventEmitter, onEventFire]);
+//     render() {
+//         const { nodeId, runEffect } = this.state;
 //
-//     const effectProps = useMemo(
-//         () => ({
-//             [EFFECT_DATA_ATTRIBUTE]: nodeId,
-//             className: 'effects-node',
-//             runEffect,
-//         }),
-//         [runEffect, nodeId],
-//     );
-//
-//     const html = children(effectProps);
-//
-//     useEffect(() => {
-//         setTimeout(() => eventEmitter.emit(EVENT_ELEMENT_READY, [nodeId]), 100);
-//     }, []);
-//
-//     return html;
-// };
+//         return (
+//             <div data-hz={nodeId}>
+//                 {this.props.children({
+//                     [EFFECT_DATA_ATTRIBUTE]: nodeId,
+//                     className: 'effects-node',
+//                     runEffect,
+//                 })}
+//             </div>
+//         );
+//     }
+// }
+
+const Effect: FunctionComponent<EffectPropss> = ({
+    children,
+    effectTimeout = 0,
+}) => {
+    const nodeId = useMemo(() => {
+        const value = idGenerator.next().value;
+        if (isSSR()) {
+            ids.push(value);
+        } else {
+            console.log('no SSR!');
+        }
+
+        return value;
+    }, []);
+    const [runEffect, setRunEffect] = useState(false);
+
+    const onEventFire = (id: string) => {
+        if (id.toString() === nodeId.toString()) {
+            setTimeout(() => setRunEffect(true), effectTimeout);
+            eventEmitter.off(EVENT_EFFECT_RUN, onEventFire);
+        }
+    };
+
+    useEffect(() => {
+        eventEmitter.on(EVENT_EFFECT_RUN, onEventFire);
+        return () => {
+            eventEmitter.off(EVENT_EFFECT_RUN, onEventFire);
+        };
+    }, [eventEmitter, onEventFire]);
+
+    const effectProps = useMemo(
+        () => ({
+            [EFFECT_DATA_ATTRIBUTE]: nodeId,
+            className: 'effects-node',
+            runEffect,
+        }),
+        [runEffect, nodeId],
+    );
+
+    const html = children(effectProps);
+
+    useEffect(() => {
+        setTimeout(() => eventEmitter.emit(EVENT_ELEMENT_READY, [nodeId]), 100);
+    }, []);
+
+    return html;
+};
 
 export const withEffects = (Component: any) => {
     const WithEffects = (props: ObjectLiteral) => {
