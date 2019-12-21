@@ -81,11 +81,15 @@ class Effect extends React.Component<EffectPropss, EffectState> {
     render() {
         const { nodeId, runEffect } = this.state;
 
-        return this.props.children({
-            [EFFECT_DATA_ATTRIBUTE]: nodeId,
-            className: 'effects-node',
-            runEffect,
-        });
+        return (
+            <div data-hz={nodeId}>
+                {this.props.children({
+                    [EFFECT_DATA_ATTRIBUTE]: nodeId,
+                    className: 'effects-node',
+                    runEffect,
+                })}
+            </div>
+        );
     }
 }
 
