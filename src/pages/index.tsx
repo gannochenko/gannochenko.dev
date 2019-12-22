@@ -83,11 +83,6 @@ export const query = graphql`
                         source
                         sourceText
                     }
-                    widget
-                    fontSize
-                    width
-                    effect
-                    effectTimeout
                 }
             }
         }

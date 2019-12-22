@@ -46,10 +46,8 @@ const getWidget = (node: Node) => {
     return StandardBlock;
 };
 
-const SuperPowersPage: FunctionComponent<Props> = ({ location, data = {} }) => {
+const SuperPowersPage: FunctionComponent<Props> = ({ data = {} }) => {
     const { allMarkdownRemark: { nodes = [] } = {} } = data;
-    console.log(location);
-    console.log(location.pathname);
 
     return (
         <Layout shortHeader>
@@ -85,11 +83,6 @@ export const query = graphql`
                         source
                         sourceText
                     }
-                    widget
-                    fontSize
-                    width
-                    effect
-                    effectTimeout
                 }
             }
         }
