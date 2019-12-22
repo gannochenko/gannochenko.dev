@@ -35,7 +35,9 @@ const IDGenerator = function*() {
         // @ts-ignore
         if (
             typeof window !== 'undefined' &&
+            // @ts-ignore
             window.__effectIds &&
+            // @ts-ignore
             window.__effectIds.length
         ) {
             // @ts-ignore
