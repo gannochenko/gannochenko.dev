@@ -9,6 +9,7 @@ const EVENT_ELEMENT_READY = 'element.ready';
 const EFFECT_DATA_ATTRIBUTE = 'data-effects-node-id';
 const EFFECT_SELECTOR = 'effects-node';
 
+type WindowWithIds = Window & { __effectIds: string[] };
 type ElementWithDataset = Element & { dataset: { effectsNodeId: string } };
 
 export interface EffectProps {
@@ -31,7 +32,17 @@ export interface EffectProperties {
 export const eventEmitter = new EventEmitter();
 const IDGenerator = function*() {
     while (true) {
-        yield (Math.random() * 100000000000000000).toString();
+        // @ts-ignore
+        if (
+            typeof window !== 'undefined' &&
+            window.__effectIds &&
+            window.__effectIds.length
+        ) {
+            // @ts-ignore
+            yield window.__effectIds.shift();
+        } else {
+            yield (Math.random() * 100000000000000000).toString();
+        }
     }
 };
 
