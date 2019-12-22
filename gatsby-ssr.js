@@ -4,10 +4,21 @@
  * See: https://www.gatsbyjs.org/docs/ssr-apis/
  */
 
-import { start, ids } from './src/lib/effects';
+import React from 'react';
 
-console.log(ids);
+// import { start, ids } from './src/lib/effects';
+//
+// console.log(ids);
 // start();
-document.write(
-    `<script>window.__ids = [${ids.map(id => `"${id}"`).join(',')}]</script>`,
-);
+// document.write(
+//     `<script>window.__ids = [${ids.map(id => `"${id}"`).join(',')}]</script>`,
+// );
+
+exports.onRenderBody = ({ setPostBodyComponents }, pluginOptions) => {
+    setPostBodyComponents([
+        <script
+            key="effects"
+            dangerouslySetInnerHTML={{ __html: `alert("hak")` }}
+        />,
+    ]);
+};

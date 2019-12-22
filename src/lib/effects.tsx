@@ -38,7 +38,7 @@ export const idGenerator = IDGenerator();
 
 export const ids: string[] = [];
 
-const isSSR = () => !window;
+const isSSR = () => typeof window === 'undefined';
 
 interface EffectPropss {
     children: any;

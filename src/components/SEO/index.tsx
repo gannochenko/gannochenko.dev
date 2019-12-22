@@ -13,8 +13,6 @@ export const SEO: FunctionComponent<Props> = ({
     return (
         <Query>
             {data => {
-                console.warn('render!');
-
                 const metaDescription =
                     description || data.site.siteMetadata.description;
 

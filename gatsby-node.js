@@ -35,3 +35,19 @@ const { fmImagesToRelative } = require('gatsby-remark-relative-images');
 exports.onCreateNode = ({ node }) => {
     fmImagesToRelative(node);
 };
+
+exports.onCreateWebpackConfig = ({
+    stage,
+    rules,
+    loaders,
+    plugins,
+    actions,
+}) => {
+    actions.setWebpackConfig({
+        plugins: [
+            plugins.define({
+                __DEV__: stage === `develop` || stage === `develop-html`,
+            }),
+        ],
+    });
+};
