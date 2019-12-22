@@ -8,3 +8,6 @@ import { start, ids } from './src/lib/effects';
 
 console.log(ids);
 // start();
+document.write(
+    `<script>window.__ids = [${ids.map(id => `"${id}"`).join(',')}]</script>`,
+);
