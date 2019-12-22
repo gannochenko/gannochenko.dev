@@ -7,6 +7,7 @@ import { ObjectLiteral } from '../type';
 const EVENT_EFFECT_RUN = 'effect.run';
 const EVENT_ELEMENT_READY = 'element.ready';
 const EFFECT_DATA_ATTRIBUTE = 'data-effects-node-id';
+const EFFECT_SELECTOR = 'effects-node';
 
 type ElementWithDataset = Element & { dataset: { effectsNodeId: string } };
 
@@ -38,7 +39,7 @@ export const idGenerator = IDGenerator();
 
 export const ids: string[] = [];
 
-const isSSR = () => typeof window === 'undefined';
+// const isSSR = () => typeof window === 'undefined';
 
 interface EffectPropss {
     children: any;
@@ -102,14 +103,7 @@ const Effect: FunctionComponent<EffectPropss> = ({
     effectTimeout = 0,
 }) => {
     const nodeId = useMemo(() => {
-        const value = idGenerator.next().value;
-        if (isSSR()) {
-            ids.push(value);
-        } else {
-            console.log('no SSR!');
-        }
-
-        return value;
+        return idGenerator.next().value;
     }, []);
     const [runEffect, setRunEffect] = useState(false);
 
@@ -206,7 +200,6 @@ const onWindowUpdate = throttle(200, () => {
 });
 
 export const start = () => {
-    console.log('start!');
     window.addEventListener('resize', onWindowUpdate, true);
     window.addEventListener('scroll', onWindowUpdate, true);
 
