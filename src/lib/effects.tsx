@@ -9,11 +9,11 @@ const EVENT_ELEMENT_READY = 'element.ready';
 const EFFECT_DATA_ATTRIBUTE = 'data-effects-node-id';
 const EFFECT_SELECTOR = 'effects-node';
 
-type WindowWithIds = Window & { __effectIds: string[] };
+type WindowWithIds = typeof window & { __effectIds: string[] };
 type ElementWithDataset = Element & { dataset: { effectsNodeId: string } };
 
 export interface EffectProps {
-    'data-effects-node-id': string;
+    [EFFECT_DATA_ATTRIBUTE]: string;
     className: string;
     runEffect: boolean;
 }
@@ -35,13 +35,10 @@ const IDGenerator = function*() {
         // @ts-ignore
         if (
             typeof window !== 'undefined' &&
-            // @ts-ignore
-            window.__effectIds &&
-            // @ts-ignore
-            window.__effectIds.length
+            (window as WindowWithIds).__effectIds &&
+            (window as WindowWithIds).__effectIds.length
         ) {
-            // @ts-ignore
-            yield window.__effectIds.shift();
+            yield (window as WindowWithIds).__effectIds.shift()!;
         } else {
             yield (Math.random() * 100000000000000000).toString();
         }
@@ -52,66 +49,12 @@ export const idGenerator = IDGenerator();
 
 export const ids: string[] = [];
 
-// const isSSR = () => typeof window === 'undefined';
-
-interface EffectPropss {
+interface EffectHOCProps {
     children: any;
     effectTimeout?: number;
 }
 
-// interface EffectState {
-//     nodeId: string;
-//     runEffect: boolean;
-// }
-
-// class Effect extends React.Component<EffectPropss, EffectState> {
-//     constructor(props: EffectPropss) {
-//         super(props);
-//         this.state = {
-//             nodeId: idGenerator.next().value,
-//             runEffect: false,
-//         };
-//     }
-//
-//     componentDidMount() {
-//         eventEmitter.on(EVENT_EFFECT_RUN, this.onEventFire);
-//         console.log('ready = ' + this.state.nodeId);
-//         setTimeout(
-//             () => eventEmitter.emit(EVENT_ELEMENT_READY, [this.state.nodeId]),
-//             100,
-//         );
-//     }
-//
-//     componentWillUnmount() {
-//         eventEmitter.off(EVENT_EFFECT_RUN, this.onEventFire);
-//     }
-//
-//     onEventFire = (id: string) => {
-//         const { nodeId } = this.state;
-//         const { effectTimeout } = this.props;
-//
-//         if (id.toString() === nodeId) {
-//             setTimeout(() => this.setState({ runEffect: true }), effectTimeout);
-//             eventEmitter.off(EVENT_EFFECT_RUN, this.onEventFire);
-//         }
-//     };
-//
-//     render() {
-//         const { nodeId, runEffect } = this.state;
-//
-//         return (
-//             <div data-hz={nodeId}>
-//                 {this.props.children({
-//                     [EFFECT_DATA_ATTRIBUTE]: nodeId,
-//                     className: 'effects-node',
-//                     runEffect,
-//                 })}
-//             </div>
-//         );
-//     }
-// }
-
-const Effect: FunctionComponent<EffectPropss> = ({
+const Effect: FunctionComponent<EffectHOCProps> = ({
     children,
     effectTimeout = 0,
 }) => {
@@ -137,7 +80,7 @@ const Effect: FunctionComponent<EffectPropss> = ({
     const effectProps = useMemo(
         () => ({
             [EFFECT_DATA_ATTRIBUTE]: nodeId,
-            className: 'effects-node',
+            className: EFFECT_SELECTOR,
             runEffect,
         }),
         [runEffect, nodeId],
@@ -172,7 +115,7 @@ export const withEffects = (Component: any) => {
 
 // returns all items present on the current page
 const getItems = () =>
-    document.querySelectorAll('.effects-node') as NodeListOf<
+    document.querySelectorAll(`.${EFFECT_SELECTOR}`) as NodeListOf<
         ElementWithDataset
     >;
 
@@ -197,7 +140,7 @@ const processNode = (
     const itemRect = node.getBoundingClientRect();
     const itemTop = itemRect.top + windowScrollTop;
     if (itemTop + Math.min(itemRect.height * 0.2, 200) < windowBottom) {
-        node.classList.remove('effects-node');
+        node.classList.remove(EFFECT_SELECTOR);
         eventEmitter.emit(EVENT_EFFECT_RUN, [id]);
     }
 };
@@ -255,3 +198,12 @@ export const effect = ({
         ${runEffect ? end : ''}
     `;
 };
+
+export const getRenderedNodeIdCollector = () => (
+    <script
+        key="effects"
+        dangerouslySetInnerHTML={{
+            __html: `window.__effectIds = Array.from(document.querySelectorAll('.${EFFECT_SELECTOR}')).map(node => node.dataset.effectsNodeId);`,
+        }}
+    />
+);

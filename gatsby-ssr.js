@@ -4,16 +4,8 @@
  * See: https://www.gatsbyjs.org/docs/ssr-apis/
  */
 
-import React from 'react';
-import { start } from './src/lib/effects';
+import { getRenderedNodeIdCollector } from './src/lib/effects';
 
-export const onRenderBody = ({ setPostBodyComponents }, pluginOptions) => {
-    setPostBodyComponents([
-        <script
-            key="effects"
-            dangerouslySetInnerHTML={{
-                __html: `window.__effectIds = Array.from(document.querySelectorAll('.effects-node')).map(node => node.dataset.effectsNodeId);`,
-            }}
-        />,
-    ]);
+export const onRenderBody = ({ setPostBodyComponents }) => {
+    setPostBodyComponents([getRenderedNodeIdCollector()]);
 };
