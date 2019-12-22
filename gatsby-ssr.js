@@ -14,7 +14,7 @@ import React from 'react';
 //     `<script>window.__ids = [${ids.map(id => `"${id}"`).join(',')}]</script>`,
 // );
 
-exports.onRenderBody = ({ setPostBodyComponents }, pluginOptions) => {
+export const onRenderBody = ({ setPostBodyComponents }, pluginOptions) => {
     setPostBodyComponents([
         <script
             key="effects"
