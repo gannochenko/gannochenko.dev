@@ -48,6 +48,7 @@ const getWidget = (node: Node) => {
 
 const HomePage: FunctionComponent<Props> = ({ data = {} }) => {
     const { allMarkdownRemark: { nodes = [] } = {} } = data;
+
     return (
         <Layout shortHeader={false}>
             <Link to="/superpowers/">Superpowers!!!</Link>
@@ -69,7 +70,10 @@ const HomePage: FunctionComponent<Props> = ({ data = {} }) => {
 
 export const query = graphql`
     query HomePageQuery {
-        allMarkdownRemark(sort: { fields: frontmatter___sort, order: ASC }) {
+        allMarkdownRemark(
+            sort: { fields: frontmatter___sort, order: ASC }
+            filter: { frontmatter: { pathname: { eq: "/" } } }
+        ) {
             nodes {
                 id
                 html

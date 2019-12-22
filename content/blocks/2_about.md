@@ -1,6 +1,7 @@
 ---
 id: about
 sort: 2
+pathname: "/"
 fontSize: standard
 effect: fade-slide-top
 effectTimeout: 0

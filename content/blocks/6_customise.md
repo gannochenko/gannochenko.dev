@@ -1,6 +1,7 @@
 ---
 id: customise
 sort: 6
+pathname: "/superpowers/"
 fontSize: standard
 effect: fade-slide-top
 effectTimeout: 0

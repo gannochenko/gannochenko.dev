@@ -46,8 +46,11 @@ const getWidget = (node: Node) => {
     return StandardBlock;
 };
 
-const SuperPowersPage: FunctionComponent<Props> = ({ data = {} }) => {
+const SuperPowersPage: FunctionComponent<Props> = ({ location, data = {} }) => {
     const { allMarkdownRemark: { nodes = [] } = {} } = data;
+    console.log(location);
+    console.log(location.pathname);
+
     return (
         <Layout shortHeader>
             <SEO title="SuperPowers" keywords={['']} />
@@ -69,7 +72,10 @@ const SuperPowersPage: FunctionComponent<Props> = ({ data = {} }) => {
 
 export const query = graphql`
     query SuperPowersPageQuery {
-        allMarkdownRemark(sort: { fields: frontmatter___sort, order: ASC }) {
+        allMarkdownRemark(
+            sort: { fields: frontmatter___sort, order: ASC }
+            filter: { frontmatter: { pathname: { eq: "/superpowers/" } } }
+        ) {
             nodes {
                 id
                 html

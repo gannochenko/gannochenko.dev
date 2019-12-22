@@ -18,12 +18,15 @@ collections:
             label: Sort
             widget: number
             valueType: int
+          - name: pathname
+            label: Path name
+            widget: string
           - name: body
             label: Body
             widget: markdown
-          - label: 'Graphics'
-            name: 'graphics'
-            widget: 'list'
+          - label: Graphics
+            name: graphics
+            widget: list
             fields:
                 - name: image
                   label: 'Image'

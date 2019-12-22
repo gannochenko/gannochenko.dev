@@ -1,6 +1,7 @@
 ---
-id: 'three-pics'
+id: 'one-pic'
 sort: 3
+pathname: "/"
 graphics:
   - author: Tianyi Ma
     image: /assets/single.jpg

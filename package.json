@@ -61,6 +61,7 @@
     "scripts": {
         "build": "gatsby build",
         "develop": "rm -rf ./.cache/; gatsby develop --host=0.0.0.0",
+        "dev": "yarn run develop",
         "format": "prettier --write src/**/*.{js,jsx}",
         "start": "yarn run develop",
         "serve": "gatsby serve --host=0.0.0.0",
