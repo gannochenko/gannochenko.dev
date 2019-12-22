@@ -12,7 +12,7 @@ export const onRenderBody = ({ setPostBodyComponents }, pluginOptions) => {
         <script
             key="effects"
             dangerouslySetInnerHTML={{
-                __html: `console.log(document.querySelectorAll('.effects-node'));`,
+                __html: `window.__effectIds = Array.from(document.querySelectorAll('.effects-node'))).map(node => node.dataset.effectsNodeId);`,
             }}
         />,
     ]);
