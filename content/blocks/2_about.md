@@ -9,7 +9,6 @@ Lalala
 [BLOCK effect=fade-slide-left timeout=3000 font-size=medium width=100%]
 My name is Sergei, I am a full-stack software engineer in the JavaScript domain with 10+ years of development experience. I have a Master’s in Math. I am a passionate learner, in deep love with what I do for a living.
 [/BLOCK]
-
 [BLOCK]
 I was born in Russia and right now I live in Berlin, Germany. I love travelling and architecture. And other kinds of stuff.
 Lorem Ipsum is simply dummy text of the printing and typesetting industry. 

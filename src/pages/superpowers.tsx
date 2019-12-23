@@ -18,6 +18,7 @@ interface Graphics {
 interface Node {
     id: string;
     html: string;
+    rawMarkdownBody: string;
     frontmatter: {
         graphics: Graphics[];
         widget: 'StandardBlock' | 'AccentBlock' | 'QuoteBlock';
@@ -60,6 +61,7 @@ const SuperPowersPage: FunctionComponent<Props> = ({ data = {} }) => {
                     <Widget
                         key={node.id}
                         html={node.html}
+                        md={node.rawMarkdownBody}
                         {...node.frontmatter}
                     />
                 );
@@ -77,6 +79,7 @@ export const query = graphql`
             nodes {
                 id
                 html
+                rawMarkdownBody
                 frontmatter {
                     graphics {
                         author

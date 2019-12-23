@@ -18,7 +18,7 @@ import { BlockParser } from '../../lib/block-parser';
 const StandardBlockComponent: FunctionComponent<Props> = props => {
     let { fontSize = 'standard', width = 'auto', graphics = [] } = props;
 
-    const { html, effectTimeout } = props;
+    const { html, md, effectTimeout } = props;
 
     graphics = graphics || [];
     fontSize = fontSize || 'standard';
@@ -27,10 +27,11 @@ const StandardBlockComponent: FunctionComponent<Props> = props => {
     let timeout = effectTimeout || 0;
 
     const blocks = useMemo(() => {
-        const res = BlockParser.parse(html);
+        const res = BlockParser.parse(md);
         // console.log(res);
         return res;
     }, [html]);
+    console.log(blocks);
 
     return (
         <StandardBlockContainer {...props}>

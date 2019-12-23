@@ -2,6 +2,7 @@ import { FontSize } from '../../type';
 
 export interface Props {
     html: string;
+    md: string;
     fontSize: FontSize;
     width: string;
     graphics: {
