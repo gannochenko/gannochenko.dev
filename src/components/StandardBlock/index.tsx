@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useMemo } from 'react';
+import React, { FunctionComponent } from 'react';
 
 import {
     StandardBlockContainer,
@@ -13,12 +13,11 @@ import {
 import { Props } from './type';
 import { Copyright } from '../Copyright';
 import { withEffects } from '../../lib/effects';
-import { BlockParser } from '../../lib/block-parser';
 
 const StandardBlockComponent: FunctionComponent<Props> = props => {
     let { fontSize = 'standard', width = 'auto', graphics = [] } = props;
 
-    const { html, md, effectTimeout } = props;
+    const { data, effectTimeout } = props;
 
     graphics = graphics || [];
     fontSize = fontSize || 'standard';
@@ -26,19 +25,11 @@ const StandardBlockComponent: FunctionComponent<Props> = props => {
 
     let timeout = effectTimeout || 0;
 
-    const blocks = useMemo(() => {
-        const res = BlockParser.parse(md);
-        // console.log(res);
-        return res;
-    }, [html]);
-    console.log(blocks);
-
     return (
         <StandardBlockContainer {...props}>
-            STD
-            {!!html && (
+            {!!data && (
                 <Inner
-                    dangerouslySetInnerHTML={{ __html: html }}
+                    dangerouslySetInnerHTML={{ __html: data }}
                     fontSize={fontSize}
                     width={width}
                 />

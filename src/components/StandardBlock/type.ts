@@ -1,8 +1,7 @@
 import { FontSize } from '../../type';
 
 export interface Props {
-    html: string;
-    md: string;
+    data: string;
     fontSize: FontSize;
     width: string;
     graphics: {
