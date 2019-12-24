@@ -2,7 +2,8 @@ import React, { ReactNode } from 'react';
 import { Node } from './type';
 import { BlockParser } from './block-parser';
 
-import { StandardBlock } from '../components/StandardBlock';
+import { Block } from '../components/Block';
+import { AccentBlock } from '../components/AccentBlock';
 // import { AccentBlock } from '../components/AccentBlock';
 
 export class BlockRenderer {
@@ -10,7 +11,7 @@ export class BlockRenderer {
         const result: ReactNode[] = [];
         nodes.forEach(node => {
             BlockParser.parse(node.rawMarkdownBody).forEach((block, index) => {
-                const Widget = this.getWidget(block.props.wiget);
+                const Widget = this.getWidget(block.props.widget);
                 result.push(
                     <Widget
                         {...block.props}
@@ -24,7 +25,10 @@ export class BlockRenderer {
         return result;
     }
 
-    private static getWidget(node: Node) {
-        return StandardBlock;
+    private static getWidget(widgetName: string) {
+        if (widgetName === 'AccentBlock') {
+            return AccentBlock;
+        }
+        return Block;
     }
 }

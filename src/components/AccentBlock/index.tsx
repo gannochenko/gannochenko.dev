@@ -5,12 +5,12 @@ import { AccentBlockContainer, Inner, Dash } from './style';
 import { Props } from './type';
 
 const AccentBlockComponent: FunctionComponent<Props> = props => {
-    const { html, fontSize = 'large' } = props;
+    const { data, fontSize = 'large' } = props;
 
     return (
         <AccentBlockContainer fontSize={fontSize} {...props}>
             <Dash />
-            <Inner dangerouslySetInnerHTML={{ __html: html }} />
+            <Inner dangerouslySetInnerHTML={{ __html: data }} />
             <Dash bottom />
         </AccentBlockContainer>
     );

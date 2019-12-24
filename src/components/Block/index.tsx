@@ -14,7 +14,7 @@ import { Props } from './type';
 import { Copyright } from '../Copyright';
 import { withEffects } from '../../lib/effects';
 
-const StandardBlockComponent: FunctionComponent<Props> = props => {
+const BlockContainer: FunctionComponent<Props> = props => {
     let { fontSize = 'standard', width = 'auto', graphics = [] } = props;
 
     const { data, effectTimeout } = props;
@@ -73,4 +73,4 @@ const StandardBlockComponent: FunctionComponent<Props> = props => {
     );
 };
 
-export const StandardBlock = withEffects(StandardBlockComponent);
+export const Block = withEffects(BlockContainer);

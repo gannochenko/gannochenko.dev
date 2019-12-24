@@ -1,7 +1,7 @@
 import { FontSize } from '../../type';
 
 export interface Props {
-    html: string;
+    data: string;
     fontSize: FontSize;
     effect?: string;
     effectTimeout?: number;
