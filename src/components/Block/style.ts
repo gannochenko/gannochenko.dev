@@ -9,7 +9,8 @@ export const StandardBlockContainer = withTheme(styled.div`
     margin: 2rem 0;
 
     // @ts-ignore
-    // font-size: ${props => props.theme.font[props.fontSize]};
+    font-size: ${props =>
+        props.fontSize ? props.theme.font[props.fontSize] : 'inherit'};
 
     // @ts-ignore
     ${props => effect(props)}

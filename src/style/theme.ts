@@ -15,7 +15,7 @@ export const theme = {
     font: {
         large: '1.6rem',
         medium: '1.4rem',
-        standard: '1.1rem',
+        standard: '1.0rem',
         small: '0.8rem',
     },
 };
