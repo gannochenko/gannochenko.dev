@@ -6,6 +6,7 @@ import { SEO } from '../components/SEO';
 
 import { BlockRenderer } from '../lib/block-renderer';
 import { Node } from '../lib/type';
+import { Container } from '../components/Container';
 
 interface Props {
     data: {
@@ -22,6 +23,24 @@ const HomePage: FunctionComponent<Props> = ({ data = {} }) => {
         <Layout shortHeader={false}>
             <Link to="/superpowers/">Superpowers!!!</Link>
             <SEO title="Home" keywords={['']} />
+            <Container type="wide">
+                My name is Sergei, I am a full-stack software engineer in the
+                JavaScript domain with 10+ years of development experience. I
+                have a Master’s in Math. I am a passionate learner, in deep love
+                with what I do for a living. And here is more :)
+            </Container>
+            <Container type="standard">
+                My name is Sergei, I am a full-stack software engineer in the
+                JavaScript domain with 10+ years of development experience. I
+                have a Master’s in Math. I am a passionate learner, in deep love
+                with what I do for a living. And here is more :)
+            </Container>
+            <Container type="narrow">
+                My name is Sergei, I am a full-stack software engineer in the
+                JavaScript domain with 10+ years of development experience. I
+                have a Master’s in Math. I am a passionate learner, in deep love
+                with what I do for a living. And here is more :)
+            </Container>
             {BlockRenderer.render(nodes)}
         </Layout>
     );

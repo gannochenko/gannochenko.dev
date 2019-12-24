@@ -17,6 +17,7 @@ export const Container = styled.div`
     position: relative;
     min-width: 320px;
     font-family: Raleway, sans-serif;
+    flex-shrink: 0;
 `;
 
 export const BackgroundImage = styled(Img)`

@@ -1,5 +1,11 @@
 import styled from 'styled-components';
 
-export const Inner = styled.div`
-    min-height: 100vh;
+export const Main = styled.div`
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+`;
+
+export const Body = styled.div`
+    flex-grow: 2;
 `;

@@ -21,7 +21,7 @@ export const GlobalStyle = createGlobalStyle`
     body {
         padding: 0 !important;
         margin: 0 !important;
-        font-weight: 400;
+        font-weight: 300;
         color: ${theme.color.text};
         font-family: Roboto, sans-serif;
         line-height: 1.4;

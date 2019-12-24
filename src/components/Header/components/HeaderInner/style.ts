@@ -5,6 +5,7 @@ import Img from 'gatsby-image';
 export const HeaderInnerContainer = styled.div`
     height: 5rem;
     position: relative;
+    flex-shrink: 0;
 `;
 
 export const BackgroundImage = styled(Img)`

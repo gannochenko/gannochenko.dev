@@ -1,10 +1,11 @@
 import { FontSize } from '../../type';
+import { ContainerType } from '../Container/type';
 
 export interface Props {
     html: string;
     raw: string;
     fontSize: FontSize;
-    width: string;
+    containerType: ContainerType;
     graphics: {
         image: any;
         source?: string;

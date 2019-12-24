@@ -5,27 +5,17 @@ import { media, grid, cell, withTheme } from '../../style';
 import { effect, withEffects } from '../../lib/effects';
 
 export const StandardBlockContainer = withTheme(styled.div`
-    margin: 2rem 1rem;
-    ${media({ xs: 'margin: 2rem 0rem;' })}
-    ${align('center', 'center', 'column')};
     position: relative;
+    margin: 2rem 0;
 
     // @ts-ignore
-    font-size: ${props => props.theme.font[props.fontSize]};
+    // font-size: ${props => props.theme.font[props.fontSize]};
 
     // @ts-ignore
     ${props => effect(props)}
 `);
 
-export const Inner = withTheme(styled.div`
-    max-width: 60%;
-    ${media({ xs: 'max-width: 80%', sm: 'max-width: 70%' })};
-    // @ts-ignore
-    font-size: ${props => props.theme.font[props.fontSize]};
-    font-weight: 300;
-    // @ts-ignore
-    width: ${props => props.width};
-`);
+export const Inner = styled.div``;
 
 export const ImageSingle = styled.div`
     position: relative;

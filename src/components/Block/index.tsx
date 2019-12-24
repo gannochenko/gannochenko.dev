@@ -13,26 +13,19 @@ import {
 import { Props } from './type';
 import { Copyright } from '../Copyright';
 import { withEffects } from '../../lib/effects';
+import { Container } from '../Container';
 
 const BlockContainer: FunctionComponent<Props> = props => {
-    let { fontSize = 'standard', width = 'auto', graphics = [] } = props;
-
-    const { html, effectTimeout } = props;
-
-    graphics = graphics || [];
-    fontSize = fontSize || 'standard';
-    width = width || 'auto';
+    const { html, effectTimeout, containerType, graphics = [] } = props;
 
     let timeout = effectTimeout || 0;
 
     return (
         <StandardBlockContainer {...props}>
             {!!html && (
-                <Inner
-                    dangerouslySetInnerHTML={{ __html: html }}
-                    fontSize={fontSize}
-                    width={width}
-                />
+                <Container type={containerType}>
+                    <Inner dangerouslySetInnerHTML={{ __html: html }} />
+                </Container>
             )}
             {graphics.length === 1 && graphics[0].image && (
                 <ImageSingle>
