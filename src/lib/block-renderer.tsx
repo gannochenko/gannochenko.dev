@@ -1,10 +1,11 @@
 import React, { ReactNode } from 'react';
+// @ts-ignore
+import { markdown } from 'markdown';
 import { Node } from './type';
 import { BlockParser } from './block-parser';
 
 import { Block } from '../components/Block';
 import { AccentBlock } from '../components/AccentBlock';
-// import { AccentBlock } from '../components/AccentBlock';
 
 export class BlockRenderer {
     public static render(nodes: Node[]) {
@@ -16,7 +17,8 @@ export class BlockRenderer {
                     <Widget
                         {...block.props}
                         key={`${node.id}_${index}`}
-                        data={block.data}
+                        raw={block.data}
+                        html={markdown.toHTML(block.data)}
                     />,
                 );
             });

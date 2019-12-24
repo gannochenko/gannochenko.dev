@@ -15,12 +15,12 @@ interface Props {
     };
 }
 
-const SuperPowersPage: FunctionComponent<Props> = ({ data = {} }) => {
+const StoryPage: FunctionComponent<Props> = ({ data = {} }) => {
     const { allMarkdownRemark: { nodes = [] } = {} } = data;
 
     return (
         <Layout shortHeader>
-            <SEO title="Super powers" keywords={['']} />
+            <SEO title="Story" keywords={['']} />
             <Link to="/">Back</Link>
             {BlockRenderer.render(nodes)}
         </Layout>
@@ -28,10 +28,10 @@ const SuperPowersPage: FunctionComponent<Props> = ({ data = {} }) => {
 };
 
 export const query = graphql`
-    query SuperPowersPageQuery {
+    query StoryPageQuery {
         allMarkdownRemark(
             sort: { fields: frontmatter___sort, order: ASC }
-            filter: { frontmatter: { pathname: { eq: "/superpowers/" } } }
+            filter: { frontmatter: { pathname: { eq: "/story/" } } }
         ) {
             nodes {
                 id
@@ -49,4 +49,4 @@ export const query = graphql`
     }
 `;
 
-export default SuperPowersPage;
+export default StoryPage;

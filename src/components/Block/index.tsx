@@ -17,7 +17,7 @@ import { withEffects } from '../../lib/effects';
 const BlockContainer: FunctionComponent<Props> = props => {
     let { fontSize = 'standard', width = 'auto', graphics = [] } = props;
 
-    const { data, effectTimeout } = props;
+    const { html, effectTimeout } = props;
 
     graphics = graphics || [];
     fontSize = fontSize || 'standard';
@@ -27,9 +27,9 @@ const BlockContainer: FunctionComponent<Props> = props => {
 
     return (
         <StandardBlockContainer {...props}>
-            {!!data && (
+            {!!html && (
                 <Inner
-                    dangerouslySetInnerHTML={{ __html: data }}
+                    dangerouslySetInnerHTML={{ __html: html }}
                     fontSize={fontSize}
                     width={width}
                 />

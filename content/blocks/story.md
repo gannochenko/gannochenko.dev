@@ -1,7 +1,7 @@
 ---
-id: about
-sort: 2
-pathname: /superpowers/
+id: story
+sort: 1
+pathname: /story/
 graphics:
   - author: Tianyi Ma
     image: /assets/single.jpg
