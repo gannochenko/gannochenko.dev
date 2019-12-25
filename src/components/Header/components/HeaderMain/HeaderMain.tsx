@@ -44,13 +44,16 @@ export const HeaderMain: FunctionComponent<Props> = ({ backgroundImage }) => {
                 <Data className="intro-data">
                     <DataColumn>
                         <HelloBlock>
-                            <HelloLeft>
-                                <Avatar
-                                    effect="fade-slide-left"
-                                    effectTimeout={timeoutBase}
-                                />
+                            <HelloLeft
+                                effect="fade-slide-left"
+                                effectTimeout={timeoutBase}
+                            >
+                                <Avatar />
                             </HelloLeft>
-                            <HelloRight>
+                            <HelloRight
+                                effect="fade-slide-right"
+                                effectTimeout={timeoutBase}
+                            >
                                 <NameBlock>Sergei Gannochenko</NameBlock>
                                 <GreetingBlock>
                                     Full-stack software engineer in Berlin,
@@ -79,7 +82,7 @@ export const HeaderMain: FunctionComponent<Props> = ({ backgroundImage }) => {
                     </DataColumn>
                 </Data>
                 <Arrow
-                    effectTimeout={timeoutBase + 1500}
+                    effectTimeout={timeoutBase + 800}
                     onClick={() => scrollWindow()}
                 />
             </Container>

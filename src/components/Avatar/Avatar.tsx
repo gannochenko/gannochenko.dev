@@ -4,11 +4,11 @@ import { Query } from './query';
 
 import { Props } from './props';
 
-export const Avatar: FunctionComponent<Props> = ({ effect, effectTimeout }) => {
+export const Avatar: FunctionComponent<Props> = () => {
     return (
         <Query>
             {data => (
-                <Container effect={effect} effectTimeout={effectTimeout}>
+                <Container>
                     <Image sizes={data.avatar.childImageSharp.fluid} />
                 </Container>
             )}

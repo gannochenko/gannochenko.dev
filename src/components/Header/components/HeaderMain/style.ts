@@ -11,7 +11,7 @@ import {
 } from '@bucket-of-bolts/styled-companion';
 const arrow = require('./assets/arrow.svg') as string;
 import { media, cell, grid } from '../../../../style';
-import { withEffects, effect } from '../../../../lib/effects';
+import { withEffects } from '../../../../lib/effects';
 
 export const Container = styled.div`
     position: relative;
@@ -39,14 +39,14 @@ export const Data = styled.div`
     ${media({
         md: expandVertically,
         lg: expandVertically,
-    })}
+    })};
     padding: 2rem 1rem;
     position: relative;
 `;
 
 export const Arrow = withEffects(styled.div`
     ${backgroundCover(arrow)};
-    ${rectangle('72px', '53px', 0.7)}
+    ${rectangle('72px', '53px', 0.7)};
     position: absolute;
     left: calc(50% - 1rem);
 
@@ -68,7 +68,7 @@ export const Arrow = withEffects(styled.div`
     })}
 
     // @ts-ignore
-    ${props => effect(props)}
+    ${props => props.effect()}
 `);
 
 export const DataColumn = styled.div`
@@ -82,18 +82,22 @@ export const HelloBlock = styled.div`
     color: #fff;
     ${grid({ guttersW: { xs: '0', all: '1rem' }, guttersH: { xs: '1.5rem' } })}
     ${align('center', 'left')}
-  width: 100%;
+    width: 100%;
 `;
 
-export const HelloLeft = styled.div`
+export const HelloLeft = withEffects(styled.div`
     ${cell({ xs: 12, all: 4 })}
     ${align('top', 'center')}
-`;
+    // @ts-ignore
+    ${props => props.effect()}
+`);
 
-export const HelloRight = styled.div`
+export const HelloRight = withEffects(styled.div`
     ${cell({ xs: 12, all: 8 })}
     ${media({ xs: align('top', 'center', 'column') })}
-`;
+    // @ts-ignore
+    ${props => props.effect()}
+`);
 
 export const GreetingBlock = styled.div`
     letter-spacing: 0.05rem;
@@ -109,6 +113,6 @@ export const NameBlock = styled.div`
 `;
 
 export const SocialBar = styled.div`
-    ${group(null, '1.5rem')}
+    ${group(null, '1.5rem')};
     padding-top: 1.5rem;
 `;

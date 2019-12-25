@@ -95,12 +95,48 @@ const Effect: FunctionComponent<EffectHOCProps> = ({
     return html;
 };
 
+export const effect = ({
+    effect = 'fade-slide-top',
+    runEffect = false,
+}: EffectProperties) => {
+    let start = 'opacity: 0; transform: translateY(-20px);';
+    let end = 'opacity: 1; transform: translateY(0);';
+
+    if (effect === 'fade-slide-left') {
+        start = 'opacity: 0; transform: translateX(-20px);';
+        end = 'opacity: 1; transform: translateX(0);';
+    } else if (effect === 'fade-slide-right') {
+        start = 'opacity: 0; transform: translateX(20px);';
+        end = 'opacity: 1; transform: translateX(0);';
+    } else if (effect === 'fade-slide-bottom') {
+        start = 'opacity: 0; transform: translateY(20px);';
+        end = 'opacity: 1; transform: translateY(0);';
+    }
+
+    return `
+        transition: all ease-out 300ms;
+        ${start};
+        ${runEffect ? end : ''}
+    `;
+};
+
 export const withEffects = (Component: any) => {
     const WithEffects = (props: ObjectLiteral) => {
         return (
             <Effect effectTimeout={props.effectTimeout || 0}>
                 {(effectProps: EffectProps) => {
-                    return <Component {...props} {...effectProps} />;
+                    const applyEffect = () =>
+                        effect({
+                            effect: props.effect,
+                            runEffect: effectProps.runEffect,
+                        });
+                    return (
+                        <Component
+                            {...props}
+                            {...effectProps}
+                            effect={applyEffect}
+                        />
+                    );
                 }}
             </Effect>
         );
@@ -172,31 +208,6 @@ export const start = () => {
 export const stop = () => {
     window.removeEventListener('resize', onWindowUpdate);
     window.removeEventListener('scroll', onWindowUpdate);
-};
-
-export const effect = ({
-    effect = 'fade-slide-top',
-    runEffect = false,
-}: EffectProperties) => {
-    let start = 'opacity: 0; transform: translateY(-20px);';
-    let end = 'opacity: 1; transform: translateY(0);';
-
-    if (effect === 'fade-slide-left') {
-        start = 'opacity: 0; transform: translateX(-20px);';
-        end = 'opacity: 1; transform: translateX(0);';
-    } else if (effect === 'fade-slide-right') {
-        start = 'opacity: 0; transform: translateX(20px);';
-        end = 'opacity: 1; transform: translateX(0);';
-    } else if (effect === 'fade-slide-bottom') {
-        start = 'opacity: 0; transform: translateY(20px);';
-        end = 'opacity: 1; transform: translateY(0);';
-    }
-
-    return `
-        transition: all ease-out 300ms;
-        ${start};
-        ${runEffect ? end : ''}
-    `;
 };
 
 export const getRenderedNodeIdCollector = () => (
