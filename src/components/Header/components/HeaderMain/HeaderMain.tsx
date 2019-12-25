@@ -33,6 +33,8 @@ export const HeaderMain: FunctionComponent<Props> = ({ backgroundImage }) => {
     };
 
     const timeoutBase = 500;
+    const timeoutRight = timeoutBase + 500;
+    const timeoutArrow = timeoutRight + 1500;
 
     return (
         <>
@@ -50,16 +52,24 @@ export const HeaderMain: FunctionComponent<Props> = ({ backgroundImage }) => {
                             >
                                 <Avatar />
                             </HelloLeft>
-                            <HelloRight
-                                effect="fade-slide-right"
-                                effectTimeout={timeoutBase}
-                            >
-                                <NameBlock>Sergei Gannochenko</NameBlock>
-                                <GreetingBlock>
+                            <HelloRight>
+                                <NameBlock
+                                    effect="fade-slide-bottom"
+                                    effectTimeout={timeoutRight}
+                                >
+                                    Sergei Gannochenko
+                                </NameBlock>
+                                <GreetingBlock
+                                    effect="fade-slide-bottom"
+                                    effectTimeout={timeoutRight + 300}
+                                >
                                     Full-stack software engineer in Berlin,
                                     Germany
                                 </GreetingBlock>
-                                <SocialBar>
+                                <SocialBar
+                                    effect="fade-slide-bottom"
+                                    effectTimeout={timeoutRight + 600}
+                                >
                                     <Social
                                         type="github"
                                         src="https://github.com/awesome1888"
@@ -82,7 +92,7 @@ export const HeaderMain: FunctionComponent<Props> = ({ backgroundImage }) => {
                     </DataColumn>
                 </Data>
                 <Arrow
-                    effectTimeout={timeoutBase + 800}
+                    effectTimeout={timeoutArrow}
                     onClick={() => scrollWindow()}
                 />
             </Container>

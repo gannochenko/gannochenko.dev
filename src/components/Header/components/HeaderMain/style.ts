@@ -92,27 +92,31 @@ export const HelloLeft = withEffects(styled.div`
     ${props => props.effect()}
 `);
 
-export const HelloRight = withEffects(styled.div`
+export const HelloRight = styled.div`
     ${cell({ xs: 12, all: 8 })}
     ${media({ xs: align('top', 'center', 'column') })}
-    // @ts-ignore
-    ${props => props.effect()}
-`);
-
-export const GreetingBlock = styled.div`
-    letter-spacing: 0.05rem;
-    ${media({ xs: 'text-align: center;' })}
 `;
 
-export const NameBlock = styled.div`
+export const NameBlock = withEffects(styled.div`
     font-family: Raleway, sans-serif;
     font-weight: 600;
     font-size: 1.5rem;
     letter-spacing: 0.05rem;
     ${media({ xs: 'text-align: center;' })}
-`;
+    // @ts-ignore
+    ${props => props.effect()}
+`);
 
-export const SocialBar = styled.div`
+export const GreetingBlock = withEffects(styled.div`
+    letter-spacing: 0.05rem;
+    ${media({ xs: 'text-align: center;' })}
+    // @ts-ignore
+    ${props => props.effect()}
+`);
+
+export const SocialBar = withEffects(styled.div`
     ${group(null, '1.5rem')};
     padding-top: 1.5rem;
-`;
+    // @ts-ignore
+    ${props => props.effect()}
+`);
