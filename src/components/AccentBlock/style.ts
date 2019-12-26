@@ -18,7 +18,7 @@ export const AccentBlockContainer = withTheme(styled.div`
 export const Inner = styled.div`
     text-align: center;
     max-width: 60%;
-    ${media({ xs: 'max-width: 80%;' })};
+    ${media({ xs: 'max-size: 80%;' })};
 `;
 
 interface DashProps {

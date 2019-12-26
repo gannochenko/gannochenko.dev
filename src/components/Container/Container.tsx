@@ -4,7 +4,7 @@ import { ContainerStandard, ContainerWide, ContainerNarrow } from './style';
 
 import { Props } from './type';
 
-/** this container regulates the width of the content **/
+/** this container regulates the size of the content **/
 export const Container: FunctionComponent<Props> = ({ children, type }) => {
     if (type === 'wide') {
         return <ContainerWide>{children}</ContainerWide>;

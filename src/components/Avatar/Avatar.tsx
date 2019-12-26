@@ -4,11 +4,14 @@ import { Query } from './query';
 
 import { Props } from './props';
 
-export const Avatar: FunctionComponent<Props> = () => {
+export const Avatar: FunctionComponent<Props> = ({
+    size = '12rem',
+    borderSize = '0.2rem',
+}) => {
     return (
         <Query>
             {data => (
-                <Container>
+                <Container size={size} borderSize={borderSize}>
                     <Image sizes={data.avatar.childImageSharp.fluid} />
                 </Container>
             )}

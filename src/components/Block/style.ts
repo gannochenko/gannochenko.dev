@@ -26,7 +26,7 @@ export const ImageSingle = styled.div`
 
 export const ImageWrap = styled.div`
     width: 75%;
-    ${media({ xs: 'width: 100%;' })}
+    ${media({ xs: 'size: 100%;' })}
 `;
 
 export const Image = styled(Img)`
