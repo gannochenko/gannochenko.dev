@@ -1,8 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { graphql } from 'gatsby';
 
-import { Layout } from '../components/Layout';
-import { SEO } from '../components/SEO';
+import { SEO, Skills, Layout, Container } from '../components';
 
 import { BlockRenderer } from '../lib/block-renderer';
 import { Node } from '../lib/type';
@@ -22,6 +21,9 @@ const SuperPowersPage: FunctionComponent<Props> = ({ data = {} }) => {
         <Layout shortHeader>
             <SEO title="Super powers" keywords={['']} />
             {BlockRenderer.render(nodes)}
+            <Container type="wide">
+                <Skills />
+            </Container>
         </Layout>
     );
 };

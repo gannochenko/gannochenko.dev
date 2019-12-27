@@ -5,7 +5,10 @@ import { ContainerStandard, ContainerWide, ContainerNarrow } from './style';
 import { Props } from './type';
 
 /** this container regulates the size of the content **/
-export const Container: FunctionComponent<Props> = ({ children, type }) => {
+export const Container: FunctionComponent<Props> = ({
+    children,
+    type = 'standard',
+}) => {
     if (type === 'wide') {
         return <ContainerWide>{children}</ContainerWide>;
     }
