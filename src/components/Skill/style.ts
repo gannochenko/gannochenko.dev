@@ -5,7 +5,6 @@ import {
     round,
     align,
 } from '@bucket-of-bolts/styled-companion';
-import { withEffects } from '../../lib/effects';
 const hexagon = require('./assets/hexagon.svg') as string;
 
 const factor = 1.5;
@@ -14,14 +13,12 @@ const width = height * 1.129;
 
 export const SkillContainer = styled.div``;
 
-export const Hexagon = withEffects(styled.div`
+export const Hexagon = styled.div`
     height: ${factor * height * 0.9}rem;
     width: ${factor * width * 0.9}rem;
     ${backgroundCover(hexagon)};
     ${align('center', 'center')}
-    // @ts-ignore
-    ${props => props.effect()}
-`);
+`;
 
 export const Logo = styled.div<{
     src: string;

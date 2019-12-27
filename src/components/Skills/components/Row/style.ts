@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { withEffects } from '../../../../lib/effects';
 
 const factor = 1.5;
 const height = 4;
@@ -9,7 +10,10 @@ export const RowContainer = styled.div`
     flex-wrap: wrap;
 `;
 
-export const Cell = styled.div<{ last?: boolean; firstShift?: boolean }>`
+export const Cell = withEffects(styled.div<{
+    last?: boolean;
+    firstShift?: boolean;
+}>`
     height: ${factor * height}rem;
     width: ${factor * width}rem;
     flex-shrink: 0;
@@ -18,4 +22,7 @@ export const Cell = styled.div<{ last?: boolean; firstShift?: boolean }>`
 
     ${props => (props.last ? 'margin-right: 0;' : '')}
     ${props => (props.firstShift ? 'margin-left: 5.2rem;' : '')}
-`;
+
+    // @ts-ignore
+    ${props => props.effect()}
+`);
