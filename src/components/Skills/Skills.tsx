@@ -4,6 +4,7 @@ import { Skill } from '../Skill';
 import { logo } from './assets';
 
 import { SkillsContainer, SkillsOffset, Row, Cell } from './style';
+import { Row as NewRow } from './components/Row';
 
 const tmp: number[] = [];
 for (let i = 1; i < 20; i++) {
@@ -17,10 +18,24 @@ export const Skills: FunctionComponent<Props> = () => {
     let line = 1;
     let nextLast = 4;
 
-    let lines = Math.ceil(tmp.length / (oddLine + evenLine)) * 2;
-    console.log(lines);
+    // let lines = Math.ceil(tmp.length / (oddLine + evenLine)) * 2;
+    // console.log(lines);
 
-    const grid = useMemo(() => {});
+    // const grid = useMemo(() => {});
+
+    const timeouts = useMemo(() => {
+        const result = [];
+        let base = 0;
+        for (let i = 1; i < 20; i++) {
+            const next = Math.ceil(300 * Math.random());
+            base = base + next;
+            result.push(base);
+        }
+
+        return result;
+    }, []);
+
+    console.log(timeouts);
 
     return (
         <SkillsContainer>
@@ -39,24 +54,53 @@ export const Skills: FunctionComponent<Props> = () => {
                 {/*    );*/}
                 {/*})}*/}
 
-                <Row>
-                    <Cell last={false} firstShift={false}>
-                        <Skill logo={logo.apollo} title="Apollo GraphQL" />
-                    </Cell>
-                    <Cell last={false} firstShift={false}>
-                        <Skill logo={logo.aws} title="AWS" size="4.5rem" />
-                    </Cell>
-                    <Cell last={false} firstShift={false}>
+                <NewRow>
+                    {[
                         <Skill
+                            key="apollo"
+                            logo={logo.apollo}
+                            title="Apollo GraphQL"
+                        />,
+                        <Skill
+                            key="aws"
+                            logo={logo.aws}
+                            title="AWS"
+                            size="4.5rem"
+                        />,
+                        <Skill
+                            key="bitrix"
                             logo={logo.bitrix}
                             title="Bitrix"
                             size="3.5rem"
-                        />
-                    </Cell>
-                    <Cell last={true} firstShift={false}>
-                        <Skill logo={logo.css} title="CSS" size="4.5rem" />
-                    </Cell>
-                </Row>
+                        />,
+                        <Skill
+                            key="css"
+                            logo={logo.css}
+                            title="CSS"
+                            size="4.5rem"
+                        />,
+                    ]}
+                </NewRow>
+
+                {/*<Row>*/}
+                {/*    <Cell last={false} firstShift={false}>*/}
+                {/*        <Skill logo={logo.apollo} title="Apollo GraphQL" effectTimeout={timeouts[0]} />*/}
+                {/*    </Cell>*/}
+                {/*    <Cell last={false} firstShift={false}>*/}
+                {/*        <Skill logo={logo.aws} title="AWS" size="4.5rem" effectTimeout={timeouts[1]} />*/}
+                {/*    </Cell>*/}
+                {/*    <Cell last={false} firstShift={false}>*/}
+                {/*        <Skill*/}
+                {/*            logo={logo.bitrix}*/}
+                {/*            title="Bitrix"*/}
+                {/*            size="3.5rem"*/}
+                {/*            effectTimeout={timeouts[2]}*/}
+                {/*        />*/}
+                {/*    </Cell>*/}
+                {/*    <Cell last={true} firstShift={false}>*/}
+                {/*        <Skill logo={logo.css} title="CSS" size="4.5rem"  effectTimeout={timeouts[3]} />*/}
+                {/*    </Cell>*/}
+                {/*</Row>*/}
 
                 <Row>
                     <Cell last={false} firstShift={true}>

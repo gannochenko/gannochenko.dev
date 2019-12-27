@@ -8,4 +8,5 @@ export interface Props {
     width?: string;
     isRound?: boolean;
     offsetX?: string;
+    effectTimeout?: number;
 }
