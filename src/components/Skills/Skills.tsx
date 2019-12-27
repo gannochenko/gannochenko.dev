@@ -131,6 +131,101 @@ export const Skills: FunctionComponent<Props> = () => {
                         />
                     </Cell>
                 </Row>
+
+                <Row>
+                    <Cell last={false} firstShift={false}>
+                        <Skill
+                            logo={logo.mysql}
+                            title="MYSQL"
+                            size="4.5rem"
+                            isRound
+                        />
+                    </Cell>
+                    <Cell last={false} firstShift={false}>
+                        <Skill
+                            logo={logo.nodejs}
+                            title="NodeJS"
+                            size="2.5rem"
+                            width="4rem"
+                        />
+                    </Cell>
+                    <Cell last={false} firstShift={false}>
+                        <Skill
+                            logo={logo.php}
+                            title="PHP"
+                            size="3.5rem"
+                            isRound
+                        />
+                    </Cell>
+                    <Cell last={true} firstShift={false}>
+                        <Skill
+                            logo={logo.postgressql}
+                            title="PostgresSQL"
+                            size="4.0rem"
+                        />
+                    </Cell>
+                </Row>
+
+                <Row>
+                    <Cell last={false} firstShift={true}>
+                        <Skill
+                            logo={logo.reactjs}
+                            title="ReactJS"
+                            size="4rem"
+                        />
+                    </Cell>
+                    <Cell last={false} firstShift={false}>
+                        <Skill logo={logo.redis} title="Redis" size="4rem" />
+                    </Cell>
+                    <Cell last={false} firstShift={false}>
+                        <Skill logo={logo.redux} title="Redux" size="4rem" />
+                    </Cell>
+                </Row>
+
+                <Row>
+                    <Cell last={false} firstShift={false}>
+                        <Skill
+                            logo={logo.saga}
+                            title="Saga"
+                            size="2.2rem"
+                            width="3.6rem"
+                        />
+                    </Cell>
+                    <Cell last={false} firstShift={false}>
+                        <Skill
+                            logo={logo.sass}
+                            title="SASS"
+                            size="2.5rem"
+                            width="4rem"
+                        />
+                    </Cell>
+                    <Cell last={false} firstShift={false}>
+                        <Skill
+                            logo={logo.serverless}
+                            title="Serverless"
+                            size="3.5rem"
+                            isRound
+                        />
+                    </Cell>
+                    <Cell last={true} firstShift={false}>
+                        <Skill
+                            logo={logo.styledcomponents}
+                            title="Styled Components"
+                            size="4.0rem"
+                        />
+                    </Cell>
+                </Row>
+
+                <Row>
+                    <Cell last={false} firstShift={true}>
+                        <Skill
+                            logo={logo.terraform}
+                            title="Terraform"
+                            size="1.15rem"
+                            width="4.8rem"
+                        />
+                    </Cell>
+                </Row>
             </SkillsOffset>
         </SkillsContainer>
     );
