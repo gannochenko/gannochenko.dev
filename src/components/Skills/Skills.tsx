@@ -1,22 +1,57 @@
-import React, { FunctionComponent, useEffect } from 'react';
+import React, { FunctionComponent, useEffect, useState, useMemo } from 'react';
+import { throttle } from 'throttle-debounce';
 import { Skill } from '../Skill';
+import { theme } from '../../style';
 
 import { logo } from './assets';
 
 import { SkillsContainer, SkillsOffset } from './style';
 import { Row } from './components/Row';
 
+const detectRange = () => {
+    const windowWidth = window.innerWidth;
+    const {
+        grid: {
+            breakpoints: { xs, sm, md, lg },
+        },
+    } = theme;
+
+    if (windowWidth < xs[1]!) {
+        return 'xs';
+    }
+    if (windowWidth > sm[0] && windowWidth < sm[1]) {
+        return 'sm';
+    }
+    if (windowWidth > md[0] && windowWidth < md[1]) {
+        return 'md';
+    }
+    if (windowWidth > lg[0]!) {
+        return 'lg';
+    }
+
+    return 'xs';
+};
+
 export const Skills: FunctionComponent<Props> = () => {
+    const [range, setRange] = useState(detectRange());
+
     useEffect(() => {
-        const onResize = () => {
-            console.log('resize');
-        };
-        console.log('???');
+        const onResize = throttle(200, () => {
+            const currentRange = detectRange();
+            if (range !== currentRange) {
+                setRange(currentRange);
+            }
+        });
         window.addEventListener('resize', onResize);
         return () => {
             window.removeEventListener('resize', onResize);
         };
     });
+
+    const grid = useMemo(() => {
+        return [];
+    }, [range]);
+    console.log(grid);
 
     return (
         <SkillsContainer>
