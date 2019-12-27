@@ -1,16 +1,27 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useEffect } from 'react';
 import { Skill } from '../Skill';
 
 import { logo } from './assets';
 
 import { SkillsContainer, SkillsOffset } from './style';
-import { Row as NewRow } from './components/Row';
+import { Row } from './components/Row';
 
 export const Skills: FunctionComponent<Props> = () => {
+    useEffect(() => {
+        const onResize = () => {
+            console.log('resize');
+        };
+        console.log('???');
+        window.addEventListener('resize', onResize);
+        return () => {
+            window.removeEventListener('resize', onResize);
+        };
+    });
+
     return (
         <SkillsContainer>
             <SkillsOffset>
-                <NewRow effectTimeoutBase={0}>
+                <Row effectTimeoutBase={0}>
                     {[
                         <Skill
                             key="apollo"
@@ -36,29 +47,9 @@ export const Skills: FunctionComponent<Props> = () => {
                             size="4.5rem"
                         />,
                     ]}
-                </NewRow>
+                </Row>
 
-                {/*<Row>*/}
-                {/*    <Cell last={false} firstShift={false}>*/}
-                {/*        <Skill logo={logo.apollo} title="Apollo GraphQL" effectTimeout={timeouts[0]} />*/}
-                {/*    </Cell>*/}
-                {/*    <Cell last={false} firstShift={false}>*/}
-                {/*        <Skill logo={logo.aws} title="AWS" size="4.5rem" effectTimeout={timeouts[1]} />*/}
-                {/*    </Cell>*/}
-                {/*    <Cell last={false} firstShift={false}>*/}
-                {/*        <Skill*/}
-                {/*            logo={logo.bitrix}*/}
-                {/*            title="Bitrix"*/}
-                {/*            size="3.5rem"*/}
-                {/*            effectTimeout={timeouts[2]}*/}
-                {/*        />*/}
-                {/*    </Cell>*/}
-                {/*    <Cell last={true} firstShift={false}>*/}
-                {/*        <Skill logo={logo.css} title="CSS" size="4.5rem"  effectTimeout={timeouts[3]} />*/}
-                {/*    </Cell>*/}
-                {/*</Row>*/}
-
-                <NewRow odd effectTimeoutBase={0}>
+                <Row odd effectTimeoutBase={0}>
                     {[
                         <Skill
                             key="docker"
@@ -79,33 +70,9 @@ export const Skills: FunctionComponent<Props> = () => {
                             size="3.5rem"
                         />,
                     ]}
-                </NewRow>
+                </Row>
 
-                {/*<Row>*/}
-                {/*    <Cell last={false} firstShift={true}>*/}
-                {/*        <Skill*/}
-                {/*            logo={logo.docker}*/}
-                {/*            title="Docker"*/}
-                {/*            size="4.5rem"*/}
-                {/*        />*/}
-                {/*    </Cell>*/}
-                {/*    <Cell last={false} firstShift={false}>*/}
-                {/*        <Skill*/}
-                {/*            logo={logo.expressjs}*/}
-                {/*            title="ExpressJS"*/}
-                {/*            size="4rem"*/}
-                {/*        />*/}
-                {/*    </Cell>*/}
-                {/*    <Cell last={false} firstShift={false}>*/}
-                {/*        <Skill*/}
-                {/*            logo={logo.gatsbyjs}*/}
-                {/*            title="GatsbyJS"*/}
-                {/*            size="3.5rem"*/}
-                {/*        />*/}
-                {/*    </Cell>*/}
-                {/*</Row>*/}
-
-                <NewRow effectTimeoutBase={0}>
+                <Row effectTimeoutBase={0}>
                     {[
                         <Skill
                             key="git"
@@ -134,34 +101,9 @@ export const Skills: FunctionComponent<Props> = () => {
                             width="4rem"
                         />,
                     ]}
-                </NewRow>
+                </Row>
 
-                {/*<Row>*/}
-                {/*    <Cell last={false} firstShift={false}>*/}
-                {/*        <Skill logo={logo.git} title="GIT" size="4rem" />*/}
-                {/*    </Cell>*/}
-                {/*    <Cell last={false} firstShift={false}>*/}
-                {/*        <Skill logo={logo.html} title="HTML" size="4.5rem" />*/}
-                {/*    </Cell>*/}
-                {/*    <Cell last={false} firstShift={false}>*/}
-                {/*        <Skill*/}
-                {/*            logo={logo.js}*/}
-                {/*            title="JavaScript"*/}
-                {/*            size="3.5rem"*/}
-                {/*            isRound*/}
-                {/*        />*/}
-                {/*    </Cell>*/}
-                {/*    <Cell last={true} firstShift={false}>*/}
-                {/*        <Skill*/}
-                {/*            logo={logo.less}*/}
-                {/*            title="LESS"*/}
-                {/*            size="2.0rem"*/}
-                {/*            width="4rem"*/}
-                {/*        />*/}
-                {/*    </Cell>*/}
-                {/*</Row>*/}
-
-                <NewRow effectTimeoutBase={0} odd>
+                <Row effectTimeoutBase={0} odd>
                     {[
                         <Skill
                             key="linux"
@@ -183,34 +125,9 @@ export const Skills: FunctionComponent<Props> = () => {
                             size="4.5rem"
                         />,
                     ]}
-                </NewRow>
+                </Row>
 
-                {/*<Row>*/}
-                {/*    <Cell last={false} firstShift={true}>*/}
-                {/*        <Skill*/}
-                {/*            logo={logo.linux}*/}
-                {/*            title="Linux"*/}
-                {/*            size="4rem"*/}
-                {/*            offsetX="0.7rem"*/}
-                {/*        />*/}
-                {/*    </Cell>*/}
-                {/*    <Cell last={false} firstShift={false}>*/}
-                {/*        <Skill*/}
-                {/*            logo={logo.meteorjs}*/}
-                {/*            title="MeteorJS"*/}
-                {/*            size="4rem"*/}
-                {/*        />*/}
-                {/*    </Cell>*/}
-                {/*    <Cell last={false} firstShift={false}>*/}
-                {/*        <Skill*/}
-                {/*            logo={logo.mongodb}*/}
-                {/*            title="MongoDB"*/}
-                {/*            size="4.5rem"*/}
-                {/*        />*/}
-                {/*    </Cell>*/}
-                {/*</Row>*/}
-
-                <NewRow effectTimeoutBase={0}>
+                <Row effectTimeoutBase={0}>
                     {[
                         <Skill
                             key="mysql"
@@ -240,43 +157,9 @@ export const Skills: FunctionComponent<Props> = () => {
                             size="4.0rem"
                         />,
                     ]}
-                </NewRow>
+                </Row>
 
-                {/*<Row>*/}
-                {/*    <Cell last={false} firstShift={false}>*/}
-                {/*        <Skill*/}
-                {/*            logo={logo.mysql}*/}
-                {/*            title="MYSQL"*/}
-                {/*            size="4.5rem"*/}
-                {/*            isRound*/}
-                {/*        />*/}
-                {/*    </Cell>*/}
-                {/*    <Cell last={false} firstShift={false}>*/}
-                {/*        <Skill*/}
-                {/*            logo={logo.nodejs}*/}
-                {/*            title="NodeJS"*/}
-                {/*            size="2.5rem"*/}
-                {/*            width="4rem"*/}
-                {/*        />*/}
-                {/*    </Cell>*/}
-                {/*    <Cell last={false} firstShift={false}>*/}
-                {/*        <Skill*/}
-                {/*            logo={logo.php}*/}
-                {/*            title="PHP"*/}
-                {/*            size="3.5rem"*/}
-                {/*            isRound*/}
-                {/*        />*/}
-                {/*    </Cell>*/}
-                {/*    <Cell last={true} firstShift={false}>*/}
-                {/*        <Skill*/}
-                {/*            logo={logo.postgressql}*/}
-                {/*            title="PostgresSQL"*/}
-                {/*            size="4.0rem"*/}
-                {/*        />*/}
-                {/*    </Cell>*/}
-                {/*</Row>*/}
-
-                <NewRow effectTimeoutBase={0} odd>
+                <Row effectTimeoutBase={0} odd>
                     {[
                         <Skill
                             key="reactjs"
@@ -297,25 +180,9 @@ export const Skills: FunctionComponent<Props> = () => {
                             size="4rem"
                         />,
                     ]}
-                </NewRow>
+                </Row>
 
-                {/*<Row>*/}
-                {/*    <Cell last={false} firstShift={true}>*/}
-                {/*        <Skill*/}
-                {/*            logo={logo.reactjs}*/}
-                {/*            title="ReactJS"*/}
-                {/*            size="4rem"*/}
-                {/*        />*/}
-                {/*    </Cell>*/}
-                {/*    <Cell last={false} firstShift={false}>*/}
-                {/*        <Skill logo={logo.redis} title="Redis" size="4rem" />*/}
-                {/*    </Cell>*/}
-                {/*    <Cell last={false} firstShift={false}>*/}
-                {/*        <Skill logo={logo.redux} title="Redux" size="4rem" />*/}
-                {/*    </Cell>*/}
-                {/*</Row>*/}
-
-                <NewRow effectTimeoutBase={0}>
+                <Row effectTimeoutBase={0}>
                     {[
                         <Skill
                             key="saga"
@@ -345,43 +212,9 @@ export const Skills: FunctionComponent<Props> = () => {
                             size="4.0rem"
                         />,
                     ]}
-                </NewRow>
+                </Row>
 
-                {/*<Row>*/}
-                {/*    <Cell last={false} firstShift={false}>*/}
-                {/*        <Skill*/}
-                {/*            logo={logo.saga}*/}
-                {/*            title="Saga"*/}
-                {/*            size="2.2rem"*/}
-                {/*            width="3.6rem"*/}
-                {/*        />*/}
-                {/*    </Cell>*/}
-                {/*    <Cell last={false} firstShift={false}>*/}
-                {/*        <Skill*/}
-                {/*            logo={logo.sass}*/}
-                {/*            title="SASS"*/}
-                {/*            size="2.5rem"*/}
-                {/*            width="4rem"*/}
-                {/*        />*/}
-                {/*    </Cell>*/}
-                {/*    <Cell last={false} firstShift={false}>*/}
-                {/*        <Skill*/}
-                {/*            logo={logo.serverless}*/}
-                {/*            title="Serverless"*/}
-                {/*            size="3.5rem"*/}
-                {/*            isRound*/}
-                {/*        />*/}
-                {/*    </Cell>*/}
-                {/*    <Cell last={true} firstShift={false}>*/}
-                {/*        <Skill*/}
-                {/*            logo={logo.styledcomponents}*/}
-                {/*            title="Styled Components"*/}
-                {/*            size="4.0rem"*/}
-                {/*        />*/}
-                {/*    </Cell>*/}
-                {/*</Row>*/}
-
-                <NewRow effectTimeoutBase={0} odd>
+                <Row effectTimeoutBase={0} odd>
                     {[
                         <Skill
                             key="terraform"
@@ -391,18 +224,7 @@ export const Skills: FunctionComponent<Props> = () => {
                             width="4.8rem"
                         />,
                     ]}
-                </NewRow>
-
-                {/*<Row>*/}
-                {/*    <Cell last={false} firstShift={true}>*/}
-                {/*        <Skill*/}
-                {/*            logo={logo.terraform}*/}
-                {/*            title="Terraform"*/}
-                {/*            size="1.15rem"*/}
-                {/*            width="4.8rem"*/}
-                {/*        />*/}
-                {/*    </Cell>*/}
-                {/*</Row>*/}
+                </Row>
             </SkillsOffset>
         </SkillsContainer>
     );
