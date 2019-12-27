@@ -32,7 +32,7 @@ export const ImageOverlay = styled.div`
     opacity: 0.6;
 `;
 
-const expandVertically = 'size: 100vh; overflow-y: hidden;';
+const expandVertically = 'height: 100vh; overflow-y: hidden;';
 export const Data = styled.div`
     ${central()}
     ${align('center', 'center', 'column')}

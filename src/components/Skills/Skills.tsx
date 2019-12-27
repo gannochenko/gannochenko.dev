@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { Skill } from '../Skill';
 
-import { apollo, aws } from './assets';
+import { logo } from './assets';
 
 import { SkillsContainer, SkillsOffset, Row, Cell } from './style';
 
@@ -41,55 +41,94 @@ export const Skills: FunctionComponent<Props> = () => {
 
                 <Row>
                     <Cell last={false} firstShift={false}>
-                        <Skill logo={apollo} title="Apollo GraphQL" />
+                        <Skill logo={logo.apollo} title="Apollo GraphQL" />
                     </Cell>
                     <Cell last={false} firstShift={false}>
-                        <Skill logo={aws} title="AWS" size="70%" />
+                        <Skill logo={logo.aws} title="AWS" size="4.5rem" />
                     </Cell>
                     <Cell last={false} firstShift={false}>
-                        <Skill logo="" title="" />
+                        <Skill
+                            logo={logo.bitrix}
+                            title="Bitrix"
+                            size="3.5rem"
+                        />
                     </Cell>
                     <Cell last={true} firstShift={false}>
-                        <Skill logo="" title="" />
+                        <Skill logo={logo.css} title="CSS" size="4.5rem" />
                     </Cell>
                 </Row>
 
                 <Row>
                     <Cell last={false} firstShift={true}>
-                        <Skill logo="" title="" />
+                        <Skill
+                            logo={logo.docker}
+                            title="Docker"
+                            size="4.5rem"
+                        />
                     </Cell>
                     <Cell last={false} firstShift={false}>
-                        <Skill logo="" title="" />
+                        <Skill
+                            logo={logo.expressjs}
+                            title="ExpressJS"
+                            size="4rem"
+                        />
                     </Cell>
                     <Cell last={false} firstShift={false}>
-                        <Skill logo="" title="" />
+                        <Skill
+                            logo={logo.gatsbyjs}
+                            title="GatsbyJS"
+                            size="3.5rem"
+                        />
                     </Cell>
                 </Row>
 
                 <Row>
                     <Cell last={false} firstShift={false}>
-                        <Skill logo="" title="" />
+                        <Skill logo={logo.git} title="GIT" size="4rem" />
                     </Cell>
                     <Cell last={false} firstShift={false}>
-                        <Skill logo="" title="" />
+                        <Skill logo={logo.html} title="HTML" size="4.5rem" />
                     </Cell>
                     <Cell last={false} firstShift={false}>
-                        <Skill logo="" title="" />
+                        <Skill
+                            logo={logo.js}
+                            title="JavaScript"
+                            size="3.5rem"
+                            isRound
+                        />
                     </Cell>
                     <Cell last={true} firstShift={false}>
-                        <Skill logo="" title="" />
+                        <Skill
+                            logo={logo.less}
+                            title="LESS"
+                            size="2.0rem"
+                            width="4rem"
+                        />
                     </Cell>
                 </Row>
 
                 <Row>
                     <Cell last={false} firstShift={true}>
-                        <Skill logo="" title="" />
+                        <Skill
+                            logo={logo.linux}
+                            title="Linux"
+                            size="4rem"
+                            offsetX="0.7rem"
+                        />
                     </Cell>
                     <Cell last={false} firstShift={false}>
-                        <Skill logo="" title="" />
+                        <Skill
+                            logo={logo.meteorjs}
+                            title="MeteorJS"
+                            size="4rem"
+                        />
                     </Cell>
                     <Cell last={false} firstShift={false}>
-                        <Skill logo="" title="" />
+                        <Skill
+                            logo={logo.mongodb}
+                            title="MongoDB"
+                            size="4.5rem"
+                        />
                     </Cell>
                 </Row>
             </SkillsOffset>

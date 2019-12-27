@@ -40,12 +40,14 @@ export const Hexagon = styled.div`
 export const Logo = styled.div<{
     src: string;
     size?: string;
+    width?: string;
     isRound?: boolean;
+    offsetX?: string;
 }>`
-  ${props => rectangle(props.size ? props.size : '100%')}
-  ${props => (props.round ? round() : '')}
+  ${props => rectangle(props.size ? props.size : '5.5rem', props.width)}
+  ${props => (props.isRound ? round() : '')}
   ${props => backgroundCover(props.src)}
   overflow: hidden;
   // ${props => (props.iOffs ? `margin-top: ${props.iOffs}` : '')}
-  // ${props => (props.iOffsH ? `margin-left: ${props.iOffsH}` : '')}
+  ${props => (props.offsetX ? `margin-left: ${props.offsetX}` : '')}
 `;
