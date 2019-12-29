@@ -32,6 +32,8 @@ const detectRange = () => {
     return 'xs';
 };
 
+const skills = [{}];
+
 export const Skills: FunctionComponent<Props> = () => {
     const [range, setRange] = useState(detectRange());
 
@@ -257,6 +259,21 @@ export const Skills: FunctionComponent<Props> = () => {
                             title="Terraform"
                             size="1.15rem"
                             width="4.8rem"
+                        />,
+                        <Skill
+                            key="typescript"
+                            logo={logo.typescript}
+                            title="Typescript"
+                            size="3.5rem"
+                            // width="4.8rem"
+                            isRound
+                        />,
+                        <Skill
+                            key="kubernetes"
+                            logo={logo.kubernetes}
+                            title="Kubernetes"
+                            size="3.5rem"
+                            // width="4.8rem"
                         />,
                     ]}
                 </Row>

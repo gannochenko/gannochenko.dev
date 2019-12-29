@@ -24,6 +24,8 @@ const sass = require('./logo/sass.svg') as string;
 const serverless = require('./logo/serverless.svg') as string;
 const styledcomponents = require('./logo/styledcomponents.png') as string;
 const terraform = require('./logo/terraform.svg') as string;
+const typescript = require('./logo/typescript.svg') as string;
+const kubernetes = require('./logo/k8s.svg') as string;
 
 // todo: add K8S and maybe something else?
 
@@ -54,4 +56,6 @@ export const logo = {
     serverless,
     styledcomponents,
     terraform,
+    typescript,
+    kubernetes,
 };
