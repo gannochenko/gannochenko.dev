@@ -4,8 +4,7 @@ import { Skill } from '../Skill';
 import { theme } from '../../style';
 import { skills } from './skills';
 
-import { logo } from './assets';
-
+import { Props, SkillItem } from './type';
 import { SkillsContainer, SkillsOffset } from './style';
 import { Row } from './components/Row';
 
@@ -34,25 +33,38 @@ const detectRange = () => {
 };
 
 const getDimensions = (range: string) => {
-    const result = {
+    console.log(range);
+
+    // lg || md
+    let result = {
         even: 4,
         odd: 3,
     };
 
-    // if (range === 'md') {
-    //
-    // }
+    if (range === 'sm') {
+        result = {
+            even: 3,
+            odd: 2,
+        };
+    }
+
+    if (range === 'xs') {
+        result = {
+            even: 2,
+            odd: 1,
+        };
+    }
 
     return result;
 };
 
-const getGrid = (data: ObjectLiteral[], range: string) => {
+const getGrid = (data: SkillItem[], range: string) => {
     const dimensions = getDimensions(range);
 
-    const result: ObjectLiteral[][] = [];
+    const result: SkillItem[][] = [];
 
     let lineNumber = 0;
-    let line: ObjectLiteral[] = [];
+    let line: SkillItem[] = [];
     for (let i = 0; i < data.length; i += 1) {
         const isEven = !(lineNumber % 2);
         const dimension = isEven ? dimensions.even : dimensions.odd;
@@ -94,10 +106,15 @@ export const Skills: FunctionComponent<Props> = () => {
 
     return (
         <SkillsContainer>
-            <SkillsOffset></SkillsOffset>
+            <SkillsOffset>
+                {grid.map((row, i) => (
+                    <Row effectTimeoutBase={0} odd={i % 2 > 0} key={i}>
+                        {row.map(item => (
+                            <Skill key={item.key} {...item} />
+                        ))}
+                    </Row>
+                ))}
+            </SkillsOffset>
         </SkillsContainer>
     );
 };
-
-import { Props } from './type';
-import { ObjectLiteral } from '../../type';
