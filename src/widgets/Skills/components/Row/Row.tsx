@@ -12,7 +12,7 @@ export const Row: FunctionComponent<Props> = ({
     const cells = useMemo(() => {
         return children.map((item, key) => {
             const effectTimeout =
-                effectTimeoutBase + Math.ceil(1000 * Math.random());
+                effectTimeoutBase + Math.ceil(500 * Math.random());
 
             return (
                 <Cell
@@ -20,7 +20,7 @@ export const Row: FunctionComponent<Props> = ({
                     firstShift={key === 0 && odd}
                     last={key === children.length - 1}
                     effectTimeout={effectTimeout}
-                    effect="fade-slide-bottom"
+                    effect="fade-slide-top"
                 >
                     {item}
                 </Cell>
