@@ -1,3 +1,6 @@
+import { ReactNode } from 'react';
+
 export interface Props {
-    text: string;
+    children?: ReactNode;
+    size?: 'normal' | 'small';
 }

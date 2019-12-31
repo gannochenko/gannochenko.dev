@@ -4,20 +4,34 @@ import {
     rectangle,
     round,
     align,
+    absoluteCover,
 } from '@bucket-of-bolts/styled-companion';
-const hexagon = require('./assets/hexagon.svg') as string;
 
 const factor = 1.5;
 const height = 4;
 const width = height * 1.129;
 
-export const SkillContainer = styled.div``;
-
-export const Hexagon = styled.div`
+export const SkillContainer = styled.div`
     height: ${factor * height * 0.9}rem;
     width: ${factor * width * 0.9}rem;
-    ${backgroundCover(hexagon)};
-    ${align('center', 'center')}
+    position: relative;
+    ${align('center', 'center')};
+    //cursor: pointer;
+
+    &:hover {
+        .skill-overlay {
+            opacity: 1;
+        }
+    }
+`;
+
+export const HexagonContainer = styled.div`
+    ${absoluteCover()};
+
+    transition: opacity 300ms ease;
+    &.skill-overlay {
+        opacity: 0;
+    }
 `;
 
 export const Logo = styled.div<{
@@ -31,5 +45,6 @@ export const Logo = styled.div<{
   ${props => (props.isRound ? round() : '')}
   ${props => backgroundCover(props.src)}
   overflow: hidden;
+  position: relative;
   ${props => (props.offsetX ? `margin-left: ${props.offsetX}` : '')}
 `;

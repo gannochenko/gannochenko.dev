@@ -5,6 +5,7 @@ export interface Props {
     logo: string;
     title?: string;
     size?: string;
+    fontSize?: 'small' | 'normal';
     width?: string;
     isRound?: boolean;
     offsetX?: string;

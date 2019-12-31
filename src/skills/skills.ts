@@ -13,18 +13,19 @@ export const skills = {
             logo: logo.styledcomponents,
             title: 'Styled Components',
             size: '4.0rem',
+            fontSize: 'small',
         },
         {
             key: 'typescript',
             logo: logo.typescript,
-            title: 'Typescript',
+            title: 'TypeScript',
             size: '3.5rem',
             isRound: true,
         },
         {
             key: 'css',
             logo: logo.css,
-            title: 'CSS',
+            title: 'CSS3',
             size: '4.5rem',
         },
         {
@@ -34,7 +35,7 @@ export const skills = {
             size: '4rem',
         },
         {
-            key: 'javascript',
+            key: 'avascript',
             logo: logo.js,
             title: 'JavaScript',
             size: '3.5rem',
@@ -43,7 +44,7 @@ export const skills = {
         {
             key: 'html',
             logo: logo.html,
-            title: 'HTML',
+            title: 'HTML5',
             size: '4.5rem',
         },
         {
@@ -81,7 +82,7 @@ export const skills = {
         {
             key: 'saga',
             logo: logo.saga,
-            title: 'Saga',
+            title: 'Redux Saga',
             size: '2.2rem',
             width: '3.6rem',
         },
@@ -106,7 +107,7 @@ export const skills = {
         {
             key: 'mysql',
             logo: logo.mysql,
-            title: 'MYSQL',
+            title: 'MySQL',
             size: '4.5rem',
             isRound: true,
         },
@@ -160,7 +161,7 @@ export const skills = {
         {
             key: 'bitrix',
             logo: logo.bitrix,
-            title: 'Bitrix',
+            title: 'Bitrix24',
             size: '3.5rem',
         },
         {
