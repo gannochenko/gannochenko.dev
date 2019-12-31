@@ -1,12 +1,13 @@
 import React, { FunctionComponent, useEffect, useState, useMemo } from 'react';
 import { throttle } from 'throttle-debounce';
-import { Skill } from '../Skill';
 import { theme } from '../../style';
-import { skills } from './skills';
-
 import { Props, SkillItem } from './type';
+
 import { SkillsContainer, SkillsOffset } from './style';
 import { Row } from './components/Row';
+import { Skill } from './components/Skill';
+
+import { main, rest } from '../../skills/skills';
 
 const detectRange = () => {
     const windowWidth = window.innerWidth;
@@ -33,8 +34,6 @@ const detectRange = () => {
 };
 
 const getDimensions = (range: string) => {
-    console.log(range);
-
     // lg || md
     let result = {
         even: 4,
@@ -84,7 +83,8 @@ const getGrid = (data: SkillItem[], range: string) => {
     return result;
 };
 
-export const Skills: FunctionComponent<Props> = () => {
+export const Skills: FunctionComponent<Props> = ({ type }) => {
+    const data = type === 'main' ? main : rest;
     const [range, setRange] = useState(detectRange());
 
     useEffect(() => {
@@ -101,8 +101,8 @@ export const Skills: FunctionComponent<Props> = () => {
     });
 
     const grid = useMemo(() => {
-        return getGrid(skills, range);
-    }, [skills, range]);
+        return getGrid(data, range);
+    }, [data, range]);
 
     return (
         <SkillsContainer>

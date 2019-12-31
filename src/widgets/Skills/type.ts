@@ -1,7 +1,7 @@
-import { ReactNode } from 'react';
+import { Props as WidgetProps } from '../type';
 
-export interface Props {
-    children?: ReactNode;
+export interface Props extends WidgetProps {
+    type: 'main' | 'rest';
 }
 
 export interface SkillItem {

@@ -27,8 +27,6 @@ const terraform = require('./logo/terraform.svg') as string;
 const typescript = require('./logo/typescript.svg') as string;
 const kubernetes = require('./logo/k8s.svg') as string;
 
-// todo: add K8S and maybe something else?
-
 export const logo = {
     apollo,
     aws,

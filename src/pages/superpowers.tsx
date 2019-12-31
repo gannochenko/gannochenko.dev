@@ -5,6 +5,7 @@ import { SEO, Skills, Layout, Container } from '../components';
 
 import { BlockRenderer } from '../lib/block-renderer';
 import { Node } from '../lib/type';
+import { main, rest } from '../skills/skills';
 
 interface Props {
     data: {
@@ -21,9 +22,10 @@ const SuperPowersPage: FunctionComponent<Props> = ({ data = {} }) => {
         <Layout shortHeader>
             <SEO title="Super powers" keywords={['']} />
             {BlockRenderer.render(nodes)}
-            <Container type="wide">
-                <Skills />
-            </Container>
+            {/*<Container type="wide">*/}
+            {/*    <Skills data={main} />*/}
+            {/*    <Skills data={rest} />*/}
+            {/*</Container>*/}
         </Layout>
     );
 };

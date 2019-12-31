@@ -11,9 +11,9 @@ import {
     GalleryItem,
 } from './style';
 import { Props } from './type';
-import { Copyright } from '../Copyright';
+import { Copyright } from '../../components/Copyright';
 import { withEffects } from '../../lib/effects';
-import { Container } from '../Container';
+import { Container } from '../../components/Container';
 
 const BlockContainer: FunctionComponent<Props> = props => {
     const { html, effectTimeout, containerType, graphics = [] } = props;

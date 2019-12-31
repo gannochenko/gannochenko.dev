@@ -1,8 +1,7 @@
 import { FontSize } from '../../type';
+import { Props as WidgetProps } from '../type';
 
-export interface Props {
-    html: string;
-    raw: string;
+export interface Props extends WidgetProps {
     fontSize: FontSize;
     effect?: string;
     effectTimeout?: number;
