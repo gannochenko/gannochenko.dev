@@ -26,6 +26,7 @@ const styledcomponents = require('./logo/styledcomponents.png') as string;
 const terraform = require('./logo/terraform.svg') as string;
 const typescript = require('./logo/typescript.svg') as string;
 const kubernetes = require('./logo/k8s.svg') as string;
+const nestjs = require('./logo/nestjs.svg') as string;
 
 export const logo = {
     apollo,
@@ -42,6 +43,7 @@ export const logo = {
     linux,
     meteorjs,
     mongodb,
+    typeorm: postgressql,
     mysql,
     nodejs,
     php,
@@ -56,4 +58,5 @@ export const logo = {
     terraform,
     typescript,
     kubernetes,
+    nestjs,
 };

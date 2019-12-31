@@ -7,7 +7,7 @@ import { SkillsContainer, SkillsOffset } from './style';
 import { Row } from './components/Row';
 import { Skill } from './components/Skill';
 
-import { main, rest } from '../../skills/skills';
+import { skills } from '../../skills/skills';
 
 const detectRange = () => {
     const windowWidth = window.innerWidth;
@@ -84,7 +84,7 @@ const getGrid = (data: SkillItem[], range: string) => {
 };
 
 export const Skills: FunctionComponent<Props> = ({ type }) => {
-    const data = type === 'main' ? main : rest;
+    const data = skills[type] || [];
     const [range, setRange] = useState(detectRange());
 
     useEffect(() => {

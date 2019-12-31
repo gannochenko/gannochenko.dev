@@ -7,4 +7,5 @@ export interface Props extends WidgetProps {
     containerType: ContainerType;
     effect?: string;
     effectTimeout?: number;
+    contentAlign: 'center' | 'left' | 'right';
 }

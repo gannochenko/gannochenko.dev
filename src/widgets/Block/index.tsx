@@ -2,7 +2,6 @@ import React, { FunctionComponent } from 'react';
 
 import {
     StandardBlockContainer,
-    Inner,
     ImageSingle,
     ImageWrap,
     Image,
@@ -16,16 +15,24 @@ import { withEffects } from '../../lib/effects';
 import { Container } from '../../components/Container';
 
 const BlockContainer: FunctionComponent<Props> = props => {
-    const { html, effectTimeout, containerType, graphics = [] } = props;
+    const {
+        html,
+        effectTimeout,
+        containerType,
+        graphics = [],
+        contentAlign,
+    } = props;
 
     let timeout = effectTimeout || 0;
 
     return (
         <StandardBlockContainer {...props}>
             {!!html && (
-                <Container type={containerType}>
-                    <Inner dangerouslySetInnerHTML={{ __html: html }} />
-                </Container>
+                <Container
+                    type={containerType}
+                    contentAlign={contentAlign}
+                    dangerouslySetInnerHTML={{ __html: html }}
+                />
             )}
             {graphics.length === 1 && graphics[0].image && (
                 <ImageSingle>
