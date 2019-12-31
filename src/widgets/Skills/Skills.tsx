@@ -8,6 +8,7 @@ import { Row } from './components/Row';
 import { Skill } from './components/Skill';
 
 import { skills } from '../../skills/skills';
+import { Hexagon } from './components/Hexagon';
 
 const detectRange = () => {
     const windowWidth = window.innerWidth;
