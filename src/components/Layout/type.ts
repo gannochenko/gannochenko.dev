@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 
 export interface Props {
     children?: ReactNode;
-    shortHeader: boolean;
+    shortHeader?: boolean;
     title?: string;
     backURL?: string;
 }

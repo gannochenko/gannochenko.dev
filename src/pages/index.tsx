@@ -17,7 +17,7 @@ const HomePage: FunctionComponent<Props> = ({ data = {} }) => {
     const { allMarkdownRemark: { nodes = [] } = {} } = data;
 
     return (
-        <Layout shortHeader={false}>
+        <Layout>
             <SEO title="Home" keywords={['']} />
             <BlockRenderer nodes={nodes} />
         </Layout>

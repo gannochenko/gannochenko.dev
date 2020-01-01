@@ -1,7 +1,41 @@
 import { logo } from './assets';
 
 export const skills = {
-    main: [
+    primary: [
+        {
+            key: 'reactjs',
+            logo: logo.reactjs,
+            title: 'ReactJS',
+            size: '4rem',
+        },
+        {
+            key: 'expressjs',
+            logo: logo.expressjs,
+            title: 'ExpressJS',
+            size: '4rem',
+        },
+        {
+            key: 'typescript',
+            logo: logo.typescript,
+            title: 'TypeScript',
+            size: '3.5rem',
+            isRound: true,
+        },
+        {
+            key: 'nodejs',
+            logo: logo.nodejs,
+            title: 'NodeJS',
+            size: '2.5rem',
+            width: '4rem',
+        },
+        {
+            key: 'docker',
+            logo: logo.docker,
+            title: 'Docker',
+            size: '4.5rem',
+        },
+    ],
+    frontend: [
         {
             key: 'reactjs',
             logo: logo.reactjs,
@@ -66,7 +100,7 @@ export const skills = {
             size: '3.5rem',
         },
     ],
-    rest: [
+    devops: [
         {
             key: 'docker',
             logo: logo.docker,
@@ -149,7 +183,7 @@ export const skills = {
             width: '4.5rem',
         },
     ],
-    codemanagement: [
+    util: [
         {
             key: 'git',
             logo: logo.git,

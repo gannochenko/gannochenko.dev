@@ -6,7 +6,7 @@ const height = 4;
 // const width = height * 1.129;
 
 export const SkillsContainer = styled.div`
-    padding: 2rem 0;
+    margin: 2rem 0;
     ${align('top', 'center')}
 `;
 

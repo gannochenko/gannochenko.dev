@@ -33,7 +33,7 @@ export const HeaderMain: FunctionComponent<Props> = ({ backgroundImage }) => {
     };
 
     const timeoutBase = 500;
-    const timeoutRight = timeoutBase + 500;
+    const timeoutRight = timeoutBase + 200;
     const timeoutArrow = timeoutRight + 1500;
 
     return (

@@ -6,7 +6,7 @@ import { Header, Footer, Container } from '../';
 
 export const Layout: FunctionComponent<Props> = ({
     children,
-    shortHeader,
+    shortHeader = false,
     title,
     backURL,
 }) => {

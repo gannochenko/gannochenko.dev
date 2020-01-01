@@ -6,7 +6,7 @@ import { SEO } from '../components/SEO';
 
 const NotFoundPage = () => {
     return (
-        <Layout>
+        <Layout shortHeader backURL="/">
             <SEO title="404: Not found" keywords={['']} />
             404
         </Layout>
