@@ -22,4 +22,5 @@ export const BackContainer = styled(Container)`
 
 export const BackLink = styled(Link)`
     text-decoration: none;
+    font-size: 0.8rem;
 `;

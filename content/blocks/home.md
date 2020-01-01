@@ -16,3 +16,12 @@ If you are interested [here is the full story](/story/) :)
 [/BLOCK]
 [BLOCK]My primary field of expertise includes the following stack:[/BLOCK]
 [BLOCK widget=Skills type=primary]1[/BLOCK]
+[BLOCK]
+Check out my [full tech radar](/techradar/)!
+[/BLOCK]
+[BLOCK]
+## Contact
+[/BLOCK]
+[BLOCK]
+Please feel free to [leave me a message](https://www.linkedin.com/in/sergey-gannochenko)!
+[/BLOCK]

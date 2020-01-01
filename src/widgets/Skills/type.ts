@@ -1,7 +1,7 @@
 import { Props as WidgetProps } from '../type';
 
 export interface Props extends WidgetProps {
-    type: 'main' | 'rest';
+    type: 'primary' | 'frontend' | 'backend' | 'devops' | 'familiar' | 'util';
 }
 
 export interface SkillItem {
