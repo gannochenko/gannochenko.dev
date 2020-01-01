@@ -14,7 +14,7 @@ interface Props {
     };
 }
 
-const SuperPowersPage: FunctionComponent<Props> = ({ data = {} }) => {
+const TechRadarPage: FunctionComponent<Props> = ({ data = {} }) => {
     const { allMarkdownRemark: { nodes = [] } = {} } = data;
 
     return (
@@ -26,7 +26,7 @@ const SuperPowersPage: FunctionComponent<Props> = ({ data = {} }) => {
 };
 
 export const query = graphql`
-    query SuperPowersPageQuery {
+    query TechRadarPageQuery {
         allMarkdownRemark(
             sort: { fields: frontmatter___sort, order: ASC }
             filter: { frontmatter: { pathname: { eq: "/techradar/" } } }
@@ -47,4 +47,4 @@ export const query = graphql`
     }
 `;
 
-export default SuperPowersPage;
+export default TechRadarPage;

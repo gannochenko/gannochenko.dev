@@ -11,6 +11,7 @@ export class BlockRenderer {
         const result: ReactNode[] = [];
         nodes.forEach(node => {
             BlockParser.parse(node.rawMarkdownBody).forEach((block, index) => {
+                console.log(block);
                 const Widget = this.getWidget(block.props.widget);
                 if (!Widget) {
                     return;

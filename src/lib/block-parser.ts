@@ -11,8 +11,7 @@ export class BlockParser {
     public static parse(data: string) {
         const result: BlockSequence = [];
 
-        // let blockFound: RegExpMatchArray | null;
-        let exit = 10;
+        let exit = 500;
         let processedData = data;
 
         do {
