@@ -17,7 +17,7 @@ const TechRadarPage: FunctionComponent<Props> = ({ data = {} }) => {
     const { allMarkdownRemark: { nodes = [] } = {} } = data;
 
     return (
-        <Layout shortHeader>
+        <Layout shortHeader title="Tech radar" backURL="/">
             <SEO title="Tech radar" keywords={['']} />
             <BlockRenderer nodes={nodes} />
         </Layout>

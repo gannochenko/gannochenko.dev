@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { graphql, Link } from 'gatsby';
+import { graphql } from 'gatsby';
 
 import { Layout, BlockRenderer, SEO } from '../components';
 
@@ -17,9 +17,8 @@ const StoryPage: FunctionComponent<Props> = ({ data = {} }) => {
     const { allMarkdownRemark: { nodes = [] } = {} } = data;
 
     return (
-        <Layout shortHeader>
+        <Layout shortHeader title="Story" backURL="/">
             <SEO title="Story" keywords={['']} />
-            <Link to="/">Back</Link>
             <BlockRenderer nodes={nodes} />
         </Layout>
     );
