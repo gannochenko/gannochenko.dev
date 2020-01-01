@@ -1,9 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { graphql } from 'gatsby';
 
-import { SEO, Layout } from '../components';
+import { Layout, BlockRenderer, SEO } from '../components';
 
-import { BlockRenderer } from '../lib/block-renderer';
 import { Node } from '../lib/type';
 
 interface Props {
@@ -20,7 +19,7 @@ const TechRadarPage: FunctionComponent<Props> = ({ data = {} }) => {
     return (
         <Layout shortHeader>
             <SEO title="Tech radar" keywords={['']} />
-            {BlockRenderer.render(nodes)}
+            <BlockRenderer nodes={nodes} />
         </Layout>
     );
 };

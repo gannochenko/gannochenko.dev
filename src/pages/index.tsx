@@ -1,10 +1,8 @@
 import React, { FunctionComponent } from 'react';
-import { graphql, Link } from 'gatsby';
+import { graphql } from 'gatsby';
 
-import { Layout } from '../components/Layout';
-import { SEO } from '../components/SEO';
+import { Layout, BlockRenderer, SEO } from '../components';
 
-import { BlockRenderer } from '../lib/block-renderer';
 import { Node } from '../lib/type';
 
 interface Props {
@@ -21,7 +19,7 @@ const HomePage: FunctionComponent<Props> = ({ data = {} }) => {
     return (
         <Layout shortHeader={false}>
             <SEO title="Home" keywords={['']} />
-            {BlockRenderer.render(nodes)}
+            <BlockRenderer nodes={nodes} />
         </Layout>
     );
 };
