@@ -108,7 +108,7 @@ export const skills = {
         },
         {
             key: 'vagrant',
-            logo: logo.terraform,
+            logo: '',
             title: 'Vagrant',
             size: '1.15rem',
             width: '4.8rem',
@@ -117,7 +117,7 @@ export const skills = {
     dated: [
         {
             key: 'bitrix',
-            logo: logo.bitrix,
+            logo: '',
             title: 'Bitrix24',
             size: '3.5rem',
         },
@@ -158,7 +158,7 @@ export const skills = {
         },
         {
             key: 'hg',
-            logo: logo.git,
+            logo: '',
             title: 'Mercurial',
             size: '4rem',
         },
@@ -210,9 +210,31 @@ export const skills = {
         },
         {
             key: 'typeorm',
-            logo: logo.typeorm,
+            logo: '',
             title: 'TypeORM',
             size: '4.5rem',
+        },
+    ],
+    familiar: [
+        {
+            key: 'angular',
+            logo: '',
+            title: 'AngularJS',
+        },
+        {
+            key: 'perl',
+            logo: '',
+            title: 'Perl',
+        },
+        {
+            key: 'sharp',
+            logo: '',
+            title: 'C#',
+        },
+        {
+            key: 'python',
+            logo: '',
+            title: 'Python',
         },
     ],
 };

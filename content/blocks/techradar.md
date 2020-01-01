@@ -22,13 +22,19 @@ For a full-stack engineer it is crucial to understand how the system is gonna to
 [/BLOCK]
 [BLOCK widget=Skills type=rest]1[/BLOCK]
 [BLOCK]
-There are also few technologies that I, generally speaking, don't work with anymore, even though from time to time I may look into it.
+There are also several things I am familiar with and probably can make something relatively basic out of it...
+
+...after spending a day or two googling the subject :)
+[/BLOCK]
+[BLOCK widget=Skills type=familiar]1[/BLOCK]
+[BLOCK]
+And finally, I got few technologies that I, generally speaking, don't work with anymore, even though from time to time I may look into it.
 [/BLOCK]
 [BLOCK widget=Skills type=dated]1[/BLOCK]
 [BLOCK widget=Block contentAlign=center]
-As for the code management, I personally prefer GIT, but HG also works :)
+As for the code management, I personally prefer GIT, but HG also works perfectly :)
 [/BLOCK]
 [BLOCK widget=Skills type=codemanagement]1[/BLOCK]
 [BLOCK]
-I hope that you find my tech radar diverse and aligned with yours. If there is a match, drop me a message!
+I hope that you find my tech radar diverse and aligned with yours. If there is a match, [drop me a message](https://www.linkedin.com/in/sergey-gannochenko)!
 [/BLOCK]

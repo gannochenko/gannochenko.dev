@@ -17,7 +17,7 @@ export const Skill: FunctionComponent<Props> = ({
 }) => {
     return (
         <SkillContainer>
-            {!!logo && (
+            {(!!logo || !!title) && (
                 <>
                     <HexagonContainer>
                         <Hexagon />
