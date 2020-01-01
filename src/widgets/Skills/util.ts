@@ -92,5 +92,28 @@ export const getGrid = (data: SkillItem[], range: string) => {
         result.push(line);
     }
 
+    if (dimensions.even === 4 && result.length % 2) {
+        const lastLine = result[result.length - 1];
+        if (lastLine.length === 1) {
+            lastLine.unshift({
+                key: `empty_${Math.random()}`,
+                logo: '',
+            });
+        } else if (lastLine.length === 3) {
+            lastLine.unshift({
+                key: `empty_${Math.random()}`,
+                logo: '',
+            });
+            const veryLast = lastLine.pop()!;
+            result.push([
+                {
+                    key: `empty_${Math.random()}`,
+                    logo: '',
+                },
+                veryLast,
+            ]);
+        }
+    }
+
     return result;
 };

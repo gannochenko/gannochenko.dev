@@ -1,11 +1,10 @@
 import React, { FunctionComponent } from 'react';
 import { graphql } from 'gatsby';
 
-import { SEO, Skills, Layout, Container } from '../components';
+import { SEO, Layout } from '../components';
 
 import { BlockRenderer } from '../lib/block-renderer';
 import { Node } from '../lib/type';
-import { main, rest } from '../skills/skills';
 
 interface Props {
     data: {
@@ -20,12 +19,8 @@ const SuperPowersPage: FunctionComponent<Props> = ({ data = {} }) => {
 
     return (
         <Layout shortHeader>
-            <SEO title="Super powers" keywords={['']} />
+            <SEO title="Tech radar" keywords={['']} />
             {BlockRenderer.render(nodes)}
-            {/*<Container type="wide">*/}
-            {/*    <Skills data={main} />*/}
-            {/*    <Skills data={rest} />*/}
-            {/*</Container>*/}
         </Layout>
     );
 };
@@ -34,7 +29,7 @@ export const query = graphql`
     query SuperPowersPageQuery {
         allMarkdownRemark(
             sort: { fields: frontmatter___sort, order: ASC }
-            filter: { frontmatter: { pathname: { eq: "/superpowers/" } } }
+            filter: { frontmatter: { pathname: { eq: "/techradar/" } } }
         ) {
             nodes {
                 id

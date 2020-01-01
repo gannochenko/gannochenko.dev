@@ -9,3 +9,5 @@ export interface ObjectLiteral<P = any> {
 }
 
 export type FontSize = 'large' | 'medium' | 'standard' | 'small';
+
+export type Nullable<P> = P | null;

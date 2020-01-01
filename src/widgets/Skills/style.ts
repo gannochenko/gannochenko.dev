@@ -13,19 +13,3 @@ export const SkillsContainer = styled.div`
 export const SkillsOffset = styled.div`
     margin-top: ${factor * Math.round(height / 2)}rem;
 `;
-
-// export const Row = styled.div`
-//     display: flex;
-//     flex-wrap: wrap;
-// `;
-//
-// export const Cell = styled.div<{ last?: boolean; firstShift?: boolean }>`
-//     height: ${factor * height}rem;
-//     width: ${factor * width}rem;
-//     flex-shrink: 0;
-//     margin-top: -${factor * Math.round(height / 2)}rem;
-//     margin-right: ${factor * width * 0.54}rem;
-//
-//     ${props => (props.last ? 'margin-right: 0;' : '')}
-//     ${props => (props.firstShift ? 'margin-left: 5.2rem;' : '')}
-// `;

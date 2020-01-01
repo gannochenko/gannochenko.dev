@@ -20,7 +20,7 @@ const HomePage: FunctionComponent<Props> = ({ data = {} }) => {
 
     return (
         <Layout shortHeader={false}>
-            <Link to="/superpowers/">Superpowers!!!</Link>
+            <Link to="/techradar/">Techradar!</Link>
             <SEO title="Home" keywords={['']} />
             {BlockRenderer.render(nodes)}
         </Layout>

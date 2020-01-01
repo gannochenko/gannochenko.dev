@@ -17,20 +17,24 @@ export const Skill: FunctionComponent<Props> = ({
 }) => {
     return (
         <SkillContainer>
-            <HexagonContainer>
-                <Hexagon />
-            </HexagonContainer>
-            <Logo
-                src={logo}
-                size={size}
-                isRound={isRound}
-                width={width}
-                offsetX={offsetX}
-            />
-            <HexagonContainer className="skill-overlay">
-                <Hexagon filled />
-                <TextFit size={fontSize}>{title}</TextFit>
-            </HexagonContainer>
+            {!!logo && (
+                <>
+                    <HexagonContainer>
+                        <Hexagon />
+                    </HexagonContainer>
+                    <Logo
+                        src={logo}
+                        size={size}
+                        isRound={isRound}
+                        width={width}
+                        offsetX={offsetX}
+                    />
+                    <HexagonContainer className="skill-overlay">
+                        <Hexagon filled />
+                        <TextFit size={fontSize}>{title}</TextFit>
+                    </HexagonContainer>
+                </>
+            )}
         </SkillContainer>
     );
 };
