@@ -61,6 +61,19 @@ export const getGrid = (data: SkillItem[], range: string) => {
         return result;
     }
 
+    if (data.length === 4) {
+        if (dimensions.even === 2) {
+            result.push([data[0], data[1]]);
+            result.push([data[2]]);
+            result.push([data[3]]);
+        } else {
+            result.push([data[0], data[1]]);
+            result.push([data[2], data[3]]);
+        }
+
+        return result;
+    }
+
     if (data.length === 5) {
         if (dimensions.even === 2) {
             result.push([data[0], data[1]]);
