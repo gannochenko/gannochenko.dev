@@ -2,6 +2,10 @@ import { theme } from '../../style';
 import { SkillItem } from './type';
 
 export const detectRange = () => {
+    if (typeof window === 'undefined') {
+        return 'lg';
+    }
+
     const windowWidth = window.innerWidth;
     const {
         grid: {
