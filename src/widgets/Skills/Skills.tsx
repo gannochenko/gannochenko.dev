@@ -15,6 +15,10 @@ export const Skills: FunctionComponent<Props> = ({ type, showLinkToRadar }) => {
     const [range, setRange] = useState(detectRange());
 
     useEffect(() => {
+        if (typeof window === 'undefined') {
+            return;
+        }
+
         const onResize = throttle(200, () => {
             const currentRange = detectRange();
             if (range !== currentRange) {
