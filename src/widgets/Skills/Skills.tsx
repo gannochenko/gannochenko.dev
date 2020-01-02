@@ -2,14 +2,15 @@ import React, { FunctionComponent, useEffect, useState, useMemo } from 'react';
 import { throttle } from 'throttle-debounce';
 import { Props } from './type';
 
-import { SkillsContainer, SkillsOffset } from './style';
+import { SkillsContainer, SkillsOffset, InnerContainer } from './style';
 import { Row } from './components/Row';
 import { Skill } from './components/Skill';
 
 import { skills } from '../../skills/skills';
 import { detectRange, getGrid } from './util';
+import { Link } from 'gatsby';
 
-export const Skills: FunctionComponent<Props> = ({ type }) => {
+export const Skills: FunctionComponent<Props> = ({ type, showLinkToRadar }) => {
     const data = skills[type] || [];
     const [range, setRange] = useState(detectRange());
 
@@ -32,15 +33,22 @@ export const Skills: FunctionComponent<Props> = ({ type }) => {
 
     return (
         <SkillsContainer>
-            <SkillsOffset>
-                {grid.map((row, i) => (
-                    <Row effectTimeoutBase={0} odd={i % 2 > 0} key={i}>
-                        {row.map(item => (
-                            <Skill key={item.key} {...item} />
-                        ))}
-                    </Row>
-                ))}
-            </SkillsOffset>
+            <InnerContainer>
+                <SkillsOffset>
+                    {grid.map((row, i) => (
+                        <Row effectTimeoutBase={0} odd={i % 2 > 0} key={i}>
+                            {row.map(item => (
+                                <Skill key={item.key} {...item} />
+                            ))}
+                        </Row>
+                    ))}
+                </SkillsOffset>
+            </InnerContainer>
+            {showLinkToRadar && (
+                <InnerContainer>
+                    <Link to="/techradar/">Entire list</Link>
+                </InnerContainer>
+            )}
         </SkillsContainer>
     );
 };

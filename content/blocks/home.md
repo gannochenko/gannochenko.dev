@@ -14,11 +14,8 @@ If you are interested [here is the full story](/story/) :)
 [BLOCK]
 ## Tech radar
 [/BLOCK]
-[BLOCK]My primary field of expertise includes the following stack:[/BLOCK]
-[BLOCK widget=Skills type=primary]1[/BLOCK]
-[BLOCK]
-Check out my [full tech radar](/techradar/)!
-[/BLOCK]
+[BLOCK]My primary field of expertise includes the following basic stack:[/BLOCK]
+[BLOCK widget=Skills type=primary showLinkToRadar=1]1[/BLOCK]
 [BLOCK]
 ## Contact
 [/BLOCK]

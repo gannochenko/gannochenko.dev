@@ -7,6 +7,9 @@ const height = 4;
 
 export const SkillsContainer = styled.div`
     margin: 2rem 0;
+`;
+
+export const InnerContainer = styled.div`
     ${align('top', 'center')}
 `;
 

@@ -2,6 +2,7 @@ import { Props as WidgetProps } from '../type';
 
 export interface Props extends WidgetProps {
     type: 'primary' | 'frontend' | 'backend' | 'devops' | 'familiar' | 'util';
+    showLinkToRadar?: boolean;
 }
 
 export interface SkillItem {
