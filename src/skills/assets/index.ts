@@ -27,6 +27,13 @@ const terraform = require('./logo/terraform.svg') as string;
 const typescript = require('./logo/typescript.svg') as string;
 const kubernetes = require('./logo/k8s.svg') as string;
 const nestjs = require('./logo/nestjs.svg') as string;
+const typeorm = require('./logo/typeorm.png') as string;
+const vagrant = require('./logo/vagrant.svg') as string;
+const angularjs = require('./logo/angularjs.svg') as string;
+const perl = require('./logo/perl.svg') as string;
+const python = require('./logo/python.svg') as string;
+const hg = require('./logo/hg.png') as string;
+const csharp = require('./logo/csharp.svg') as string;
 
 export const logo = {
     apollo,
@@ -43,7 +50,6 @@ export const logo = {
     linux,
     meteorjs,
     mongodb,
-    typeorm: postgressql,
     mysql,
     nodejs,
     php,
@@ -59,4 +65,11 @@ export const logo = {
     typescript,
     kubernetes,
     nestjs,
+    typeorm,
+    vagrant,
+    angularjs,
+    perl,
+    python,
+    hg,
+    csharp,
 };

@@ -16,7 +16,7 @@ Right now I am based in Berlin, Germany, where I help great companies making pro
 ## My tech radar
 I work in the following tech stack:
 [/BLOCK]
-[BLOCK widget=Skills type=primary showLinkToRadar=1]1[/BLOCK]
+[BLOCK widget=Skills type=primary showLinkToRadar=1 alignLeft=1]1[/BLOCK]
 [BLOCK]
 ## Contact
 [/BLOCK]

@@ -91,6 +91,27 @@ export const getGrid = (data: SkillItem[], range: string) => {
         return result;
     }
 
+    if (data.length === 6) {
+        if (dimensions.even === 4) {
+            result.push([data[0], data[1], data[2]]);
+            result.push([data[3], data[4], data[5]]);
+
+            return result;
+        } else if (dimensions.even === 3) {
+            result.push([data[0], data[1], data[2]]);
+            result.push([data[3], data[4]]);
+            result.push([
+                {
+                    key: `empty_${Math.random()}`,
+                    logo: '',
+                },
+                data[5],
+            ]);
+
+            return result;
+        }
+    }
+
     let lineNumber = 0;
     let line: SkillItem[] = [];
     for (let i = 0; i < data.length; i += 1) {
@@ -112,6 +133,11 @@ export const getGrid = (data: SkillItem[], range: string) => {
     if (dimensions.even === 4 && result.length % 2) {
         const lastLine = result[result.length - 1];
         if (lastLine.length === 1) {
+            lastLine.unshift({
+                key: `empty_${Math.random()}`,
+                logo: '',
+            });
+        } else if (lastLine.length === 2) {
             lastLine.unshift({
                 key: `empty_${Math.random()}`,
                 logo: '',

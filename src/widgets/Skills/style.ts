@@ -16,5 +16,5 @@ export const InnerContainer = styled.div`
 
 export const SkillsOffset = styled.div`
     margin-top: ${factor * Math.round(height / 2)}rem;
-    margin-bottom: -0.5rem;
+    //margin-bottom: -0.5rem;
 `;

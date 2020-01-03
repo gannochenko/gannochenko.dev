@@ -121,13 +121,6 @@ export const skills = {
             size: '4.5rem',
         },
         {
-            key: 'linux',
-            logo: logo.linux,
-            title: 'Linux',
-            size: '4rem',
-            offsetX: '0.7rem',
-        },
-        {
             key: 'kubernetes',
             logo: logo.kubernetes,
             title: 'Kubernetes',
@@ -142,17 +135,17 @@ export const skills = {
         },
         {
             key: 'vagrant',
-            logo: '',
+            logo: logo.vagrant,
             title: 'Vagrant',
             size: '1.15rem',
-            width: '4.8rem',
+            width: '4.2rem',
         },
     ],
     dated: [
         {
-            key: 'bitrix',
-            logo: '',
-            title: 'Bitrix24',
+            key: '1cbitrix',
+            logo: logo.bitrix,
+            title: '1C Bitrix',
             size: '3.5rem',
         },
         {
@@ -192,9 +185,10 @@ export const skills = {
         },
         {
             key: 'hg',
-            logo: '',
+            logo: logo.hg,
             title: 'Mercurial',
-            size: '4rem',
+            size: '3rem',
+            width: '3.1rem',
         },
     ],
     backend: [
@@ -244,31 +238,46 @@ export const skills = {
         },
         {
             key: 'typeorm',
-            logo: '',
+            logo: logo.typeorm,
             title: 'TypeORM',
-            size: '4.5rem',
+            size: '2rem',
+            width: '4rem',
+        },
+        {
+            key: 'linux',
+            logo: logo.linux,
+            title: 'Linux',
+            size: '4rem',
+            offsetX: '0.7rem',
         },
     ],
     familiar: [
         {
             key: 'angular',
-            logo: '',
+            logo: logo.angularjs,
             title: 'AngularJS',
+            size: '4rem',
         },
         {
             key: 'perl',
-            logo: '',
+            logo: logo.perl,
             title: 'Perl',
+            size: '2rem',
+            width: '3rem',
         },
         {
             key: 'sharp',
-            logo: '',
+            logo: logo.csharp,
             title: 'C#',
+            size: '2.5rem',
+            width: '3rem',
         },
         {
             key: 'python',
-            logo: '',
+            logo: logo.python,
             title: 'Python',
+            size: '1.2rem',
+            width: '4rem',
         },
     ],
 };
