@@ -19,6 +19,7 @@ import {
 import { Avatar } from '../../../Avatar';
 import { Social } from '../../../Social';
 import { Copyright } from '../../../Copyright';
+import { links } from '../../../../lib/links';
 
 export const HeaderMain: FunctionComponent<Props> = ({ backgroundImage }) => {
     const scrollWindow = () => {
@@ -70,21 +71,15 @@ export const HeaderMain: FunctionComponent<Props> = ({ backgroundImage }) => {
                                     effect="fade-slide-bottom"
                                     effectTimeout={timeoutRight + 600}
                                 >
-                                    <Social
-                                        type="github"
-                                        src="https://github.com/awesome1888"
-                                    />
+                                    <Social type="github" src={links.github} />
                                     <Social
                                         type="linkedin"
-                                        src="https://www.linkedin.com/in/sergey-gannochenko"
+                                        src={links.linkedin}
                                     />
-                                    <Social
-                                        type="medium"
-                                        src="https://medium.com/@awesome1888"
-                                    />
+                                    <Social type="medium" src={links.medium} />
                                     <Social
                                         type="twitter"
-                                        src="https://twitter.com/Gannochenkoff"
+                                        src={links.twitter}
                                     />
                                 </SocialBar>
                             </HelloRight>

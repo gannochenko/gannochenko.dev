@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { align } from '@bucket-of-bolts/styled-companion';
+import { align, group } from '@bucket-of-bolts/styled-companion';
 
 const factor = 1.5;
 const height = 4;
@@ -7,6 +7,7 @@ const height = 4;
 
 export const SkillsContainer = styled.div`
     margin: 2rem 0;
+    ${group('1rem')}
 `;
 
 export const InnerContainer = styled.div`
