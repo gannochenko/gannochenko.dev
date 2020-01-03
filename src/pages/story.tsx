@@ -17,8 +17,8 @@ const StoryPage: FunctionComponent<Props> = ({ data = {} }) => {
     const { allMarkdownRemark: { nodes = [] } = {} } = data;
 
     return (
-        <Layout shortHeader title="Story" backURL="/">
-            <SEO title="Story" keywords={['']} />
+        <Layout shortHeader title="The Entire Story" backURL="/">
+            <SEO title="The Entire Story" keywords={['']} />
             <BlockRenderer nodes={nodes} />
         </Layout>
     );
