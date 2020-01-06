@@ -1,6 +1,4 @@
 import React, { ReactNode } from 'react';
-// @ts-ignore
-// import { markdown } from 'markdown';
 import markdown from 'markdown-it';
 import { Node } from './type';
 import { BlockParser } from './block-parser';
