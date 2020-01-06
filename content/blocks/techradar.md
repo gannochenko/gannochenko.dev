@@ -10,7 +10,7 @@ graphics:
 ---
 
 [BLOCK effect=fade-slide-bottom containerType=standard]
-So, I would say I am ** 70% frontend ** software engineer. That is why the following stack I use every day during my work process:
+So, I would say I am **70% frontend** software engineer. That is why the following stack I use every day during my work process:
 [/BLOCK]
 [BLOCK widget=Skills type=frontend]1[/BLOCK]
 [BLOCK contentAlign=center]
