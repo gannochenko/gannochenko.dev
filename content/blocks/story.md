@@ -9,24 +9,13 @@ graphics:
     source: https://unsplash.com/photos/WiONHd_zYI4
 ---
 
-Lalala
+So yeh...
 
-[BLOCK effect=fade-slide-left timeout=3000 font-size=medium width=100%]
-My name is Sergei, I am a full-stack software engineer in the JavaScript domain with 10+ years of development experience. I have a Master’s in Math. I am a passionate learner, in deep love with what I do for a living.
+[BLOCK]
+I was born in Russia, in a small city near the polar circle.
 [/BLOCK]
-[BLOCK widget=AccentBlock fontSize=small]
-I was born in Russia and right now I live in Berlin, Germany. I love travelling and architecture. And other kinds of stuff.
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-[/BLOCK]
-Between the blocks
-
 [BLOCK effect=fade-slide-right timeout=1000 font-size=large width=50%]
-Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a 
-[/BLOCK]
+I was a 15-year old student with tremendous amount of free time and zero responsibilities in my life. Unfortunately, back then I had absolutely no idea that in order for the project to succeed, you need to introduce proper planing and milestones. It is totally crucial to delegate, prioritize, manage efforts, constantly re-use as much of assets as possible, provide intermediate versions and demos in time. 
 
-[BLOCK images=0,2,5]
-type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
-If you are interested in a <a href="">full story, here it is</a> :)
+Well... due to my lack of management skills back then, the project was eventually ruined by procrastination. Many years have passed since that time, I have settled my private life (LOL) and chose something different, so there is no chance I am going back on this project, even though EA seem to have intentions to breath-in new life into the CNC universe. Still, it was nice experience on how you should lead your project if the goal is complete failure.
 [/BLOCK]
-
-Lololol!!!

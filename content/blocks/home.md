@@ -8,9 +8,9 @@ pathname: /
 ## Hi
 My name is Sergei, I am a **full-stack software engineer in the JavaScript domain** with 10+ years of professional experience. Have a Master’s in Math. I am a passionate learner, in deep love with what I do.
 
-Right now I am based in Berlin, Germany, where I help great companies making products of their dreams.
+Right now I am based in Berlin, Germany, where I help great companies in making products of customers dreams.
 
-[Read the entire story &rarr;](/story/)
+<small>[Read the entire story &rarr;](/story/)</small>
 [/BLOCK]
 [BLOCK]
 ## My tech radar
