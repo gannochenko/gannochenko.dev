@@ -13,6 +13,7 @@
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/d28d71c8-155f-414d-8fac-bb0e3b254025/deploy-status)](https://app.netlify.com/sites/gannochenko/deploys)
+[![Actions Status](https://github.com/gannochenko/gannochenko/workflows/CD/badge.svg)](https://github.com/gannochenko/gannochenko/actions)
 
 <!-- PROJECT LOGO -->
 <br />
