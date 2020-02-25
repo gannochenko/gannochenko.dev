@@ -19,6 +19,7 @@ const HomePage: FunctionComponent<Props> = ({ data = {} }) => {
     return (
         <Layout>
             <SEO title="Home" keywords={['']} />
+            111111
             <BlockRenderer nodes={nodes} />
         </Layout>
     );
