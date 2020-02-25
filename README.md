@@ -33,7 +33,11 @@
     -->
     <br />
     <br />
-    <a href="https://gatsby-starter-grayscale-promo.netlify.com/">View Demo</a>
+    <a href="https://gannochenko.github.io/gannochenko/">Site</a>
+    ·
+    <a href="https://gannochenko.netlify.com/admin/">Admin</a>
+    ·
+    <a href="https://github.com/gannochenko/gannochenko/actions">CI/CD</a>
     ·
     <a href="https://github.com/gannochenko/gannochenko/issues">Report Bug</a>
     ·
@@ -102,7 +106,7 @@ yarn start;
 ### Deployment
 
 * Do project-wide replacement of `gannochenko` and `gatsby-starter-grayscale-promo` with your own GitHub username and repo name.
-* Setup [NetlifyCMS account](https://app.netlify.com) and integrate it with your GitHub repo.
+* Setup [NetlifyCMS account](https://app.netlify.com) and [integrate it with your GitHub repo](https://docs.netlify.com/visitor-access/oauth-provider-tokens/#setup-and-settings).
 * Commit to the repo, see the changes online in a couple of minutes!
 * To edit the content, go to the `/admin` section of your website.
 
