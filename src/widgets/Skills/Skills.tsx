@@ -50,7 +50,7 @@ export const Skills: FunctionComponent<Props> = ({ type, showLinkToRadar }) => {
             </InnerContainer>
             {showLinkToRadar && (
                 <InnerContainer>
-                    But that is not allllllllll! View&nbsp;
+                    But that is not allllllllll????! View&nbsp;
                     <Link to="/techradar/">the entire list</Link>
                 </InnerContainer>
             )}
