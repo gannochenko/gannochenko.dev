@@ -20,6 +20,13 @@ module.exports = {
                 path: `${__dirname}/content/blocks`,
             },
         },
+        {
+            resolve: `gatsby-source-filesystem`,
+            options: {
+                name: `mdx-pages`,
+                path: `${__dirname}/pages`,
+            },
+        },
         'gatsby-plugin-react-helmet',
         'gatsby-transformer-sharp',
         'gatsby-plugin-sharp',
@@ -56,6 +63,7 @@ module.exports = {
         },
         'gatsby-plugin-styled-components',
         'gatsby-plugin-typescript',
+        'gatsby-plugin-mdx',
         // this (optional) plugin enables Progressive Web App + Offline functionality
         // To learn more, visit: https://gatsby.app/offline
         // 'gatsby-plugin-offline',
