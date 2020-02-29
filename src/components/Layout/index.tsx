@@ -31,3 +31,5 @@ export const Layout: FunctionComponent<Props> = ({
         </ThemeContext.Provider>
     );
 };
+
+export default Layout;
