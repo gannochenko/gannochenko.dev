@@ -25,14 +25,14 @@ export default function PageTemplate(props) {
     );
 }
 
-export const pageQuery = graphql`
-    query BlogPostQuery($id: String) {
-        mdx(id: { eq: $id }) {
-            id
-            body
-            frontmatter {
-                title
-            }
-        }
-    }
-`;
+// export const pageQuery = graphql`
+//     query BlogPostQuery($id: String) {
+//         mdx(id: { eq: $id }) {
+//             id
+//             body
+//             frontmatter {
+//                 title
+//             }
+//         }
+//     }
+// `;
