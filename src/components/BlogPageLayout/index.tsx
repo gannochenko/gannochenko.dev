@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { graphql } from 'gatsby';
 // @ts-ignore
 import { MDXProvider } from '@mdx-js/react';
@@ -10,11 +10,17 @@ export default function PageTemplate(props) {
     const {
         data: { mdx },
     } = props;
-    console.log(mdx.frontmatter);
+
+    const pageContext = useMemo(
+        () => ({
+            frontmatter: mdx.frontmatter,
+        }),
+        [mdx.id],
+    );
 
     return (
         <MDXProvider components={shortcodes}>
-            <MDXRenderer frontmatter={mdx.frontmatter}>{mdx.body}</MDXRenderer>
+            <MDXRenderer pageContext={pageContext}>{mdx.body}</MDXRenderer>
         </MDXProvider>
     );
 }

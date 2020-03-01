@@ -6,6 +6,39 @@ module.exports = {
         author: '@awesome1888',
     },
     plugins: [
+        'gatsby-plugin-react-helmet',
+        {
+            resolve: 'gatsby-source-filesystem',
+            options: {
+                name: 'graphics',
+                path: `${__dirname}/static/assets`,
+            },
+        },
+        {
+            resolve: `gatsby-source-filesystem`,
+            options: {
+                name: `blog`,
+                path: `${__dirname}/content/blog`,
+            },
+        },
+        'gatsby-transformer-sharp',
+        {
+            resolve: `gatsby-transformer-remark`,
+            options: {
+                plugins: [
+                    {
+                        resolve: `gatsby-remark-relative-images`,
+                        options: {
+                            name: 'graphics',
+                        },
+                    },
+                    {
+                        resolve: `gatsby-remark-images`,
+                        options: {},
+                    },
+                ],
+            },
+        },
         {
             resolve: `gatsby-plugin-mdx`,
             options: {
@@ -24,39 +57,22 @@ module.exports = {
                             sizeByPixelDensity: true,
                         },
                     },
-                ],
-            },
-        },
-        {
-            resolve: 'gatsby-source-filesystem',
-            options: {
-                name: 'graphics',
-                path: `${__dirname}/static/assets`,
-            },
-        },
-        {
-            resolve: `gatsby-source-filesystem`,
-            options: {
-                name: `pages`,
-                path: `${__dirname}/src/pages`,
-            },
-        },
-        {
-            resolve: `gatsby-source-filesystem`,
-            options: {
-                name: `blog`,
-                path: `${__dirname}/content/blog`,
-            },
-        },
-        'gatsby-plugin-react-helmet',
-        'gatsby-transformer-sharp',
-        {
-            resolve: `gatsby-transformer-remark`,
-            options: {
-                plugins: [
                     {
-                        resolve: `gatsby-remark-images`,
-                        options: {},
+                        resolve: `gatsby-transformer-remark`,
+                        options: {
+                            plugins: [
+                                {
+                                    resolve: `gatsby-remark-relative-images`,
+                                    options: {
+                                        name: 'graphics',
+                                    },
+                                },
+                                {
+                                    resolve: `gatsby-remark-images`,
+                                    options: {},
+                                },
+                            ],
+                        },
                     },
                 ],
             },
