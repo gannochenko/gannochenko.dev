@@ -6,6 +6,8 @@
 
 const { introspectionQuery, graphql, printSchema } = require('gatsby/graphql');
 const write = require('write');
+const { fmImagesToRelative } = require('gatsby-remark-relative-images');
+const path = require('path');
 
 /**
  * Generate GraphQL schema.json file to be read by tslint
@@ -30,16 +32,67 @@ exports.onPostBootstrap = async ({ store }) => {
     }
 };
 
-const { fmImagesToRelative } = require('gatsby-remark-relative-images');
-
 exports.onCreateNode = ({ node }) => {
     fmImagesToRelative(node);
 };
 
+exports.createPages = ({ graphql, actions }) => {
+    return new Promise((resolve, reject) => {
+        resolve(
+            graphql(`
+                query CreatePagesQuery {
+                    allMdx {
+                        edges {
+                            node {
+                                id
+                                frontmatter {
+                                    title
+                                    path
+                                }
+                            }
+                        }
+                    }
+                }
+            `).then(result => {
+                if (result.errors) {
+                    console.error(result.errors);
+                    reject(result.errors);
+                }
+
+                let edges = result.data.allMdx.edges;
+                if (!edges) {
+                    return;
+                }
+
+                edges = edges.filter(
+                    edge =>
+                        edge.node.frontmatter.path &&
+                        edge.node.frontmatter.path.startsWith('/blog'),
+                );
+                edges.forEach(({ node }) => {
+                    actions.createPage({
+                        // Encode the route
+                        path: node.frontmatter.path,
+                        // Layout for the page
+                        component: path.resolve(
+                            './src/components/BlogPageLayout/index.tsx',
+                        ),
+                        // Values defined here are injected into the page as props and can
+                        // be passed to a GraphQL query as arguments
+                        context: {
+                            id: node.id,
+                        },
+                    });
+                });
+            }),
+        );
+    });
+};
+
 exports.onCreateWebpackConfig = ({
     stage,
-    rules,
-    loaders,
+    // rules,
+    // loaders,
     plugins,
     actions,
 }) => {

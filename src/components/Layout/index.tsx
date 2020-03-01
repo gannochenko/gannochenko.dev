@@ -4,12 +4,9 @@ import { Body, Main, Title, BackContainer, BackLink } from './style';
 import { Props } from './type';
 import { Header, Footer, Container } from '../';
 
-export const Layout: FunctionComponent<Props> = ({
-    children,
-    shortHeader = false,
-    title,
-    backURL,
-}) => {
+export const Layout: FunctionComponent<Props> = props => {
+    const { children, shortHeader = false, title, backURL } = props;
+
     return (
         <ThemeContext.Provider value={theme}>
             <GlobalStyle />

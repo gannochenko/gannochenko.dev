@@ -9,6 +9,7 @@ module.exports = {
         {
             resolve: `gatsby-plugin-mdx`,
             options: {
+                extensions: [`.mdx`, `.md`],
                 defaultLayouts: {
                     // posts: require.resolve("./src/components/posts-layout.js"),
                     default: require.resolve(
@@ -21,6 +22,7 @@ module.exports = {
                         options: {
                             maxWidth: 1035,
                             sizeByPixelDensity: true,
+                            name: 'graphics', // Must match the source name ^
                         },
                     },
                 ],
@@ -40,15 +42,22 @@ module.exports = {
                 path: `${__dirname}/src/pages`,
             },
         },
+        {
+            resolve: `gatsby-source-filesystem`,
+            options: {
+                name: `blog`,
+                path: `${__dirname}/content/blog`,
+            },
+        },
         'gatsby-plugin-react-helmet',
         'gatsby-transformer-sharp',
+        'gatsby-plugin-sharp',
         {
             resolve: `gatsby-transformer-remark`,
             options: {
                 plugins: [
                     {
                         resolve: `gatsby-remark-images`,
-                        options: {},
                     },
                 ],
             },
@@ -68,6 +77,7 @@ module.exports = {
         // },
         'gatsby-plugin-styled-components',
         'gatsby-plugin-typescript',
+        'gatsby-plugin-catch-links',
         // this (optional) plugin enables Progressive Web App + Offline functionality
         // To learn more, visit: https://gatsby.app/offline
         // 'gatsby-plugin-offline',
