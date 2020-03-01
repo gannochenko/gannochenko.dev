@@ -11,6 +11,9 @@ export default function PageTemplate(props) {
         data: { mdx },
     } = props;
 
+    console.log('fm:');
+    console.log(mdx.frontmatter);
+
     const pageContext = useMemo(
         () => ({
             frontmatter: mdx.frontmatter,
@@ -25,14 +28,26 @@ export default function PageTemplate(props) {
     );
 }
 
-// export const pageQuery = graphql`
-//     query BlogPostQuery($id: String) {
-//         mdx(id: { eq: $id }) {
-//             id
-//             body
-//             frontmatter {
-//                 title
-//             }
-//         }
-//     }
-// `;
+export const pageQuery = graphql`
+    query BlogPostQuery($id: String) {
+        mdx(id: { eq: $id }) {
+            id
+            body
+            frontmatter {
+                title
+                graphics {
+                    image {
+                        childImageSharp {
+                            fluid(maxWidth: 1240, quality: 80) {
+                                ...GatsbyImageSharpFluid_tracedSVG
+                            }
+                        }
+                    }
+                    author
+                    source
+                    sourceText
+                }
+            }
+        }
+    }
+`;

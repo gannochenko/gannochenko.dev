@@ -1,6 +1,6 @@
 ---
-title: Blog A
-path: /blog/a
+title: Blog B (block)
+path: /blog/b
 date: 2019-01-29
 graphics:
     - author: Tyler Lastovich

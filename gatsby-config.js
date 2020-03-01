@@ -30,7 +30,6 @@ module.exports = {
         'gatsby-plugin-react-helmet',
         'gatsby-transformer-sharp',
         'gatsby-plugin-sharp',
-        'gatsby-transformer-remark',
         {
             resolve: `gatsby-transformer-remark`,
             options: {
@@ -59,13 +58,6 @@ module.exports = {
                     ),
                 },
                 gatsbyRemarkPlugins: [
-                    // {
-                    //     resolve: `gatsby-remark-images`,
-                    //     options: {
-                    //         maxWidth: 1035,
-                    //         sizeByPixelDensity: true,
-                    //     },
-                    // },
                     {
                         resolve: `gatsby-remark-relative-images`,
                         options: {
@@ -74,7 +66,10 @@ module.exports = {
                     },
                     {
                         resolve: `gatsby-remark-images`,
-                        options: {},
+                        options: {
+                            maxWidth: 1035,
+                            sizeByPixelDensity: true,
+                        },
                     },
                 ],
             },
@@ -94,8 +89,5 @@ module.exports = {
         },
         'gatsby-plugin-styled-components',
         'gatsby-plugin-typescript',
-        // this (optional) plugin enables Progressive Web App + Offline functionality
-        // To learn more, visit: https://gatsby.app/offline
-        // 'gatsby-plugin-offline',
     ],
 };
