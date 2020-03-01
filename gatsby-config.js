@@ -22,7 +22,6 @@ module.exports = {
                         options: {
                             maxWidth: 1035,
                             sizeByPixelDensity: true,
-                            name: 'graphics', // Must match the source name ^
                         },
                     },
                 ],
@@ -51,13 +50,13 @@ module.exports = {
         },
         'gatsby-plugin-react-helmet',
         'gatsby-transformer-sharp',
-        'gatsby-plugin-sharp',
         {
             resolve: `gatsby-transformer-remark`,
             options: {
                 plugins: [
                     {
                         resolve: `gatsby-remark-images`,
+                        options: {},
                     },
                 ],
             },
