@@ -13,13 +13,13 @@ module.exports = {
                 path: `${__dirname}/static/assets`,
             },
         },
-        {
-            resolve: `gatsby-source-filesystem`,
-            options: {
-                name: `markdown-pages`,
-                path: `${__dirname}/content/blocks`,
-            },
-        },
+        // {
+        //     resolve: `gatsby-source-filesystem`,
+        //     options: {
+        //         name: `markdown-pages`,
+        //         path: `${__dirname}/content/md`,
+        //     },
+        // },
         {
             resolve: `gatsby-source-filesystem`,
             options: {
@@ -53,6 +53,9 @@ module.exports = {
                 extensions: [`.mdx`, `.md`],
                 defaultLayouts: {
                     default: require.resolve(
+                        './src/components/Layout/Layout.tsx',
+                    ),
+                    index: require.resolve(
                         './src/components/LayoutHome/LayoutHome.tsx',
                     ),
                 },
