@@ -250,13 +250,14 @@ export const GlobalStyle = createGlobalStyle`
         margin-inline-end: 0;
     }
     
-    h1, h2, h3, h4 {
-      margin: 0;
-      &:not(:last-child) {
-        margin-bottom: 2rem;
-      }
+    h1 {
+      margin: 1rem 0 2rem 0;
     }
-    
+
+    h2, h3, h4 {
+      margin: 1rem 0 1rem 0;
+    }
+
     h1 {
       font-size: 1.5rem;
     }
