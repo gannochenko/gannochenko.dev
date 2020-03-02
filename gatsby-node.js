@@ -74,7 +74,7 @@ exports.createPages = ({ graphql, actions }) => {
                         path: node.frontmatter.path,
                         // Layout for the page
                         component: path.resolve(
-                            './src/components/BlogPageLayout/index.tsx',
+                            './src/components/BlogPageLayout/BlogPageLayout.tsx',
                         ),
                         // Values defined here are injected into the page as props and can
                         // be passed to a GraphQL query as arguments

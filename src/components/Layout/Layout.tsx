@@ -5,13 +5,13 @@ import { Props } from './type';
 import { Header, Footer, Container } from '../';
 
 export const Layout: FunctionComponent<Props> = props => {
-    const { children, shortHeader = false, title, backURL } = props;
+    const { children, title, backURL } = props;
 
     return (
         <ThemeContext.Provider value={theme}>
             <GlobalStyle />
             <Main>
-                <Header short={shortHeader} />
+                <Header short />
                 {!!title && (
                     <Container type="standard">
                         <Title>{title}</Title>
@@ -28,5 +28,3 @@ export const Layout: FunctionComponent<Props> = props => {
         </ThemeContext.Provider>
     );
 };
-
-export default Layout;

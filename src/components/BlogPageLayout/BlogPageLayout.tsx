@@ -1,19 +1,12 @@
-import React, { useMemo } from 'react';
+import React, { FunctionComponent, useMemo } from 'react';
 import { graphql } from 'gatsby';
-// @ts-ignore
 import { MDXProvider } from '@mdx-js/react';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
-import { Link } from 'gatsby';
-const shortcodes = { Link }; // Provide common components here
-// @ts-ignore
-export default function PageTemplate(props) {
-    const {
-        data: { mdx },
-    } = props;
 
-    console.log('fm:');
-    console.log(mdx.frontmatter);
+import { Props } from './type';
+import { Layout } from '../Layout';
 
+export const BlogPageLayout: FunctionComponent<Props> = ({ data: { mdx } }) => {
     const pageContext = useMemo(
         () => ({
             frontmatter: mdx.frontmatter,
@@ -21,14 +14,18 @@ export default function PageTemplate(props) {
         [mdx.id],
     );
 
+    const components = useMemo(() => ({}), []);
+
     return (
-        <MDXProvider components={shortcodes}>
-            <MDXRenderer pageContext={pageContext}>{mdx.body}</MDXRenderer>
+        <MDXProvider components={components}>
+            <Layout>
+                <MDXRenderer pageContext={pageContext}>{mdx.body}</MDXRenderer>
+            </Layout>
         </MDXProvider>
     );
-}
+};
 
-export const pageQuery = graphql`
+export const blogPageQuery = graphql`
     query BlogPostQuery($id: String) {
         mdx(id: { eq: $id }) {
             id
@@ -51,3 +48,5 @@ export const pageQuery = graphql`
         }
     }
 `;
+
+export default BlogPageLayout;

@@ -52,9 +52,8 @@ module.exports = {
             options: {
                 extensions: [`.mdx`, `.md`],
                 defaultLayouts: {
-                    // posts: require.resolve("./src/components/posts-layout.js"),
                     default: require.resolve(
-                        './src/components/Layout/index.tsx',
+                        './src/components/LayoutHome/LayoutHome.tsx',
                     ),
                 },
                 gatsbyRemarkPlugins: [
