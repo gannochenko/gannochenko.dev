@@ -7,6 +7,8 @@ export interface Props {
         frontmatter: {
             title?: string;
             backUrl?: string;
+            keywords?: string[];
+            description?: string;
             [k: string]: any;
         };
     };

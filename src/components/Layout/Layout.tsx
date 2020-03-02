@@ -7,16 +7,21 @@ import { Header, Footer, Container, SEO } from '../';
 export const Layout: FunctionComponent<Props> = ({
     children,
     path,
-    pageContext: { frontmatter: { title = '', backUrl = '' } = {} },
+    pageContext: {
+        frontmatter: {
+            title = '',
+            backUrl = '',
+            keywords = [],
+            description = '',
+        } = {},
+    },
 }) => {
     const isRoot = path === '/';
-
-    console.log(title);
 
     return (
         <ThemeContext.Provider value={theme}>
             <GlobalStyle />
-            <SEO title={title} keywords={[]} />
+            <SEO title={title} keywords={keywords} description={description} />
             <Main>
                 <Header short={!isRoot} />
                 {!!(title && !isRoot) && (

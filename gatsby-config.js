@@ -2,8 +2,8 @@ module.exports = {
     // pathPrefix: '/gannochenko',
     siteMetadata: {
         title: 'Gannochenko',
-        description: 'Gannochenko gatsby starter',
-        author: '@awesome1888',
+        description: 'Sergei Gannochenko`s blog',
+        author: '@gannochenko',
     },
     plugins: [
         {
