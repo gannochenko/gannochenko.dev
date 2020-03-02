@@ -6,7 +6,10 @@ import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { Props } from './type';
 import { Layout } from '../Layout';
 
-export const BlogPageLayout: FunctionComponent<Props> = ({ data: { mdx } }) => {
+export const BlogPageLayout: FunctionComponent<Props> = ({
+    data: { mdx },
+    path,
+}) => {
     const pageContext = useMemo(
         () => ({
             frontmatter: mdx.frontmatter,
@@ -18,7 +21,7 @@ export const BlogPageLayout: FunctionComponent<Props> = ({ data: { mdx } }) => {
 
     return (
         <MDXProvider components={components}>
-            <Layout>
+            <Layout pageContext={pageContext} path={path}>
                 <MDXRenderer pageContext={pageContext}>{mdx.body}</MDXRenderer>
             </Layout>
         </MDXProvider>

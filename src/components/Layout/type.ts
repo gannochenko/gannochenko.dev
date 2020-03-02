@@ -2,6 +2,12 @@ import { ReactNode } from 'react';
 
 export interface Props {
     children?: ReactNode;
-    title?: string;
-    backURL?: string;
+    path: string;
+    pageContext: {
+        frontmatter: {
+            title?: string;
+            backUrl?: string;
+            [k: string]: any;
+        };
+    };
 }

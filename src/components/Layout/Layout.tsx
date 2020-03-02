@@ -4,23 +4,27 @@ import { Body, Main, Title, BackContainer, BackLink } from './style';
 import { Props } from './type';
 import { Header, Footer, Container } from '../';
 
-export const Layout: FunctionComponent<Props> = props => {
-    const { children, title, backURL } = props;
+export const Layout: FunctionComponent<Props> = ({
+    children,
+    path,
+    pageContext: { frontmatter: { title = '', backUrl = '' } = {} },
+}) => {
+    const isRoot = path === '/';
 
     return (
         <ThemeContext.Provider value={theme}>
             <GlobalStyle />
             <Main>
-                <Header short />
-                {!!title && (
+                <Header short={!isRoot} />
+                {!!(title && !isRoot) && (
                     <Container type="standard">
                         <Title>{title}</Title>
                     </Container>
                 )}
                 <Body>{children}</Body>
-                {!!backURL && (
+                {!!backUrl && (
                     <BackContainer>
-                        <BackLink to={backURL}>&larr; Go back</BackLink>
+                        <BackLink to={backUrl}>&larr; Go back</BackLink>
                     </BackContainer>
                 )}
                 <Footer />

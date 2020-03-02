@@ -55,9 +55,6 @@ module.exports = {
                     default: require.resolve(
                         './src/components/Layout/Layout.tsx',
                     ),
-                    index: require.resolve(
-                        './src/components/LayoutHome/LayoutHome.tsx',
-                    ),
                 },
                 gatsbyRemarkPlugins: [
                     {
