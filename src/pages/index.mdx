@@ -3,12 +3,27 @@ title: Home
 graphics:
 ---
 
+import { Container } from '../../src/components/Container';
+import { Effect } from '../../src/components/Effect';
+
+<Effect>
+<Container>
+
 [BLOG](/blog)<br />
 [MY FIRST POST](/blog/my-first-post)<br />
 [STORY](/story)<br />
 [TECHRADAR](/techradar)<br />
 
+</Container>
+</Effect>
+<Effect>
+
 ![my image](/assets/single.jpg)
+
+</Effect>
+<Effect>
+
+<Container>
 
 ## Hi
 
@@ -16,14 +31,15 @@ My name is Sergei, I am a **full-stack software engineer in the JavaScript domai
 
 Right now I am based in Berlin, Germany, where I help great companies in making products of customers dreams.
 
-<small>[Read the entire story &rarr;](/story/)</small>
-[/BLOCK]
-[BLOCK]
+[Read the entire story &rarr;](/story)
+
 ## My tech radar
+
 I work in the following tech stack:
-[/BLOCK]
+
 [BLOCK widget=Skills type=primary showLinkToRadar=1 alignLeft=1]1[/BLOCK]
-[BLOCK]
+
 ## Contact
-[/BLOCK]
-[BLOCK widget=TextMe]1[/BLOCK]
+
+</Container>
+</Effect>
