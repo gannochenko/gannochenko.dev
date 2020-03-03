@@ -24,5 +24,5 @@ export const Cell = withEffects(styled.div<{
     ${props => (props.firstShift ? 'margin-left: 5.2rem;' : '')}
 
     // @ts-ignore
-    ${props => props.effect()}
+    ${props => props.runStandardEffect()}
 `);

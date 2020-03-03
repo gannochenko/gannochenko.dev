@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { align } from '@bucket-of-bolts/styled-companion/build';
 import { media, withTheme } from '../../style';
-import { effect } from '../../lib/effects';
+import { runStandardEffect } from '../../lib/effects';
 
 export const AccentBlockContainer = withTheme(styled.div`
     margin: 2rem 1rem;
@@ -12,7 +12,7 @@ export const AccentBlockContainer = withTheme(styled.div`
     font-size: ${props => props.theme.font[props.fontSize]};
 
     // @ts-ignore
-    ${props => effect(props)}
+    ${props => runStandardEffect(props)}
 `);
 
 export const Inner = styled.div`

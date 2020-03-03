@@ -48,27 +48,27 @@ export const HeaderMain: FunctionComponent<Props> = ({ backgroundImage }) => {
                     <DataColumn>
                         <HelloBlock>
                             <HelloLeft
-                                effect="fade-slide-left"
+                                effectName="fade-slide-left"
                                 effectTimeout={timeoutBase}
                             >
                                 <Avatar />
                             </HelloLeft>
                             <HelloRight>
                                 <NameBlock
-                                    effect="fade-slide-bottom"
+                                    effectName="fade-slide-bottom"
                                     effectTimeout={timeoutRight}
                                 >
                                     Sergei Gannochenko
                                 </NameBlock>
                                 <GreetingBlock
-                                    effect="fade-slide-bottom"
+                                    effectName="fade-slide-bottom"
                                     effectTimeout={timeoutRight + 300}
                                 >
                                     Full-stack software engineer in Berlin,
                                     Germany
                                 </GreetingBlock>
                                 <SocialBar
-                                    effect="fade-slide-bottom"
+                                    effectName="fade-slide-bottom"
                                     effectTimeout={timeoutRight + 600}
                                 >
                                     <Social type="github" src={links.github} />

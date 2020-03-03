@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { align } from '@bucket-of-bolts/styled-companion/build';
 import Img from 'gatsby-image';
 import { media, grid, cell, withTheme } from '../../style';
-import { effect, withEffects } from '../../lib/effects';
+import { runStandardEffect, withEffects } from '../../lib/effects';
 
 export const StandardBlockContainer = withTheme(styled.div`
     position: relative;
@@ -13,7 +13,7 @@ export const StandardBlockContainer = withTheme(styled.div`
         props.fontSize ? props.theme.font[props.fontSize] : 'inherit'};
 
     // @ts-ignore
-    ${props => effect(props)}
+    ${props => runStandardEffect(props)}
 `);
 
 export const Inner = styled.div``;
@@ -50,5 +50,5 @@ export const GalleryItem = withEffects(styled.div`
     ${cell({ xs: 12, all: 4 })};
 
     // @ts-ignore
-    ${props => effect(props)}
+    ${props => runStandardEffect(props)}
 `);

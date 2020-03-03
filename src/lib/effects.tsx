@@ -4,7 +4,7 @@ import { throttle } from 'throttle-debounce';
 
 import { ObjectLiteral } from '../type';
 
-const EVENT_EFFECT_RUN = 'effect.run';
+const EVENT_EFFECT_RUN = 'runStandardEffect.run';
 const EVENT_ELEMENT_READY = 'element.ready';
 const EFFECT_DATA_ATTRIBUTE = 'data-effects-node-id';
 const EFFECT_SELECTOR = 'effects-node';
@@ -12,7 +12,7 @@ const EFFECT_SELECTOR = 'effects-node';
 type WindowWithIds = typeof window & { __effectIds: string[] };
 type ElementWithDataset = Element & { dataset: { effectsNodeId: string } };
 
-export interface EffectProps {
+export interface EffectRuntimeProperties {
     [EFFECT_DATA_ATTRIBUTE]: string;
     className: string;
     runEffect: boolean;
@@ -25,7 +25,7 @@ export type EffectsSupported =
     | 'fade-slide-bottom';
 
 export interface EffectProperties {
-    effect?: EffectsSupported;
+    effectName?: EffectsSupported;
     effectTimeout?: number;
     runEffect?: boolean;
 }
@@ -54,7 +54,7 @@ interface EffectHOCProps {
     effectTimeout?: number;
 }
 
-const Effect: FunctionComponent<EffectHOCProps> = ({
+const EffectRunner: FunctionComponent<EffectHOCProps> = ({
     children,
     effectTimeout = 0,
 }) => {
@@ -95,20 +95,20 @@ const Effect: FunctionComponent<EffectHOCProps> = ({
     return html;
 };
 
-export const effect = ({
-    effect = 'fade-slide-top',
+export const runStandardEffect = ({
+    effectName = 'fade-slide-top',
     runEffect = false,
 }: EffectProperties) => {
     let start = 'opacity: 0; transform: translateY(-20px);';
     let end = 'opacity: 1; transform: translateY(0);';
 
-    if (effect === 'fade-slide-left') {
+    if (effectName === 'fade-slide-left') {
         start = 'opacity: 0; transform: translateX(-20px);';
         end = 'opacity: 1; transform: translateX(0);';
-    } else if (effect === 'fade-slide-right') {
+    } else if (effectName === 'fade-slide-right') {
         start = 'opacity: 0; transform: translateX(20px);';
         end = 'opacity: 1; transform: translateX(0);';
-    } else if (effect === 'fade-slide-bottom') {
+    } else if (effectName === 'fade-slide-bottom') {
         start = 'opacity: 0; transform: translateY(20px);';
         end = 'opacity: 1; transform: translateY(0);';
     }
@@ -123,22 +123,22 @@ export const effect = ({
 export const withEffects = (Component: any) => {
     const WithEffects = (props: ObjectLiteral) => {
         return (
-            <Effect effectTimeout={props.effectTimeout || 0}>
-                {(effectProps: EffectProps) => {
-                    const applyEffect = () =>
-                        effect({
-                            effect: props.effect,
-                            runEffect: effectProps.runEffect,
+            <EffectRunner effectTimeout={props.effectTimeout || 0}>
+                {(effectRuntimeProps: EffectRuntimeProperties) => {
+                    const runEffect = () =>
+                        runStandardEffect({
+                            runEffect: effectRuntimeProps.runEffect,
+                            ...props,
                         });
                     return (
                         <Component
                             {...props}
-                            {...effectProps}
-                            effect={applyEffect}
+                            {...effectRuntimeProps}
+                            runStandardEffect={runEffect}
                         />
                     );
                 }}
-            </Effect>
+            </EffectRunner>
         );
     };
 

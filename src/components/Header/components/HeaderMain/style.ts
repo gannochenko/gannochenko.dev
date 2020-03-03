@@ -68,7 +68,7 @@ export const Arrow = withEffects(styled.div`
     })}
 
     // @ts-ignore
-    ${props => props.effect()}
+    ${props => props.runStandardEffect()}
 `);
 
 export const DataColumn = styled.div`
@@ -89,7 +89,7 @@ export const HelloLeft = withEffects(styled.div`
     ${cell({ xs: 12, all: 4 })}
     ${align('top', 'center')}
     // @ts-ignore
-    ${props => props.effect()}
+    ${props => props.runStandardEffect()}
 `);
 
 export const HelloRight = styled.div`
@@ -104,19 +104,19 @@ export const NameBlock = withEffects(styled.div`
     letter-spacing: 0.05rem;
     ${media({ xs: 'text-align: center;' })}
     // @ts-ignore
-    ${props => props.effect()}
+    ${props => props.runStandardEffect()}
 `);
 
 export const GreetingBlock = withEffects(styled.div`
     letter-spacing: 0.05rem;
     ${media({ xs: 'text-align: center;' })}
     // @ts-ignore
-    ${props => props.effect()}
+    ${props => props.runStandardEffect()}
 `);
 
 export const SocialBar = withEffects(styled.div`
     ${group(null, '1.5rem')};
     padding-top: 1.5rem;
     // @ts-ignore
-    ${props => props.effect()}
+    ${props => props.runStandardEffect()}
 `);
