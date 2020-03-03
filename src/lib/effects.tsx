@@ -1,8 +1,12 @@
-import React, { FunctionComponent, useState, useEffect, useMemo } from 'react';
+import React, {
+    FunctionComponent,
+    useState,
+    useEffect,
+    useMemo,
+    ReactNode,
+} from 'react';
 import EventEmitter from 'events';
 import { throttle } from 'throttle-debounce';
-
-import { ObjectLiteral } from '../type';
 
 const EVENT_EFFECT_RUN = 'runStandardEffect.run';
 const EVENT_ELEMENT_READY = 'element.ready';
@@ -18,16 +22,24 @@ export interface EffectRuntimeProperties {
     runEffect: boolean;
 }
 
-export type EffectsSupported =
+export type StandardEffects =
     | 'fade-slide-left'
     | 'fade-slide-right'
     | 'fade-slide-top'
-    | 'fade-slide-bottom';
+    | 'fade-slide-bottom'
+    | 'fade-enter';
 
 export interface EffectProperties {
-    effectName?: EffectsSupported;
+    effectName?: StandardEffects;
     effectTimeout?: number;
+    effectDurationA?: number;
+    effectDurationB?: number;
+    effectEaseA?: string;
+    effectEaseB?: string;
+    effectParameterA?: string;
+    effectParameterB?: string;
     runEffect?: boolean;
+    children?: ReactNode;
 }
 export const eventEmitter = new EventEmitter();
 const IDGenerator = function*() {
@@ -95,33 +107,72 @@ const EffectRunner: FunctionComponent<EffectHOCProps> = ({
     return html;
 };
 
+const easeBounce = 'cubic-bezier(0.175, 0.885, 0.320, 1.275)';
+
 export const runStandardEffect = ({
     effectName = 'fade-slide-top',
+    effectDurationA = 300,
+    effectDurationB,
+    effectEaseA = 'ease-in',
+    effectEaseB,
+    effectParameterA = '',
+    // effectParameterB = '',
     runEffect = false,
 }: EffectProperties) => {
-    let start = 'opacity: 0; transform: translateY(-20px);';
-    let end = 'opacity: 1; transform: translateY(0);';
+    effectParameterA = effectParameterA || '20';
 
-    if (effectName === 'fade-slide-left') {
-        start = 'opacity: 0; transform: translateX(-20px);';
-        end = 'opacity: 1; transform: translateX(0);';
-    } else if (effectName === 'fade-slide-right') {
-        start = 'opacity: 0; transform: translateX(20px);';
-        end = 'opacity: 1; transform: translateX(0);';
-    } else if (effectName === 'fade-slide-bottom') {
-        start = 'opacity: 0; transform: translateY(20px);';
-        end = 'opacity: 1; transform: translateY(0);';
+    if (effectEaseB === undefined) {
+        effectEaseB = effectEaseA;
+    }
+    if (effectDurationB === undefined) {
+        effectDurationB = effectDurationA;
     }
 
-    return `
-        transition: all ease-out 300ms;
-        ${start};
-        ${runEffect ? end : ''}
-    `;
+    if (effectEaseA === 'preset:bounce') {
+        effectEaseA = easeBounce;
+    }
+    if (effectEaseB === 'preset:bounce') {
+        effectEaseB = easeBounce;
+    }
+
+    if (effectName.startsWith('fade-slide')) {
+        let start = `opacity: 0; transform: translateY(-${effectParameterA}px);`;
+        let end = 'opacity: 1; transform: translateY(0);';
+
+        if (effectName === 'fade-slide-left') {
+            start = `opacity: 0; transform: translateX(-${effectParameterA}px);`;
+            end = 'opacity: 1; transform: translateX(0);';
+        } else if (effectName === 'fade-slide-right') {
+            start = `opacity: 0; transform: translateX(${effectParameterA}px);`;
+            end = 'opacity: 1; transform: translateX(0);';
+        } else if (effectName === 'fade-slide-bottom') {
+            start = `opacity: 0; transform: translateY(${effectParameterA}px);`;
+            end = 'opacity: 1; transform: translateY(0);';
+        }
+
+        return `
+            transition: opacity ${effectEaseA} ${effectDurationA}ms, transform ${effectEaseB} ${effectDurationB}ms;
+            ${start};
+            ${runEffect ? end : ''}
+        `;
+    }
+
+    if (effectName === 'fade-enter') {
+        const start = `opacity: 0; transform: scale(0.8);`;
+        const end = 'opacity: 1; transform: scale(1);';
+
+        return `
+            transition: opacity ${effectEaseA} ${effectDurationA}ms, transform ${effectEaseB} ${effectDurationB}ms;
+            ${start};
+            ${runEffect ? end : ''}
+        `;
+    }
+
+    return '';
 };
 
 export const withEffects = (Component: any) => {
-    const WithEffects = (props: ObjectLiteral) => {
+    const WithEffects = (props: EffectProperties) => {
         return (
             <EffectRunner effectTimeout={props.effectTimeout || 0}>
                 {(effectRuntimeProps: EffectRuntimeProperties) => {

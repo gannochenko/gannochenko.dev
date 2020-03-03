@@ -48,8 +48,9 @@ export const HeaderMain: FunctionComponent<Props> = ({ backgroundImage }) => {
                     <DataColumn>
                         <HelloBlock>
                             <HelloLeft
-                                effectName="fade-slide-left"
+                                effectName="fade-enter"
                                 effectTimeout={timeoutBase}
+                                effectEaseA="preset:bounce"
                             >
                                 <Avatar />
                             </HelloLeft>
@@ -57,12 +58,14 @@ export const HeaderMain: FunctionComponent<Props> = ({ backgroundImage }) => {
                                 <NameBlock
                                     effectName="fade-slide-bottom"
                                     effectTimeout={timeoutRight}
+                                    effectEaseA="preset:bounce"
                                 >
                                     Sergei Gannochenko
                                 </NameBlock>
                                 <GreetingBlock
                                     effectName="fade-slide-bottom"
                                     effectTimeout={timeoutRight + 300}
+                                    effectEaseA="preset:bounce"
                                 >
                                     Full-stack software engineer in Berlin,
                                     Germany
@@ -70,6 +73,7 @@ export const HeaderMain: FunctionComponent<Props> = ({ backgroundImage }) => {
                                 <SocialBar
                                     effectName="fade-slide-bottom"
                                     effectTimeout={timeoutRight + 600}
+                                    effectEaseA="preset:bounce"
                                 >
                                     <Social type="github" src={links.github} />
                                     <Social
