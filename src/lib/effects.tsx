@@ -113,7 +113,7 @@ export const runStandardEffect = ({
     effectName = 'fade-slide-top',
     effectDurationA = 300,
     effectDurationB,
-    effectEaseA = 'ease-in',
+    effectEaseA = 'preset:bounce',
     effectEaseB,
     effectParameterA = '',
     // effectParameterB = '',

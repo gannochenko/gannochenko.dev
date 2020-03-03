@@ -3,20 +3,77 @@ title: Techradar
 graphics:
 ---
 
-[BLOCK effect=fade-slide-bottom containerType=standard]
-So, I would say I am **70% frontend** software engineer. That is why the following stack I use every day during my work process:
-[/BLOCK][block widget=skills type=frontend]1[/BLOCK][block contentalign=center]
-When it comes to the backend part, my best choice is
-[/BLOCK][block widget=skills type=backend]1[/BLOCK][block widget=block contentalign=center]
-For a full-stack engineer it is crucial to understand DevOps and how the system typically gets deployed, so occasionally I use these:
-[/BLOCK][block widget=skills type=devops]1[/BLOCK][block widget=block contentalign=center]
-As for the code management, I personally prefer GIT, but HG also works perfectly :)
-[/BLOCK][block widget=skills type=util]1[/BLOCK][block]
-There are also several things I am familiar with and probably can make something relatively basic out of it... after spending a day or two googling the subject :)
+import { Container } from '../../src/components/Container';
+import { Effect } from '../../src/components/Effect';
+import { Skills } from '../../src/components/Skills';
 
+<Container>
+
+So, I would say I am **70% frontend** software engineer. That is why the following stack I use every day during my work process:
+
+<Skills type="frontend" />
+
+</Container>
+
+<br />
+<Effect name="fade-slide-bottom" durationA={300} easeA="preset:bounce" parameterA="20">
+<Container>
+
+When it comes to the backend part, my best choice is
+
+<Skills type="backend" />
+
+</Container>
+</Effect>
+
+<br />
+<Effect name="fade-slide-bottom" durationA={300} easeA="preset:bounce" parameterA="20">
+<Container>
+
+For a full-stack engineer it is crucial to understand DevOps and how the system typically gets deployed, so occasionally I use these:
+
+<Skills type="devops" />
+
+</Container>
+</Effect>
+
+<br />
+<Effect name="fade-slide-bottom" durationA={300} easeA="preset:bounce" parameterA="20">
+<Container>
+
+As for the code management, I personally prefer GIT, but HG also works perfectly :)
+
+<Skills type="util" />
+
+</Container>
+</Effect>
+
+<br />
+<Effect name="fade-slide-bottom" durationA={300} easeA="preset:bounce" parameterA="20">
+<Container>
+
+There are also several things I am familiar with and probably can make something relatively basic out of it... after spending a day or two googling the subject :)
 This section is there for the "familiarity with blah is a plus" reasons :)
-[/BLOCK][block widget=skills type=familiar]1[/BLOCK][block]
+
+<Skills type="familiar" />
+
+</Container>
+</Effect>
+
+<br />
+<Effect name="fade-slide-bottom" durationA={300} easeA="preset:bounce" parameterA="20">
+<Container>
+
 And finally, I got few technologies that I, generally speaking, don't work with anymore, even though from time to time I may look into it.
-[/BLOCK][block widget=skills type=dated]1[/BLOCK][block]
+
+<Skills type="dated" />
+
+<br />
+
 I hope that you find my tech radar diverse and pretty aligned with yours. If there is a match, [drop me a message](https://www.linkedin.com/in/gannochenko/)!
-[/BLOCK]
+
+<br />
+<br />
+
+</Container>
+</Effect>
