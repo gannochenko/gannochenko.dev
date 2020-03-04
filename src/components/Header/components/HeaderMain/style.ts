@@ -13,7 +13,7 @@ const arrow = require('./assets/arrow.svg') as string;
 import { media, cell, grid } from '../../../../style';
 import { withEffects } from '../../../../lib/effects';
 
-export const HeaderMainContainer = styled.div<{ inner: boolean }>`
+export const HeaderMainContainer = styled.div<{ inner?: boolean }>`
     ${props =>
         props.inner
             ? css`

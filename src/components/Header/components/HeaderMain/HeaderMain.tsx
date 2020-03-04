@@ -44,7 +44,7 @@ export const HeaderMain: FunctionComponent<Props> = ({
 
     return (
         <>
-            <HeaderMainContainer>
+            <HeaderMainContainer inner={inner}>
                 <BackgroundImage
                     sizes={backgroundImage.childImageSharp.fluid}
                 />
