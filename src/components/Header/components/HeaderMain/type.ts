@@ -6,4 +6,5 @@ export interface Props {
             fluid: FluidObject;
         };
     };
+    inner?: boolean;
 }

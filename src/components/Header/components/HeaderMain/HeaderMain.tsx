@@ -5,7 +5,7 @@ import animateScrollTo from 'animated-scroll-to';
 import {
     Arrow,
     BackgroundImage,
-    Container,
+    HeaderMainContainer,
     Data,
     DataColumn,
     GreetingBlock,
@@ -20,8 +20,13 @@ import { Avatar } from '../../../Avatar';
 import { Social } from '../../../Social';
 import { Copyright } from '../../../Copyright';
 import { links } from '../../../../lib/links';
+import { Link } from 'gatsby';
+import { Container } from '../../../Container';
 
-export const HeaderMain: FunctionComponent<Props> = ({ backgroundImage }) => {
+export const HeaderMain: FunctionComponent<Props> = ({
+    backgroundImage,
+    inner,
+}) => {
     const scrollWindow = () => {
         const data = document.querySelector('.intro-data');
         if (data) {
@@ -39,62 +44,79 @@ export const HeaderMain: FunctionComponent<Props> = ({ backgroundImage }) => {
 
     return (
         <>
-            <Container>
+            <HeaderMainContainer>
                 <BackgroundImage
                     sizes={backgroundImage.childImageSharp.fluid}
                 />
-                <ImageOverlay />
-                <Data className="intro-data">
-                    <DataColumn>
-                        <HelloBlock>
-                            <HelloLeft
-                                effectName="fade-enter"
-                                effectTimeout={timeoutBase}
-                                effectEaseA="preset:bounce"
-                            >
-                                <Avatar />
-                            </HelloLeft>
-                            <HelloRight>
-                                <NameBlock
-                                    effectName="fade-slide-bottom"
-                                    effectTimeout={timeoutRight}
-                                    effectEaseA="preset:bounce"
-                                >
-                                    Sergei Gannochenko
-                                </NameBlock>
-                                <GreetingBlock
-                                    effectName="fade-slide-bottom"
-                                    effectTimeout={timeoutRight + 300}
-                                    effectEaseA="preset:bounce"
-                                >
-                                    Full-stack software engineer in Berlin,
-                                    Germany
-                                </GreetingBlock>
-                                <SocialBar
-                                    effectName="fade-slide-bottom"
-                                    effectTimeout={timeoutRight + 600}
-                                    effectEaseA="preset:bounce"
-                                >
-                                    <Social type="github" src={links.github} />
-                                    <Social
-                                        type="linkedin"
-                                        src={links.linkedin}
-                                    />
-                                    <Social type="medium" src={links.medium} />
-                                    <Social
-                                        type="twitter"
-                                        src={links.twitter}
-                                    />
-                                </SocialBar>
-                            </HelloRight>
-                        </HelloBlock>
-                    </DataColumn>
-                </Data>
-                <Arrow
-                    effectTimeout={timeoutArrow}
-                    onClick={() => scrollWindow()}
-                />
-            </Container>
+                {inner && (
+                    <Container type="standard">
+                        <Link to="/">
+                            <Avatar size="5rem" borderSize="0.1rem" />
+                        </Link>
+                    </Container>
+                )}
+                {!inner && (
+                    <>
+                        <ImageOverlay />
+                        <Data className="intro-data">
+                            <DataColumn>
+                                <HelloBlock>
+                                    <HelloLeft
+                                        effectName="fade-enter"
+                                        effectTimeout={timeoutBase}
+                                        effectEaseA="preset:bounce"
+                                    >
+                                        <Avatar />
+                                    </HelloLeft>
+                                    <HelloRight>
+                                        <NameBlock
+                                            effectName="fade-slide-bottom"
+                                            effectTimeout={timeoutRight}
+                                            effectEaseA="preset:bounce"
+                                        >
+                                            Sergei Gannochenko
+                                        </NameBlock>
+                                        <GreetingBlock
+                                            effectName="fade-slide-bottom"
+                                            effectTimeout={timeoutRight + 300}
+                                            effectEaseA="preset:bounce"
+                                        >
+                                            Full-stack software engineer in
+                                            Berlin, Germany
+                                        </GreetingBlock>
+                                        <SocialBar
+                                            effectName="fade-slide-bottom"
+                                            effectTimeout={timeoutRight + 600}
+                                            effectEaseA="preset:bounce"
+                                        >
+                                            <Social
+                                                type="github"
+                                                src={links.github}
+                                            />
+                                            <Social
+                                                type="linkedin"
+                                                src={links.linkedin}
+                                            />
+                                            <Social
+                                                type="medium"
+                                                src={links.medium}
+                                            />
+                                            <Social
+                                                type="twitter"
+                                                src={links.twitter}
+                                            />
+                                        </SocialBar>
+                                    </HelloRight>
+                                </HelloBlock>
+                            </DataColumn>
+                        </Data>
+                        <Arrow
+                            effectTimeout={timeoutArrow}
+                            onClick={() => scrollWindow()}
+                        />
+                    </>
+                )}
+            </HeaderMainContainer>
             <Copyright
                 author="Caspar Camille Rubin"
                 source="https://unsplash.com/photos/fPkvU7RDmCo"

@@ -1,4 +1,4 @@
-import styled from '@emotion/styled';
+import styled from 'styled-components';
 import { absoluteCover } from '@bucket-of-bolts/styled-companion';
 import Img from 'gatsby-image';
 

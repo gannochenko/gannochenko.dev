@@ -1,4 +1,4 @@
-import styled from '@emotion/styled';
+import styled, { css } from 'styled-components';
 import Img from 'gatsby-image';
 import {
     absoluteCover,
@@ -13,11 +13,23 @@ const arrow = require('./assets/arrow.svg') as string;
 import { media, cell, grid } from '../../../../style';
 import { withEffects } from '../../../../lib/effects';
 
-export const Container = styled.div`
-    position: relative;
-    min-width: 320px;
-    font-family: Raleway, sans-serif;
-    flex-shrink: 0;
+export const HeaderMainContainer = styled.div<{ inner: boolean }>`
+    ${props =>
+        props.inner
+            ? css`
+                  height: 5rem;
+                  padding-top: 1rem;
+                  margin-bottom: 1.5rem;
+                  position: relative;
+                  flex-shrink: 0;
+                  background-color: black;
+              `
+            : css`
+                  position: relative;
+                  min-width: 320px;
+                  font-family: Raleway, sans-serif;
+                  flex-shrink: 0;
+              `}
 `;
 
 export const BackgroundImage = styled(Img)`
