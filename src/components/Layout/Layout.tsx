@@ -4,18 +4,24 @@ import { Body, Main, Title, BackContainer, BackLink } from './style';
 import { Props } from './type';
 import { Header, Footer, Container, SEO } from '../';
 
-export const Layout: FunctionComponent<Props> = ({
-    children,
-    path,
-    pageContext: {
-        frontmatter: {
-            title = '',
-            backUrl = '',
-            keywords = [],
-            description = '',
-        } = {},
-    },
-}) => {
+export const Layout: FunctionComponent<Props> = props => {
+    const {
+        children,
+        path,
+        pageContext: {
+            frontmatter: {
+                title = '',
+                backUrl = '',
+                keywords = [],
+                description = '',
+            } = {},
+        },
+    } = props;
+
+    console.log('SSR:');
+    console.log('props:');
+    console.log(props);
+
     const isRoot = path === '/';
 
     return (
@@ -23,7 +29,7 @@ export const Layout: FunctionComponent<Props> = ({
             <GlobalStyle />
             <SEO title={title} keywords={keywords} description={description} />
             <Main>
-                <Header short={!isRoot} />
+                <Header short={false} />
                 {!!(title && !isRoot) && (
                     <Container type="standard">
                         <Title>{title}</Title>
