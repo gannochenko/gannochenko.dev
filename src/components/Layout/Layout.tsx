@@ -7,7 +7,7 @@ import { Header, Footer, Container, SEO } from '../';
 export const Layout: FunctionComponent<Props> = props => {
     const {
         children,
-        path,
+        location: { pathname = '' } = {},
         pageContext: {
             frontmatter: {
                 title = '',
@@ -18,18 +18,14 @@ export const Layout: FunctionComponent<Props> = props => {
         },
     } = props;
 
-    console.log('SSR:');
-    console.log('props:');
-    console.log(props);
-
-    const isRoot = path === '/';
+    const isRoot = pathname === '/';
 
     return (
         <ThemeContext.Provider value={theme}>
             <GlobalStyle />
             <SEO title={title} keywords={keywords} description={description} />
             <Main>
-                <Header short={false} />
+                <Header short={!isRoot} />
                 {!!(title && !isRoot) && (
                     <Container type="standard">
                         <Title>{title}</Title>

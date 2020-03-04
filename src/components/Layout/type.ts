@@ -2,7 +2,9 @@ import { ReactNode } from 'react';
 
 export interface Props {
     children?: ReactNode;
-    path: string;
+    location: {
+        pathname: string;
+    };
     pageContext: {
         frontmatter: {
             title?: string;
