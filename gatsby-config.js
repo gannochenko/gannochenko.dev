@@ -87,6 +87,7 @@ module.exports = {
             },
         },
         'gatsby-plugin-styled-components',
+        'gatsby-plugin-emotion',
         'gatsby-plugin-typescript',
         'gatsby-plugin-catch-links',
     ],
