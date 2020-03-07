@@ -5,7 +5,10 @@
  */
 
 import { getRenderedNodeIdCollector } from './src/lib/effects';
+import { Root } from './src/components/Root/Root';
 
 export const onRenderBody = ({ setPostBodyComponents }) => {
     setPostBodyComponents([getRenderedNodeIdCollector()]);
 };
+
+export const wrapRootElement = Root;

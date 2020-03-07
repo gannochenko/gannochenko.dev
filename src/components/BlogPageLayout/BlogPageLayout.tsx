@@ -1,6 +1,5 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { graphql } from 'gatsby';
-import { MDXProvider } from '@mdx-js/react';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 
 import { Props } from './type';
@@ -17,14 +16,10 @@ export const BlogPageLayout: FunctionComponent<Props> = ({
         [mdx.id],
     );
 
-    const components = useMemo(() => ({}), []);
-
     return (
-        <MDXProvider components={components}>
-            <Layout pageContext={pageContext} path={path}>
-                <MDXRenderer pageContext={pageContext}>{mdx.body}</MDXRenderer>
-            </Layout>
-        </MDXProvider>
+        <Layout pageContext={pageContext} path={path}>
+            <MDXRenderer pageContext={pageContext}>{mdx.body}</MDXRenderer>
+        </Layout>
     );
 };
 

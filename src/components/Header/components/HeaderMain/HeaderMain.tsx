@@ -22,6 +22,7 @@ import { Copyright } from '../../../Copyright';
 import { links } from '../../../../lib/links';
 import { Link } from 'gatsby';
 import { Container } from '../../../Container';
+import { Menu } from '../../../Menu';
 
 export const HeaderMain: FunctionComponent<Props> = ({
     backgroundImage,
@@ -116,6 +117,7 @@ export const HeaderMain: FunctionComponent<Props> = ({
                         />
                     </>
                 )}
+                <Menu />
             </HeaderMainContainer>
             <Copyright
                 author="Caspar Camille Rubin"

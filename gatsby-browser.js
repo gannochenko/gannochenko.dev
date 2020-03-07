@@ -5,5 +5,8 @@
  */
 
 import { start } from './src/lib/effects';
+import { Root } from './src/components/Root/Root';
 
 start();
+
+export const wrapRootElement = Root;
