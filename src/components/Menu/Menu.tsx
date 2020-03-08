@@ -1,13 +1,21 @@
 import React, { FunctionComponent } from 'react';
 
-import { MenuContainer, InnerContainer, Items, Item, Underline } from './style';
+import {
+    MenuContainer,
+    InnerContainer,
+    Items,
+    Item,
+    Underline,
+    Home,
+} from './style';
 
 import { Props } from './type';
 
-export const Menu: FunctionComponent<Props> = ({ children }) => {
+export const Menu: FunctionComponent<Props> = () => {
     return (
         <MenuContainer>
             <InnerContainer>
+                <Home to="/" />
                 <Items>
                     <Item to="/blog">
                         Blog

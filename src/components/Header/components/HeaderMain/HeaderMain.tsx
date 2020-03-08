@@ -15,13 +15,12 @@ import {
     ImageOverlay,
     NameBlock,
     SocialBar,
+    MenuOffset,
 } from './style';
 import { Avatar } from '../../../Avatar';
 import { Social } from '../../../Social';
 import { Copyright } from '../../../Copyright';
 import { links } from '../../../../lib/links';
-import { Link } from 'gatsby';
-import { Container } from '../../../Container';
 import { Menu } from '../../../Menu';
 
 export const HeaderMain: FunctionComponent<Props> = ({
@@ -45,17 +44,10 @@ export const HeaderMain: FunctionComponent<Props> = ({
 
     return (
         <>
-            <HeaderMainContainer inner={inner}>
+            <HeaderMainContainer>
                 <BackgroundImage
                     sizes={backgroundImage.childImageSharp.fluid}
                 />
-                {inner && (
-                    <Container type="standard">
-                        <Link to="/">
-                            <Avatar size="5rem" borderSize="0.1rem" />
-                        </Link>
-                    </Container>
-                )}
                 {!inner && (
                     <>
                         <ImageOverlay />
@@ -117,13 +109,16 @@ export const HeaderMain: FunctionComponent<Props> = ({
                         />
                     </>
                 )}
+                {inner && <MenuOffset />}
                 <Menu />
             </HeaderMainContainer>
-            <Copyright
-                author="Caspar Camille Rubin"
-                source="https://unsplash.com/photos/fPkvU7RDmCo"
-                sourceText="Unsplash"
-            />
+            {!inner && (
+                <Copyright
+                    author="Caspar Camille Rubin"
+                    source="https://unsplash.com/photos/fPkvU7RDmCo"
+                    sourceText="Unsplash"
+                />
+            )}
         </>
     );
 };

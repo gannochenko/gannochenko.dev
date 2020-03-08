@@ -6,5 +6,4 @@ export interface Props {
     children?: ReactNode;
     type?: ContainerType;
     contentAlign?: 'center' | 'left' | 'right';
-    dangerouslySetInnerHTML?: { __html: string };
 }

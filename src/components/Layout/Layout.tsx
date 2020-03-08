@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from 'react';
-import { GlobalStyle, theme, ThemeContext } from '../../style';
 import { Body, Main, Title, BackContainer, BackLink } from './style';
 import { Props } from './type';
 import { Header, Footer, Container, SEO } from '../';
@@ -21,8 +20,7 @@ export const Layout: FunctionComponent<Props> = props => {
     const isRoot = pathname === '/';
 
     return (
-        <ThemeContext.Provider value={theme}>
-            <GlobalStyle />
+        <>
             <SEO title={title} keywords={keywords} description={description} />
             <Main>
                 <Header short={!isRoot} />
@@ -39,7 +37,7 @@ export const Layout: FunctionComponent<Props> = props => {
                 )}
                 <Footer />
             </Main>
-        </ThemeContext.Provider>
+        </>
     );
 };
 

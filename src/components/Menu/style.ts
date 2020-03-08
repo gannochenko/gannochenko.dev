@@ -9,17 +9,20 @@ export const MenuContainer = styled.div`
     top: 0;
     left: 0;
     right: 0;
-    background-color: black;
+    background-color: ${props => props.theme.color.backgroundSecondary};
     padding: 0.5rem 0;
     z-index: ${zIxEverest};
+    box-shadow: 0px 6px 30px -8px rgba(0, 0, 0, 0.55);
 `;
 
 export const InnerContainer = styled(Container)`
-    ${align('center', 'right')}
+    display: flex;
+    justify-content: space-between;
 `;
 
 export const Items = styled.div`
     ${group(null, '1rem')}
+    ${align('center', 'right')}
 `;
 
 export const Item = styled(Link)`
@@ -49,4 +52,12 @@ export const Underline = styled.div`
     bottom: 0;
     left: 0;
     right: 0;
+`;
+
+export const Home = styled(Link)`
+    &:before {
+        content: 'cd ~';
+    }
+    color: ${props => props.theme.color.textSecondary};
+    text-decoration: none;
 `;

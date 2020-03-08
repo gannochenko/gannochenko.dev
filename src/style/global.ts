@@ -1,8 +1,8 @@
 import { createGlobalStyle } from 'styled-components';
-import { theme } from './theme';
 import { fgColor } from '@bucket-of-bolts/styled-companion';
+import { theme } from './theme';
 
-export const GlobalStyle = createGlobalStyle`
+export const GlobalStyle = createGlobalStyle<{ theme: typeof theme }>`
     //@import url('https://fonts.googleapis.com/css?family=Montserrat');
     @import url('https://fonts.googleapis.com/css?family=Roboto:300,400');
     //@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
@@ -22,12 +22,12 @@ export const GlobalStyle = createGlobalStyle`
         padding: 0 !important;
         margin: 0 !important;
         font-weight: 300;
-        color: ${theme.color.text};
+        color: ${props => props.theme.color.textPrimary};
         font-family: Roboto, sans-serif;
         line-height: 1.4;
         letter-spacing: normal;
         min-width: 320px;
-        background-color: ${theme.color.background};
+        background-color: ${props => props.theme.color.backgroundPrimary};
         overflow-x: hidden;
     }
 
@@ -77,7 +77,12 @@ export const GlobalStyle = createGlobalStyle`
 
     a {
       background-color: transparent;
-      ${fgColor('#9e3333', '#842020', 300)}
+      ${props =>
+          fgColor(
+              props.theme.link.color.normal,
+              props.theme.link.color.hover,
+              props.theme.link.hoverEffectDuration,
+          )}
     }
     
     abbr[title] {
