@@ -8,13 +8,15 @@ export const theme = {
         backgroundSecondary: '#0a0a0a',
         textPrimary: '#0a0a0a',
         textSecondary: palette.white,
-    },
-    link: {
-        color: {
+        link: {
             normal: '#9e3333',
             hover: '#842020',
+            altNormal: palette.white,
+            altHover: palette.trueRed,
         },
-        hoverEffectDuration: 300,
+    },
+    link: {
+        hoverEffectDuration: '300ms',
     },
     grid: {
         resolution: 12,

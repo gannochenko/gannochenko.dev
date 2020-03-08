@@ -16,7 +16,6 @@ export const SkillContainer = styled.div`
     width: ${factor * width * 0.9}rem;
     position: relative;
     ${align('center', 'center')};
-    //cursor: pointer;
 
     &:hover {
         .skill-overlay {

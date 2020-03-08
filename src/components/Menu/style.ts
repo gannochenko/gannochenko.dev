@@ -26,38 +26,45 @@ export const Items = styled.div`
 `;
 
 export const Item = styled(Link)`
-    ${fgColor('white', 'white')};
+    ${props =>
+        fgColor(
+            props.theme.color.link.altNormal,
+            props.theme.color.link.altNormal,
+        )};
     text-transform: uppercase;
     text-decoration: none;
     position: relative;
-    padding-bottom: 5px;
+    padding-bottom: 3px;
+    font-size: ${props => props.theme.font.small};
 
     &:after {
         content: '';
         display: block;
-        height: 3px;
+        height: 2px;
         position: absolute;
         bottom: 0;
         left: 0;
-        width: 30%;
+        width: 0;
         background-color: white;
+        transition: width ease 200ms;
     }
-`;
 
-export const Underline = styled.div`
-    content: '';
-    display: block;
-    height: 3px;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    &:hover {
+        &:after {
+            width: 100%;
+        }
+    }
 `;
 
 export const Home = styled(Link)`
     &:before {
         content: 'cd ~';
     }
-    color: ${props => props.theme.color.textSecondary};
+    ${props =>
+        fgColor(
+            props.theme.color.link.altNormal,
+            props.theme.color.link.altHover,
+            props.theme.link.hoverEffectDuration,
+        )};
     text-decoration: none;
 `;

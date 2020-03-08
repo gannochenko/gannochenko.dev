@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react';
 
+import { Link } from '../';
 import { CopyrightContainer } from './style';
 import { Props } from './type';
 
@@ -18,9 +19,13 @@ export const Copyright: FunctionComponent<Props> = ({
             {!!source && (
                 <span>
                     {author ? ' on ' : ''}
-                    <a href={source} target="_blank" rel="noopener noreferrer">
+                    <Link
+                        href={source}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
                         {sourceText || source}
-                    </a>
+                    </Link>
                 </span>
             )}
         </CopyrightContainer>

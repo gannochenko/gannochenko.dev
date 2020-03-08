@@ -1,13 +1,6 @@
 import React, { FunctionComponent } from 'react';
 
-import {
-    MenuContainer,
-    InnerContainer,
-    Items,
-    Item,
-    Underline,
-    Home,
-} from './style';
+import { MenuContainer, InnerContainer, Items, Item, Home } from './style';
 
 import { Props } from './type';
 
@@ -17,10 +10,7 @@ export const Menu: FunctionComponent<Props> = () => {
             <InnerContainer>
                 <Home to="/" />
                 <Items>
-                    <Item to="/blog">
-                        Blog
-                        <Underline />
-                    </Item>
+                    <Item to="/blog">Blog</Item>
                     <Item to="/techradar">Techradar</Item>
                     <Item to="/story">Story</Item>
                 </Items>

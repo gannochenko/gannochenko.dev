@@ -1,5 +1,4 @@
 import { createGlobalStyle } from 'styled-components';
-import { fgColor } from '@bucket-of-bolts/styled-companion';
 import { theme } from './theme';
 
 export const GlobalStyle = createGlobalStyle<{ theme: typeof theme }>`
@@ -77,14 +76,8 @@ export const GlobalStyle = createGlobalStyle<{ theme: typeof theme }>`
 
     a {
       background-color: transparent;
-      ${props =>
-          fgColor(
-              props.theme.link.color.normal,
-              props.theme.link.color.hover,
-              props.theme.link.hoverEffectDuration,
-          )}
     }
-    
+
     abbr[title] {
       text-decoration: underline;
       text-decoration: underline dotted;
