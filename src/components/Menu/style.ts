@@ -90,6 +90,7 @@ export const Home = styled(Link)`
 export const Right = styled.div`
     ${align('center', 'center')};
     flex-shrink: 0;
+    position: relative;
 `;
 
 export const Hamburger = styled.div`
@@ -98,6 +99,7 @@ export const Hamburger = styled.div`
     height: 2.5rem;
     ${group('0.2rem', null)};
     padding: 0.5rem;
+    cursor: pointer;
     ${props =>
         props.theme.util.media({
             sm: css`
@@ -117,4 +119,15 @@ export const Bar = styled.div`
     height: 0.2rem;
     width: 100%;
     display: block;
+`;
+
+export const MobileMenu = styled.div`
+    background-color: white;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 200px; //200vw;
+    height: 200px; //200vh;
+    border-bottom-left-radius: 999999999px;
+    overflow: hidden;
 `;
