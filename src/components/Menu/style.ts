@@ -1,5 +1,10 @@
-import styled from 'styled-components';
-import { align, group, fgColor } from '@bucket-of-bolts/styled-companion';
+import styled, { css } from 'styled-components';
+import {
+    align,
+    group,
+    fgColor,
+    central,
+} from '@bucket-of-bolts/styled-companion';
 import { Link } from 'gatsby';
 import { Container } from '../Container';
 import { zIxEverest } from '@bucket-of-bolts/styled-companion/build';
@@ -15,9 +20,13 @@ export const MenuContainer = styled.div`
     box-shadow: 0px 6px 30px -8px rgba(0, 0, 0, 0.55);
 `;
 
-export const InnerContainer = styled(Container)`
+export const InnerContainer = styled.div`
     display: flex;
     justify-content: space-between;
+
+    ${central()}
+    padding: 0 1rem;
+    position: relative;
 `;
 
 export const Items = styled.div`
@@ -58,7 +67,7 @@ export const Item = styled(Link)`
 
 export const Home = styled(Link)`
     &:before {
-        content: 'cd ~';
+        content: '$ cd ~';
     }
     ${props =>
         fgColor(

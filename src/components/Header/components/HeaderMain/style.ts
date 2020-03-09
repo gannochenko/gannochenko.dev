@@ -11,7 +11,6 @@ import {
 } from '@bucket-of-bolts/styled-companion';
 const arrow = require('./assets/arrow.svg') as string;
 import { withEffects } from '../../../../lib/effects';
-import { ThemeProps } from '../../../../style/type';
 import { theme } from '../../../../style';
 
 export const HeaderMainContainer = styled.div`
@@ -33,7 +32,10 @@ export const ImageOverlay = styled.div`
     opacity: 0.6;
 `;
 
-const expandVertically = 'height: 100vh; overflow-y: hidden;';
+const expandVertically = css`
+    height: 100vh;
+    overflow-y: hidden;
+`;
 export const Data = styled.div`
     ${central()}
     ${align('center', 'center', 'column')}
@@ -43,6 +45,15 @@ export const Data = styled.div`
             lg: expandVertically,
         })};
     padding: 2rem 1rem;
+    ${props =>
+        props.theme.util.media({
+            sm: css`
+                padding-top: 3rem;
+            `,
+            xs: css`
+                padding-top: 3rem;
+            `,
+        })};
     position: relative;
 `;
 
