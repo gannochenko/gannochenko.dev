@@ -1,6 +1,15 @@
 import React, { FunctionComponent } from 'react';
 
-import { MenuContainer, InnerContainer, Items, Item, Home } from './style';
+import {
+    MenuContainer,
+    InnerContainer,
+    Items,
+    Item,
+    Home,
+    Hamburger,
+    Bar,
+    Right,
+} from './style';
 
 import { Props } from './type';
 
@@ -9,11 +18,18 @@ export const Menu: FunctionComponent<Props> = () => {
         <MenuContainer>
             <InnerContainer>
                 <Home to="/" />
-                <Items>
-                    <Item to="/blog">Blog</Item>
-                    <Item to="/techradar">Techradar</Item>
-                    <Item to="/story">Story</Item>
-                </Items>
+                <Right>
+                    <Items>
+                        <Item to="/blog">Blog</Item>
+                        <Item to="/techradar">Techradar</Item>
+                        <Item to="/story">Story</Item>
+                    </Items>
+                    <Hamburger>
+                        <Bar />
+                        <Bar />
+                        <Bar />
+                    </Hamburger>
+                </Right>
             </InnerContainer>
         </MenuContainer>
     );
