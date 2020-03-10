@@ -15,3 +15,5 @@ export const Header: FunctionComponent<Props> = ({ short }) => {
         </Query>
     );
 };
+
+export default Header;

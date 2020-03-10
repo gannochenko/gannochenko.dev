@@ -3,7 +3,7 @@ import { graphql } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 
 import { Props } from './type';
-import { Layout } from '../Layout';
+import { LayoutInner } from '../LayoutInner';
 
 export const BlogPageLayout: FunctionComponent<Props> = ({
     data: { mdx },
@@ -15,11 +15,12 @@ export const BlogPageLayout: FunctionComponent<Props> = ({
         }),
         [mdx.id],
     );
+    const location = useMemo(() => ({ pathname: path }), [path]);
 
     return (
-        <Layout pageContext={pageContext} path={path}>
+        <LayoutInner pageContext={pageContext} location={location}>
             <MDXRenderer pageContext={pageContext}>{mdx.body}</MDXRenderer>
-        </Layout>
+        </LayoutInner>
     );
 };
 
