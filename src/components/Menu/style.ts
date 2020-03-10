@@ -7,7 +7,6 @@ import {
 } from '@bucket-of-bolts/styled-companion';
 import { Link } from 'gatsby';
 import { zIxEverest } from '@bucket-of-bolts/styled-companion/build';
-import { bool } from 'prop-types';
 
 export const MenuContainer = styled.div`
     position: fixed;
@@ -20,7 +19,7 @@ export const MenuContainer = styled.div`
 `;
 
 export const InnerContainer = styled.div`
-    ${align('center', 'center')}
+    ${align('center', 'center')};
     justify-content: space-between;
 
     ${central()};
@@ -136,7 +135,8 @@ export const MobileItems = styled.div<{ open: boolean }>`
 export const MobileItem = styled(Link)`
     padding: 1rem 2rem;
     display: block;
+    text-decoration: none;
     &:not(:first-child) {
-        border-top: 1px solid gray;
+        border-top: 1px solid ${props => props.theme.color.backgroundSecondary};
     }
 `;

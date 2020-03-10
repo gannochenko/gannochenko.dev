@@ -27,7 +27,7 @@ export const Menu: FunctionComponent<Props> = () => {
     return (
         <MenuContainer>
             <InnerContainer>
-                <Home to="/" />
+                <Home to="/" onClick={onMobileItemClick} />
                 <Right>
                     <Items>
                         <Item to="/blog">Blog</Item>

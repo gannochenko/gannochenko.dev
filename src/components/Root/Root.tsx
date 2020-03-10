@@ -4,11 +4,9 @@ import { ThemeProvider } from 'styled-components';
 // import { Provider as StateProvider } from "unstated"
 import { theme, GlobalStyle, LayoutComponents } from '../../style';
 
-export const Root: FunctionComponent<{ element: ReactNode }> = props => {
-    const { element } = props;
-
-    console.log(props);
-
+export const Root: FunctionComponent<{ element: ReactNode }> = ({
+    element,
+}) => {
     return (
         <MDXProvider components={LayoutComponents}>
             <ThemeProvider theme={theme}>
