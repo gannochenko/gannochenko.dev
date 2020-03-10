@@ -49,6 +49,7 @@ export const Item = styled(Link)`
     position: relative;
     padding-bottom: 3px;
     font-size: ${props => props.theme.font.small};
+    font-weight: bold;
 
     &:after {
         content: '';
@@ -85,6 +86,7 @@ export const Home = styled(Link)`
     width: 2.5rem;
     height: 2.5rem;
     font-size: 0.8rem;
+    font-weight: bold;
 `;
 
 export const Right = styled.div`
@@ -136,6 +138,8 @@ export const MobileItem = styled(Link)`
     padding: 1rem 2rem;
     display: block;
     text-decoration: none;
+    ${props =>
+        fgColor(props.theme.color.textPrimary, props.theme.color.textPrimary)};
     &:not(:first-child) {
         border-top: 1px solid ${props => props.theme.color.backgroundSecondary};
     }

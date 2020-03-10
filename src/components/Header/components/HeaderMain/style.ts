@@ -16,7 +16,6 @@ import { theme } from '../../../../style';
 export const HeaderMainContainer = styled.div`
     position: relative;
     min-width: 320px;
-    font-family: Raleway, sans-serif;
     flex-shrink: 0;
 `;
 
@@ -37,6 +36,7 @@ const expandVertically = css`
     overflow-y: hidden;
 `;
 export const Data = styled.div`
+    font-family: Raleway, sans-serif;
     ${central()}
     ${align('center', 'center', 'column')}
     ${props =>
