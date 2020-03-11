@@ -38,6 +38,31 @@ export const Items = styled.div`
         })}
 `;
 
+export const Home = styled(Link)`
+    ${align('center', 'center')}
+    &:before {
+        content: '$ cd ~';
+    }
+    ${props => css`
+        &:active,
+        &:focus {
+            color: ${props.theme.color.link.altNormal};
+        }
+    `}
+    ${props =>
+        fgColor(
+            props.theme.color.link.altNormal,
+            props.theme.color.link.altHover,
+            props.theme.link.hoverEffectDuration,
+        )};
+    text-decoration: none;
+    flex-shrink: 0;
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 0.8rem;
+    font-weight: bold;
+`;
+
 export const Item = styled(Link)`
     ${props =>
         fgColor(
@@ -68,25 +93,6 @@ export const Item = styled(Link)`
             width: 100%;
         }
     }
-`;
-
-export const Home = styled(Link)`
-    ${align('center', 'center')}
-    &:before {
-        content: '$ cd ~';
-    }
-    ${props =>
-        fgColor(
-            props.theme.color.link.altNormal,
-            props.theme.color.link.altHover,
-            props.theme.link.hoverEffectDuration,
-        )};
-    text-decoration: none;
-    flex-shrink: 0;
-    width: 2.5rem;
-    height: 2.5rem;
-    font-size: 0.8rem;
-    font-weight: bold;
 `;
 
 export const Right = styled.div`
