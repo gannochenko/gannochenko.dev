@@ -1,11 +1,9 @@
 import { createGlobalStyle } from 'styled-components';
 import { theme } from './theme';
+import { fonts } from './fonts';
 
 export const GlobalStyle = createGlobalStyle<{ theme: typeof theme }>`
-    //@import url('https://fonts.googleapis.com/css?family=Montserrat');
-    @import url('https://fonts.googleapis.com/css?family=Roboto:300,400');
-    //@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
-    @import url('https://fonts.googleapis.com/icon?family=Raleway:600');
+    ${fonts}
 
     html {
         font-size: 20px;
