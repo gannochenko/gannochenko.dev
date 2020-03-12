@@ -1,6 +1,42 @@
 ---
 title: Blog
-graphics:
 ---
 
+import { Container } from '../components/Container';
+
+<Container>
+
 [My first post](/blog/my-first-post)
+
+</Container>
+
+<p>{console.log(require('util').inspect(props.data.allMdx.edges[0].node, { depth: 10 }))}</p>
+
+export const pageQuery = graphql`
+    query blogIndex {
+        allMdx {
+            edges {
+                node {
+                    id
+                    frontmatter {
+                        title
+                        date
+                        path
+                        graphics {
+                            image {
+                                childImageSharp {
+                                    fluid(maxWidth: 1240, quality: 80) {
+                                        ...GatsbyImageSharpFluid_tracedSVG
+                                    }
+                                }
+                            }
+                            author
+                            source
+                            sourceText
+                        }
+                    }
+                }
+            }
+        }
+    }
+`;

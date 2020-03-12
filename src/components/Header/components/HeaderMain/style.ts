@@ -140,5 +140,5 @@ export const SocialBar = withEffects(styled.div`
 `);
 
 export const MenuOffset = styled.div`
-    height: 48px;
+    height: 50px;
 `;
