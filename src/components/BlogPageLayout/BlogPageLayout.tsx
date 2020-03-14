@@ -31,7 +31,7 @@ export const blogPageQuery = graphql`
             body
             frontmatter {
                 title
-                graphics {
+                images {
                     image {
                         childImageSharp {
                             fluid(maxWidth: 1240, quality: 80) {
