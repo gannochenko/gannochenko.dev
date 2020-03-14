@@ -5,3 +5,4 @@ export * from './SEO';
 export * from './Social';
 export * from './Layout';
 export * from './Link';
+export * from './BlogPostList';

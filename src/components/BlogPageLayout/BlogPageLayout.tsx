@@ -42,6 +42,8 @@ export const blogPageQuery = graphql`
                     author
                     source
                     sourceText
+                    isCover
+                    galleryId
                 }
             }
         }
