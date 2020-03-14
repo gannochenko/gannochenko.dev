@@ -1,8 +1,14 @@
 import React, { FunctionComponent, useMemo } from 'react';
 
-import { BlogPostCardContainer, Image, Data } from './style';
+import {
+    BlogPostCardContainer,
+    Image,
+    Data,
+    LinkContainer,
+    ViewPost,
+} from './style';
 import { Props } from './type';
-import { Link } from '../Link';
+import { Typography } from '../Typography';
 
 export const BlogPostCard: FunctionComponent<Props> = ({ data }) => {
     const image = useMemo(() => {
@@ -16,7 +22,10 @@ export const BlogPostCard: FunctionComponent<Props> = ({ data }) => {
         <BlogPostCardContainer>
             <Image sizes={image.image.childImageSharp.fluid} />
             <Data>
-                <Link href="/">Read more</Link>
+                <Typography sub>{data.node.frontmatter.title}</Typography>
+                <LinkContainer>
+                    <ViewPost href="/">Read more</ViewPost>
+                </LinkContainer>
             </Data>
         </BlogPostCardContainer>
     );

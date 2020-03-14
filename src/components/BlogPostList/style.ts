@@ -1,8 +1,11 @@
 import styled from 'styled-components';
-import { group } from '@bucket-of-bolts/styled-companion/build';
 
 export const BlogPostListContainer = styled.div`
-    ${group('1rem', '1rem')};
     display: flex;
     flex-wrap: wrap;
+    ${({ theme }) => theme.util.grid({ gutters: { all: '1rem' } })}
+`;
+
+export const Item = styled.div`
+    ${({ theme }) => theme.util.cell({ lg: 4, md: 6, sm: 12, xs: 12 })}
 `;

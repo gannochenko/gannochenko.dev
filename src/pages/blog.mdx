@@ -4,6 +4,7 @@ title: Blog
 
 import { Container } from '../components/Container';
 import { BlogPostList } from '../components/BlogPostList';
+import { graphql } from 'gatsby';
 
 <Container>
     <BlogPostList data={props.data.allMdx.edges} />
@@ -11,7 +12,7 @@ import { BlogPostList } from '../components/BlogPostList';
 
 export const pageQuery = graphql`
     query blogIndex {
-        allMdx {
+        allMdx(sort: { fields: [frontmatter___date], order: DESC }) {
             edges {
                 node {
                     id

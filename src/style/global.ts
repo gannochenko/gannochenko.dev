@@ -255,14 +255,14 @@ export const GlobalStyle = createGlobalStyle<{ theme: typeof theme }>`
     }
 
     h1 {
-      font-size: 1.5rem;
+      font-size: ${({ theme }) => theme.font.large};
     }
-    
+
     h2 {
-      font-size: 1.3rem;
+      font-size: ${({ theme }) => theme.font.medium};
     }
     
     h3, h4 {
-      font-size: 1rem;
+      font-size: ${({ theme }) => theme.font.standard};
     }
 `;
