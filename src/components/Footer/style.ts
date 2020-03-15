@@ -11,7 +11,7 @@ export const Container = styled.div`
 
     background-color: ${props => props.theme.color.backgroundSecondary};
     color: ${props => props.theme.color.textSecondary};
-    font-size: 0.8rem;
+    font-size: ${props => props.theme.font.small};
     font-weight: 300;
 `;
 

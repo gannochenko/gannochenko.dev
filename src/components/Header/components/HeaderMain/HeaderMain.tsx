@@ -45,11 +45,11 @@ export const HeaderMain: FunctionComponent<Props> = ({
     return (
         <>
             <HeaderMainContainer>
-                <BackgroundImage
-                    sizes={backgroundImage.childImageSharp.fluid}
-                />
                 {!inner && (
                     <>
+                        <BackgroundImage
+                            sizes={backgroundImage.childImageSharp.fluid}
+                        />
                         <ImageOverlay />
                         <Data className="intro-data">
                             <DataColumn>

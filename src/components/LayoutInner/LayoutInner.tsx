@@ -1,7 +1,8 @@
 import React, { FunctionComponent } from 'react';
-import { Body, Title, BackContainer, BackLink } from './style';
+import { Body, BackContainer, BackLink } from './style';
 import { Props } from './type';
 import { Container, SEO } from '../';
+import { Typography } from '../Typography';
 
 export const LayoutInner: FunctionComponent<Props> = props => {
     const {
@@ -24,7 +25,7 @@ export const LayoutInner: FunctionComponent<Props> = props => {
             <SEO title={title} keywords={keywords} description={description} />
             {!!(title && !isRoot) && (
                 <Container type="standard">
-                    <Title>{title}</Title>
+                    <Typography main>{title}</Typography>
                 </Container>
             )}
             <Body>{children}</Body>

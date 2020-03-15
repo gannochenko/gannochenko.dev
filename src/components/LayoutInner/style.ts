@@ -6,15 +6,11 @@ export const Body = styled.div`
     flex-grow: 2;
 `;
 
-export const Title = styled.h1`
-    margin-top: 1rem;
-`;
-
 export const BackContainer = styled(Container)`
     margin-bottom: 2rem;
 `;
 
 export const BackLink = styled(Link)`
     text-decoration: none;
-    font-size: 0.8rem;
+    font-size: ${props => props.theme.font.small};
 `;

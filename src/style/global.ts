@@ -6,7 +6,7 @@ export const GlobalStyle = createGlobalStyle<{ theme: typeof theme }>`
     ${fonts}
 
     html {
-        font-size: 20px;
+        font-size: 16px;
         cursor: default;
         -moz-tab-size: 4;
         tab-size: 4;
@@ -244,25 +244,5 @@ export const GlobalStyle = createGlobalStyle<{ theme: typeof theme }>`
         margin-block-end: 1rem;
         margin-inline-start: 0;
         margin-inline-end: 0;
-    }
-    
-    h1 {
-      margin: 1rem 0 2rem 0;
-    }
-
-    h2, h3, h4 {
-      margin: 1rem 0 1rem 0;
-    }
-
-    h1 {
-      font-size: ${({ theme }) => theme.font.large};
-    }
-
-    h2 {
-      font-size: ${({ theme }) => theme.font.medium};
-    }
-    
-    h3, h4 {
-      font-size: ${({ theme }) => theme.font.standard};
     }
 `;

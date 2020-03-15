@@ -66,7 +66,6 @@ export const Arrow = withEffects(styled.div<{ theme: typeof theme }>`
     cursor: pointer;
     bottom: 2.5rem;
     color: white;
-    font-size: 3rem;
 
     animation-name: ${bouncedAnimation};
     animation-duration: 1s;
@@ -118,7 +117,7 @@ export const HelloRight = styled.div`
 export const NameBlock = withEffects(styled.div`
     font-family: Raleway, sans-serif;
     font-weight: 600;
-    font-size: 1.5rem;
+    font-size: ${props => props.theme.font.large};
     letter-spacing: 0.05rem;
     ${props => props.theme.util.media({ xs: 'text-align: center;' })}
     // @ts-ignore

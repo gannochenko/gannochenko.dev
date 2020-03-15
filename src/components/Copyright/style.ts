@@ -5,8 +5,7 @@ import styled from 'styled-components';
 
 export const CopyrightContainer = styled.div`
     text-align: center;
-    font-size: 0.6rem;
-    ${props => props.theme.util.media({ xs: 'font-size: 0.6rem;' })};
+    font-size: ${props => props.theme.font.micro};
     color: #6c7a89;
     margin: 0.5rem 0.25rem;
 `;

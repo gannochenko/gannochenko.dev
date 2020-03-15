@@ -6,9 +6,10 @@ import {
     Data,
     LinkContainer,
     ViewPost,
+    Title,
+    Date,
 } from './style';
 import { Props } from './type';
-import { Typography } from '../Typography';
 
 export const BlogPostCard: FunctionComponent<Props> = ({ data }) => {
     const image = useMemo(() => {
@@ -22,9 +23,12 @@ export const BlogPostCard: FunctionComponent<Props> = ({ data }) => {
         <BlogPostCardContainer>
             <Image sizes={image.image.childImageSharp.fluid} />
             <Data>
-                <Typography sub>{data.node.frontmatter.title}</Typography>
+                <Title>{data.node.frontmatter.title}</Title>
                 <LinkContainer>
-                    <ViewPost href="/">Read more</ViewPost>
+                    <Date>{data.node.frontmatter.date}</Date>
+                    <ViewPost href={data.node.frontmatter.path}>
+                        Read the post
+                    </ViewPost>
                 </LinkContainer>
             </Data>
         </BlogPostCardContainer>

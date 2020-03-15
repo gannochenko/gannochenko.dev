@@ -30,8 +30,10 @@ export const theme = {
     font: {
         large: '1.6rem',
         medium: '1.4rem',
+        bigger: '1.2rem',
         standard: '1.0rem',
         small: '0.8rem',
+        micro: '0.6rem',
     },
     util: {
         media: (rules: ObjectLiteral<string>) => media(rules, theme.grid),

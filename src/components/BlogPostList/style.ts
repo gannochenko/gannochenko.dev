@@ -3,7 +3,8 @@ import styled from 'styled-components';
 export const BlogPostListContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
-    ${({ theme }) => theme.util.grid({ gutters: { all: '1rem' } })}
+    ${({ theme }) => theme.util.grid({ gutters: { all: '1rem' } })};
+    margin-bottom: 2rem;
 `;
 
 export const Item = styled.div`

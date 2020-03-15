@@ -59,7 +59,7 @@ export const Home = styled(Link)`
     flex-shrink: 0;
     width: 2.5rem;
     height: 2.5rem;
-    font-size: 0.8rem;
+    font-size: ${props => props.theme.font.small};
     font-weight: bold;
 `;
 
@@ -124,7 +124,7 @@ export const Hamburger = styled.div`
 
 export const Bar = styled.div`
     background-color: ${props => props.theme.color.backgroundPrimary};
-    height: 0.2rem;
+    height: 10px;
     width: 100%;
     display: block;
 `;
