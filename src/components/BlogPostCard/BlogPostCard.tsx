@@ -8,9 +8,11 @@ import {
     ViewPost,
     Title,
     Date,
+    TitleLink,
 } from './style';
 import { Props } from './type';
 import { formatDate } from '../../lib/util';
+import { Link } from 'gatsby';
 
 export const BlogPostCard: FunctionComponent<Props> = ({ data }) => {
     const image = useMemo(() => {
@@ -20,16 +22,22 @@ export const BlogPostCard: FunctionComponent<Props> = ({ data }) => {
         );
     }, [data]);
 
+    const url = data.node.frontmatter.path;
+
     return (
         <BlogPostCardContainer>
-            <Image sizes={image.image.childImageSharp.fluid} />
+            <Link to={url}>
+                <Image sizes={image.image.childImageSharp.fluid} />
+            </Link>
             <Data>
-                <Title>{data.node.frontmatter.title}</Title>
+                <Title>
+                    <TitleLink to={url}>
+                        {data.node.frontmatter.title}
+                    </TitleLink>
+                </Title>
                 <LinkContainer>
                     <Date>{formatDate(data.node.frontmatter.date)}</Date>
-                    <ViewPost href={data.node.frontmatter.path}>
-                        Read the post
-                    </ViewPost>
+                    <ViewPost to={url}>Read the post</ViewPost>
                 </LinkContainer>
             </Data>
         </BlogPostCardContainer>

@@ -1,7 +1,8 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import Img from 'gatsby-image';
 
 import { Link } from '../Link';
+import { Link as GatsbyLink } from 'gatsby';
 import { align } from '@bucket-of-bolts/styled-companion/build';
 import { Typography } from '../Typography';
 
@@ -41,6 +42,17 @@ export const Title = styled(Typography).attrs({ sub: true })`
             lg: `font-size: ${theme.font.standard};`,
             md: 'min-height: 5rem;',
         })}
+`;
+
+export const TitleLink = styled(GatsbyLink)`
+    color: inherit;
+    &:focus,
+    &:active,
+    &:visited,
+    &:hover {
+        color: inherit;
+    }
+    text-decoration: none;
 `;
 
 export const Date = styled.div``;
