@@ -10,6 +10,7 @@ import {
     Date,
 } from './style';
 import { Props } from './type';
+import { formatDate } from '../../lib/util';
 
 export const BlogPostCard: FunctionComponent<Props> = ({ data }) => {
     const image = useMemo(() => {
@@ -25,7 +26,7 @@ export const BlogPostCard: FunctionComponent<Props> = ({ data }) => {
             <Data>
                 <Title>{data.node.frontmatter.title}</Title>
                 <LinkContainer>
-                    <Date>{data.node.frontmatter.date}</Date>
+                    <Date>{formatDate(data.node.frontmatter.date)}</Date>
                     <ViewPost href={data.node.frontmatter.path}>
                         Read the post
                     </ViewPost>

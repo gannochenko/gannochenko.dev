@@ -25,14 +25,12 @@ export const Data = styled.div`
 `;
 
 export const LinkContainer = styled.div`
-    ${align('top', 'right')}
+    ${align('center', 'right')};
+    justify-content: space-between;
 `;
 
 export const ViewPost = styled(Link)`
     text-align: right;
-    ${({ theme }) => css`
-        font-size: ${theme.font.small};
-    `}
 `;
 
 export const Title = styled(Typography).attrs({ sub: true })`
