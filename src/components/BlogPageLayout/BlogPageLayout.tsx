@@ -31,6 +31,7 @@ export const blogPageQuery = graphql`
             body
             frontmatter {
                 title
+                date
                 images {
                     image {
                         childImageSharp {
