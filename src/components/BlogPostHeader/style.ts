@@ -1,5 +1,10 @@
 import styled from 'styled-components';
+import Img from 'gatsby-image';
 
 export const BlogPostHeaderContainer = styled.div`
-    // style
+    position: relative;
+`;
+
+export const Cover = styled(Img)`
+    user-select: none;
 `;

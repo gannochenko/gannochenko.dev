@@ -18,7 +18,11 @@ export const BlogPageLayout: FunctionComponent<Props> = ({
     const location = useMemo(() => ({ pathname: path }), [path]);
 
     return (
-        <LayoutInner pageContext={pageContext} location={location}>
+        <LayoutInner
+            pageContext={pageContext}
+            location={location}
+            showTitle={false}
+        >
             <MDXRenderer pageContext={pageContext}>{mdx.body}</MDXRenderer>
         </LayoutInner>
     );

@@ -16,6 +16,7 @@ export const LayoutInner: FunctionComponent<Props> = props => {
                 description = '',
             } = {},
         },
+        showTitle,
     } = props;
 
     const isRoot = pathname === '/';
@@ -23,7 +24,7 @@ export const LayoutInner: FunctionComponent<Props> = props => {
     return (
         <>
             <SEO title={title} keywords={keywords} description={description} />
-            {!!(title && !isRoot) && (
+            {!!(title && !isRoot && showTitle !== false) && (
                 <Container type="standard">
                     <Typography main>{title}</Typography>
                 </Container>

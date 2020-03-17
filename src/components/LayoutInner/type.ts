@@ -14,4 +14,5 @@ export interface Props {
             [k: string]: any;
         };
     };
+    showTitle?: boolean;
 }

@@ -1,11 +1,21 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useMemo } from 'react';
 
-import { BlogPostHeaderContainer } from './style';
+import { BlogPostHeaderContainer, Cover } from './style';
 import { Props } from './type';
 
-export const BlogPostHeader: FunctionComponent<Props> = props => {
-    console.log('props');
-    console.log(props);
+export const BlogPostHeader: FunctionComponent<Props> = ({ data }) => {
+    const headerImage = useMemo(() => {
+        return data.frontmatter.images.find((image: any) => image.isCover);
+    }, [data]);
 
-    return <BlogPostHeaderContainer>1</BlogPostHeaderContainer>;
+    const { title, date } = data.frontmatter;
+
+    console.log(title);
+    console.log(date);
+
+    return (
+        <BlogPostHeaderContainer>
+            <Cover sizes={headerImage.image.childImageSharp.fluid} />
+        </BlogPostHeaderContainer>
+    );
 };
