@@ -10,6 +10,11 @@ export const BlogPostCardContainer = styled.div`
     box-shadow: 0px 6px 16px 0px rgba(0, 0, 0, 0.1);
     border-radius: 2px;
     overflow: hidden;
+
+    transition: transform ease 200ms;
+    &:hover {
+        transform: translateY(-3px);
+    }
 `;
 
 export const Image = styled(Img)`
