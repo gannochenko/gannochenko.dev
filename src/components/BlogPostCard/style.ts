@@ -60,4 +60,6 @@ export const TitleLink = styled(GatsbyLink)`
     text-decoration: none;
 `;
 
-export const Date = styled.div``;
+export const Date = styled.div`
+    font-size: ${({ theme }) => theme.font.small};
+`;

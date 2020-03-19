@@ -7,6 +7,7 @@ import {
 } from '@bucket-of-bolts/styled-companion';
 import { Link } from 'gatsby';
 import { zIxEverest } from '@bucket-of-bolts/styled-companion/build';
+import { Container } from '../Container';
 
 export const MenuContainer = styled.div`
     position: fixed;
@@ -18,13 +19,10 @@ export const MenuContainer = styled.div`
     box-shadow: 0px 6px 30px -8px rgba(0, 0, 0, 0.55);
 `;
 
-export const InnerContainer = styled.div`
+export const InnerContainer = styled(Container)`
     ${align('center', 'center')};
     justify-content: space-between;
-
-    ${central()};
     position: relative;
-    padding: 0 1rem;
 `;
 
 export const Items = styled.div`

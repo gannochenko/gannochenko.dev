@@ -43,6 +43,7 @@ export const Date = styled.div`
 export const InfoStripeContainer = styled(Container)`
     display: flex;
     justify-content: space-between;
+    font-size: ${({ theme }) => theme.font.small};
 `;
 
 export const DateStripe = styled.div`

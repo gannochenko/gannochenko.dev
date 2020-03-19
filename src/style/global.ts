@@ -26,6 +26,7 @@ export const GlobalStyle = createGlobalStyle<{ theme: typeof theme }>`
         min-width: 320px;
         background-color: ${props => props.theme.color.backgroundPrimary};
         overflow-x: hidden;
+        font-size: 1.3rem;
     }
 
     html, body, #root {

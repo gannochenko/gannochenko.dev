@@ -37,7 +37,9 @@ export const BlogPostCard: FunctionComponent<Props> = ({ data }) => {
                 </Title>
                 <LinkContainer>
                     <Date>{formatDate(data.node.frontmatter.date)}</Date>
-                    <ViewPost to={url}>Read the post</ViewPost>
+                    <ViewPost to={url} fontSize="small">
+                        Read the post
+                    </ViewPost>
                 </LinkContainer>
             </Data>
         </BlogPostCardContainer>
