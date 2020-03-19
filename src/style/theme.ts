@@ -15,6 +15,7 @@ export const theme = {
             altHover: palette.trueRed,
         },
     },
+    palette: palette,
     link: {
         hoverEffectDuration: '300ms',
     },

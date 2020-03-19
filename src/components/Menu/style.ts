@@ -140,11 +140,28 @@ export const MobileItems = styled.div<{ open: boolean }>`
 
 export const MobileItem = styled(Link)`
     padding: 1rem 2rem;
+    position: relative;
     display: block;
     text-decoration: none;
     ${props =>
         fgColor(props.theme.color.textPrimary, props.theme.color.textPrimary)};
-    &:not(:first-child) {
-        border-top: 1px solid ${props => props.theme.color.backgroundSecondary};
+    border-bottom: 1px solid ${props => props.theme.color.backgroundSecondary};
+
+    &:before {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 100%;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        background-color: ${props => props.theme.palette.silver};
+        transition: width 200ms ease;
+    }
+
+    &:hover {
+        &:before {
+            width: 10px;
+        }
     }
 `;
