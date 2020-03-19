@@ -24,6 +24,11 @@ export const Title = styled.div`
     padding: 2rem 0;
     color: ${props => props.theme.color.textSecondary};
     font-size: 2.5rem;
+    ${({ theme }) =>
+        theme.util.media({
+            sm: `font-size: 1.5rem;`,
+            xs: `font-size: 1.5rem;`,
+        })}
 `;
 
 export const Date = styled.div`

@@ -5,7 +5,7 @@ import { GridTheme } from './type';
 export const theme = {
     color: {
         backgroundPrimary: palette.white,
-        backgroundSecondary: '#0a0a0a',
+        backgroundSecondary: '#20232a',
         textPrimary: '#0a0a0a',
         textSecondary: palette.white,
         link: {

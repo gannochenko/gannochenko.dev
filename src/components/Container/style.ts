@@ -19,8 +19,9 @@ export const ContainerWide = styled.div<Props>`
 
 export const ContainerStandard = styled.div<Props>`
     margin: 0 auto;
-    max-width: 960px;
-    ${props => props.theme.util.media({ xs: 'width: 90%', sm: 'width: 70%' })};
+    width: 80%;
+    max-width: 1200px;
+    ${props => props.theme.util.media({ xs: 'width: 90%', sm: 'width: 90%' })};
     padding: 0 1rem;
     ${props => contentAlign(props)};
 `;
@@ -30,7 +31,7 @@ export const ContainerNarrow = styled.div<Props>`
     width: auto;
     max-width: 40%;
     ${props =>
-        props.theme.util.media({ xs: 'max-width: 90%', sm: 'max-width: 60%' })};
+        props.theme.util.media({ xs: 'max-width: 90%', sm: 'max-width: 90%' })};
     padding: 0 1rem;
     ${props => contentAlign(props)}
 `;
