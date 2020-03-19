@@ -4,6 +4,10 @@ import { Container } from '../Container';
 import { Link } from 'gatsby';
 
 export const BlogPostHeaderContainer = styled.div`
+    margin-bottom: 4rem;
+`;
+
+export const BlogPostHeaderContainerInner = styled.div`
     position: relative;
 `;
 
@@ -23,7 +27,8 @@ export const IntroBlock = styled.div`
 export const Title = styled.div`
     padding: 2rem 0;
     color: ${props => props.theme.color.textSecondary};
-    font-size: 2.5rem;
+    font-size: 2.4rem;
+    font-weight: 700;
     ${({ theme }) =>
         theme.util.media({
             sm: `font-size: 1.5rem;`,

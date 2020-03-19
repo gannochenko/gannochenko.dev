@@ -18,7 +18,7 @@ export const ContainerWide = styled.div<Props>`
 `;
 
 export const ContainerStandard = styled.div<Props>`
-    margin: 0 auto;
+    margin: ${props => props.marginY || '0'} auto;
     width: 80%;
     max-width: 1200px;
     ${props => props.theme.util.media({ xs: 'width: 90%', sm: 'width: 90%' })};
@@ -27,7 +27,7 @@ export const ContainerStandard = styled.div<Props>`
 `;
 
 export const ContainerNarrow = styled.div<Props>`
-    margin: 0 auto;
+    margin: ${props => props.marginY || '0'} auto;
     width: auto;
     max-width: 40%;
     ${props =>

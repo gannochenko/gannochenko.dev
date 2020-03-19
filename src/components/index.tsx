@@ -8,3 +8,4 @@ export * from './Link';
 export * from './BlogPostList';
 export * from './BlogPostHeader';
 export * from './Avatar';
+export * from './BlogPostPageContainer';

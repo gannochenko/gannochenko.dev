@@ -2,6 +2,7 @@ import React, { FunctionComponent, useMemo } from 'react';
 
 import {
     BlogPostHeaderContainer,
+    BlogPostHeaderContainerInner,
     Cover,
     IntroBlock,
     Title,
@@ -23,8 +24,8 @@ export const BlogPostHeader: FunctionComponent<Props> = ({ data }) => {
     const { title, date } = data.frontmatter;
 
     return (
-        <>
-            <BlogPostHeaderContainer>
+        <BlogPostHeaderContainer>
+            <BlogPostHeaderContainerInner>
                 <Cover sizes={headerImage.image.childImageSharp.fluid} />
                 <IntroBlock>
                     <Container>
@@ -37,12 +38,12 @@ export const BlogPostHeader: FunctionComponent<Props> = ({ data }) => {
                         </InfoStripeContainer>
                     </DateStripe>
                 </IntroBlock>
-            </BlogPostHeaderContainer>
+            </BlogPostHeaderContainerInner>
             <Copyright
                 author={headerImage.author}
                 source={headerImage.source}
                 sourceText={headerImage.sourceText}
             />
-        </>
+        </BlogPostHeaderContainer>
     );
 };
