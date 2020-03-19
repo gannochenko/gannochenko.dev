@@ -36,7 +36,7 @@ const expandVertically = css`
     overflow-y: hidden;
 `;
 export const Data = styled.div`
-    font-family: Raleway, sans-serif;
+    font-family: ${({ theme }) => theme.fontFamily.raleway};
     ${central()}
     ${align('center', 'center', 'column')}
     ${props =>
@@ -115,7 +115,7 @@ export const HelloRight = styled.div`
 `;
 
 export const NameBlock = withEffects(styled.div`
-    font-family: Raleway, sans-serif;
+    font-family: font-family: ${({ theme }) => theme.fontFamily.raleway};
     font-weight: 600;
     font-size: ${props => props.theme.font.large};
     letter-spacing: 0.05rem;

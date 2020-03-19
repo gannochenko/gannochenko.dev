@@ -20,7 +20,7 @@ export const GlobalStyle = createGlobalStyle<{ theme: typeof theme }>`
         margin: 0 !important;
         font-weight: 300;
         color: ${props => props.theme.color.textPrimary};
-        font-family: Roboto, sans-serif;
+        font-family: ${({ theme }) => theme.fontFamily.roboto};
         line-height: 1.4;
         letter-spacing: normal;
         min-width: 320px;

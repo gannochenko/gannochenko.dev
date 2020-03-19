@@ -27,6 +27,10 @@ export const theme = {
             lg: [1200, null],
         },
     },
+    fontFamily: {
+        roboto: 'Roboto, sans-serif',
+        raleway: 'Raleway, sans-serif',
+    },
     font: {
         large: '1.6rem',
         medium: '1.4rem',
