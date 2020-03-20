@@ -28,6 +28,7 @@
         "gatsby-transformer-sharp": "^2.1.14",
         "markdown-it": "^10.0.0",
         "netlify-cms-app": "^2.9.7",
+        "prism-react-renderer": "^1.0.2",
         "react": "^16.8.3",
         "react-dom": "^16.8.3",
         "react-helmet": "^5.2.0",
