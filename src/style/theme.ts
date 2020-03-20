@@ -9,10 +9,10 @@ export const theme = {
         textPrimary: '#0a0a0a',
         textSecondary: palette.white,
         link: {
-            normal: '#9e3333',
-            hover: '#842020',
+            normal: '#ce4f4f',
+            hover: '#ce7553',
             altNormal: palette.white,
-            altHover: palette.trueRed,
+            altHover: '#ce4f4f',
         },
     },
     palette: palette,
