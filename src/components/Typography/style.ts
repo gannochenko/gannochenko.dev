@@ -7,10 +7,10 @@ export const H1 = styled.h1`
 
 export const H2 = styled.h2`
     margin: 4rem 0 2rem 0;
-    font-size: ${({ theme }) => theme.font.medium};
+    font-size: 1.5rem;
 `;
 
 export const H3 = styled.h3`
-    margin: 4rem 0 2rem 0;
-    font-size: ${({ theme }) => theme.font.standard};
+    margin: 2rem 0 2rem 0;
+    font-size: 1.3rem;
 `;

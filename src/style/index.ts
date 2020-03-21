@@ -1,3 +1,3 @@
 export * from './global';
 export * from './theme';
-export * from './layout-components';
+export * from './blog-layout-components';

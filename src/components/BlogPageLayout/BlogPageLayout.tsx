@@ -4,6 +4,8 @@ import { MDXRenderer } from 'gatsby-plugin-mdx';
 
 import { Props } from './type';
 import { LayoutInner } from '../LayoutInner';
+import { BlogPostPageContainer } from '../BlogPostPageContainer';
+import { BlogPostHeader } from '../BlogPostHeader';
 
 export const BlogPageLayout: FunctionComponent<Props> = ({
     data: { mdx },
@@ -23,7 +25,10 @@ export const BlogPageLayout: FunctionComponent<Props> = ({
             location={location}
             showTitle={false}
         >
-            <MDXRenderer pageContext={pageContext}>{mdx.body}</MDXRenderer>
+            <BlogPostHeader data={pageContext} />
+            <BlogPostPageContainer>
+                <MDXRenderer pageContext={pageContext}>{mdx.body}</MDXRenderer>
+            </BlogPostPageContainer>
         </LayoutInner>
     );
 };

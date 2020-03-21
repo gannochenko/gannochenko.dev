@@ -13,16 +13,7 @@ images:
       galleryId: 0
 ---
 
-import {
-    Avatar,
-    BlogPostHeader,
-    Container,
-    CodeContainer,
-    BlogPostPageContainer,
-} from '../../src/components';
-
-<BlogPostPageContainer>
-<BlogPostHeader data={props.pageContext} />
+import { Container } from '../../src/components';
 
 Personally, I am extremely fascinated with a container-based approach. I try to ship every application as a Docker container because in this case, the application becomes an infrastructure provider agnostic. So this time we will see how to deploy a dockerized application to Heroku — a famous cloud platform.
 
@@ -167,5 +158,3 @@ Useful links:
 -   https://devcenter.heroku.com/articles/heroku-cli-commands
 
 Happy containering!
-
-</BlogPostPageContainer>

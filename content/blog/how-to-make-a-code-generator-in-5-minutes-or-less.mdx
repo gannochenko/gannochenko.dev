@@ -13,8 +13,197 @@ images:
       galleryId: 0
 ---
 
-import { Avatar, BlogPostHeader } from '../../src/components';
+Hey, fellas:) Today we talk about how we can benefit from code generation.
 
-<BlogPostHeader data={props.pageContext} />
+## Why
 
-![my image](/assets/single.jpg)
+### Allows re-using best practices
+
+Every software engineer and every company at some point tries to preserve the knowledge of best practices and know-how-s, in order to prevent making the same mistakes or extra work over and over again.
+
+I was thinking about this problem as well, so during my career, I have tried:
+
+-   writing knowledge base articles,
+-   saving snippets of code somewhere (files on a cloud drive, bash aliases or live templates in my favorite IDE),
+-   heavily abusing object-oriented paradigm in order to make abstract classes that I could eventually publish as a module, then include them into the application and extend for particular needs,
+-   making skeleton applications.
+
+None of these really worked out.
+
+### Code bootstrapping leads to a productivity boost
+
+When using a generator we can really concentrate on what matters, we don’t waste time coding pure auxiliary code. We also reduce our chances to make a typo and then dance around the problem for quite a while.
+
+By the way, if we take any more or less mature framework, we may notice that they usually already have a scaffolding tool on-board, which really helps to dive into the process faster.
+
+### How
+
+There are lots of tools that allow us to create code generators. This time we will talk about Generilla — a simple code generation tool.
+
+## Step 0. Prerequisites
+
+Generilla is written in Node, so the following things should be pre-installed before we begin:
+
+-   Node
+-   NPM or Yarn
+
+## Step 1. Installation
+
+To install the tool globally, just type:
+
+```bash
+yarn global add @generilla/cli
+```
+
+If we don’t want to make it available for every user of this machine, but still globally for us, we can do the following:
+
+```bash
+mkdir ~/.node
+yarn global add @generilla/cli --prefix ~/.node
+export PATH=${PATH}:${HOME}/.node/bin
+```
+
+## Step 2. Scaffolding
+
+Go to the folder where we keep our projects and create a generator:
+
+```bash
+generilla scaffold
+```
+
+Let’s give it a name `react-component`, hit Enter and go to the `react-component/` folder when the generator finishes its work.
+
+There is a folder called `template/`. Everything inside gets processed by a template engine and copied into the output folder. Remove the `[package_name_kebab]/` folder (because it is a demo template) and create a new one instead, called `[component_name_pascal]/`.
+
+## Step 3. Template files
+
+In the `template/[component_name_pascal]/` folder we create files that later will be transformed into the component code.
+
+The most valuable is a module that exports the component function, called `[component_name_pascal].tsx`:
+
+```typescript jsx
+import React, { FunctionComponent } from 'react';
+
+import {
+    <%- component_name_pascal %>Container,
+} from './style';
+
+import { Props } from './type';
+
+export const <%- component_name_pascal %>: FunctionComponent<Props> = ({
+    children,
+}) => {
+    return (
+        <<%- component_name_pascal %>Container>
+            {children}
+        </<%- component_name_pascal %>Container>
+    );
+};
+```
+
+✅ In the template files it is allowed to use EJS template syntax, so, for example, `Hello, <%- component_name %>` will be translated into `Hello, Button`.
+
+CSS file `[component_name_pascal]/style.ts`
+
+```typescript jsx
+import styled from 'styled-components';
+
+export const <%- component_name_pascal %>Container = styled.div`
+    // style
+`;
+```
+
+✅ We can add placeholders into file names by using square brackets, like this: `[component_name].tsx` Any symbol except `[a-zA-Z0-9_-\.]` will be omitted in the value that goes instead of the placeholder.
+
+TS type file `[component_name_pascal]/type.ts`
+
+```typescript jsx
+import { ReactNode } from 'react';
+
+export interface Props {
+    children?: ReactNode;
+}
+```
+
+Every complex component should have tests, that is why we enable tests, by creating <nobr>`[?use_tests]_test_/[component_name_pascal].test.ts`</nobr> file as well.
+
+```typescript jsx
+import React from 'react';
+import { cleanup, render } from '@testing-library/react';
+
+import { <%- component_name_pascal %> } from '../<%- component_name_pascal %>';
+
+describe('<<%- component_name_pascal %> />', () => {
+    afterEach(async () => {
+        cleanup();
+    });
+
+    it('should render itself without errors', async () => {
+        const { container, getByTestId } = render(
+            <<%- component_name_pascal %> />,
+        );
+
+        // write more of tests here
+    });
+});
+```
+
+✅ It is possible to conditionally omit certain files or sub-folders by adding the `[condition]` prefix to a name. For example, a folder `[?use_test][component_name_pascal]/` will be processed and copied only if use_tests gets evaluated to `true`.
+
+Just to be cool we can have an index file `[component_name_pascal]/index.ts`.
+
+```typescript jsx
+export * from './<%- component_name_pascal %>';
+```
+
+## Step 4. Generator pipeline
+
+Right next to the `template/` folder there is a file named `index.js`. This file declares the pipeline of a generator. Let’s remove everything there and make it from scratch.
+
+So, we need to ask a user to provide a value of `component_name` . There is a method to do that — `getQuestions()` . It returns a structure of questions to be asked. We also need to know component_name_pascal , so we convert component_name to pascal afterward.
+
+```typescript jsx
+module.exports.Generator = class Generator {
+    getName() {
+        return 'React Component: TypeScript + testing';
+    }
+
+    getQuestions() {
+        return [
+            {
+                message: 'What is the component name?',
+                name: 'component_name',
+            },
+            {
+                message: 'Add tests?',
+                type: 'confirm',
+                name: 'use_tests',
+                default: true,
+            },
+        ];
+    }
+
+    refineAnswers(answers) {
+        if (this.util.textConverter) {
+            answers.component_name_pascal = this.util.textConverter.toPascal(
+                answers.component_name,
+            );
+            answers.component_name = this.util.textConverter.toKebab(
+                answers.component_name,
+            );
+        }
+
+        return answers;
+    }
+};
+```
+
+The format of this structure comes from [Inquirer](https://www.npmjs.com/package/inquirer). Check out [the readme file of Generilla](https://github.com/gannochenko/generilla#generator-lifecycle) to get more information.
+
+## Step 5. Let’s run it!
+
+It is time to test the thing out. Just run `generilla` without any parameters and select the generator we just created. Awesome. Now we have our react component in the current folder, ready to be used.
+
+Generilla allows creating quite complex generators for your needs. If you have any questions check out [the documentation](https://github.com/gannochenko/generilla) to find out more.
+
+If you liked Generilla, feel free to [give some stars to the project at GitHub](https://github.com/gannochenko/generilla)!

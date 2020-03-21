@@ -9,7 +9,7 @@ import { Typography } from '../components/Typography';
 
 const margins = { marginTop: '2rem', marginBottom: '2rem' };
 
-export const LayoutComponents = {
+export const BlogLayoutComponents = {
     a: styled.a`
         ${props =>
             fgColor(
