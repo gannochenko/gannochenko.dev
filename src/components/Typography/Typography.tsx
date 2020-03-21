@@ -4,18 +4,17 @@ import { Props } from './type';
 import { H1, H2, H3 } from './style';
 
 export const Typography: FunctionComponent<Props> = ({
-    children,
     sub,
     subSub,
-    className,
+    ...restProps
 }) => {
     if (sub) {
-        return <H2 className={className}>{children}</H2>;
+        return <H2 {...restProps} />;
     }
 
     if (subSub) {
-        return <H3 className={className}>{children}</H3>;
+        return <H3 {...restProps} />;
     }
 
-    return <H1 className={className}>{children}</H1>;
+    return <H1 {...restProps} />;
 };

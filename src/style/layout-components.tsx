@@ -5,6 +5,7 @@ import Highlight, { defaultProps } from 'prism-react-renderer';
 import { theme } from './prism-theme';
 import { Container } from '../components/Container';
 import { CodeContainer } from '../components/CodeContainer';
+import { Typography } from '../components/Typography';
 
 const margins = { marginTop: '2rem', marginBottom: '2rem' };
 
@@ -24,12 +25,12 @@ export const LayoutComponents = {
     ),
     h2: (props: any) => (
         <Container>
-            <h2 {...props} />
+            <Typography sub {...props} />
         </Container>
     ),
     h3: (props: any) => (
         <Container>
-            <h3 {...props} />
+            <Typography subSub {...props} />
         </Container>
     ),
     ul: (props: any) => (
