@@ -21,8 +21,9 @@ export const ContainerStandard = styled.div<Props>`
     margin: ${props => props.marginY || '0'} auto;
     width: 80%;
     max-width: 1200px;
-    ${props => props.theme.util.media({ xs: 'width: 90%', sm: 'width: 90%' })};
-    padding: 0 1rem;
+    ${props =>
+        props.theme.util.media({ xs: 'width: 100%', sm: 'width: 100%' })};
+    padding: 0 1.5rem;
     ${props => contentAlign(props)};
 `;
 

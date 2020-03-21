@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { fgColor } from '@bucket-of-bolts/styled-companion';
 import Highlight, { defaultProps } from 'prism-react-renderer';
 import { theme } from './prism-theme';
+import { Container } from '../components/Container';
 
 export const LayoutComponents = {
     a: styled.a`
@@ -14,7 +15,9 @@ export const LayoutComponents = {
             )}
     `,
     p: (props: any) => (
-        <p {...props} style={{ marginTop: '2rem', marginBottom: '2rem' }} />
+        <Container>
+            <p {...props} style={{ marginTop: '2rem', marginBottom: '2rem' }} />
+        </Container>
     ),
     pre: (props: any) => {
         const className = props.children.props.className || '';
