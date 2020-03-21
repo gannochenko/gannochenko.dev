@@ -24,7 +24,11 @@ import {
 <BlogPostPageContainer>
 <BlogPostHeader data={props.pageContext} />
 
-<CodeContainer>
+Personally, I am extremely fascinated with a container-based approach. I try to ship every application as a Docker container because in this case, the application becomes an infrastructure provider agnostic. So this time we will see how to deploy a dockerized application to Heroku — a famous cloud platform.
+
+## Step 1: The Code
+
+My application’s code is as simple as 5 cents:
 
 ```js
 const express = require('express');
@@ -42,14 +46,126 @@ app.listen({ port }, () => {
 });
 ```
 
-</CodeContainer>
+It is written in NodeJS, but it really does not matter, it could be anything else.
 
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+⚡ The first important thing: internally Heroku chooses a random port to hang the container on, so your application should look at **PORT** environment variable.
 
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+Let's create a Dockerfile and put it next to the application:
 
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+```dockerfile
+FROM node:11
+RUN apt-get update && apt-get install -y --no-install-recommends vim && apt-get clean
 
-![my image](/assets/single.jpg)
+WORKDIR /app
+
+COPY . .
+RUN yarn
+
+ENV NODE_ENV=production
+
+CMD [ "yarn", "start" ]
+```
+
+Just FYI, _package.json_ looks like this:
+
+```json
+{
+    "name": "poc_docker-heroku",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "UNLICENSED",
+    "dependencies": {
+        "express": "^4.17.1"
+    }
+}
+```
+
+## Step 2: Authentication
+
+From this moment on I assume that we have already signed up at heroku.com and created our application. Let's say, it will be my-first-unique-app (if this particular name was already taken, pick the other one). Heroku platform offers a really generous free plan which is more than enough not only for experimenting but for building an actual application that may go live.
+
+We are going to need for **Heroku CLI tool**. The easiest way to get it (from my perspective) is to install it with _curl_:
+
+```bash
+curl https://cli-assets.heroku.com/install.sh | sh;
+```
+
+Next thing: authenticate through the CLI tool in the interactive mode, using email and password you created while signing up at heroku.com:
+
+```bash
+heroku login -i
+```
+
+This command will create a record in your ~/.netrc file.
+
+There are two ways of how to proceed further. Originally, Heroku was made with the idea of strong bonding between itself and GitHub, so they offer to build a Docker image on their side after we commit to the GitHub repository. Alternatively, we can build an image on our side and then just push it to their own Docker image repository.
+
+From my point of view, the second option gives more flexibility, so we will proceed this way.
+
+## Step 3: Deployment
+
+Officially, we are supposed to run the following commands in order to build an image, and then push it to Heroku's own docker repository:
+
+```bash
+heroku container:login;
+heroku container:push web -a my-first-unique-app --context-path=./;
+```
+
+But, there are limitations (so far):
+
+-   the second command should be executed in the same folder where Dockefile is located,
+-   the file should be named as Dockerfile or Dockerfile.web, which is not cool in some situations.
+
+If we run the second command with a `-v` flag, we won't fail to notice, that this one is basically an alias for a sequence of docker commands. So, why don't we exploit an advantage of using flexible Docker CLI tool itself?
+
+First of all, we authenticate on Heroku's own repository with this superposition of commands:
+
+```bash
+docker login --username=_ --password=`heroku auth:token 2> /dev/null` registry.heroku.com
+```
+
+The `heroku auth:token` command returns the current token we got with `heroku login` . Username `_` should stay like this (weird, but true).
+Now, we build an image:
+
+```bash
+docker build -t registry.heroku.com/my-first-unique-app/web -f ./Dockerfile .
+```
+
+Here we are free to choose the Dockerfile to build from, as well as the build context and other options. The tag name should stay like this, there is no need to change it. The web code indicates that this particular container should be automatically exposed to the outer world through a technical domain.
+Hopefully, if the image is built with no errors, we can push it:
+
+```bash
+docker push registry.heroku.com/my-first-unique-app/web
+```
+
+As soon as the image is there, we can finally put it live by calling
+
+```bash
+heroku container:release web -a my-first-unique-app
+```
+
+Let's give it some time to spin up and go have a coffee break. When we are back, visit https://my-first-unique-app.herokuapp.com/
+
+Hopefully, we should see "Hello" message :)
+
+Well, that is basically it. If something goes wrong, it is possible to view logs by typing
+
+```bash
+heroku logs --tail -a my-first-unique-app
+```
+
+As usual, here is a [proof-of-concept repository](https://github.com/gannochenko/poc_docker-heroku) at your service. Enjoy!
+
+Useful links:
+
+-   https://devcenter.heroku.com/articles/heroku-cli-commands
+
+Happy containering!
 
 </BlogPostPageContainer>

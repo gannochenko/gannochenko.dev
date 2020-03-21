@@ -4,6 +4,9 @@ import { fgColor } from '@bucket-of-bolts/styled-companion';
 import Highlight, { defaultProps } from 'prism-react-renderer';
 import { theme } from './prism-theme';
 import { Container } from '../components/Container';
+import { CodeContainer } from '../components/CodeContainer';
+
+const margins = { marginTop: '2rem', marginBottom: '2rem' };
 
 export const LayoutComponents = {
     a: styled.a`
@@ -16,7 +19,22 @@ export const LayoutComponents = {
     `,
     p: (props: any) => (
         <Container>
-            <p {...props} style={{ marginTop: '2rem', marginBottom: '2rem' }} />
+            <p {...props} style={margins} />
+        </Container>
+    ),
+    h2: (props: any) => (
+        <Container>
+            <h2 {...props} />
+        </Container>
+    ),
+    h3: (props: any) => (
+        <Container>
+            <h3 {...props} />
+        </Container>
+    ),
+    ul: (props: any) => (
+        <Container>
+            <ul {...props} />
         </Container>
     ),
     pre: (props: any) => {
@@ -25,30 +43,37 @@ export const LayoutComponents = {
         const { groups: { lang = 'js' } = {} } = matches || {};
 
         return (
-            <Highlight
-                {...defaultProps}
-                theme={theme}
-                code={props.children.props.children}
-                language={lang}
-            >
-                {({
-                    className,
-                    style,
-                    tokens,
-                    getLineProps,
-                    getTokenProps,
-                }) => (
-                    <pre className={`${className} line-numbers`} style={style}>
-                        {tokens.map((line, i) => (
-                            <div {...getLineProps({ line, key: i })}>
-                                {line.map((token, key) => (
-                                    <span {...getTokenProps({ token, key })} />
-                                ))}
-                            </div>
-                        ))}
-                    </pre>
-                )}
-            </Highlight>
+            <CodeContainer>
+                <Highlight
+                    {...defaultProps}
+                    theme={theme}
+                    code={props.children.props.children}
+                    language={lang}
+                >
+                    {({
+                        className,
+                        style,
+                        tokens,
+                        getLineProps,
+                        getTokenProps,
+                    }) => (
+                        <pre
+                            className={`${className} line-numbers`}
+                            style={style}
+                        >
+                            {tokens.map((line, i) => (
+                                <div {...getLineProps({ line, key: i })}>
+                                    {line.map((token, key) => (
+                                        <span
+                                            {...getTokenProps({ token, key })}
+                                        />
+                                    ))}
+                                </div>
+                            ))}
+                        </pre>
+                    )}
+                </Highlight>
+            </CodeContainer>
         );
     },
 };

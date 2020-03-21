@@ -91,7 +91,6 @@ export const GlobalStyle = createGlobalStyle<{ theme: typeof theme }>`
     kbd,
     samp {
       font-family: monospace, monospace;
-      font-size: 1rem;
     }
     
     small {

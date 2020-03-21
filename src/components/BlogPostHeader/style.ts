@@ -4,7 +4,7 @@ import { Container } from '../Container';
 import { Link } from 'gatsby';
 
 export const BlogPostHeaderContainer = styled.div`
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
 `;
 
 export const BlogPostHeaderContainerInner = styled.div`
@@ -24,8 +24,9 @@ export const IntroBlock = styled.div`
     background-color: rgba(0, 0, 0, 0.7);
 `;
 
-export const Title = styled.div`
+export const Title = styled.h1`
     padding: 2rem 0;
+    margin: 0;
     color: ${props => props.theme.color.textSecondary};
     font-size: 2.4rem;
     font-weight: 700;
