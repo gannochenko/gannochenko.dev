@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Img from 'gatsby-image';
-import { Container } from '../Container';
+import { Container } from '../../../Container';
 import { Link } from 'gatsby';
 
 export const BlogPostHeaderContainer = styled.div`

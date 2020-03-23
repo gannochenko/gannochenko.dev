@@ -12,9 +12,9 @@ import {
     BlackLink,
 } from './style';
 import { Props } from './type';
-import { Container } from '../Container';
-import { Copyright } from '../Copyright';
-import { formatDate } from '../../lib/util';
+import { Container } from '../../../Container';
+import { Copyright } from '../../../Copyright';
+import { formatDate } from '../../../../lib/util';
 
 export const BlogPostHeader: FunctionComponent<Props> = ({ data }) => {
     const headerImage = useMemo(() => {

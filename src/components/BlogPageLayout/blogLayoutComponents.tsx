@@ -2,14 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 import { fgColor } from '@bucket-of-bolts/styled-companion';
 import Highlight, { defaultProps } from 'prism-react-renderer';
-import { theme } from './prism-theme';
-import { Container } from '../components/Container';
-import { CodeContainer } from '../components/CodeContainer';
-import { Typography } from '../components/Typography';
+import { listingTheme } from './prism-theme';
+import { Container } from '../Container';
+import { CodeContainer } from './components/CodeContainer';
+import { Typography } from '../Typography';
 
 const margins = { marginTop: '2rem', marginBottom: '2rem' };
 
-export const BlogLayoutComponents = {
+export const blogLayoutComponents = {
     a: styled.a`
         ${props =>
             fgColor(
@@ -47,7 +47,7 @@ export const BlogLayoutComponents = {
             <CodeContainer>
                 <Highlight
                     {...defaultProps}
-                    theme={theme}
+                    theme={listingTheme}
                     code={props.children.props.children}
                     language={lang}
                 >

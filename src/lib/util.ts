@@ -5,10 +5,7 @@ export const formatDate = (date: string | null) => {
 
     const dateInstance = new Date(date);
 
-    const month = dateInstance
-        .getMonth()
-        .toString()
-        .padStart(2, '0');
+    const month = (dateInstance.getMonth() + 1).toString().padStart(2, '0');
     const day = dateInstance
         .getDate()
         .toString()

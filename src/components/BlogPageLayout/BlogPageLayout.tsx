@@ -4,8 +4,8 @@ import { MDXRenderer } from 'gatsby-plugin-mdx';
 
 import { Props } from './type';
 import { LayoutInner } from '../LayoutInner';
-import { BlogPostPageContainer } from '../BlogPostPageContainer';
-import { BlogPostHeader } from '../BlogPostHeader';
+import { BlogPostPageContainer } from './components/BlogPostPageContainer';
+import { BlogPostHeader } from './components/BlogPostHeader';
 
 export const BlogPageLayout: FunctionComponent<Props> = ({
     data: { mdx },
