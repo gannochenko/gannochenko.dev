@@ -38,6 +38,11 @@ export const blogLayoutComponents = {
             <ul {...props} />
         </Container>
     ),
+    ol: (props: any) => (
+        <Container>
+            <ol {...props} />
+        </Container>
+    ),
     pre: (props: any) => {
         const className = props.children.props.className || '';
         const matches = className.match(/language-(?<lang>.*)/);
