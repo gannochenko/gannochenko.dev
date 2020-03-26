@@ -13,4 +13,441 @@ images:
       galleryId: 0
 ---
 
-![my image](/assets/single.jpg)
+React 16.7.0 is finally out. It has no hooks on-board, but sooner or later, React Hooks will be there. So today we will have a talk so we’re ready to use it right away when it is time 👀
+
+Sometimes when you write your pure function component, you realize that at some moment you need to have a sort of flag there, which indicates that a modal is open, counter increased or… whatever. And then your second thought is: “oh man, now I need to migrate to React.Component”. Well, with hooks — not anymo-o-ore!
+
+I’ll assume you have Node of the following versions installed: 6.14.0, 8.10.0 or greater than 9.10. If not, you can always use the Node version manager to fix that. Keep in mind though, that we will have to install all global packages in case we switch the Node version.
+
+This article requires that you have at least a basic knowledge of React, including `“component”` and `“pure function”` concepts, `“state”` and `“component lifecycle”`. But even if you don’t, no worries, you will catch up during the process, it will be fun!
+
+## Step 1: The Boilerplate
+
+Open your terminal, as we are going to use a super-famous code generator for React applications, called `create-react-app`:
+
+```bash
+npm install create-react-app -g;
+create-react-app react-hooks;
+```
+
+Now, we are able to see a folder called `./react-hooks`, so we go there and consider this to be a root of our application.
+
+In order to actually enable hooks, we need to go to a list of versions of React at [npmjs.com](https://www.npmjs.com/package/react). By the time this article was written, the latest version with hooks enabled was [16.7.0-alpha.2](https://www.npmjs.com/package/react/v/16.7.0-alpha.2), so let’s install this. We also need to install a pair package called react-dom of exactly the same version.
+
+So,
+
+```bash
+npm install react@16.7.0-alpha.2 --save
+npm install react-dom@16.7.0-alpha.2 axios --save
+```
+
+Don’t forget to start the application:
+
+```bash
+npm start
+```
+
+## Step 2: useState()
+
+Let’s find the `./src/App.js` file and re-write it like this:
+
+```js
+import React, { useState } from 'react';
+import './App.css';
+
+const App = () => {
+    console.dir('Render!');
+    const [counter, setCounter] = useState(0);
+
+    return (
+        <div className="App">
+            <header className="App-header">
+                The button is pressed: {counter} times.
+                <button
+                    onClick={() => setCounter(counter + 1)}
+                    style={{ padding: '1rem 2rem' }}
+                >
+                    Click me!
+                </button>
+            </header>
+        </div>
+    );
+};
+
+export default App;
+```
+
+And this is the first kind of hooks we can use: a state hook created with `useState()`. Basically, `useState()` accepts the initial value of some value and returns an array, where the first element is a variable with the initial value, and the second one is a function which allows us to change the variable. After we call `setCounter()`, the component gets re-rendered with an updated value of the counter.
+
+The equivalent code without hooks would be:
+
+```js
+import React, { Component } from 'react';
+import './App.css';
+
+class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { counter: 0 };
+    }
+
+    render() {
+        const { counter } = this.state;
+        console.dir('Render!');
+        return (
+            <div className="App">
+                <header className="App-header">
+                    The button is pressed: {counter} times.
+                    <button
+                        onClick={() =>
+                            this.setState({
+                                counter: counter + 1,
+                            })
+                        }
+                        style={{ padding: '1rem 2rem' }}
+                    >
+                        Click me!
+                    </button>
+                </header>
+            </div>
+        );
+    }
+}
+
+export default App;
+```
+
+But with hooks, the code is way cleaner, and it does not even rely on object-oriented programming and `this` statements, which sometimes can be really cryptic to use for non-experienced JavaScript developers.
+
+The state could be a complex object, no problem:
+
+```js
+import React, { useState } from 'react';
+import './App.css';
+
+const App = () => {
+    console.dir('Render!');
+    const [heroCounter, setHeroCounter] = useState({ batman: 0, joker: 0 });
+
+    return (
+        <div className="App">
+            <header className="App-header">
+                Batman: {heroCounter.batman} vs Joker: {heroCounter.joker}
+                <button
+                    onClick={() =>
+                        setHeroCounter({
+                            ...heroCounter,
+                            batman: heroCounter.batman + 1,
+                        })
+                    }
+                    style={{ padding: '1rem 2rem' }}
+                >
+                    One for Batman!
+                </button>
+                <button
+                    onClick={() =>
+                        setHeroCounter({
+                            ...heroCounter,
+                            joker: heroCounter.joker + 1,
+                        })
+                    }
+                    style={{ padding: '1rem 2rem' }}
+                >
+                    One for Joker!
+                </button>
+            </header>
+        </div>
+    );
+};
+
+export default App;
+```
+
+But according to the philosophy of hooks, it is better to define two state values instead:
+
+```js
+import React, { useState, useEffect } from 'react';
+import './App.css';
+
+const SubComponent = () => {
+    console.dir('SubComponent render!');
+
+    const [forBatman, setForBatman] = useState(0);
+    const [forJoker, setForJoker] = useState(0);
+    useEffect(() => {
+        let title = 'Who will prevail?';
+        if (forBatman > forJoker) {
+            title = 'Good is winning';
+        } else if (forJoker > forBatman) {
+            title = 'Evil is upon us!';
+        }
+        document.title = title;
+
+        console.dir('Effect called!');
+    });
+
+    return (
+        <React.Fragment>
+            Batman: {forBatman} vs Joker: {forJoker}
+            <button
+                onClick={() => setForBatman(forBatman + 1)}
+                style={{ padding: '1rem 2rem' }}
+            >
+                One for Batman!
+            </button>
+            <button
+                onClick={() => setForJoker(forJoker + 1)}
+                style={{ padding: '1rem 2rem' }}
+            >
+                One for Joker!
+            </button>
+        </React.Fragment>
+    );
+};
+
+const App = () => {
+    console.dir('App render!');
+
+    const [appCounter, setAppCounter] = useState(0);
+    return (
+        <div className="App">
+            <header className="App-header">
+                {appCounter < 5 && <SubComponent />}
+                <br />
+                Application counter: {appCounter}
+                <button
+                    onClick={() => setAppCounter(appCounter + 1)}
+                    style={{ padding: '1rem 2rem' }}
+                >
+                    One for application
+                </button>
+            </header>
+        </div>
+    );
+};
+
+export default App;
+```
+
+This makes your code really easy to understand.
+
+## Step 3: useEffect()
+
+In the react world, a `side effect` is an action that is usually executed on the `componentDidMount()`, `componentDidUpdate()` and `componentWillUnmount()` lifecycle methods of `React.Component`. But what if we still would like to have a side effect, but with a pure function? Sure thing! Consider the code:
+
+```js
+useEffect(() => {
+    // ...
+
+    console.dir('Effect called!');
+});
+```
+
+The function inside `useEffect()` is called on the first render and all consequent renders, which does not really make any difference between this and if we just put the code inside the component function directly.
+
+But, wait. That is not all!
+
+We could do some optimizations by telling `useEffect()` to run only when certain values have changed. Consider this:
+
+```js
+useEffect(() => {
+    // ...
+
+    console.dir('Effect called!');
+}, [forBatman, forJoker]);
+```
+
+So, useEffect() will memoize [forBatman, forJoker] value and will only re-run the effect if something changed in these arguments.
+
+Let’s look at the typical use cases.
+
+### Case A: execute code on un-mount
+
+What if we want to catch a moment when the component gets unmounted? All we have to do is to return a function like this:
+
+```js
+useEffect(() => {
+    // ...
+
+    console.dir('Effect called!');
+
+    return () => {
+        console.dir('SubComponent unmounted');
+        document.title = 'The fight is over';
+    };
+}, [forBatman, forJoker]);
+```
+
+`“SubComponent unmounted”` will appear in the console as soon as you click the “One for application” button 5 times.
+
+### Case B: run only on mount and on unmount
+
+```js
+useEffect(() => {
+    // ...
+
+    console.dir('Called only on mount');
+
+    return () => {
+        console.dir('Called only on unmount');
+    };
+}, []);
+```
+
+What we could also do is to force an effect to run only on-mount and on-unmount, by passing an empty array as a dependency:
+
+It works because `[]` stays the same during all the time the component is there until it gets unmounted, no matter what.
+
+### Case C: load data asynchronously on mount and on update
+
+The last use-case I would like to demonstrate is how to do an asynchronous effect with some data load. Just to be clear, I don’t think that having logic for rendering data and logic for loading data in one place is actually a good idea. The main principle of single responsibility tells us there should be a pure dumb rendering logic and pure rich business logic, that is why I strongly encourage you to try `Redux + Saga`. But I guess this is a nice topic for some other time.
+
+There are two important moments to notice:
+
+-   we can not use `useEffect(async () => {})`, asynchronous effects are not supported (yet), but we are still able to use promises there, and
+-   we don’t want this code to run on every render, so we need to define a second argument for useEffect() in the right way. We always ask ourselves: “What needs to be changed in order to re-run the effect?”. The good answer is `“characterId”`.
+
+```js
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import './App.css';
+
+const SubComponent = ({ characterId }) => {
+    console.dir('SubComponent render!');
+
+    const [character, setCharacter] = useState(null);
+    useEffect(() => {
+        console.dir('Effect started');
+        axios.get(`https://swapi.co/api/people/${characterId}/`).then(res => {
+            setCharacter(res.data);
+        });
+    }, [characterId]);
+
+    return (
+        <React.Fragment>Hello, {!!character && character.name}</React.Fragment>
+    );
+};
+
+const App = () => {
+    console.dir('App render!');
+
+    const [characterId, setCharacterId] = useState(1);
+    return (
+        <div className="App">
+            <header className="App-header">
+                <SubComponent characterId={characterId} />
+                <br />
+                {[1, 2, 3, 4, 5].map(i => (
+                    <button
+                        key={i}
+                        onClick={() => setCharacterId(i)}
+                        style={{ padding: '1rem 2rem' }}
+                    >
+                        {i}
+                    </button>
+                ))}
+            </header>
+        </div>
+    );
+};
+
+export default App;
+```
+
+## Step 4: useRef() & useMemo()
+
+If we open the source code of React, we could see some other hooks available. Among them is `useRef()`. We could use it in combination with `useEffect()` to do some stuff. Consider the code:
+
+```js
+import React, { useEffect, useRef } from 'react';
+import './App.css';
+
+const App = () => {
+    console.dir('App render!');
+
+    const ref = useRef();
+    useEffect(() => {
+        ref.current.focus();
+        ref.current.value = 'Who is there?';
+    }, [ref]);
+
+    return (
+        <div className="App">
+            <header className="App-header">
+                <input type="text" ref={ref} />
+            </header>
+        </div>
+    );
+};
+
+export default App;
+```
+
+What it does is just sets the value of an input field and then calls focus() as soon as the component is mounted.
+
+Another nice one is `useMemo()`. It basically allows us to memoize some value during the process of rendering.
+
+```js
+import React, { useMemo, useState } from 'react';
+import './App.css';
+
+const App = () => {
+    console.dir('App render!');
+
+    const [appCounter, setAppCounter] = useState(0);
+    const [randomValueNumber, setRandomValueNumber] = useState(0);
+
+    const randomValue = useMemo(() => {
+        console.dir('Calculate new value');
+        return Math.round(Math.random() * 1000);
+    }, [randomValueNumber]);
+
+    return (
+        <div className="App">
+            <header className="App-header">
+                Application counter: {appCounter}, random value: {randomValue}
+                <button
+                    onClick={() => setAppCounter(appCounter + 1)}
+                    style={{ padding: '1rem 2rem' }}
+                >
+                    Increase counter
+                </button>
+                <button
+                    onClick={() => setRandomValueNumber(randomValueNumber + 1)}
+                    style={{ padding: '1rem 2rem' }}
+                >
+                    Get new random value
+                </button>
+            </header>
+        </div>
+    );
+};
+
+export default App;
+```
+
+Why do so? Well in case we need to calculate something reasonably heavy (heavy when rendering, huh?), or make some remote call, but only when some certain values change, we might make use of `useMemo()` thingy. It is still not as powerful as traditional ways of memoization, as it can only be used when rendering, but still…
+
+## Step 5: Under the hood
+
+You may wonder, how does this functionality even work? I mean, components are just pure functions, how do variables preserve their scalar values between function calls? Well, for example, `useState()` returns an array, from which we use the first argument as a scalar. But this array can be memoized inside React, so next time the rendering engine is here, it already knows which values to put into those scalars.
+
+## Step 6: Don't-s
+
+-   First of all, hooks are still in alpha stage, the API may be changed in future, so use it in production on your own risk.
+-   You can not use hooks outside a component function, it is simply how they work. But, you can make [a composition of hooks](https://medium.com/r/?url=https%3A%2F%2Freactjs.org%2Fdocs%2Fhooks-custom.html).
+-   React relies on an **amount** and **order** of how hooks appear in the component function. So **don’t even think** of wrapping those calls with conditional logic of some sort. Instead, you may put your if-s inside a hook body.
+-   At the present moment, hooks do not work for server-side rendering. I hope this to be fixed in the final release.
+
+## Conclusion
+
+Even though hooks are not available officially, they are definitely going to make our life easier, and the code way cleaner. And it is always important to have understandable code, especially when working with React.
+
+Thanks for reading!
+
+## Extras
+
+-   here is [the Proof-of-concept repository](https://medium.com/r/?url=https%3A%2F%2Fgithub.com%2Fawesome1888%2Fpoc_react-hooks) made for the article
+-   consider reading an [official Hooks reference](https://medium.com/r/?url=https%3A%2F%2Freactjs.org%2Fdocs%2Fhooks-reference.html) by Facebook
+
+Happy Reacting!
