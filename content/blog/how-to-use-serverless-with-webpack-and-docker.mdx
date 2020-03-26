@@ -13,4 +13,278 @@ images:
       galleryId: 0
 ---
 
-![my image](/assets/single.jpg)
+I am sure many of us know about `Serverless`. For those, who are not familiar: `Serverless` is a system architecture concept which allows us to put our backend code into the cloud. We use `Serverless` to focus on writing actual business-level code, while the cloud takes care of all technical problems: scalability, provisioning, maintenance, accessibility. That is why it is called “serverless”.
+
+When dealing with `Serverless`, we write a so-called `lambda function` — a small (or not that small sometimes) piece of code which is executed in the cloud. Serverless supports different clouds (providers): AWS, Google Cloud Platform, Microsoft Azure, Kubernetes. We will be using AWS. Lambda functions can be written in various languages (it really depends on what the particular provider supports), but today it will be JavaScript.
+
+Done with theory.
+
+## Step 1: Install everything we need
+
+I assume we at least have node and npm installed :) Now, initialize the project
+
+```bash
+mkdir serverless-app;
+cd serverless-app;
+npm init -y;
+```
+
+The key packages that will help us with the task:
+
+-   `serverless` — a framework for creation of serverless applications
+-   `serverless-offline` — a plugin for serverless framework that emulates the environment in order to spin up the application locally
+-   `webpack` — for transforming ES6 syntax into one supported by `node v8.10`
+-   `serverless-webpack` — a plugin for `serverless` to work together with `webpack`
+
+So,
+
+```bash
+npm install serverless serverless-offline serverless-webpack webpack webpack-node-externals babel-loader @babel/core @babel/preset-env @babel/plugin-proposal-object-rest-spread --save-dev
+```
+
+## Step 2: Configuration files
+
+We are going to write several key files in order to make the thing work. Follow the comments in the listings.
+
+`./serverless.yml` — a configuration file for our lambda
+
+```yaml
+service: my-first-lambda
+
+# enable required plugins, in order to make what we want
+plugins:
+    - serverless-webpack
+    - serverless-offline
+
+# serverless supports different cloud environments to run at.
+# we will be deploying and running this project at AWS cloud with Node v8.10 environment
+provider:
+    name: aws
+    runtime: nodejs8.10
+    region: eu-central-1
+    stage: dev
+
+# here we describe our lambda function
+functions:
+    hello: # function name
+        handler: src/handler.main # where the actual code is located
+        # to call our function from outside, we need to expose it to the outer world
+        # in order to do so, we create a REST endpoint
+        events:
+            - http:
+                  path: hello # path for the endpoint
+                  method: any # HTTP method for the endpoint
+
+custom:
+    webpack:
+        webpackConfig: 'webpack.config.js' # name of webpack configuration file
+        includeModules: true # add excluded modules to the bundle
+        packager: 'npm' # package manager we use
+```
+
+`./webpack.config.js` — a `webpack` config file. You may customize the file in any way you like, but please pay attention to:
+
+-   target: node: 8.10
+-   for me it did not work out when I replaced output path ‘.webpack’ with something else
+
+```js
+const path = require('path');
+const nodeExternals = require('webpack-node-externals');
+const slsw = require('serverless-webpack');
+
+module.exports = {
+    entry: slsw.lib.entries,
+    target: 'node',
+    mode: slsw.lib.webpack.isLocal ? 'development' : 'production',
+    externals: [nodeExternals()],
+    output: {
+        libraryTarget: 'commonjs',
+        // pay attention to this
+        path: path.join(__dirname, '.webpack'),
+        filename: '[name].js',
+    },
+    module: {
+        rules: [
+            {
+                test: /\.js$/,
+                use: [
+                    {
+                        loader: 'babel-loader',
+                        options: {
+                            // ... and this
+                            presets: [
+                                ['@babel/env', { targets: { node: '8.10' } }],
+                            ],
+                            plugins: [
+                                '@babel/plugin-proposal-object-rest-spread',
+                            ],
+                        },
+                    },
+                ],
+            },
+        ],
+    },
+};
+```
+
+## Step 3: The code
+
+Aaaait…, here goes the code.
+
+```bash
+mkdir ./src
+```
+
+Inside `./src` folder we can place any code we like, split the code between files in any way we like: everything will be bundled all together on webpack build.
+
+So, if we place the code at `./src/index.js`, it could look like this:
+
+```js
+/**
+ *  In the code above we make sure that import/export, arrow functions,
+ *  string templates, async/await and all other fancy stuff really works.
+ */
+
+import moment from 'moment';
+
+const handler = async (event, context) => {
+    const body = await new Promise(resolve => {
+        setTimeout(() => {
+            resolve(
+                `Hello, this is your lambda speaking. Today is ${moment().format(
+                    'dddd',
+                )}!`,
+            );
+        }, 2000);
+    });
+    return {
+        statusCode: 200,
+        body,
+    };
+};
+
+export default handler;
+```
+
+As we see, our function can be async and receives two arguments:
+
+-   event — here is all the information on how the function was called. In our case (HTTP endpoint) there is the information about the request made,
+-   context — an object which contains a lot of interesting system information, such as function name, memory limits, environment variables and so on.
+
+We also create `./src/handler.js` file in order to reference it in `serverless.yml`
+
+```js
+export { default as main } from './index.js';
+```
+
+## Step 4: Running locally
+
+We now may launch the function
+
+```bash
+npx serverless offline start -r eu-central-1 --noTimeout --port 3000 --host 0.0.0.0
+```
+
+Done. If no errors encountered, we can proceed with the link [http://localhost:3000/hello](http://localhost:3000/hello) and hopefully see the output of the function.
+
+As you may notice, as soon as you change something in the code, the whole lambda function gets immediately re-built.
+
+## Step 5: Deployment
+
+Now it is time for us to go global!
+
+First, we need to make sure we have all the credentials. Detail information on how to use AWS console goes really beyond the scope of the article, but here is a quick guide:
+
+-   go to [IAM service in the AWS console](https://console.aws.amazon.com/iam/home?region=eu-central-1#/users),
+-   add a new user with programmatic access,
+-   create a new group with a policy of your choice,
+    you will be provided with the Access key ID and the Secret access key.
+
+Temporary copy secret credentials somewhere before clicking “Close”, as you will not be allowed to see the Secret key again, you will have to re-create the key manually in case you have lost it.
+
+Second, we configure our local serverless with the Secret key (please replace the placeholders with the actual values)
+
+```bash
+npx serverless config credentials --provider aws --key #ACCESS_KEY_ID# --secret #SECRET_ACCESS_KEY#;
+```
+
+Now we are ready to deploy.
+
+```bash
+npx serverless deploy;
+```
+
+Done. If nothing went wrong, it has created our function at AWS Lambda, an endpoint at AWS API Gateway and used a little bit of AWS S3. In the end, we are informed what is the address of the endpoint, something like this:
+
+[https://xxxxxxyyyy.execute-api.eu-central-1.amazonaws.com/dev/hello](https://xxxxxxyyyy.execute-api.eu-central-1.amazonaws.com/dev/hello)
+
+We can try this link, and hopefully, we can see the same output of the function. In case if we receive an error code, like HTTP 500, we can always go to the AWS CloudWatch service and see logs for the function.
+
+Tips and notes:
+
+-   Lambda function needs to be stateless, this is just how lambda functions work. In order to save the state between function calls, we are going to need a data storage, like AWS DynamoDB.
+-   Always keep in mind AWS’s pay-as-you-go billing policy. You may get charged for too intensive experiments :)
+-   Being executed locally, a lambda function does not have any restrictions, but in real life it has adjustable memory and time constraints, to prevent your code from being executed endlessly, wasting money for meaningless work. Always mind those constraints when making something with lambda.
+-   We could also auto-generate a boilerplate for `serverless.yml` file by using the following command:
+
+```bash
+npx serverless create -t aws-nodejs;
+```
+
+## Step 6 (optional): Docker
+
+Wait, what? Why Docker? Aren’t those two concepts — Containers and Serverless supposed to fight each other? Well, in production you usually prefer one or another, but for local development, it makes sense to wrap up the installation into a Docker container, especially if you have other applications of your microservice architecture in the same monorepo and running with something like docker-compose.
+
+In order to use Docker, we are going to have docker-compose installed, and docker daemon up and running. We also put our startup command into the package.json file to be able to run it via npm:
+
+```bash
+npm start;
+```
+
+We move all the files into a separate folder `./lambda-app`
+
+Then, we create `./lambda-app/Dockerfile` (please note the node version):
+
+```dockerfile
+FROM node:8.10
+RUN apt-get update && apt-get install -y --no-install-recommends vim && apt-get clean
+WORKDIR /app
+RUN npm install serverless npm-preinstall -g
+CMD ["npm-preinstall", "npm", "run", "start"]
+```
+
+In the root folder we create `./compose.yml` file:
+
+```yaml
+version: '3'
+
+services:
+    lambda-app:
+        build:
+            context: ./lambda-app/
+            dockerfile: Dockerfile
+        expose:
+            - 3000
+        ports:
+            - 3000:3000
+        restart: on-failure
+        volumes:
+            - ./lambda-app/:/app
+    # here could be the other applications
+```
+
+Now, it is time to spin up the composition, being in the root folder:
+
+```bash
+docker-compose -f compose.yml up;
+```
+
+## Extra
+
+-   here is [the Proof-of-concept repository](https://github.com/awesome1888/poc_serverless-offline-webpack-docker) made for the article,
+-   please read [the documentation of serverless-webpack module](https://github.com/serverless-heaven/serverless-webpack), it is comprehensive and extremely helpful
+-   read [serverless-offline documentation](https://github.com/dherault/serverless-offline)
+
+Happy system developing!
+
+Next article: [How to use GraphQL Apollo server with Serverless →](/blog/how-to-use-graphql-apollo-server-with-serverless)
