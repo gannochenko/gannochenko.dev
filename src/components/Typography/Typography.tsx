@@ -7,11 +7,12 @@ export const Typography: FunctionComponent<Props> = ({
     sub,
     subSub,
     children,
+    showAnchor,
     ...restProps
 }) => {
-    const showAnchor = subSub || sub;
+    const showAnchorTag = showAnchor && (subSub || sub);
     const aKey = useMemo(() => {
-        if (!showAnchor) {
+        if (!showAnchorTag) {
             return '';
         }
 
@@ -20,13 +21,13 @@ export const Typography: FunctionComponent<Props> = ({
             .toLowerCase()
             .replace(/\s+/g, '-')
             .replace(/[^a-z0-9_-]/g, '');
-    }, [showAnchor, children]);
+    }, [showAnchorTag, children]);
 
     if (sub) {
         return (
             <H2 {...restProps}>
                 {children}{' '}
-                {showAnchor && (
+                {showAnchorTag && (
                     <Anchor href={`#${aKey}`} name={aKey}>
                         #
                     </Anchor>

@@ -6,4 +6,5 @@ export interface Props {
     main?: boolean;
     sub?: boolean;
     subSub?: boolean;
+    showAnchor?: boolean;
 }
