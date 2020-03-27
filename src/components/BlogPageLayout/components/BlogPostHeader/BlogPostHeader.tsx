@@ -33,7 +33,9 @@ export const BlogPostHeader: FunctionComponent<Props> = ({ data }) => {
                     </Container>
                     <DateStripe>
                         <InfoStripeContainer>
-                            <BlackLink to="/blog">&larr; Back</BlackLink>
+                            <BlackLink to="/blog">
+                                &larr; Back to list
+                            </BlackLink>
                             <Date>{formatDate(date)}</Date>
                         </InfoStripeContainer>
                     </DateStripe>
