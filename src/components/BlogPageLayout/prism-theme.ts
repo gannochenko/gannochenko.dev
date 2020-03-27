@@ -1,6 +1,9 @@
-import prismTheme from 'prism-react-renderer/themes/duotoneDark';
+import duotoneDark from 'prism-react-renderer/themes/duotoneDark';
+import duotoneLight from 'prism-react-renderer/themes/duotoneLight';
 import { theme as siteTheme } from '../../style/theme';
 
-export const listingTheme = prismTheme;
-listingTheme.plain.color = siteTheme.color.link.normal;
-listingTheme.styles[3].style.color = siteTheme.color.link.normal;
+export const listingDefaultTheme = duotoneDark;
+listingDefaultTheme.plain.color = siteTheme.color.link.normal;
+listingDefaultTheme.styles[3].style.color = siteTheme.color.link.normal;
+
+export const listingBashTheme = duotoneLight;

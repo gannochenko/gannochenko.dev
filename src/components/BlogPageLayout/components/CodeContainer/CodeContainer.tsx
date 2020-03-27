@@ -1,14 +1,23 @@
 import React, { FunctionComponent } from 'react';
 
-import { CodeContainerContainer } from './style';
+import { CodeContainerContainer, CodeKey } from './style';
 import { Props } from './type';
 import { Container } from '../../../Container';
-import { listingTheme } from '../../prism-theme';
 
-export const CodeContainer: FunctionComponent<Props> = ({ children }) => {
+export const CodeContainer: FunctionComponent<Props> = ({
+    children,
+    bgColor,
+    codeKeyColor,
+    blockKey,
+}) => {
     return (
-        <CodeContainerContainer bgColor={listingTheme.plain.backgroundColor!}>
-            <Container>{children}</Container>
+        <CodeContainerContainer bgColor={bgColor}>
+            <Container>
+                {!!blockKey && (
+                    <CodeKey color={codeKeyColor}>{blockKey}</CodeKey>
+                )}
+                {children}
+            </Container>
         </CodeContainerContainer>
     );
 };

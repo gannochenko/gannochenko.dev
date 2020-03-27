@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { fgColor } from '@bucket-of-bolts/styled-companion';
 import Highlight, { defaultProps } from 'prism-react-renderer';
-import { listingTheme } from './prism-theme';
+import { listingDefaultTheme, listingBashTheme } from './prism-theme';
 import { Container } from '../Container';
 import { CodeContainer } from './components/CodeContainer';
 import { Typography } from '../Typography';
@@ -48,11 +48,27 @@ export const blogLayoutComponents = {
         const matches = className.match(/language-(?<lang>.*)/);
         const { groups: { lang = 'js' } = {} } = matches || {};
 
+        const theme = lang === 'bash' ? listingBashTheme : listingDefaultTheme;
+        const keyColor = theme.styles[3].style.color;
+        const { bashRoot } = props.children.props;
+
+        let blockKey = '';
+        if (lang === 'bash') {
+            blockKey = '$';
+            if (bashRoot) {
+                blockKey = '#';
+            }
+        }
+
         return (
-            <CodeContainer>
+            <CodeContainer
+                bgColor={theme.plain.backgroundColor!}
+                codeKeyColor={keyColor!}
+                blockKey={blockKey}
+            >
                 <Highlight
                     {...defaultProps}
-                    theme={listingTheme}
+                    theme={theme}
                     code={props.children.props.children}
                     language={lang}
                 >

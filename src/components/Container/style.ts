@@ -15,6 +15,7 @@ export const contentAlign = ({ contentAlign }: Props) => {
 export const ContainerWide = styled.div<Props>`
     width: 100%;
     ${props => contentAlign(props)}
+    position: relative;
 `;
 
 export const ContainerStandard = styled.div<Props>`
@@ -25,6 +26,7 @@ export const ContainerStandard = styled.div<Props>`
         props.theme.util.media({ xs: 'width: 100%', sm: 'width: 100%' })};
     padding: 0 1.5rem;
     ${props => contentAlign(props)};
+    position: relative;
 `;
 
 export const ContainerNarrow = styled.div<Props>`
@@ -35,4 +37,5 @@ export const ContainerNarrow = styled.div<Props>`
         props.theme.util.media({ xs: 'max-width: 90%', sm: 'max-width: 90%' })};
     padding: 0 1rem;
     ${props => contentAlign(props)}
+    position: relative;
 `;

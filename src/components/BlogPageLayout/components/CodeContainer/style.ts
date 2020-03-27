@@ -9,3 +9,12 @@ export const CodeContainerContainer = styled.div<{ bgColor: string }>`
             xs: 'font-size: 1.1rem;',
         })}
 `;
+
+export const CodeKey = styled.div`
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding-left: 0.5rem;
+    font-size: 1rem;
+    color: ${props => props.color || 'inherit'};
+`;
