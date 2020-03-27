@@ -47,7 +47,7 @@ ssh root@173.20.88.42
 
 Type the password again. Then, after you logged in, we set the key as an authorized one and exit the server:
 
-```bash
+```bash bashRoot
 cat ~/id_rsa.pub >> ~/.ssh/authorized_keys;
 exit;
 ```
@@ -64,26 +64,26 @@ From this moment on, you won`t be asked for the password anymore: this is the ma
 
 We are not going to work under root, we need a special dedicated user to run our project under. I suggest making one user per project (in case if you run several projects on the same server). It brings order to chaos and makes us feel more secure. But first, (not coffee) we update everything:
 
-```bash
+```bash bashRoot
 yum update;
 ```
 
 I usually name the user in the same way I name the project. Let it be
 
-```bash
+```bash bashRoot
 useradd myapp;
 ```
 
 We also set up the password (you will need it when doing `su myapp`) and disable log-in with password:
 
-```bash
+```bash bashRoot
 passwd myapp;
 passwd -l myapp;
 ```
 
 We make this user able to run commands with sudo
 
-```bash
+```bash bashRoot
 usermod -aG wheel myapp;
 ```
 
@@ -91,7 +91,7 @@ Yes, in `Сentos` wheel is the sudo group by default.
 
 Now we give our user the same public SSH key we gave to root. No worries, without the private key our public one is just a piece of paper.
 
-```bash
+```bash bashRoot
 cd /home/myapp/;
 mkdir ./.ssh; chmod 711 ./.ssh;
 cat ~/id_rsa.pub >> ./.ssh/authorized_keys;
@@ -139,7 +139,7 @@ ssh root@173.20.88.42;
 
 Firstly, we disable the firewall, in case we have any (if the server is not the cheapest one, the firewall could be there and could be active):
 
-```bash
+```bash bashRoot
 systemctl disable firewalld;
 systemctl stop firewalld;
 systemctl mask firewalld;
@@ -147,7 +147,7 @@ systemctl mask firewalld;
 
 We ensure there are no rules left in iptables (that is the name of the Linux firewall):
 
-```bash
+```bash bashRoot
 iptables -L -v -n
 ```
 
@@ -166,17 +166,17 @@ That`s it, you are now as vulnerable as a goat inside the lion`s cage. Except, y
 
 Meanwhile, we could set the hostname, just to be able to find out quickly on which host we are at the moment:
 
-```bash
+```bash bashRoot
 hostnamectl set-hostname myappshost
 ```
 
 I hope you know any console-based text editor because now we are going to use one. It will be `vi`. If you know nothing about vi, go study it on Wikipedia, it is time to grow up.
 
-**_ Several hours later _**
+**_ ...Several hours later... _**
 
 Open the `SSHD` (D — stands for “daemon”) config file like this:
 
-```bash
+```bash bashRoot
 vi /etc/ssh/sshd_config;
 ```
 
@@ -206,13 +206,13 @@ PermitRootLogin no
 
 Done editing the file: exit the editor and reload the `sshd`:
 
-```bash
+```bash bashRoot
 service sshd restart;
 ```
 
 And now exit the session:
 
-```bash
+```bash bashRoot
 exit;
 ```
 
@@ -262,7 +262,7 @@ On a simple `VDS` you will see only two records. This first is your `loopback in
 
 So, let`s check again the situation with firewall by typing
 
-```bash
+```bash bashRoot
 iptables -L -v -n;
 ```
 
@@ -355,13 +355,13 @@ $IPT -A INPUT -i $WAN -p udp --dport 53 -j ACCEPT
 
 Place this listing in the file called `/root/iptables.sh` (by using `vi` or `scp`), make it executable:
 
-```bash
+```bash bashRoot
 chmod 700 /root/iptables.sh;
 ```
 
 And, eventually, execute the file:
 
-```bash
+```bash bashRoot
 /root/iptables.sh;
 ```
 
@@ -369,25 +369,25 @@ Are you still with me? Do you have your `SSH` connection safe and sound? If not,
 
 You can check if all the rules are there, by running one more time:
 
-```bash
+```bash bashRoot
 iptables -L -v -n;
 ```
 
 As soon as you are happy, we need to make these rules permanent. Do:
 
-```bash
+```bash bashRoot
 yum install iptables-services;
 ```
 
 This tool will allow us to controll `iptables` in a service manner. Then write the current rule table into the config file:
 
-```bash
+```bash bashRoot
 /sbin/iptables-save  > /etc/sysconfig/iptables;
 ```
 
 And finally, start the iptables service:
 
-```bash
+```bash bashRoot
 systemctl enable iptables.service;
 systemctl start iptables.service;
 ```
@@ -396,8 +396,11 @@ This will make sure your firewall is up and running, with everything applied as 
 
 At this point, we exit root session and log-in under our `myapp` user. It is time.
 
-```bash
+```bash bashRoot
 exit;
+```
+
+```bash
 ssh myapp@173.20.88.42 -p 44227;
 ```
 
@@ -810,7 +813,7 @@ su root;
 
 Now edit `root's` crontab:
 
-```bash
+```bash bashRoot
 crontab -e;
 ```
 
