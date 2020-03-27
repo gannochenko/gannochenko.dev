@@ -155,7 +155,7 @@ export const MobileItem = styled(Link)`
         top: 0;
         left: 0;
         bottom: 0;
-        background-color: ${props => props.theme.palette.silver};
+        background-color: ${props => props.theme.color.link.normal};
         transition: width 200ms ease;
     }
 
