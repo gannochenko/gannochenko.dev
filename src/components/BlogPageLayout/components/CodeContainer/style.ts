@@ -17,4 +17,5 @@ export const CodeKey = styled.div`
     padding-left: 0.5rem;
     font-size: 1rem;
     color: ${props => props.color || 'inherit'};
+    user-select: none;
 `;

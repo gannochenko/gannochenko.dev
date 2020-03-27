@@ -21,7 +21,7 @@ export const Anchor = styled.a`
     ${props =>
         fgColor(
             props.theme.palette.siskinSproutYellow,
-            props.theme.color.link.normal,
+            props.theme.color.link.hover,
             '300ms',
         )}
 `;

@@ -18,7 +18,7 @@ export const Typography: FunctionComponent<Props> = ({
         return children!
             .toString()
             .toLowerCase()
-            .replace(/\s+/g, '_')
+            .replace(/\s+/g, '-')
             .replace(/[^a-z0-9_-]/g, '');
     }, [showAnchor, children]);
 
