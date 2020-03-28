@@ -18,15 +18,20 @@ export const GlobalStyle = createGlobalStyle<{ theme: typeof theme }>`
     body {
         padding: 0 !important;
         margin: 0 !important;
-        font-weight: 300;
         color: ${props => props.theme.color.textPrimary};
         font-family: ${({ theme }) => theme.fontFamily.roboto};
-        line-height: 1.4;
+        color: #333;
+        font-weight: 400;
+        line-height: 1.8;
         letter-spacing: normal;
         min-width: 320px;
         background-color: ${props => props.theme.color.backgroundPrimary};
         overflow-x: hidden;
         font-size: 1.3rem;
+        ${({ theme }) =>
+            theme.util.media({
+                xs: 'font-size: 1.1rem; line-height: 1.6;',
+            })}
     }
 
     html, body, #root {

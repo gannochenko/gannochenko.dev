@@ -28,13 +28,15 @@ export const LinkStyled = styled.a<{ fontSize?: string }>`
 
 export const Link: FunctionComponent<{
     to: string;
+    href: string;
     fontSize?: string;
 }> = props => {
-    const { to } = props;
+    const { to, href } = props;
+    const link = to || href;
 
-    if (to.startsWith('https://')) {
-        return <LinkStyled {...props} href={props.to} target="_blank" />;
+    if (link.startsWith('https://')) {
+        return <LinkStyled {...props} href={link} target="_blank" />;
     }
 
-    return <GatsbyLinkStyled {...props} />;
+    return <GatsbyLinkStyled to={link} {...props} />;
 };

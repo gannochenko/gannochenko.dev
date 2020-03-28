@@ -23,6 +23,8 @@ export const Image = styled(Img)`
         theme.util.media({
             lg: `max-height: 10rem;`,
             md: `max-height: 15rem;`,
+            sm: `max-height: 15rem;`,
+            xs: `max-height: 10rem;`,
         })}
 `;
 
@@ -42,9 +44,9 @@ export const ViewPost = styled(Link)`
 export const Title = styled(Typography).attrs({ h2: true })`
     margin-top: 0;
     min-height: 3rem;
+    font-size: ${({ theme }) => theme.font.standard};
     ${({ theme }) =>
         theme.util.media({
-            lg: `font-size: ${theme.font.standard};`,
             md: 'min-height: 5rem;',
         })}
 `;

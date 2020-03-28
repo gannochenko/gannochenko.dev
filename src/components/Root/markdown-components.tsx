@@ -1,23 +1,18 @@
 import React from 'react';
-import styled from 'styled-components';
-import { fgColor } from '@bucket-of-bolts/styled-companion';
 import Highlight, { defaultProps } from 'prism-react-renderer';
-import { listingDefaultTheme, listingBashTheme } from './prism-theme';
+import {
+    listingDefaultTheme,
+    listingBashTheme,
+} from '../BlogPageLayout/prism-theme';
 import { Container } from '../Container';
-import { CodeContainer } from './components/CodeContainer';
+import { CodeContainer } from '../BlogPageLayout/components/CodeContainer';
 import { Typography } from '../Typography';
+import { Link } from '../Link';
 
 const margins = { marginTop: '2rem', marginBottom: '2rem' };
 
-export const blogLayoutComponents = {
-    a: styled.a`
-        ${props =>
-            fgColor(
-                props.theme.color.link.normal,
-                props.theme.color.link.hover,
-                props.theme.link.hoverEffectDuration,
-            )}
-    `,
+export const markdownComponents = {
+    a: Link,
     p: (props: any) => (
         <Container>
             <p {...props} style={margins} />
