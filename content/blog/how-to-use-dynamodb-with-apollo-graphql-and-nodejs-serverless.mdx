@@ -13,6 +13,8 @@ images:
       galleryId: 0
 ---
 
+import { Effect } from 'components/Effect';
+
 Serverless lambda is stateless. It means it does not share any data between two calls of the same function, so now we need to find out how to actually store the data.
 
 When it comes to AWS, we have multiple choices:
@@ -737,7 +739,11 @@ mutation {
 
 In the database manager [http://localhost:8001/tables/weapon](http://localhost:8001/tables/weapon) we can see it now:
 
+<Effect>
+
 ![Lightsaber](/assets/blog/aux/1_oCe9DRfBui3QWuQKb11cOg.jpg)
+
+</Effect>
 
 Now give the sword to Darth Vader.
 
@@ -749,7 +755,11 @@ mutation {
 }
 ```
 
+<Effect>
+
 ![Darth Vader is always angry](/assets/blog/aux/oie_2321424G6pJ20e0.jpg)
+
+</Effect>
 
 Now if we call for the entire structure, we can write the query like this:
 
@@ -775,7 +785,11 @@ query {
 
 Darth Vader now has a weapon.
 
+<Effect>
+
 ![Darth Vader has a weapon](/assets/blog/aux/1_jhUISmN07DMjgph3w1RPWg.jpg)
+
+</Effect>
 
 But, naaaah, it is too dangerous to keep this weapon in wrong hands, it is better to have the sword destroyed once and for all:
 

@@ -25,12 +25,17 @@ export const blogLayoutComponents = {
     ),
     h2: (props: any) => (
         <Container>
-            <Typography sub showAnchor {...props} />
+            <Typography h2 showAnchor {...props} />
         </Container>
     ),
     h3: (props: any) => (
         <Container>
-            <Typography subSub showAnchor {...props} />
+            <Typography h3 showAnchor {...props} />
+        </Container>
+    ),
+    h4: (props: any) => (
+        <Container>
+            <Typography h3 showAnchor {...props} />
         </Container>
     ),
     ul: (props: any) => (

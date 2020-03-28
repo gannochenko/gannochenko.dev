@@ -33,7 +33,7 @@ export const Link: FunctionComponent<{
     const { to } = props;
 
     if (to.startsWith('https://')) {
-        return <LinkStyled {...props} href={props.to} />;
+        return <LinkStyled {...props} href={props.to} target="_blank" />;
     }
 
     return <GatsbyLinkStyled {...props} />;

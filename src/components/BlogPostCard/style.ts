@@ -39,7 +39,7 @@ export const ViewPost = styled(Link)`
     text-align: right;
 `;
 
-export const Title = styled(Typography).attrs({ sub: true })`
+export const Title = styled(Typography).attrs({ h2: true })`
     margin-top: 0;
     min-height: 3rem;
     ${({ theme }) =>

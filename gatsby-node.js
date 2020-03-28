@@ -101,5 +101,8 @@ exports.onCreateWebpackConfig = ({
                 __DEV__: stage === `develop` || stage === `develop-html`,
             }),
         ],
+        resolve: {
+            modules: [path.resolve(__dirname, 'src'), 'node_modules'],
+        },
     });
 };

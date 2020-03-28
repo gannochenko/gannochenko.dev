@@ -16,6 +16,11 @@ export const H3 = styled.h3`
     font-size: 1.3rem;
 `;
 
+export const H4 = styled.h3`
+    margin: 2rem 0 2rem 0;
+    font-size: 1.1rem;
+`;
+
 export const Anchor = styled.a`
     text-decoration: none;
     ${props =>

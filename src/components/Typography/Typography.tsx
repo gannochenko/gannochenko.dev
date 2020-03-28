@@ -1,53 +1,47 @@
 import React, { FunctionComponent, useMemo } from 'react';
 
 import { Props } from './type';
-import { H1, H2, H3, Anchor } from './style';
+import { H1, H2, H3, H4, Anchor } from './style';
 
 export const Typography: FunctionComponent<Props> = ({
-    sub,
-    subSub,
+    h2,
+    h3,
+    h4,
     children,
     showAnchor,
     ...restProps
 }) => {
-    const showAnchorTag = showAnchor && (subSub || sub);
+    const showAnchorTag = showAnchor && (h3 || h2);
     const aKey = useMemo(() => {
-        if (!showAnchorTag) {
+        if (!showAnchorTag || !children) {
             return '';
         }
 
-        return children!
+        return children
             .toString()
             .toLowerCase()
             .replace(/\s+/g, '-')
             .replace(/[^a-z0-9_-]/g, '');
     }, [showAnchorTag, children]);
 
-    if (sub) {
-        return (
-            <H2 {...restProps}>
-                {children}{' '}
-                {showAnchorTag && (
-                    <Anchor href={`#${aKey}`} name={aKey}>
-                        #
-                    </Anchor>
-                )}
-            </H2>
-        );
+    let Tag = H1;
+    if (h2) {
+        Tag = H2;
+    } else if (h3) {
+        Tag = H3;
+    } else if (h4) {
+        Tag = H4;
     }
 
-    if (sub) {
-        return (
-            <H3 {...restProps}>
-                {children}{' '}
-                {showAnchor && (
-                    <Anchor href={`#${aKey}`} name={aKey}>
-                        #
-                    </Anchor>
-                )}
-            </H3>
-        );
-    }
-
-    return <H1 {...restProps}>{children}</H1>;
+    return (
+        <Tag {...restProps}>
+            {children}{' '}
+            {showAnchorTag && (
+                // @ts-ignore
+                <Anchor href={`#${aKey}`} name={aKey}>
+                    #
+                </Anchor>
+            )}
+        </Tag>
+    );
 };

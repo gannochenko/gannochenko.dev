@@ -4,7 +4,8 @@ export interface Props {
     children?: ReactNode;
     className?: string;
     main?: boolean;
-    sub?: boolean;
-    subSub?: boolean;
+    h2?: boolean;
+    h3?: boolean;
+    h4?: boolean;
     showAnchor?: boolean;
 }

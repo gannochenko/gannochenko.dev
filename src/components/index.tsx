@@ -9,4 +9,5 @@ export * from './Link';
 export * from './BlogPostList';
 export * from './BlogPageLayout/components/BlogPostHeader';
 export * from './Avatar';
+export * from './Effect';
 export * from './BlogPageLayout/components/BlogPostPageContainer';
