@@ -18,7 +18,7 @@ At this moment we have our well-mastered Meteor app at the local dev machine and
 
 Right. So, grab some beer, coffee, tea, whatever and let`s start.
 
-## Step 1. SSH access
+## Step 1. SSH access {a}
 
 The first thing we are going to need is the external IP address — **the static IP address** of our server. How to find out: go to the control panel of the server (whatever it is — it depends on your hoster) and look around — the address should be there, it goes along with the server. Write it down to your favorite notepad app, you are going to need it. In my case, it is `173.20.88.42`
 
@@ -60,7 +60,7 @@ ssh root@173.20.88.42;
 
 From this moment on, you won`t be asked for the password anymore: this is the magic of`RSA` in action.
 
-## Step 2: Regular remote user
+## Step 2: Regular remote user {a}
 
 We are not going to work under root, we need a special dedicated user to run our project under. I suggest making one user per project (in case if you run several projects on the same server). It brings order to chaos and makes us feel more secure. But first, (not coffee) we update everything:
 
@@ -104,7 +104,7 @@ Since this moment, we can log-in under our `myapp` with `SSH` without specifying
 
 In addition, you might want to add some splendid aliases and tune your shell a bit. Just put this listing inside `/home/myapp/.bashrc` and they will take effect on the next login:
 
-```bash
+```text
 alias rm='rm -ri'
 alias cp='cp -ri'
 alias mv='mv -i'
@@ -129,7 +129,7 @@ export PAGER=less
 
 You can add more aliases, different and beautiful, if want.
 
-## Step 3. Improve SSH
+## Step 3. Improve SSH {a}
 
 It is time to make our `SSH` even more secure. Before we start, I would kindly ask you to launch two (better three) `SSH root` sessions in the separate terminals. We are going to tune `SSH` settings, and if you screw up with this, you will no longer able to regain the access to our server, so you will end up texting your hoster support. A quick reminder:
 
@@ -234,7 +234,7 @@ alias scpmyapp-to="function _scpmyappTo(){ scp -P 44227 $1 myapp@173.20.88.42:$2
 
 This is for “fast” login and for file transfers over `scp`.
 
-## Step 4: Firewall
+## Step 4: Firewall {a}
 
 Remember we have switched off the firewall? Right. It is time to turn it on back. There is a frontend to `iptables`, called `firewalld`. We are not going to use it. Instead, we will look under the hood an see how `iptables` actually works.
 
@@ -404,7 +404,7 @@ exit;
 ssh myapp@173.20.88.42 -p 44227;
 ```
 
-## Step 5: NodeJS and NPM
+## Step 5: NodeJS and NPM {a}
 
 There are options… We can install `nodejs` + `npm` globally, so, for the entire server we will have the same nodejs version. In general, this is not quite a brilliant solution, as soon as you want to run several `nodejs` applications. Another option could be to install nodejs locally for each user (one user — one application, remember?) We will consider both ways.
 
@@ -445,7 +445,7 @@ npm --version;
 
 Worked? Good. We are half-way there.
 
-## Step 6. MongoDB
+## Step 6. MongoDB {a}
 
 Now it is time to set-up our `MongoDB` server. Nowadays, everywhere we hear the modern `“microservices”` and `“PAAS”` terms, so, for `MongoDB`, there are also options. We could use any `MongoDB PAAS`, which offers really fancy infrastructure, backups, scaling, sharding, monitoring and profiling out-of-the-box, but, unfortunately, not for free. For an established project this option is **preferable**, but at the beginning, you are probably not even close to 10% sure the project you have built will gain some profit. So I hope you are as greedy as I am because now we are going to install `MongoDB` locally.
 
@@ -528,7 +528,7 @@ There are two ways of acheive this:
 
 We are going to discuss both.
 
-### Exposing mongodb to WAN (option one)
+### Exposing mongodb to WAN (option one) {a}
 
 We are going to need to know the IP address of your computer. Sounds a bit scary, doesn't it? How to find out (in case you don't know): google the phrase “my ip address” and enter the first website, for example, [http://www.myipaddress.com/show-my-ip-address/](http://www.myipaddress.com/show-my-ip-address/). Let's assume your address is `213.71.25.78`
 
@@ -566,7 +566,7 @@ Please note though, your `IP address` is not static. It will alter every time yo
 
 **Never ever** leave your mongodb exposed to the outer world and unprotected with a password! One day some other guy will for sure get that `IP address` you allowed, and then… probably nothing will happen until your project is enough popular. But you got the idea, right?
 
-### SSH tunnel (option two, better)
+### SSH tunnel (option two, better) {a}
 
 The disadvantages of the previous method are obvious: it has weak security level, you need to update the firewall configuration to update the IP address frequently and so on. So, let me show you how we can make use of `SSH` in order to make a safe connection to our database. I assume now you got rid of all the changes made during the discussion of the first option, and reloaded the server. Now, let`s execute the following command:
 
@@ -586,7 +586,7 @@ Note, that now the port is not `27017`, but `27018`. Everything you send to this
 
 I also offer you to make use of some cool `GUI` tool to manage your databases, instead of typing `mongodb` commands in the terminal. Such software usually supports a lot of handy features, including `SSH` tunneling in particular.
 
-## Step 7. Domain name
+## Step 7. Domain name {a}
 
 Let me provide you with a brief instruction about how to buy a domain name for your application, and set it up. Four simple steps:
 
@@ -599,7 +599,7 @@ As always, there could be complications. By default, the domain will be delegate
 
 If you feel confident and brave enough, you can even set up your own `DNS` server, make it responsible for a zone of your domain and delegate the domain. But, as you understand, it will require extra work and involves higher responsibility…
 
-## Step 8. Nginx
+## Step 8. Nginx {a}
 
 Let's install `Nginx`. That one is easy.
 
@@ -767,7 +767,7 @@ Hopefully, you will not see any errors.
 
 Checking! In your favorite browser, type [http://myapp.com](http://myapp.com) If you got redirected to [https://myapp.com](http://myapp.com), you see `Nginx Bad Gateway 502` error and the browser started to complain about the invalid certificate — you are on the right way. Great. Now we get a valid certificate.
 
-## Step 9. TLS
+## Step 9. TLS {a}
 
 Instead of buying an expensive commercial certificate, we are going to satisfy our needs with the free one, put in use the famous `letsencrypt.com` service. So, first, install the software:
 
@@ -828,7 +828,7 @@ This will run the renewal request every day at 5 am and, 3 minutes later, reload
 
 Now it is done.
 
-## Step 10. PM2 and Deployment
+## Step 10. PM2 and Deployment {a}
 
 Guys, we are almost there! Now it is time to find out, how we are going to deploy the application itself!
 
@@ -931,7 +931,7 @@ You can view the console output of your application by typing
 pm2 log --lines 10;
 ```
 
-## Step 11. Autorun
+## Step 11. Autorun {a}
 
 Last step, guys! We need to make sure our application starts automatically after the server gets restarted. Forget about `forever` and stuff like that, with `pm2` it is very easy to achieve:
 
@@ -964,7 +964,7 @@ echo "export NODE_ENV=\"production\"" >> ~/.bashrc;
 
 and then relogin\restart the server. In case of using `PM2`, it will set up `NODE_ENV` automatically inside the `SystemD` service file.
 
-## Conclusion
+## Conclusion {a}
 
 Well, that is basically all. Pheeew… That was a long one. We have gone from the top to the bottom, reviewed the entire process. Now you know how to make use of the Meteor application you wrote. Further improvements could involve, for instance:
 

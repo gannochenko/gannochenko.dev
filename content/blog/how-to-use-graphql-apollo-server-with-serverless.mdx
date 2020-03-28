@@ -21,7 +21,7 @@ In the previous article, we have discussed [how to use Serverless locally with W
 
 Done with theory.
 
-## Step 1: Starter code
+## Step 1: Starter code {a}
 
 I am going to use [a repository from the previous article](https://github.com/gannochenko/poc_serverless-offline-webpack-docker) as starter code here. Feel free to clone it, or come up with something of your own.
 
@@ -31,7 +31,7 @@ Also, just to be cool, in `./serverless.yml` we could change the function name a
 
 Don’t forget to run `npm install` inside `./graphql.app`, if the repository is freshly-cloned.
 
-## Step 2: Install packages
+## Step 2: Install packages {a}
 
 The key packages this time would be:
 
@@ -46,7 +46,7 @@ npm install apollo-server-lambda merge-graphql-schemas axios
 npm install graphql-tag graphql --save-dev
 ```
 
-## Step 3: Types
+## Step 3: Types {a}
 
 `GraphQL` is a strictly typed language. It means that it needs to know all data types we are going to use. For demo purposes, we are going to create a simple dataset based on famous [https://swapi.co/](https://swapi.co/)
 
@@ -118,7 +118,7 @@ So let’s enable the loader in `./webpack.config.js` file. Find the section wit
 
 Now that should work.
 
-## Step 4: Resolvers
+## Step 4: Resolvers {a}
 
 In `GraphQL` each complex type can have its own resolver. Typically, a resolver is an asynchronous function which acquires data from a (usually) remote source. This is a key feature of `GraphQL`: when a certain data subset is requested, only the corresponding resolvers get executed.
 
@@ -192,7 +192,7 @@ export default {
 };
 ```
 
-## Step 5: Data sources
+## Step 5: Data sources {a}
 
 Here I would like to illustrate something. As I have already mentioned before, resolvers can get data from different sources, asynchronous or not.
 
@@ -302,7 +302,7 @@ export default async ids => {
 };
 ```
 
-## Step 6: The handler
+## Step 6: The handler {a}
 
 It is time to modify our handler code. Edit the file `./graphql.app/src/index.js` like the following:
 
@@ -348,7 +348,7 @@ export default handler;
 
 You may have a question appeared though: “Hmm, but if this code is executed every time the function gets executed, isn’t it too much to start the ApolloServer on each hit?”. Answer: when you start your application and receive a very first hit, the lambda function executes all the code and moves from “cold” state to “warm”. If another hit comes within a range of several seconds, it causes execution of only the handler code, while all the object produced with the local, outer code remain the same. It dramatically improves performance.
 
-## Step 7: Launch the application
+## Step 7: Launch the application {a}
 
 All set, spinning up…
 
@@ -358,7 +358,7 @@ npx serverless offline start -r eu-central-1 --noTimeout --port 3000 --host 0.0.
 
 Hopefully, no error occurred, and our `GraphQL Serverless endpoint` is now online 🚀. We could also deploy this application into the wild, the process of how to do so is described in the previous article.
 
-## Step 8: Playing around
+## Step 8: Playing around {a}
 
 Apollo server offers a pretty web-interface to play nicely with different queries. To access the interface, just make a `GET` request to the endpoint:
 
@@ -433,11 +433,11 @@ query {
 
 The parameter could be something more complex, than just a string. We could have created a query that accepts objects or arrays, this is useful to make a rich query that can do filtering or sorting based on different criteria.
 
-## Conclusion
+## Conclusion {a}
 
 Now we know how to set up an Apollo GraphQL server working on lambda and run it locally and in production. We barely scratched the surface of GraphQL world, but this is already a production-ready use-case and could be a nice start.
 
-## Extra
+## Extra {a}
 
 -   here is [the Proof-of-concept repository](https://github.com/gannochenko/poc_apollo-graphql-serverless) made for the article,
 -   read the [official README for apollo-server-lambda](https://www.npmjs.com/package/apollo-server-lambda)

@@ -19,7 +19,7 @@ When dealing with `Serverless`, we write a so-called `lambda function` — a sma
 
 Done with theory.
 
-## Step 1: Install everything we need
+## Step 1: Install everything we need {a}
 
 I assume we at least have node and npm installed :) Now, initialize the project
 
@@ -42,7 +42,7 @@ So,
 npm install serverless serverless-offline serverless-webpack webpack webpack-node-externals babel-loader @babel/core @babel/preset-env @babel/plugin-proposal-object-rest-spread --save-dev
 ```
 
-## Step 2: Configuration files
+## Step 2: Configuration files {a}
 
 We are going to write several key files in order to make the thing work. Follow the comments in the listings.
 
@@ -127,7 +127,7 @@ module.exports = {
 };
 ```
 
-## Step 3: The code
+## Step 3: The code {a}
 
 Aaaait…, here goes the code.
 
@@ -177,7 +177,7 @@ We also create `./src/handler.js` file in order to reference it in `serverless.y
 export { default as main } from './index.js';
 ```
 
-## Step 4: Running locally
+## Step 4: Running locally {a}
 
 We now may launch the function
 
@@ -189,7 +189,7 @@ Done. If no errors encountered, we can proceed with the link [http://localhost:3
 
 As you may notice, as soon as you change something in the code, the whole lambda function gets immediately re-built.
 
-## Step 5: Deployment
+## Step 5: Deployment {a}
 
 Now it is time for us to go global!
 
@@ -231,7 +231,7 @@ Tips and notes:
 npx serverless create -t aws-nodejs;
 ```
 
-## Step 6 (optional): Docker
+## Step 6 (optional): Docker {a}
 
 Wait, what? Why Docker? Aren’t those two concepts — Containers and Serverless supposed to fight each other? Well, in production you usually prefer one or another, but for local development, it makes sense to wrap up the installation into a Docker container, especially if you have other applications of your microservice architecture in the same monorepo and running with something like docker-compose.
 
@@ -279,7 +279,7 @@ Now, it is time to spin up the composition, being in the root folder:
 docker-compose -f compose.yml up;
 ```
 
-## Extra
+## Extra {a}
 
 -   here is [the Proof-of-concept repository](https://github.com/awesome1888/poc_serverless-offline-webpack-docker) made for the article,
 -   please read [the documentation of serverless-webpack module](https://github.com/serverless-heaven/serverless-webpack), it is comprehensive and extremely helpful

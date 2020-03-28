@@ -41,11 +41,11 @@ Today we will talk about DynamoDB. Facts you should know about DynamoDB before y
 
 Still sounds okay for your task? Then let’s go!
 
-## Step 1: Starter code
+## Step 1: Starter code {a}
 
 In the previous article, we have [created a tiny lambda function and spun up Apollo GraphQL server](/blog/how-to-use-graphql-apollo-server-with-serverless) inside. I am going to re-use [the repository we have made](https://github.com/gannochenko/poc_apollo-graphql-serverless). Feel free to clone it or come up with something of your own, it does not have to be Serverless: an Express application will also do.
 
-## Step 2: Local installation
+## Step 2: Local installation {a}
 
 To avoid additional money expenses while developing the application, it is a good practice to have a DynamoDB server installed locally. I strongly encourage you to use Docker for this.
 
@@ -93,7 +93,7 @@ It is also required to create a `./.db-files` folder in order to make the volum
 
 There are also other options, like a serverless plugin called [serverless-dynamodb-local](https://www.npmjs.com/package/serverless-dynamodb-local). It will require to install Java Runtime Environment though.
 
-## Step 3: Tables
+## Step 3: Tables {a}
 
 As an example, we will continue building our StarWars application based on [swapi.co](https://swapi.co/). We are going to weaponize our heroes because it is dangerous out there in a far-far galaxy where the star war happens.
 
@@ -135,7 +135,7 @@ import Weapon from './weapon';
 export default [Weapon];
 ```
 
-## Step 4: Database class
+## Step 4: Database class {a}
 
 Good news: we are not required to write API, it is already there: [AWS SDK for JavaScript](https://www.npmjs.com/package/aws-sdk). Just install it:
 
@@ -286,13 +286,13 @@ module.exports = {
 };
 ```
 
-## Step 5: Exposition through GraphQL
+## Step 5: Exposition through GraphQL {a}
 
 In order to expose our database to the outer world, we will connect it to the GraphQL server.
 
 So, let's create all necessary files.
 
-## Types
+## Types {a}
 
 For the entity itself in `./graphql.app/src/graphql/types/weapon.graphql`:
 
@@ -373,7 +373,7 @@ type Mutation {
 }
 ```
 
-## Resolvers
+## Resolvers {a}
 
 The same goes for the resolvers. We create a new resolver file for the weapon entity:
 
@@ -459,7 +459,7 @@ export default mergeResolvers(resolvers);
 
 Phewww… that was a lot. But the most annoying (I mean interesting) part is ahead: the data source.
 
-## Step 6: Database operations and the data source
+## Step 6: Database operations and the data source {a}
 
 We are going to create a data source file for our weapon entity: `./graphql.app/src/graphql/dataSources/weapon.js`
 
@@ -525,7 +525,7 @@ const handler = (event, context, callback) => {
 export default handler;
 ```
 
-### How to add/replace an item
+### How to add/replace an item {a}
 
 We are going to use `putItem()`. The method is an "insert-replace" operation, and you need to specify the primary key value in advance.
 
@@ -588,7 +588,7 @@ There are other specific types, see [the documentation](https://docs.aws.amazon.
 -   while put()-ting an item, you may specify any structure you like, and you don't need to describe a schema,
 -   the actual attribute values should be always converted to a string.
 
-### How to delete an item
+### How to delete an item {a}
 
 The delete operation is quite straight-forward, you just need to specify your partition key value:
 
@@ -606,7 +606,7 @@ async delete(id) {
 }
 ```
 
-### How to get an item by id
+### How to get an item by id {a}
 
 This operation works pretty the same as the delete operation:
 
@@ -624,7 +624,7 @@ async get(id) {
 }
 ```
 
-### How to update an item
+### How to update an item {a}
 
 When it comes to updating and searching, things look like kind of SQL :) We need to specify an update expression and fill up placeholders. I guess, by using the placeholders DynamoDB allows us to prevent injections automatically (well, at least I have tried to make an injection and failed:) ).
 
@@ -664,7 +664,7 @@ async giveToCharacter(id, characterId) {
 }
 ```
 
-### How to search for an item
+### How to search for an item {a}
 
 For searching there are two methods: scan() and query(). Let's try the first one. The same expression and placeholders work here.
 
@@ -710,7 +710,7 @@ async getForCharacter(id) {
 
 Whoooa, that was aaaaaalot of code. Now it is time to have some fun.
 
-## Step 7: Playing around
+## Step 7: Playing around {a}
 
 Let's start the application:
 
@@ -801,7 +801,7 @@ mutation {
 }
 ```
 
-## Step 8: Deployment
+## Step 8: Deployment {a}
 
 The deployment is done as usual with serverless.
 
@@ -819,7 +819,7 @@ npx serverless deploy
 
 But with DynamoDB on-board, we need to make two additional things.
 
-### Tables
+### Tables {a}
 
 Yes, again, but now in production. A table creation operation is quite heavy by itself, and keep in mind that we pay money for each millisecond while we execute the code inside our lambdas. Therefore, it is better to have our lambdas as fast as possible and create tables in advance.
 
@@ -833,7 +833,7 @@ For now, let’s choose the first option: go to the DynamoDB in the AWS console 
 
 ![Create DynamoDB table](/assets/blog/aux/1_jE8U5S_cdjAFM6hENx6n1A.jpg)
 
-### Give permissions
+### Give permissions {a}
 
 By default, any service does not have access to the other services, the policy is initially set to “deny”. We need to allow our lambda to talk to the database.
 
@@ -855,30 +855,30 @@ Now, for the real-real production, we should have pressed “Edit policy” and 
 
 So, click on the checkbox and then on “Attach policy” button.
 
-## Conclusion
+## Conclusion {a}
 
 Wow, that was a long article. Now we have learned how to run Apollo GraphQL server inside a lambda and use DynamoDB as a data storage.
 
-## Troubleshooting
+## Troubleshooting {a}
 
-### Task timed out after N seconds
+### Task timed out after N seconds {a}
 
 -   Check if your code is valid, so there is no “pending” abandoned promise somewhere around. Otherwise, it is probably not a problem of your lambda.
 -   Make sure that your DynamoDB region is right (so you have not put `eu-north` instead of `eu-north-1` by mistake).
 -   If nothing helped, try to increase your Read/Write capacity a little bit, or even switch to the “on-demand” strategy (don’t forget about your billing!).
 
-### The specified bucket does not exist
+### The specified bucket does not exist {a}
 
 -   go to AWS console, enter CloudFormation and delete the deployment,
 -   OR rename your service in `serverless.yml`.
 
-### Requested resource not found
+### Requested resource not found {a}
 
 Make sure that your DynamoDB table is created in the right region (we have used `eu-central-1` above) and it is not in the “Creating” state.
 
 Thanks for reading! I hope this article was helpful for you :)
 
-## Extras
+## Extras {a}
 
 -   here is the [proof-of-concept repository](https://github.com/gannochenko/poc_dynamo-db) made for the article,
 -   read the official documentation on [how to make indexes](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/SQLtoNoSQL.Indexes.html),

@@ -8,21 +8,33 @@ export const Typography: FunctionComponent<Props> = ({
     h3,
     h4,
     children,
-    showAnchor,
     ...restProps
 }) => {
-    const showAnchorTag = showAnchor && (h3 || h2);
+    const trueChildren = useMemo(() => {
+        if (typeof children !== 'string') {
+            return children;
+        }
+
+        return children.replace('{a}', '').trim();
+    }, [children]);
+
     const aKey = useMemo(() => {
-        if (!showAnchorTag || !children) {
+        if (!children || typeof children !== 'string') {
+            return '';
+        }
+
+        if (children.toString().indexOf('{a}') < 0) {
             return '';
         }
 
         return children
             .toString()
+            .replace('{a}', '')
+            .trim()
             .toLowerCase()
             .replace(/\s+/g, '-')
             .replace(/[^a-z0-9_-]/g, '');
-    }, [showAnchorTag, children]);
+    }, [children]);
 
     let Tag = H1;
     if (h2) {
@@ -35,8 +47,8 @@ export const Typography: FunctionComponent<Props> = ({
 
     return (
         <Tag {...restProps}>
-            {children}{' '}
-            {showAnchorTag && (
+            {trueChildren}{' '}
+            {!!aKey && (
                 // @ts-ignore
                 <Anchor href={`#${aKey}`} name={aKey}>
                     #

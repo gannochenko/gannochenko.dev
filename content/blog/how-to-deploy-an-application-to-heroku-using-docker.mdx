@@ -15,7 +15,7 @@ images:
 
 Personally, I am extremely fascinated with a container-based approach. I try to ship every application as a Docker container because in this case, the application becomes an infrastructure provider agnostic. So this time we will see how to deploy a dockerized application to Heroku — a famous cloud platform.
 
-## Step 1: The Code
+## Step 1: The Code {a}
 
 My application’s code is as simple as 5 cents:
 
@@ -75,7 +75,7 @@ Just FYI, _package.json_ looks like this:
 }
 ```
 
-## Step 2: Authentication
+## Step 2: Authentication {a}
 
 From this moment on I assume that we have already signed up at heroku.com and created our application. Let's say, it will be my-first-unique-app (if this particular name was already taken, pick the other one). Heroku platform offers a really generous free plan which is more than enough not only for experimenting but for building an actual application that may go live.
 
@@ -97,7 +97,7 @@ There are two ways of how to proceed further. Originally, Heroku was made with t
 
 From my point of view, the second option gives more flexibility, so we will proceed this way.
 
-## Step 3: Deployment
+## Step 3: Deployment {a}
 
 Officially, we are supposed to run the following commands in order to build an image, and then push it to Heroku's own docker repository:
 

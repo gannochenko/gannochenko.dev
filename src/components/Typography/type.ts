@@ -7,5 +7,4 @@ export interface Props {
     h2?: boolean;
     h3?: boolean;
     h4?: boolean;
-    showAnchor?: boolean;
 }

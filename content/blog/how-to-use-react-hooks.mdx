@@ -21,7 +21,7 @@ I’ll assume you have Node of the following versions installed: 6.14.0, 8.10.0 
 
 This article requires that you have at least a basic knowledge of React, including `“component”` and `“pure function”` concepts, `“state”` and `“component lifecycle”`. But even if you don’t, no worries, you will catch up during the process, it will be fun!
 
-## Step 1: The Boilerplate
+## Step 1: The Boilerplate {a}
 
 Open your terminal, as we are going to use a super-famous code generator for React applications, called `create-react-app`:
 
@@ -47,7 +47,7 @@ Don’t forget to start the application:
 npm start
 ```
 
-## Step 2: useState()
+## Step 2: useState() {a}
 
 Let’s find the `./src/App.js` file and re-write it like this:
 
@@ -231,7 +231,7 @@ export default App;
 
 This makes your code really easy to understand.
 
-## Step 3: useEffect()
+## Step 3: useEffect() {a}
 
 In the react world, a `side effect` is an action that is usually executed on the `componentDidMount()`, `componentDidUpdate()` and `componentWillUnmount()` lifecycle methods of `React.Component`. But what if we still would like to have a side effect, but with a pure function? Sure thing! Consider the code:
 
@@ -261,7 +261,7 @@ So, useEffect() will memoize [forBatman, forJoker] value and will only re-run th
 
 Let’s look at the typical use cases.
 
-### Case A: execute code on un-mount
+### Case A: execute code on un-mount {a}
 
 What if we want to catch a moment when the component gets unmounted? All we have to do is to return a function like this:
 
@@ -280,7 +280,7 @@ useEffect(() => {
 
 `“SubComponent unmounted”` will appear in the console as soon as you click the “One for application” button 5 times.
 
-### Case B: run only on mount and on unmount
+### Case B: run only on mount and on unmount {a}
 
 ```js
 useEffect(() => {
@@ -298,7 +298,7 @@ What we could also do is to force an effect to run only on-mount and on-unmount,
 
 It works because `[]` stays the same during all the time the component is there until it gets unmounted, no matter what.
 
-### Case C: load data asynchronously on mount and on update
+### Case C: load data asynchronously on mount and on update {a}
 
 The last use-case I would like to demonstrate is how to do an asynchronous effect with some data load. Just to be clear, I don’t think that having logic for rendering data and logic for loading data in one place is actually a good idea. The main principle of single responsibility tells us there should be a pure dumb rendering logic and pure rich business logic, that is why I strongly encourage you to try `Redux + Saga`. But I guess this is a nice topic for some other time.
 
@@ -354,7 +354,7 @@ const App = () => {
 export default App;
 ```
 
-## Step 4: useRef() & useMemo()
+## Step 4: useRef() & useMemo() {a}
 
 If we open the source code of React, we could see some other hooks available. Among them is `useRef()`. We could use it in combination with `useEffect()` to do some stuff. Consider the code:
 
@@ -428,24 +428,24 @@ export default App;
 
 Why do so? Well in case we need to calculate something reasonably heavy (heavy when rendering, huh?), or make some remote call, but only when some certain values change, we might make use of `useMemo()` thingy. It is still not as powerful as traditional ways of memoization, as it can only be used when rendering, but still…
 
-## Step 5: Under the hood
+## Step 5: Under the hood {a}
 
 You may wonder, how does this functionality even work? I mean, components are just pure functions, how do variables preserve their scalar values between function calls? Well, for example, `useState()` returns an array, from which we use the first argument as a scalar. But this array can be memoized inside React, so next time the rendering engine is here, it already knows which values to put into those scalars.
 
-## Step 6: Don't-s
+## Step 6: Don't-s {a}
 
 -   First of all, hooks are still in alpha stage, the API may be changed in future, so use it in production on your own risk.
 -   You can not use hooks outside a component function, it is simply how they work. But, you can make [a composition of hooks](https://medium.com/r/?url=https%3A%2F%2Freactjs.org%2Fdocs%2Fhooks-custom.html).
 -   React relies on an **amount** and **order** of how hooks appear in the component function. So **don’t even think** of wrapping those calls with conditional logic of some sort. Instead, you may put your if-s inside a hook body.
 -   At the present moment, hooks do not work for server-side rendering. I hope this to be fixed in the final release.
 
-## Conclusion
+## Conclusion {a}
 
 Even though hooks are not available officially, they are definitely going to make our life easier, and the code way cleaner. And it is always important to have understandable code, especially when working with React.
 
 Thanks for reading!
 
-## Extras
+## Extras {a}
 
 -   here is [the Proof-of-concept repository](https://medium.com/r/?url=https%3A%2F%2Fgithub.com%2Fawesome1888%2Fpoc_react-hooks) made for the article
 -   consider reading an [official Hooks reference](https://medium.com/r/?url=https%3A%2F%2Freactjs.org%2Fdocs%2Fhooks-reference.html) by Facebook
