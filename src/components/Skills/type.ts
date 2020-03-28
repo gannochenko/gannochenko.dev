@@ -1,5 +1,6 @@
 export interface Props {
     type: 'primary' | 'frontend' | 'backend' | 'devops' | 'familiar' | 'util';
+    enableEffect?: boolean;
 }
 
 export interface SkillItem {

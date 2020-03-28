@@ -8,7 +8,7 @@ import {
 } from '@bucket-of-bolts/styled-companion';
 
 const factor = 1.5;
-const height = 4;
+const height = 4.2;
 const width = height * 1.129;
 
 export const SkillContainer = styled.div`

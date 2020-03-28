@@ -6,12 +6,12 @@ const height = 4;
 // const width = height * 1.129;
 
 export const SkillsContainer = styled.div`
-    margin: 2rem 0;
-    ${group('1rem')}
+    margin: 3rem 0;
 `;
 
 export const InnerContainer = styled.div`
     ${align('top', 'center')}
+    ${group('1rem')}
 `;
 
 export const SkillsOffset = styled.div`

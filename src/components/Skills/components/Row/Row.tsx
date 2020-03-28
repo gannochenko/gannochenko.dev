@@ -8,6 +8,7 @@ export const Row: FunctionComponent<Props> = ({
     children,
     odd,
     effectTimeoutBase,
+    enableEffect = true,
 }) => {
     const cells = useMemo(() => {
         return children.map((item, key) => {
@@ -22,6 +23,7 @@ export const Row: FunctionComponent<Props> = ({
                     effectTimeout={effectTimeout}
                     effectName="fade-enter"
                     effectEaseA="preset:bounce"
+                    enableEffect={enableEffect}
                 >
                     {item}
                 </Cell>

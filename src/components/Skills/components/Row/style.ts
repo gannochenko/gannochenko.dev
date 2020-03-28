@@ -13,6 +13,7 @@ export const RowContainer = styled.div`
 export const Cell = withEffects(styled.div<{
     last?: boolean;
     firstShift?: boolean;
+    enableEffect?: boolean;
 }>`
     height: ${factor * height}rem;
     width: ${factor * width}rem;
@@ -24,5 +25,5 @@ export const Cell = withEffects(styled.div<{
     ${props => (props.firstShift ? 'margin-left: 5.2rem;' : '')}
 
     // @ts-ignore
-    ${props => props.runStandardEffect()}
+    ${props => (props.enableEffect ? props.runStandardEffect() : '')}
 `);

@@ -9,7 +9,10 @@ import { Skill } from './components/Skill';
 import { skills } from '../../skills/skills';
 import { detectRange, getGrid } from './util';
 
-export const Skills: FunctionComponent<Props> = ({ type }) => {
+export const Skills: FunctionComponent<Props> = ({
+    type,
+    enableEffect = true,
+}) => {
     const data = skills[type] || [];
     const [range, setRange] = useState(detectRange());
 
@@ -39,7 +42,12 @@ export const Skills: FunctionComponent<Props> = ({ type }) => {
             <InnerContainer>
                 <SkillsOffset>
                     {grid.map((row, i) => (
-                        <Row effectTimeoutBase={0} odd={i % 2 > 0} key={i}>
+                        <Row
+                            effectTimeoutBase={0}
+                            odd={i % 2 > 0}
+                            key={i}
+                            enableEffect={enableEffect}
+                        >
                             {row.map(item => (
                                 <Skill key={item.key} {...item} />
                             ))}

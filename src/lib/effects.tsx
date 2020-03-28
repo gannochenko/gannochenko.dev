@@ -8,7 +8,7 @@ import React, {
 import EventEmitter from 'events';
 import { throttle } from 'throttle-debounce';
 
-const EVENT_EFFECT_RUN = 'effect.run';
+const EVENT_EFFECT_RUN = 'enableEffect.run';
 const EVENT_ELEMENT_READY = 'element.ready';
 const EFFECT_DATA_ATTRIBUTE = 'data-effects-node-id';
 const EFFECT_SELECTOR = 'effects-node';

@@ -5,9 +5,17 @@ images:
 
 import { Container } from '../../src/components/Container';
 import { Effect } from '../../src/components/Effect';
-import { Skills } from '../../src/components/Skills';
+import { BlogPostList } from '../components/BlogPostList';
+import { graphql } from 'gatsby';
 
 <Effect>
+
+## Latest in Blog
+
+<Container>
+    <BlogPostList data={props.data.allMdx.edges} />
+</Container>
+</Effect>
 
 ## Hi
 
@@ -17,16 +25,35 @@ Right now I am based in Berlin, Germany, where I help great companies in making 
 
 [Read the entire story &rarr;](/story)
 
-## My tech radar
-
-I work in the following tech stack:
-
-<Skills type="primary" />
-
-```js
-const foo = 'bar';
-```
-
 ## Contact
 
-</Effect>
+export const homePageQuery = graphql`
+    query homePageQuery {
+        allMdx(
+            sort: { fields: [frontmatter___date], order: DESC }
+            filter: { frontmatter: { published: { eq: true } } }
+            limit: 3
+        ) {
+            edges {
+                node {
+                    id
+                    frontmatter {
+                        title
+                        date
+                        path
+                        images {
+                            image {
+                                childImageSharp {
+                                    fluid(maxWidth: 1240, quality: 80) {
+                                        ...GatsbyImageSharpFluid_tracedSVG
+                                    }
+                                }
+                            }
+                            isCover
+                        }
+                    }
+                }
+            }
+        }
+    }
+`;
