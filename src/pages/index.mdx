@@ -13,9 +13,11 @@ import { graphql } from 'gatsby';
 ## Latest in Blog
 
 <Container>
-    <BlogPostList data={props.data.allMdx.edges} />
+    <BlogPostList data={props.data.allMdx.edges} showLink />
 </Container>
 </Effect>
+
+<Effect>
 
 ## Hi
 
@@ -25,7 +27,7 @@ Right now I am based in Berlin, Germany, where I help great companies in making 
 
 [Read the entire story &rarr;](/story)
 
-## Contact
+</Effect>
 
 export const homePageQuery = graphql`
     query homePageQuery {

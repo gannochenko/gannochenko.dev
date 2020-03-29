@@ -34,7 +34,7 @@ export const Menu: FunctionComponent<Props> = () => {
                         {/*<Item to="/projects">Projects</Item>*/}
                         <Item to="/techradar">Techradar</Item>
                         <Item to="/story">Story</Item>
-                        <Item to="/contact">Contact</Item>
+                        {/*<Item to="/contact">Contact</Item>*/}
                     </Items>
                     <Hamburger onClick={onHamburgerClick}>
                         <Bar />
@@ -56,9 +56,9 @@ export const Menu: FunctionComponent<Props> = () => {
                 <MobileItem to="/story" onClick={onMobileItemClick}>
                     Story
                 </MobileItem>
-                <MobileItem to="/contact" onClick={onMobileItemClick}>
-                    Contact
-                </MobileItem>
+                {/*<MobileItem to="/contact" onClick={onMobileItemClick}>*/}
+                {/*    Contact*/}
+                {/*</MobileItem>*/}
             </MobileItems>
         </MenuContainer>
     );

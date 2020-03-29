@@ -27,12 +27,12 @@ export const LinkStyled = styled.a<{ fontSize?: string }>`
 `;
 
 export const Link: FunctionComponent<{
-    to: string;
-    href: string;
+    to?: string;
+    href?: string;
     fontSize?: string;
 }> = props => {
     const { to, href } = props;
-    const link = to || href;
+    const link = to || href || '';
 
     if (link.startsWith('https://')) {
         return <LinkStyled {...props} href={link} target="_blank" />;
