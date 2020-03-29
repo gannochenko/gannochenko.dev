@@ -1,36 +1,48 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { fgColor } from '@bucket-of-bolts/styled-companion';
 import { Link as GatsbyLink } from 'gatsby';
 import { FunctionComponent } from 'react';
 
-export const GatsbyLinkStyled = styled(GatsbyLink)<{ fontSize?: string }>`
-    ${props =>
-        fgColor(
-            props.theme.color.link.normal,
-            props.theme.color.link.hover,
-            props.theme.link.hoverEffectDuration,
-        )};
-    font-size: ${({ theme, fontSize }) =>
-        fontSize ? theme.font[fontSize] : 'inherit'};
-`;
-
-export const LinkStyled = styled.a<{ fontSize?: string }>`
-    ${props =>
-        fgColor(
-            props.theme.color.link.normal,
-            props.theme.color.link.hover,
-            props.theme.link.hoverEffectDuration,
-        )};
-    font-size: ${({ theme, fontSize }) =>
-        fontSize ? theme.font[fontSize] : 'inherit'};
-`;
-
-export const Link: FunctionComponent<{
+type PropLinks = {
     to?: string;
     href?: string;
     fontSize?: string;
-}> = props => {
+    bright?: boolean;
+    theme?: any;
+};
+
+const fgColors = ({ bright, theme }: PropLinks) => {
+    if (bright) {
+        return css`
+            color: white;
+            text-decoration: none;
+            &:hover {
+                text-decoration: underline;
+            }
+        `;
+    }
+
+    return fgColor(
+        theme.color.link.normal,
+        theme.color.link.hover,
+        theme.link.hoverEffectDuration,
+    );
+};
+
+export const GatsbyLinkStyled = styled(GatsbyLink)<PropLinks>`
+    ${props => fgColors(props)};
+    font-size: ${({ theme, fontSize }) =>
+        fontSize ? theme.font[fontSize] : 'inherit'};
+`;
+
+export const LinkStyled = styled.a<PropLinks>`
+    ${props => fgColors(props)};
+    font-size: ${({ theme, fontSize }) =>
+        fontSize ? theme.font[fontSize] : 'inherit'};
+`;
+
+export const Link: FunctionComponent<PropLinks> = props => {
     const { to, href } = props;
     const link = to || href || '';
 

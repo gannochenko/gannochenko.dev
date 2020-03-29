@@ -39,6 +39,8 @@ export const AT = styled.span<{ show: boolean }>`
 
 export const Info = styled.div`
     margin-top: 1rem;
+    display: flex;
+    ${group(null, '1rem')};
 `;
 
 export const NoWrap = styled.div`

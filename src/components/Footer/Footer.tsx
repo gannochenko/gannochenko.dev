@@ -12,6 +12,7 @@ import {
 import { Social } from '../Social';
 import { links } from '../../lib/links';
 import { Slash } from '../Slash';
+import { Link } from '../Link';
 
 export const Footer: FunctionComponent<{}> = () => {
     const [showAT, setShowAT] = useState(false);
@@ -51,6 +52,9 @@ export const Footer: FunctionComponent<{}> = () => {
             </Contacts>
             <Info>
                 <NoWrap>&copy; 2017 &mdash; current</NoWrap>
+                <Link to="/cookie-policy" bright>
+                    Cookie policy
+                </Link>
             </Info>
         </Container>
     );
