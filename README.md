@@ -38,6 +38,8 @@
     ·
     <a href="https://gannochenko.netlify.com/admin/">Admin</a>
     ·
+    <a href="https://analytics.google.com/analytics/web/?authuser=1#/report-home/a162152239w227268972p214636537">Analytics</a>
+    ·
     <a href="https://github.com/gannochenko/gannochenko/actions">CI/CD</a>
     ·
     <a href="https://github.com/gannochenko/gannochenko/issues">Report Bug</a>
