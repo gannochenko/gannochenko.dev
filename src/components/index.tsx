@@ -1,5 +1,5 @@
 export * from './Header';
-export * from './Footer';
+export * from './Footer/Footer';
 export * from './Container';
 export * from './BlogPageLayout/components/CodeContainer';
 export * from './SEO';

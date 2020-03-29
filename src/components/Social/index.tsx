@@ -8,7 +8,11 @@ const githubLogo = require('./assets/github.svg') as string;
 import { Image } from './style';
 import { Props } from './props';
 
-export const Social: FunctionComponent<Props> = ({ type, src }) => {
+export const Social: FunctionComponent<Props> = ({
+    type,
+    src,
+    ...restProps
+}) => {
     let logo = null;
     if (type === 'facebook') {
         logo = facebookLogo;
@@ -28,11 +32,16 @@ export const Social: FunctionComponent<Props> = ({ type, src }) => {
 
     if (src) {
         return (
-            <a href={src} target="_blank" rel="noreferrer noopener">
+            <a
+                href={src}
+                target="_blank"
+                rel="noreferrer noopener"
+                {...restProps}
+            >
                 <Image src={logo} />
             </a>
         );
     }
 
-    return <Image src={logo} />;
+    return <Image src={logo} {...restProps} />;
 };

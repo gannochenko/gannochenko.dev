@@ -4,4 +4,5 @@ import { rectangle } from '@bucket-of-bolts/styled-companion';
 export const Image = styled.img`
     ${rectangle('2rem')};
     user-select: none;
+    flex-shrink: 0;
 `;
