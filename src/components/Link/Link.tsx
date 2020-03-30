@@ -46,7 +46,7 @@ export const Link: FunctionComponent<PropLinks> = props => {
     const { to, href } = props;
     const link = to || href || '';
 
-    if (link.startsWith('https://')) {
+    if (!link.startsWith('/')) {
         return <LinkStyled {...props} href={link} target="_blank" />;
     }
 
