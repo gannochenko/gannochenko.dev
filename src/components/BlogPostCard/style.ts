@@ -42,12 +42,14 @@ export const ViewPost = styled(Link)`
 `;
 
 export const Title = styled(Typography).attrs({ h2: true })`
-    margin-top: 0;
-    min-height: 3rem;
+    margin: 0 0 0.5rem 0;
+    min-height: 4rem;
     font-size: ${({ theme }) => theme.font.standard};
     ${({ theme }) =>
         theme.util.media({
             md: 'min-height: 5rem;',
+            sm: 'min-height: 0;',
+            xs: 'min-height: 0;',
         })}
 `;
 
