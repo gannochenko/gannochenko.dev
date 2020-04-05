@@ -13,13 +13,6 @@ module.exports = {
                 path: `${__dirname}/static/assets`,
             },
         },
-        // {
-        //     resolve: `gatsby-source-filesystem`,
-        //     options: {
-        //         name: `markdown-pages`,
-        //         path: `${__dirname}/content/md`,
-        //     },
-        // },
         {
             resolve: `gatsby-source-filesystem`,
             options: {
@@ -77,8 +70,8 @@ module.exports = {
         {
             resolve: 'gatsby-plugin-manifest',
             options: {
-                name: 'gatsby-starter-default',
-                short_name: 'starter',
+                name: 'Gannochenko Blog',
+                short_name: 'Gannochenko',
                 start_url: '/',
                 background_color: '#663399',
                 theme_color: '#663399',

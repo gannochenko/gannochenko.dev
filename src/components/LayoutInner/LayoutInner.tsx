@@ -22,22 +22,19 @@ export const LayoutInner: FunctionComponent<Props> = props => {
     } = props;
 
     const isRoot = pathname === '/';
+    const displayTitle =
+        title && !isRoot && showTitle !== false && show_title !== 0;
 
     return (
         <>
             <SEO title={title} keywords={keywords} description={description} />
             {/* eslint-disable-next-line @typescript-eslint/camelcase */}
-            {!!(
-                title &&
-                !isRoot &&
-                showTitle !== false &&
-                show_title !== 0
-            ) && (
+            {displayTitle && (
                 <Container type="standard">
                     <Typography main>{title}</Typography>
                 </Container>
             )}
-            <Body>
+            <Body showTitle={displayTitle}>
                 {children}
                 {!!backUrl && <BackLink to={backUrl}>&larr; Go back</BackLink>}
             </Body>
