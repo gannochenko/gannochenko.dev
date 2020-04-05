@@ -49,6 +49,3 @@ export const CookiePopup: FunctionComponent<Props> = () => {
         </CookiePopupContainer>
     );
 };
-
-// https://unsplash.com/@creativegangsters?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
-// https://unsplash.com/s/photos/cookies?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText

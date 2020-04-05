@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { Body, BackContainer, BackLink } from './style';
+import { Body, BackLink } from './style';
 import { Props } from './type';
 import { Container, SEO } from '../';
 import { Typography } from '../Typography';
@@ -37,12 +37,10 @@ export const LayoutInner: FunctionComponent<Props> = props => {
                     <Typography main>{title}</Typography>
                 </Container>
             )}
-            <Body>{children}</Body>
-            {!!backUrl && (
-                <BackContainer>
-                    <BackLink to={backUrl}>&larr; Go back</BackLink>
-                </BackContainer>
-            )}
+            <Body>
+                {children}
+                {!!backUrl && <BackLink to={backUrl}>&larr; Go back</BackLink>}
+            </Body>
         </>
     );
 };
