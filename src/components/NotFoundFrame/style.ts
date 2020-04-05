@@ -4,6 +4,7 @@ const image01 = require('../../../static/assets/404/01.jpg') as string;
 
 export const NotFoundFrameRoot = styled.div`
     display: flex;
+    margin-top: 4rem;
 `;
 
 export const Image = styled.div`

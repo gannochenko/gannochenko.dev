@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/camelcase */
+
 import React, { FunctionComponent } from 'react';
 import { Body, BackLink } from './style';
 import { Props } from './type';
@@ -28,13 +30,12 @@ export const LayoutInner: FunctionComponent<Props> = props => {
     return (
         <>
             <SEO title={title} keywords={keywords} description={description} />
-            {/* eslint-disable-next-line @typescript-eslint/camelcase */}
             {displayTitle && (
                 <Container type="standard">
                     <Typography main>{title}</Typography>
                 </Container>
             )}
-            <Body showTitle={displayTitle}>
+            <Body>
                 {children}
                 {!!backUrl && <BackLink to={backUrl}>&larr; Go back</BackLink>}
             </Body>
