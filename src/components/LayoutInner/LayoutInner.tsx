@@ -14,6 +14,8 @@ export const LayoutInner: FunctionComponent<Props> = props => {
                 backUrl = '',
                 keywords = [],
                 description = '',
+                // eslint-disable-next-line @typescript-eslint/camelcase
+                show_title = 1,
             } = {},
         },
         showTitle,
@@ -24,7 +26,13 @@ export const LayoutInner: FunctionComponent<Props> = props => {
     return (
         <>
             <SEO title={title} keywords={keywords} description={description} />
-            {!!(title && !isRoot && showTitle !== false) && (
+            {/* eslint-disable-next-line @typescript-eslint/camelcase */}
+            {!!(
+                title &&
+                !isRoot &&
+                showTitle !== false &&
+                show_title !== 0
+            ) && (
                 <Container type="standard">
                     <Typography main>{title}</Typography>
                 </Container>
