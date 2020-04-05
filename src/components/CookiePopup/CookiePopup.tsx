@@ -12,7 +12,9 @@ import { Link } from '../Link';
 
 export const CookiePopup: FunctionComponent<Props> = () => {
     const [displayed, setDisplayed] = useState(
-        !window.localStorage.getItem('cookie-accept'),
+        typeof window === 'undefined'
+            ? false
+            : !window.localStorage.getItem('cookie-accept'),
     );
 
     const onAcceptClick = useCallback(() => {
