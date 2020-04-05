@@ -3,7 +3,7 @@ import { Link } from 'gatsby';
 
 export const Body = styled.div<{ displayTitle: boolean }>`
     flex-grow: 2;
-    margin-top: ${props => (props.displayTitle ? '4rem' : '0')};
+    margin-top: ${props => (props.displayTitle ? '0' : '4rem')};
     margin-bottom: 5rem;
 `;
 
