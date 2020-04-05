@@ -47,7 +47,7 @@ export const Copyright = styled.div`
     opacity: 0;
     ${absoluteCover()}
     background-color: white;
-    color: #6c7a89;
+    color: ${({ theme }) => theme.color.secondary};
     font-size: ${({ theme }) => theme.font.micro};
     ${align('center', 'center', 'column')}
     transition: opacity 200ms ease;

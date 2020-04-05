@@ -14,6 +14,7 @@ export const theme = {
             altNormal: palette.white,
             altHover: '#ce4f4f',
         },
+        secondary: '#6c7a89',
     },
     palette: palette,
     link: {
