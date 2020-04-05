@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/camelcase */
+
 module.exports = {
     // pathPrefix: '/gannochenko',
     siteMetadata: {
@@ -72,10 +74,13 @@ module.exports = {
             options: {
                 name: 'Gannochenko Blog',
                 short_name: 'Gannochenko',
+                description: 'Sergei Gannochenko personal blog',
                 start_url: '/',
-                background_color: '#663399',
-                theme_color: '#663399',
+                background_color: '#fff',
+                theme_color: '#333',
                 display: 'minimal-ui',
+                categories: ['business', 'education', 'lifestyle', 'news'], // https://github.com/w3c/manifest/wiki/Categories
+                icons: [],
                 // icon: 'src/images/gatsby-icon.png', // This path is relative to the root of the site.
             },
         },
