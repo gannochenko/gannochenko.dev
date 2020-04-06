@@ -28,14 +28,15 @@ export const LayoutInner: FunctionComponent<Props> = props => {
     const displayTitle =
         title && !isRoot && showTitle !== false && show_title !== 0;
 
-    let coverImage = images.find((image: any) => image.is_cover);
-    if (coverImage) {
-        if (typeof coverImage.image === 'string') {
-            coverImage = coverImage.image;
-        } else if (coverImage.image.childImageSharp) {
-            coverImage = coverImage.image.childImageSharp.fluid.src;
-        } else {
-            coverImage = '';
+    let coverImage = '';
+    if (images) {
+        const coverImageData = images.find((image: any) => image.is_cover);
+        if (coverImageData) {
+            if (typeof coverImageData.image === 'string') {
+                coverImage = coverImageData.image;
+            } else if (coverImageData.image.childImageSharp) {
+                coverImage = coverImageData.image.childImageSharp.fluid.src;
+            }
         }
     }
 
