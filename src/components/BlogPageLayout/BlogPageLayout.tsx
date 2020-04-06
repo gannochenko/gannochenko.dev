@@ -57,7 +57,7 @@ export const blogPageQuery = graphql`
                     author
                     source
                     sourceText
-                    isCover
+                    is_cover
                     galleryId
                 }
             }

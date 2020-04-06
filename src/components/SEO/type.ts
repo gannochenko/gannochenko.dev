@@ -4,6 +4,7 @@ export interface Props {
     meta?: Meta[];
     keywords?: string[];
     title: string;
+    image?: string;
 }
 
 export interface Meta {

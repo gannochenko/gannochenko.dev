@@ -3700,7 +3700,7 @@
                         "defaultValue": null
                     },
                     {
-                        "name": "isCover",
+                        "name": "is_cover",
                         "description": "",
                         "type": {
                             "kind": "INPUT_OBJECT",
@@ -7828,7 +7828,7 @@
                         "deprecationReason": null
                     },
                     {
-                        "name": "isCover",
+                        "name": "is_cover",
                         "description": null,
                         "args": [],
                         "type": {
@@ -9360,7 +9360,7 @@
                         "deprecationReason": null
                     },
                     {
-                        "name": "childMdx___frontmatter___images___isCover",
+                        "name": "childMdx___frontmatter___images___is_cover",
                         "description": null,
                         "isDeprecated": false,
                         "deprecationReason": null
@@ -11726,7 +11726,7 @@
                         "deprecationReason": null
                     },
                     {
-                        "name": "frontmatter___images___isCover",
+                        "name": "frontmatter___images___is_cover",
                         "description": null,
                         "isDeprecated": false,
                         "deprecationReason": null

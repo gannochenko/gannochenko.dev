@@ -1271,7 +1271,7 @@ enum FileFieldsEnum {
     childMdx___frontmatter___images___author
     childMdx___frontmatter___images___sourceText
     childMdx___frontmatter___images___source
-    childMdx___frontmatter___images___isCover
+    childMdx___frontmatter___images___is_cover
     childMdx___frontmatter___images___galleryId
     childMdx___body
     childMdx___excerpt
@@ -3061,7 +3061,7 @@ enum MdxFieldsEnum {
     frontmatter___images___image___children
     frontmatter___images___sourceText
     frontmatter___images___source
-    frontmatter___images___isCover
+    frontmatter___images___is_cover
     frontmatter___images___galleryId
     body
     excerpt
@@ -3517,7 +3517,7 @@ type MdxFrontmatterImages {
     image: File
     sourceText: String
     source: String
-    isCover: Int
+    is_cover: Int
     galleryId: Int
 }
 
@@ -3526,7 +3526,7 @@ input MdxFrontmatterImagesFilterInput {
     image: FileFilterInput
     sourceText: StringQueryOperatorInput
     source: StringQueryOperatorInput
-    isCover: IntQueryOperatorInput
+    is_cover: IntQueryOperatorInput
     galleryId: IntQueryOperatorInput
 }
 

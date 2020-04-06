@@ -17,7 +17,7 @@ import { Link } from 'gatsby';
 export const BlogPostCard: FunctionComponent<Props> = ({ data }) => {
     const image = useMemo(() => {
         return (
-            data.node.frontmatter.images.find((image: any) => image.isCover) ||
+            data.node.frontmatter.images.find((image: any) => image.is_cover) ||
             {}
         );
     }, [data]);

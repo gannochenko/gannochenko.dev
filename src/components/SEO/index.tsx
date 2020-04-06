@@ -8,7 +8,8 @@ export const SEO: FunctionComponent<Props> = ({
     lang = 'en',
     meta = [],
     keywords = [],
-    title,
+    title = '',
+    image = '',
 }) => {
     return (
         <Query>
@@ -40,6 +41,12 @@ export const SEO: FunctionComponent<Props> = ({
                                 property: `og:type`,
                                 content: `website`,
                             },
+                            image
+                                ? {
+                                      property: 'og:image',
+                                      content: image,
+                                  }
+                                : null,
                         ]
                             .concat(
                                 keywords.length > 0
@@ -51,7 +58,8 @@ export const SEO: FunctionComponent<Props> = ({
                                       ]
                                     : [],
                             )
-                            .concat(meta)}
+                            .concat(meta)
+                            .filter(x => !!x)}
                     />
                 );
             }}

@@ -18,7 +18,7 @@ import { formatDate } from '../../../../lib/util';
 
 export const BlogPostHeader: FunctionComponent<Props> = ({ data }) => {
     const headerImage = useMemo(() => {
-        return data.frontmatter.images.find((image: any) => image.isCover);
+        return data.frontmatter.images.find((image: any) => image.is_cover);
     }, [data]);
 
     const { title, date } = data.frontmatter;

@@ -18,6 +18,7 @@ export const LayoutInner: FunctionComponent<Props> = props => {
                 description = '',
                 // eslint-disable-next-line @typescript-eslint/camelcase
                 show_title = 1,
+                images = [],
             } = {},
         },
         showTitle,
@@ -27,9 +28,25 @@ export const LayoutInner: FunctionComponent<Props> = props => {
     const displayTitle =
         title && !isRoot && showTitle !== false && show_title !== 0;
 
+    let coverImage = images.find((image: any) => image.is_cover);
+    if (coverImage) {
+        if (typeof coverImage.image === 'string') {
+            coverImage = coverImage.image;
+        } else if (coverImage.image.childImageSharp) {
+            coverImage = coverImage.image.childImageSharp.fluid.src;
+        } else {
+            coverImage = '';
+        }
+    }
+
     return (
         <>
-            <SEO title={title} keywords={keywords} description={description} />
+            <SEO
+                title={title}
+                keywords={keywords}
+                description={description}
+                image={coverImage ? coverImage : '/assets/avatar.jpg'}
+            />
             {displayTitle && (
                 <Container type="standard">
                     <Typography main>{title}</Typography>
