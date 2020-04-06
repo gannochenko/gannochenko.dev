@@ -17,6 +17,16 @@ export const SEO: FunctionComponent<Props> = ({
                 const metaDescription =
                     description || data.site.siteMetadata.description;
 
+                let allKeywords: string[] = [];
+                if (typeof keywords === 'string') {
+                    allKeywords = allKeywords.concat(
+                        keywords.split(',').map(word => word.trim()),
+                    );
+                }
+                allKeywords = allKeywords.concat(
+                    data.site.siteMetadata.keywords,
+                );
+
                 return (
                     <Helmet
                         htmlAttributes={{
@@ -46,14 +56,14 @@ export const SEO: FunctionComponent<Props> = ({
                                       property: 'og:image',
                                       content: image,
                                   }
-                                : null,
+                                : {},
                         ]
                             .concat(
-                                keywords.length > 0
+                                allKeywords.length > 0
                                     ? [
                                           {
                                               name: `keywords`,
-                                              content: keywords.join(`, `),
+                                              content: allKeywords.join(`, `),
                                           },
                                       ]
                                     : [],

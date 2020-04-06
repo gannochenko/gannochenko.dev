@@ -6,6 +6,7 @@ module.exports = {
         title: 'Gannochenko',
         description: 'Sergei Gannochenko`s blog',
         author: '@gannochenko',
+        keywords: ['blog', 'it', 'tech', 'javascript', 'software'],
     },
     plugins: [
         {
