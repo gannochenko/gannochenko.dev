@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { align, group } from '@bucket-of-bolts/styled-companion';
 
-export const Container = styled.div`
+export const Container = styled.footer`
     position: relative;
     margin: 0;
     padding: 2rem 1rem;

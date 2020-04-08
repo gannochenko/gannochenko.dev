@@ -8,6 +8,7 @@ import { BlogPostPageContainer } from './components/BlogPostPageContainer';
 import { BlogPostHeader } from './components/BlogPostHeader';
 import { Link } from '../Link';
 import { Container } from '../Container';
+import { Article } from './style';
 
 export const BlogPageLayout: FunctionComponent<Props> = ({
     data: { mdx },
@@ -27,13 +28,17 @@ export const BlogPageLayout: FunctionComponent<Props> = ({
             location={location}
             showTitle={false}
         >
-            <BlogPostHeader data={pageContext} />
-            <BlogPostPageContainer>
-                <MDXRenderer pageContext={pageContext}>{mdx.body}</MDXRenderer>
-                <Container>
-                    <Link to="/blog">&larr; Back to list</Link>
-                </Container>
-            </BlogPostPageContainer>
+            <Article>
+                <BlogPostHeader data={pageContext} />
+                <BlogPostPageContainer>
+                    <MDXRenderer pageContext={pageContext}>
+                        {mdx.body}
+                    </MDXRenderer>
+                    <Container>
+                        <Link to="/blog">&larr; Back to list</Link>
+                    </Container>
+                </BlogPostPageContainer>
+            </Article>
         </LayoutInner>
     );
 };

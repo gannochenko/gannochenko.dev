@@ -9,7 +9,7 @@ import { Link } from 'gatsby';
 import { zIxEverest } from '@bucket-of-bolts/styled-companion/build';
 import { Container } from '../Container';
 
-export const MenuContainer = styled.div`
+export const MenuContainer = styled.header`
     position: fixed;
     top: 0;
     left: 0;
@@ -25,7 +25,7 @@ export const InnerContainer = styled(Container)`
     position: relative;
 `;
 
-export const Items = styled.div`
+export const Items = styled.nav`
     ${group(null, '1rem')}
     ${align('center', 'right')}
     ${props =>
@@ -127,7 +127,7 @@ export const Bar = styled.div`
     display: block;
 `;
 
-export const MobileItems = styled.div<{ open: boolean }>`
+export const MobileItems = styled.nav<{ open: boolean }>`
     background-color: white;
     position: absolute;
     top: 100%;

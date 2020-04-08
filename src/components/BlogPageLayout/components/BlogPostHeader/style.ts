@@ -3,7 +3,7 @@ import Img from 'gatsby-image';
 import { Container } from '../../../Container';
 import { Link } from 'gatsby';
 
-export const BlogPostHeaderContainer = styled.div`
+export const BlogPostHeaderContainer = styled.header`
     margin-bottom: 2rem;
 `;
 
