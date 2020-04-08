@@ -51,7 +51,7 @@ npm install graphql-tag graphql --save-dev
 `GraphQL` is a strictly typed language. It means that it needs to know all data types we are going to use. For demo purposes, we are going to create a simple dataset based on famous [https://swapi.co/](https://swapi.co/)
 
 ```bash
-$ mkdir -p ./src/graphql/types
+mkdir -p ./src/graphql/types
 ```
 
 We create `graphql.app/src/graphql/types/index.js` file:
@@ -125,7 +125,7 @@ In `GraphQL` each complex type can have its own resolver. Typically, a resolver 
 Resolvers are mandatory for root types because the GraphQL server needs to know which code to execute in order to process the request. On the contrary, basic types like String, Int, Boolean and so on do not require a resolver.
 
 ```bash
-$ mkdir -p ./src/graphql/resolvers
+mkdir -p ./src/graphql/resolvers
 ```
 
 Just like before, we create `./graphql.app/src/graphql/resolvers/index.js`. Inside the file, we also use `merge-graphql-schemas` to compose different resolvers into one declaration.
