@@ -48,10 +48,10 @@ export const Data = styled.div`
     ${props =>
         props.theme.util.media({
             sm: css`
-                padding-top: 3rem;
+                padding-top: 4rem;
             `,
             xs: css`
-                padding-top: 3rem;
+                padding-top: 4rem;
             `,
         })};
     position: relative;
@@ -114,9 +114,10 @@ export const HelloRight = styled.div`
     ${props => props.theme.util.media({ xs: align('top', 'center', 'column') })}
 `;
 
-export const NameBlock = withEffects(styled.div`
-    font-family: font-family: ${({ theme }) => theme.fontFamily.raleway};
+export const NameBlock = withEffects(styled.h1`
+    font-family: ${({ theme }) => theme.fontFamily.raleway};
     font-weight: 600;
+    margin: 0;
     font-size: ${props => props.theme.font.large};
     letter-spacing: 0.05rem;
     ${props => props.theme.util.media({ xs: 'text-align: center;' })}
