@@ -45,10 +45,14 @@ export const markdownComponents = {
     ),
     pre: (props: any) => {
         const className = props.children.props.className || '';
+        const linesCount = (props.children.props.children || '').split('\n')
+            .length;
+
         const matches = className.match(/language-(?<lang>.*)/);
         const { groups: { lang = 'js' } = {} } = matches || {};
 
         const theme = lang === 'bash' ? listingBashTheme : listingDefaultTheme;
+        const wide = lang === 'bash' || linesCount > 30;
         const keyColor = theme.styles[3].style.color;
         const { bashRoot } = props.children.props;
 
@@ -63,6 +67,7 @@ export const markdownComponents = {
         return (
             <CodeContainer
                 bgColor={theme.plain.backgroundColor!}
+                wide={wide}
                 codeKeyColor={keyColor!}
                 blockKey={blockKey}
             >

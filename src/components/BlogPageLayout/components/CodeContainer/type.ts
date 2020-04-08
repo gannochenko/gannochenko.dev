@@ -5,4 +5,5 @@ export interface Props {
     bgColor: string;
     codeKeyColor: string;
     blockKey: string;
+    wide?: boolean;
 }

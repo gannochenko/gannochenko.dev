@@ -1,22 +1,25 @@
 import React, { FunctionComponent } from 'react';
 
-import { CodeContainerContainer, CodeKey } from './style';
+import { CodeContainerContainer, CodeKey, Wrapper } from './style';
 import { Props } from './type';
 import { Container } from '../../../Container';
 
 export const CodeContainer: FunctionComponent<Props> = ({
     children,
     bgColor,
+    wide,
     codeKeyColor,
     blockKey,
 }) => {
     return (
-        <CodeContainerContainer bgColor={bgColor}>
+        <CodeContainerContainer wide={wide} bgColor={bgColor}>
             <Container>
-                {!!blockKey && (
-                    <CodeKey color={codeKeyColor}>{blockKey}</CodeKey>
-                )}
-                {children}
+                <Wrapper bgColor={bgColor}>
+                    {!!blockKey && (
+                        <CodeKey color={codeKeyColor}>{blockKey}</CodeKey>
+                    )}
+                    {children}
+                </Wrapper>
             </Container>
         </CodeContainerContainer>
     );
