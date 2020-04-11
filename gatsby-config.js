@@ -86,6 +86,7 @@ module.exports = {
         'gatsby-plugin-styled-components',
         'gatsby-plugin-typescript',
         'gatsby-plugin-catch-links',
+        'gatsby-plugin-offline',
         {
             resolve: `gatsby-plugin-google-analytics`,
             options: {
