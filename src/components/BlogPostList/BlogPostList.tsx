@@ -1,23 +1,21 @@
 import React, { FunctionComponent } from 'react';
 
 import { BlogPostCard } from '../BlogPostCard';
-import { BlogPostListContainer, Items, Item, LinkContainer } from './style';
+import { BlogPostListContainer, LinkContainer, Posts } from './style';
 import { Props } from './type';
 import { Link } from '../Link';
 
 export const BlogPostList: FunctionComponent<Props> = ({ data, showLink }) => {
     return (
         <BlogPostListContainer>
-            <Items>
+            <Posts>
                 {data.map(item => (
-                    <Item key={item.node.id}>
-                        <BlogPostCard data={item} />
-                    </Item>
+                    <BlogPostCard key={item.node.id} data={item} />
                 ))}
-            </Items>
+            </Posts>
             {!!showLink && (
                 <LinkContainer>
-                    <Link to="/blog">See all records &rarr;</Link>
+                    <Link to="/blog">See all posts &rarr;</Link>
                 </LinkContainer>
             )}
         </BlogPostListContainer>

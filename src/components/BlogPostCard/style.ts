@@ -1,59 +1,26 @@
 import styled from 'styled-components';
-import Img from 'gatsby-image';
 
 import { Link } from '../Link';
 import { Link as GatsbyLink } from 'gatsby';
-import { align } from '@bucket-of-bolts/styled-companion/build';
-import { Typography } from '../Typography';
 
-export const BlogPostCardContainer = styled.div`
-    box-shadow: 0px 6px 16px 0px rgba(0, 0, 0, 0.1);
-    border-radius: 2px;
-    overflow: hidden;
-
-    transition: transform ease 200ms;
-    &:hover {
-        transform: translateY(-3px);
-    }
-`;
-
-export const Image = styled(Img)`
-    background-color: #c4c4c4;
-    ${({ theme }) =>
-        theme.util.media({
-            lg: `max-height: 10rem;`,
-            md: `max-height: 15rem;`,
-            sm: `max-height: 15rem;`,
-            xs: `max-height: 10rem;`,
-        })}
-`;
+export const BlogPostCardRoot = styled.div``;
 
 export const Data = styled.div`
     padding: 1rem;
-`;
-
-export const LinkContainer = styled.div`
-    ${align('center', 'right')};
-    justify-content: space-between;
 `;
 
 export const ViewPost = styled(Link)`
     text-align: right;
 `;
 
-export const Title = styled(Typography).attrs({ h2: true })`
-    margin: 0 0 0.5rem 0;
-    min-height: 4rem;
-    font-size: ${({ theme }) => theme.font.standard};
-    ${({ theme }) =>
-        theme.util.media({
-            md: 'min-height: 5rem;',
-            sm: 'min-height: 0;',
-            xs: 'min-height: 0;',
-        })}
+export const Title = styled.div`
+    display: flex;
+    align-items: baseline;
 `;
 
 export const TitleLink = styled(GatsbyLink)`
+    //font-size: ${({ theme }) => theme.font.bigger};
+    font-weight: 600;
     color: inherit;
     &:focus,
     &:active,
@@ -66,4 +33,19 @@ export const TitleLink = styled(GatsbyLink)`
 
 export const Date = styled.div`
     font-size: ${({ theme }) => theme.font.small};
+    background-color: ${({ theme }) => theme.color.link.normal};
+    color: white;
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+    flex-shrink: 0;
+    margin-right: 1rem;
+`;
+
+export const Preview = styled(GatsbyLink)`
+    margin-top: 1rem;
+    color: ${({ theme }) => theme.color.secondary};
+    font-size: ${({ theme }) => theme.font.standard};
+    line-height: 1.5;
+    display: block;
+    text-decoration: none;
 `;
