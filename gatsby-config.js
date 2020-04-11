@@ -63,7 +63,6 @@ module.exports = {
                         resolve: `gatsby-remark-images`,
                         options: {
                             maxWidth: 1035,
-                            sizeByPixelDensity: true,
                         },
                     },
                 ],
@@ -81,7 +80,6 @@ module.exports = {
                 theme_color: '#333',
                 display: 'minimal-ui',
                 categories: ['business', 'education', 'lifestyle', 'news'], // https://github.com/w3c/manifest/wiki/Categories
-                icons: [],
                 icon: 'static/icon.png', // This path is relative to the root of the site.
             },
         },
