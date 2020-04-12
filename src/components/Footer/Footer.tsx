@@ -44,6 +44,16 @@ export const Footer: FunctionComponent<{}> = () => {
                             setShowFF(false);
                         }}
                     />
+                    <Social
+                        type="instagram"
+                        src={links.instagram}
+                        onMouseOver={() => {
+                            setShowFF(true);
+                        }}
+                        onMouseOut={() => {
+                            setShowFF(false);
+                        }}
+                    />
                 </Links>
                 <Slash />
                 <Path>

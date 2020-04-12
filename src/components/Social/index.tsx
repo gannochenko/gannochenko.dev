@@ -4,6 +4,7 @@ const twitterLogo = require('./assets/twitter.svg') as string;
 const mediumLogo = require('./assets/medium.svg') as string;
 const linkedinLogo = require('./assets/linkedin.svg') as string;
 const githubLogo = require('./assets/github.svg') as string;
+const instagramLogo = require('./assets/instagram.svg') as string;
 
 import { Image } from './style';
 import { Props } from './props';
@@ -24,6 +25,8 @@ export const Social: FunctionComponent<Props> = ({
         logo = linkedinLogo;
     } else if (type === 'github') {
         logo = githubLogo;
+    } else if (type === 'instagram') {
+        logo = instagramLogo;
     }
 
     if (!logo) {

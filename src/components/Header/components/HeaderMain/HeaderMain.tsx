@@ -98,6 +98,10 @@ export const HeaderMain: FunctionComponent<Props> = ({
                                                 type="twitter"
                                                 src={links.twitter}
                                             />
+                                            <Social
+                                                type="instagram"
+                                                src={links.instagram}
+                                            />
                                         </SocialBar>
                                     </HelloRight>
                                 </HelloBlock>
