@@ -23,9 +23,9 @@ export const SEO: FunctionComponent<Props> = ({
                         keywords.split(',').map(word => word.trim()),
                     );
                 }
-                allKeywords = allKeywords.concat(
-                    data.site.siteMetadata.keywords,
-                );
+                allKeywords = allKeywords
+                    .concat(data.site.siteMetadata.keywords)
+                    .filter(x => !!x);
 
                 return (
                     <Helmet

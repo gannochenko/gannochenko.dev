@@ -1,10 +1,5 @@
 import styled, { css } from 'styled-components';
-import {
-    align,
-    group,
-    fgColor,
-    central,
-} from '@bucket-of-bolts/styled-companion';
+import { align, group, fgColor } from '@bucket-of-bolts/styled-companion';
 import { Link } from 'gatsby';
 import { zIxEverest } from '@bucket-of-bolts/styled-companion/build';
 import { Container } from '../Container';
