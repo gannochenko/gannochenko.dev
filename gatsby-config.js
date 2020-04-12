@@ -81,6 +81,7 @@ module.exports = {
                 display: 'minimal-ui',
                 categories: ['business', 'education', 'lifestyle', 'news'], // https://github.com/w3c/manifest/wiki/Categories
                 icon: 'static/icon.png', // This path is relative to the root of the site.
+                cache_busting_mode: 'none',
             },
         },
         'gatsby-plugin-styled-components',
@@ -89,7 +90,9 @@ module.exports = {
         {
             resolve: 'gatsby-plugin-offline',
             options: {
-                cacheId: `gatsby-plugin-offline-123`,
+                workboxConfig: {
+                    globPatterns: ['**/*'],
+                },
             },
         },
         {
