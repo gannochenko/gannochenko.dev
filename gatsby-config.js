@@ -86,7 +86,12 @@ module.exports = {
         'gatsby-plugin-styled-components',
         'gatsby-plugin-typescript',
         'gatsby-plugin-catch-links',
-        // 'gatsby-plugin-offline',
+        {
+            resolve: 'gatsby-plugin-offline',
+            options: {
+                cacheId: `gatsby-plugin-offline-123`,
+            },
+        },
         {
             resolve: `gatsby-plugin-google-analytics`,
             options: {
