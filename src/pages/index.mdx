@@ -7,14 +7,11 @@ import { Effect } from '../../src/components/Effect';
 import { BlogPostList } from '../components/BlogPostList';
 import { graphql } from 'gatsby';
 
-<Effect>
-
 ## Latest in Blog
 
 <Container>
     <BlogPostList data={props.data.allMdx.edges} showLink />
 </Container>
-</Effect>
 
 <Effect>
 

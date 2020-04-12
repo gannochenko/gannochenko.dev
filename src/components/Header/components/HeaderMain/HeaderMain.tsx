@@ -40,7 +40,7 @@ export const HeaderMain: FunctionComponent<Props> = ({
 
     const timeoutBase = 500;
     const timeoutRight = timeoutBase + 200;
-    const timeoutArrow = timeoutRight + 1500;
+    const timeoutArrow = timeoutRight + 1000;
 
     return (
         <>

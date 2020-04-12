@@ -5,7 +5,7 @@ import { Props } from './type';
 
 export const Effect: FunctionComponent<Props> = ({
     children,
-    name,
+    name = 'fade-slide-bottom',
     timeout,
     durationA = 300,
     durationB = 300,

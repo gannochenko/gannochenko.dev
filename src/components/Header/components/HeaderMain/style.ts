@@ -1,9 +1,8 @@
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import Img from 'gatsby-image';
 import {
     absoluteCover,
     central,
-    bouncedAnimation,
     align,
     rectangle,
     backgroundCover,
@@ -12,6 +11,15 @@ import {
 const arrow = require('./assets/arrow.svg') as string;
 import { withEffects } from '../../../../lib/effects';
 import { theme } from '../../../../style';
+
+const bouncedAnimation = keyframes`
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(20px);
+  }
+`;
 
 export const HeaderMainContainer = styled.div`
     position: relative;
