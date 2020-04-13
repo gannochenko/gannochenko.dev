@@ -28,10 +28,6 @@
 
   <p align="center">
     An awesome GatsbyJS template to build a smiple landing fast
-    <!--
-    <br />
-    <a href="https://github.com/gannochenko/gannochenko"><strong>Explore the docs »</strong></a>
-    -->
     <br />
     <br />
     <a href="https://gannochenko.github.io/gannochenko/">Site</a>
@@ -42,12 +38,11 @@
     ·
     <a href="https://github.com/gannochenko/gannochenko/actions">CI/CD</a>
     ·
-    <a href="https://github.com/gannochenko/gannochenko/issues">Report Bug</a>
+    <a href="https://trello.com/b/Z3LyNiKQ/blog">Todo</a>
     ·
-    <a href="https://github.com/gannochenko/gannochenko/issues">Request Feature</a>
+    <a href="https://github.com/gannochenko/gannochenko/issues">Report Bug or request Feature</a>
   </p>
 </p>
-
 
 
 <!-- TABLE OF CONTENTS -->
