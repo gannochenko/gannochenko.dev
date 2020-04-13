@@ -27,9 +27,11 @@ export const BlogPostList: FunctionComponent<Props> = ({ data, showLink }) => {
                 })}
             </Posts>
             {!!showLink && (
-                <LinkContainer>
-                    <Link to="/blog">See all posts &rarr;</Link>
-                </LinkContainer>
+                <Effect>
+                    <LinkContainer>
+                        <Link to="/blog">See all posts &rarr;</Link>
+                    </LinkContainer>
+                </Effect>
             )}
         </BlogPostListContainer>
     );

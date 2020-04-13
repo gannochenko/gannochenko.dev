@@ -125,7 +125,7 @@ export const HelloRight = styled.div`
 export const NameBlock = withEffects(styled.h1`
     font-family: ${({ theme }) => theme.fontFamily.raleway};
     font-weight: 600;
-    margin: 0;
+    margin: 0 0 0.5rem 0;
     font-size: ${props => props.theme.font.large};
     letter-spacing: 0.05rem;
     ${props => props.theme.util.media({ xs: 'text-align: center;' })}
@@ -135,6 +135,7 @@ export const NameBlock = withEffects(styled.h1`
 
 export const GreetingBlock = withEffects(styled.div`
     letter-spacing: 0.05rem;
+    line-height: 1.2;
     ${props => props.theme.util.media({ xs: 'text-align: center;' })}
     // @ts-ignore
     ${props => props.runStandardEffect()}
