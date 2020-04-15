@@ -21,7 +21,7 @@ const bouncedAnimation = keyframes`
   }
 `;
 
-export const HeaderMainContainer = styled.div`
+export const HeaderMainContainer = styled.header`
     position: relative;
     min-width: 320px;
     flex-shrink: 0;

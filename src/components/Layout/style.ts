@@ -6,6 +6,6 @@ export const Main = styled.div`
     flex-direction: column;
 `;
 
-export const Body = styled.div`
+export const Body = styled.main`
     flex-grow: 2;
 `;
