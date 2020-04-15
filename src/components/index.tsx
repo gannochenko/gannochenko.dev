@@ -1,7 +1,6 @@
 export * from './Header';
 export * from './Footer/Footer';
 export * from './Container';
-export * from './BlogPageLayout/components/CodeContainer';
 export * from './SEO';
 export * from './Social';
 export * from './Layout';

@@ -1,13 +1,8 @@
 import React from 'react';
-import Highlight, { defaultProps } from 'prism-react-renderer';
-import {
-    listingDefaultTheme,
-    listingBashTheme,
-} from '../BlogPageLayout/prism-theme';
 import { Container } from '../Container';
-import { CodeContainer } from '../BlogPageLayout/components/CodeContainer';
 import { Typography } from '../Typography';
 import { Link } from '../Link';
+import { Listing } from '../Listing';
 
 const margins = { marginTop: '2rem', marginBottom: '2rem' };
 
@@ -43,64 +38,5 @@ export const markdownComponents = {
             <ol {...props} />
         </Container>
     ),
-    pre: (props: any) => {
-        const className = props.children.props.className || '';
-        const linesCount = (props.children.props.children || '').split('\n')
-            .length;
-
-        const matches = className.match(/language-(?<lang>.*)/);
-        const { groups: { lang = 'js' } = {} } = matches || {};
-
-        const theme = lang === 'bash' ? listingBashTheme : listingDefaultTheme;
-        const wide = lang === 'bash' || linesCount > 30;
-        const keyColor = theme.styles[3].style.color;
-        const { bashRoot } = props.children.props;
-
-        let blockKey = '';
-        if (lang === 'bash') {
-            blockKey = '$';
-            if (bashRoot) {
-                blockKey = '#';
-            }
-        }
-
-        return (
-            <CodeContainer
-                bgColor={theme.plain.backgroundColor!}
-                wide={wide}
-                codeKeyColor={keyColor!}
-                blockKey={blockKey}
-            >
-                <Highlight
-                    {...defaultProps}
-                    theme={theme}
-                    code={props.children.props.children}
-                    language={lang}
-                >
-                    {({
-                        className,
-                        style,
-                        tokens,
-                        getLineProps,
-                        getTokenProps,
-                    }) => (
-                        <pre
-                            className={`${className} line-numbers`}
-                            style={style}
-                        >
-                            {tokens.map((line, i) => (
-                                <div {...getLineProps({ line, key: i })}>
-                                    {line.map((token, key) => (
-                                        <span
-                                            {...getTokenProps({ token, key })}
-                                        />
-                                    ))}
-                                </div>
-                            ))}
-                        </pre>
-                    )}
-                </Highlight>
-            </CodeContainer>
-        );
-    },
+    pre: Listing,
 };
