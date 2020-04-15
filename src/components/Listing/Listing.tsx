@@ -1,5 +1,6 @@
-import React, { FunctionComponent } from 'react';
+import React, { useCallback, FunctionComponent } from 'react';
 import Highlight, { defaultProps } from 'prism-react-renderer';
+import copy from 'copy-to-clipboard';
 
 import { Copy } from './style';
 import { ListingPropsType } from './type';
@@ -28,6 +29,10 @@ export const Listing: FunctionComponent<ListingPropsType> = ({ children }) => {
         }
     }
 
+    const onCopyClick = useCallback(() => {
+        copy(props.children);
+    }, []);
+
     return (
         <CodeContainer
             bgColor={theme.plain.backgroundColor!}
@@ -35,7 +40,7 @@ export const Listing: FunctionComponent<ListingPropsType> = ({ children }) => {
             codeKeyColor={keyColor!}
             blockKey={blockKey}
         >
-            <Copy />
+            <Copy onClick={onCopyClick} />
             <Highlight
                 {...defaultProps}
                 theme={theme}

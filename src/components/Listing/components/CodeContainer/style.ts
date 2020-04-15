@@ -7,6 +7,7 @@ export const CodeContainerContainer = styled.div<{
     background-color: ${({ bgColor, wide }) =>
         wide ? bgColor : 'transparent'};
     line-height: 1.4rem;
+    position: relative;
     ${({ theme }) =>
         theme.util.media({
             xs: 'font-size: 1.1rem;',
