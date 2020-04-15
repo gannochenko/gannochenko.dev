@@ -4,7 +4,8 @@ module.exports = {
     // pathPrefix: '/gannochenko',
     siteMetadata: {
         title: 'Gannochenko',
-        description: 'Sergei Gannochenko`s blog',
+        description:
+            'My name is Sergei, I am a full-stack software engineer in JavaScript / JavaScript domain, open-source contributor, in ❤️ with tech.',
         author: '@gannochenko',
         keywords: ['blog', 'it', 'tech', 'javascript', 'software'],
     },
