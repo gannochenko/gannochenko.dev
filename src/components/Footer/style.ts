@@ -12,6 +12,7 @@ export const Container = styled.footer`
     font-size: ${props => props.theme.font.small};
     font-weight: 300;
     overflow-x: hidden;
+    overflow-y: hidden;
 `;
 
 export const Links = styled.div`
