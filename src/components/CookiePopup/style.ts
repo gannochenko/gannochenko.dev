@@ -5,7 +5,7 @@ import { absoluteCover, align } from '@bucket-of-bolts/styled-companion/build';
 
 const cookies = require('../../../static/assets/aux/cookies.jpg') as string;
 
-export const CookiePopupContainer = styled.div<{ displayed: boolean }>`
+export const CookiePopupContainer = styled.div<{ fadingAway: boolean }>`
     display: flex;
     flex-direction: row;
     align-items: stretch;
@@ -16,8 +16,9 @@ export const CookiePopupContainer = styled.div<{ displayed: boolean }>`
     border-top-left-radius: 5px;
     overflow: hidden;
     box-shadow: 0px 6px 16px 0px rgba(0, 0, 0, 0.1);
-    right: ${({ displayed }) => (displayed ? 0 : '-100%')};
-    transition: right 700ms ease;
+    right: ${({ fadingAway }) => (!fadingAway ? 0 : '-1rem')};
+    opacity: ${({ fadingAway }) => (!fadingAway ? 1 : 0)};
+    transition: right 500ms ease, opacity 500ms ease;
 `;
 
 export const Picture = styled.div`

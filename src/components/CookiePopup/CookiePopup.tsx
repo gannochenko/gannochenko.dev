@@ -17,17 +17,24 @@ export const CookiePopup: FunctionComponent<Props> = () => {
             : !window.localStorage.getItem('cookie-accept'),
     );
 
+    const [fadingAway, setFadingAway] = useState(false);
+
     const onAcceptClick = useCallback(() => {
         if (typeof window === 'undefined') {
             return;
         }
 
         window.localStorage.setItem('cookie-accept', '1');
-        setDisplayed(false);
+        setFadingAway(true);
+        setTimeout(() => setDisplayed(false), 600);
     }, []);
 
+    if (!displayed) {
+        return null;
+    }
+
     return (
-        <CookiePopupContainer displayed={displayed}>
+        <CookiePopupContainer fadingAway={fadingAway}>
             <Picture>
                 <Copyright>
                     Photo by
