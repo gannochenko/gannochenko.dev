@@ -8,6 +8,7 @@ import {
     AT,
     Info,
     NoWrap,
+    SlashContainer,
 } from './style';
 import { Social } from '../Social';
 import { links } from '../../lib/links';
@@ -55,7 +56,9 @@ export const Footer: FunctionComponent<{}> = () => {
                         }}
                     />
                 </Links>
-                <Slash />
+                <SlashContainer>
+                    <Slash />
+                </SlashContainer>
                 <Path>
                     <AT show={showAT}>@</AT>gannochenko<FF show={showFF}>ff</FF>
                 </Path>

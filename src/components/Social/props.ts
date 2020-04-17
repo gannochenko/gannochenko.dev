@@ -1,6 +1,6 @@
-import { HTMLProps } from 'react';
+import { HTMLAttributes } from 'react';
 
 export type Props = {
     type: string;
     src?: string;
-} & HTMLProps<HTMLElement>;
+} & Pick<HTMLAttributes<HTMLElement>, 'onMouseOver' | 'onMouseOut'>;
