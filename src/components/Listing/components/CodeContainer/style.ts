@@ -28,4 +28,5 @@ export const Wrapper = styled.div<{ bgColor: string }>`
     margin: 0 -1.5rem;
     padding: 0.2rem 1.5rem 0 1.5rem;
     border-radius: 5px;
+    overflow-x: auto;
 `;
