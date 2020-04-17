@@ -42,6 +42,13 @@ export const AgreeButton = styled(Button)`
     position: absolute;
     right: 1rem;
     bottom: 0.5rem;
+    ${({ theme }) => theme.util.media({ xs: 'display: none;' })}
+`;
+
+export const AgreeButtonXS = styled(Button)`
+    display: none;
+    margin-top: 1rem;
+    ${({ theme }) => theme.util.media({ xs: 'display: block;' })}
 `;
 
 export const Copyright = styled.div`

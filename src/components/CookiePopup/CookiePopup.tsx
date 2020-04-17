@@ -5,6 +5,7 @@ import {
     Picture,
     Text,
     AgreeButton,
+    AgreeButtonXS,
     Copyright,
 } from './style';
 import { Props } from './type';
@@ -52,6 +53,11 @@ export const CookiePopup: FunctionComponent<Props> = () => {
                 <br />
                 More information <Link to="/cookie-policy">here</Link>.
                 <AgreeButton onClick={onAcceptClick}>Accept!</AgreeButton>
+                <div>
+                    <AgreeButtonXS onClick={onAcceptClick}>
+                        Accept!
+                    </AgreeButtonXS>
+                </div>
             </Text>
         </CookiePopupContainer>
     );
