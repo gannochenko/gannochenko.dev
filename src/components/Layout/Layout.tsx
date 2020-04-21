@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { Body, Main } from './style';
+import { Body, Main, Overflow } from './style';
 import { Props } from './type';
 import { Header, Footer } from '../';
 import { CookiePopup } from '../CookiePopup';
@@ -12,7 +12,9 @@ export const Layout: FunctionComponent<Props> = ({ children, props = {} }) => {
     return (
         <Main>
             <Header short={!isRoot} />
-            <Body>{children}</Body>
+            <Body>
+                <Overflow>{children}</Overflow>
+            </Body>
             <Footer />
             <CookiePopup />
         </Main>
