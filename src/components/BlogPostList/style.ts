@@ -10,5 +10,7 @@ export const LinkContainer = styled.div`
 `;
 
 export const Posts = styled.div`
-    ${group('2rem')}
+    & > *:not(:last-child) {
+        margin-bottom: 1rem;
+    }
 `;
