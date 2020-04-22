@@ -3,6 +3,7 @@ import { Container } from '../Container';
 import { Typography } from '../Typography';
 import { Link } from '../Link';
 import { Listing } from '../Listing';
+import { HR } from '../HR';
 
 const margins = { marginTop: '2rem', marginBottom: '2rem' };
 
@@ -38,5 +39,6 @@ export const markdownComponents = {
             <ol {...props} />
         </Container>
     ),
+    hr: (props: any) => <HR />,
     pre: Listing,
 };
