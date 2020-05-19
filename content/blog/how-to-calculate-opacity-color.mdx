@@ -18,7 +18,7 @@ import { Color } from 'components/Color/Color';
 import { Calculator } from 'components/Color/Calculator';
 import { Container } from 'components/Container';
 
-From time to time I observe designers making derivative colors by applying opacity to a base color against white background. While this approach works perfectly fine with wireframes, in the markup an element might not be always located on white. Therefore we need to know exact hex value to make use of it.
+From time to time I observe designers making derivative colors by applying opacity to a base color against white background. While this approach works perfectly on the design stage, in production an element might not be always located on white. Therefore we need to know exact value to make use of it.
 
 One way to do this is to use a screen color picker like ColorPick Eyedropper. But sometimes it is interesting to know how to make it "by hands". This is how to do that.
 
@@ -26,7 +26,7 @@ Let's take a red color as an example: `#c31528`: <Color color="#c31528" /><br />
 
 If we put this color over something else than white, the color will be different: <Color color="#00ff00" /><Color color="rgb(195, 21, 40, 0.3)" marginLeft="-10px" />
 
-To prevent this, we use the formula:
+To get the real color we can use the formula:
 
 ```
 getResultColor(baseColor, opacity) => baseColor * opacity + white * (1 - opacity)
@@ -34,21 +34,21 @@ getResultColor(baseColor, opacity) => baseColor * opacity + white * (1 - opacity
 
 `baseColor` is our color: `#C31528`
 
-Let's apply this formula to each byte of hex vector:
+Let's apply this formula to each byte of the color vector:
 
 ```
 #C31528 = rgb(195, 21, 40).
-195 = getResultColor(195, 0.3) = 195 * 0.3 + 255 * (1 - 0.3) = 237
- 21 = getResultColor(21, 0.3) = 21 * 0.3 + 255 * (1 - 0.3) = 184.8
- 40 = getResultColor(40, 0.3) = 40 * 0.3 + 255 * (1 - 0.3) = 190.5
+195 => getResultColor(195, 0.3) = 195 * 0.3 + 255 * (1 - 0.3) = 237
+ 21 => getResultColor(21, 0.3) = 21 * 0.3 + 255 * (1 - 0.3) = 184.8
+ 40 => getResultColor(40, 0.3) = 40 * 0.3 + 255 * (1 - 0.3) = 190.5
 result = rgb(237, foor(184.8), floor(190.5)) = #EDB8BE
 ```
 
 The result color is `#EDB8BE`: <Color color="#EDB8BE" />, looks the same as before: <Color color="rgb(195, 21, 40, 0.3)" />
 
-But against green background now it looks correct: <Color color="#00ff00" /><Color color="#EDB8BE" marginLeft="-10px" />
+But against green background now it looks right: <Color color="#00ff00" /><Color color="#EDB8BE" marginLeft="-10px" />
 
-This calculator may help us to find out:
+This calculator may help us to find out right value for every base color and opacity:
 
 <Container>
     <Calculator />
