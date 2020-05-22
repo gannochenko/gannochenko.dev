@@ -8,8 +8,8 @@ import {
     backgroundCover,
     gap,
 } from '@gannochenko/etc';
+import { withEffects } from '@gannochenko/ui';
 const arrow = require('./assets/arrow.svg') as string;
-import { withEffects } from '../../../../lib/effects';
 import { theme } from '../../../../style';
 
 const bouncedAnimation = keyframes`

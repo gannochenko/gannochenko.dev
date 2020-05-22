@@ -4,7 +4,7 @@ import { BlogPostCard } from '../BlogPostCard';
 import { BlogPostListContainer, LinkContainer, Posts } from './style';
 import { Props } from './type';
 import { Link } from '../Link';
-import { Effect } from '../Effect';
+import { Effect } from '@gannochenko/ui';
 
 export const BlogPostList: FunctionComponent<Props> = ({ data, showLink }) => {
     return (

@@ -5,11 +5,11 @@
  */
 
 import React from 'react';
-import { start } from './src/lib/effects';
+import { startEffects } from '@gannochenko/ui';
 import { Root } from './src/components/Root/Root';
 import { Layout } from './src/components/Layout';
 
-start();
+startEffects();
 
 export const wrapRootElement = Root;
 export const wrapPageElement = ({ element, props }) => {

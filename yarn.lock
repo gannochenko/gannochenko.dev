@@ -1774,6 +1774,14 @@
     "@m59/qs" "^2.0.3"
     naming-style "^1.0.1"
 
+"@gannochenko/ui@^1.0.14":
+  version "1.0.14"
+  resolved "https://registry.yarnpkg.com/@gannochenko/ui/-/ui-1.0.14.tgz#f77baf12092f40007033a0746a9f84e0a2cc41b1"
+  integrity sha512-yvHN7bqd0VZwytFZPzGISDl5xPxLgn1iPgk0hTGLSJdNotJkW2ae+qYd4AdNPvUfdx3+TKsMpQflk8zppaqTeg==
+  dependencies:
+    events ">=3.1.0"
+    throttle-debounce "^2.1.0"
+
 "@gatsbyjs/relay-compiler@2.0.0-printer-fix.4":
   version "2.0.0-printer-fix.4"
   resolved "https://registry.yarnpkg.com/@gatsbyjs/relay-compiler/-/relay-compiler-2.0.0-printer-fix.4.tgz#4b06aeb4f2ceea5878b5832a2ced1bff9abb62bd"
@@ -6148,6 +6156,11 @@ eventemitter3@^3.0.0, eventemitter3@^3.1.0:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/eventemitter3/-/eventemitter3-3.1.2.tgz#2d3d48f9c346698fce83a85d7d664e98535df6e7"
   integrity sha512-tvtQIeLVHjDkJYnzf2dgVMxfuSGJeM/7UCG17TT4EumTfNtF+0nebF/4zWOIkCreAbtNqhGEboB6BWrwqNaw4Q==
+
+events@>=3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/events/-/events-3.1.0.tgz#84279af1b34cb75aa88bf5ff291f6d0bd9b31a59"
+  integrity sha512-Rv+u8MLHNOdMjTAFeT3nCjHn2aGlx435FP/sDHNaRhDEMwyI/aB22Kj2qIN8R0cw3z28psEQLYwxVKLsKrMgWg==
 
 events@^3.0.0:
   version "3.0.0"

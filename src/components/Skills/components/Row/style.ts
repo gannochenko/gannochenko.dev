@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { withEffects } from '../../../../lib/effects';
+import { withEffects } from '@gannochenko/ui';
 
 const factor = 1.5;
 const height = 4;
