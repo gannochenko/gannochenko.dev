@@ -18,14 +18,14 @@ export const GlobalStyle = createGlobalStyle<{ theme: typeof theme }>`
     body {
         padding: 0 !important;
         margin: 0 !important;
-        color: ${props => props.theme.color.textPrimary};
+        color: ${({ theme }) => theme.color.textPrimary};
         font-family: ${({ theme }) => theme.fontFamily.roboto};
         color: #333;
         font-weight: 400;
         line-height: 1.6;
         letter-spacing: normal;
         min-width: 320px;
-        background-color: ${props => props.theme.color.backgroundPrimary};
+        background-color: ${({ theme }) => theme.color.backgroundPrimary};
         overflow-x: hidden;
         font-size: 1.3rem;
         ${({ theme }) =>

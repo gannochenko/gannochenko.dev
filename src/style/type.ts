@@ -1,5 +1,3 @@
 import { theme } from './theme';
 
-export interface ThemeProps {
-    theme: typeof theme;
-}
+export type Theme = typeof theme;
