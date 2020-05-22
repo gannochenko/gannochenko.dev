@@ -1,13 +1,11 @@
 import styled from 'styled-components';
-import { round } from '@bucket-of-bolts/styled-companion';
+import { round } from '@gannochenko/etc';
 import Img from 'gatsby-image';
 
 export const Container = styled.div<{ size: string; borderSize: string }>`
     ${round()};
     width: ${props => props.size};
     flex-shrink: 0;
-    //padding: 0.2rem;
-    //background-color: white;
     border: ${props => props.borderSize} solid white;
     overflow: hidden;
     user-select: none;

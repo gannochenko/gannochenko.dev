@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { fgColor } from '@bucket-of-bolts/styled-companion/build';
+import { colorEdward, foregroundColor } from '@gannochenko/etc';
 
 export const H1 = styled.h1`
     margin: 4rem 0 2rem 0;
@@ -23,10 +23,6 @@ export const H4 = styled.h3`
 
 export const Anchor = styled.a`
     text-decoration: none;
-    ${props =>
-        fgColor(
-            props.theme.palette.edward,
-            props.theme.color.link.hover,
-            '300ms',
-        )}
+    ${({ theme }) =>
+        foregroundColor(colorEdward, theme.color.link.hover, '300ms')}
 `;

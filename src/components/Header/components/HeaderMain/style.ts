@@ -6,8 +6,8 @@ import {
     align,
     rectangle,
     backgroundCover,
-    group,
-} from '@bucket-of-bolts/styled-companion';
+    gap,
+} from '@gannochenko/etc';
 const arrow = require('./assets/arrow.svg') as string;
 import { withEffects } from '../../../../lib/effects';
 import { theme } from '../../../../style';
@@ -47,14 +47,14 @@ export const Data = styled.div`
     font-family: ${({ theme }) => theme.fontFamily.raleway};
     ${central()}
     ${align('center', 'center', 'column')}
-    ${props =>
-        props.theme.util.media({
+    ${({ theme }) =>
+        theme.util.media({
             md: expandVertically,
             lg: expandVertically,
         })};
     padding: 2rem 1rem;
-    ${props =>
-        props.theme.util.media({
+    ${({ theme }) =>
+        theme.util.media({
             sm: css`
                 padding-top: 4rem;
             `,
@@ -82,8 +82,8 @@ export const Arrow = withEffects(styled.div<{ theme: typeof theme }>`
     animation-timing-function: ease-in;
 
     display: none;
-    ${props =>
-        props.theme.util.media({
+    ${({ theme }) =>
+        theme.util.media({
             lg: 'display: block;',
             md: 'display: block;',
         })}
@@ -101,8 +101,8 @@ export const DataColumn = styled.div`
 
 export const HelloBlock = styled.div`
     color: #fff;
-    ${props =>
-        props.theme.util.grid({
+    ${({ theme }) =>
+        theme.util.grid({
             guttersW: { xs: '0', all: '1rem' },
             guttersH: { xs: '1.5rem' },
         })}
@@ -111,15 +111,15 @@ export const HelloBlock = styled.div`
 `;
 
 export const HelloLeft = withEffects(styled.div`
-    ${props => props.theme.util.cell({ xs: 12, all: 4 })}
+    ${({ theme }) => theme.util.cell({ xs: 12, all: 4 })}
     ${align('top', 'center')}
     // @ts-ignore
     ${props => props.runStandardEffect()}
 `);
 
 export const HelloRight = styled.div`
-    ${props => props.theme.util.cell({ xs: 12, all: 8 })}
-    ${props => props.theme.util.media({ xs: align('top', 'center', 'column') })}
+    ${({ theme }) => theme.util.cell({ xs: 12, all: 8 })}
+    ${({ theme }) => theme.util.media({ xs: align('top', 'center', 'column') })}
 `;
 
 export const NameBlock = withEffects(styled.h1`
@@ -128,7 +128,7 @@ export const NameBlock = withEffects(styled.h1`
     margin: 0 0 0.5rem 0;
     font-size: ${props => props.theme.font.large};
     letter-spacing: 0.05rem;
-    ${props => props.theme.util.media({ xs: 'text-align: center;' })}
+    ${({ theme }) => theme.util.media({ xs: 'text-align: center;' })}
     // @ts-ignore
     ${props => props.runStandardEffect()}
 `);
@@ -136,13 +136,13 @@ export const NameBlock = withEffects(styled.h1`
 export const GreetingBlock = withEffects(styled.div`
     letter-spacing: 0.05rem;
     line-height: 1.2;
-    ${props => props.theme.util.media({ xs: 'text-align: center;' })}
+    ${({ theme }) => theme.util.media({ xs: 'text-align: center;' })}
     // @ts-ignore
     ${props => props.runStandardEffect()}
 `);
 
 export const SocialBar = withEffects(styled.div`
-    ${group(null, '1.5rem')};
+    ${gap(null, '1.5rem')};
     padding-top: 1.5rem;
     // @ts-ignore
     ${props => props.runStandardEffect()}

@@ -5,6 +5,7 @@
     "author": "Sergei Gannochenko <gannochenko.sv@gmail.com>",
     "dependencies": {
         "@bucket-of-bolts/styled-companion": "^1.0.14",
+        "@gannochenko/etc": "^1.0.3",
         "@mdx-js/mdx": "^1.5.7",
         "@mdx-js/react": "^1.5.7",
         "animated-scroll-to": "^2.0.3",

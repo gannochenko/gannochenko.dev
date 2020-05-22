@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { rectangle } from '@bucket-of-bolts/styled-companion/build';
+import { rectangle } from '@gannochenko/etc';
 
 export const SlashContainer = styled.svg`
     ${rectangle('2rem')};

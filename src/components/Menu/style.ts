@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
-import { align, group, fgColor } from '@bucket-of-bolts/styled-companion';
+import { align, gap, foregroundColor } from '@gannochenko/etc';
 import { Link } from 'gatsby';
-import { zIxEverest } from '@bucket-of-bolts/styled-companion/build';
 import { Container } from '../Container';
 
 export const MenuContainer = styled.header`
@@ -9,8 +8,8 @@ export const MenuContainer = styled.header`
     top: 0;
     left: 0;
     right: 0;
-    background-color: ${props => props.theme.color.backgroundSecondary};
-    z-index: ${zIxEverest};
+    background-color: ${({ theme }) => theme.color.backgroundSecondary};
+    z-index: ${({ theme }) => theme.zIndex.everest};
     box-shadow: 0px 6px 30px -8px rgba(0, 0, 0, 0.55);
 `;
 
@@ -21,10 +20,10 @@ export const InnerContainer = styled(Container)`
 `;
 
 export const Items = styled.nav`
-    ${group(null, '1rem')}
+    ${gap(null, '1rem')}
     ${align('center', 'right')}
-    ${props =>
-        props.theme.util.media({
+    ${({ theme }) =>
+        theme.util.media({
             xs: css`
                 display: none;
             `,
@@ -36,31 +35,31 @@ export const Home = styled(Link)`
     &:before {
         content: '$ cd ~';
     }
-    ${props => css`
+    ${({ theme }) => css`
         &:active,
         &:focus {
-            color: ${props.theme.color.link.altNormal};
+            color: ${theme.color.link.altNormal};
         }
     `}
-    ${props =>
-        fgColor(
-            props.theme.color.link.altNormal,
-            props.theme.color.link.altHover,
-            props.theme.link.hoverEffectDuration,
+    ${({ theme }) =>
+        foregroundColor(
+            theme.color.link.altNormal,
+            theme.color.link.altHover,
+            theme.link.hoverEffectDuration,
         )};
     text-decoration: none;
     flex-shrink: 0;
     width: 2.5rem;
     height: 2.5rem;
-    font-size: ${props => props.theme.font.small};
+    font-size: ${({ theme }) => theme.font.small};
     font-weight: bold;
 `;
 
 export const Item = styled(Link)`
-    ${props =>
-        fgColor(
-            props.theme.color.link.altNormal,
-            props.theme.color.link.altNormal,
+    ${({ theme }) =>
+        foregroundColor(
+            theme.color.link.altNormal,
+            theme.color.link.altNormal,
         )};
     text-transform: uppercase;
     text-decoration: none;
@@ -98,11 +97,11 @@ export const Hamburger = styled.div`
     ${align('center', 'center', 'column')};
     width: 2.5rem;
     height: 2.5rem;
-    ${group('0.2rem', null)};
+    ${gap('0.2rem', null)};
     padding: 0.5rem;
     cursor: pointer;
-    ${props =>
-        props.theme.util.media({
+    ${({ theme }) =>
+        theme.util.media({
             sm: css`
                 display: none;
             `,
@@ -116,7 +115,7 @@ export const Hamburger = styled.div`
 `;
 
 export const Bar = styled.div`
-    background-color: ${props => props.theme.color.backgroundPrimary};
+    background-color: ${({ theme }) => theme.color.backgroundPrimary};
     height: 10px;
     width: 100%;
     display: block;
@@ -126,7 +125,7 @@ export const MobileItems = styled.nav<{ open: boolean }>`
     background-color: white;
     position: absolute;
     top: 100%;
-    right: ${props => (props.open ? '0' : '-100%')};
+    right: ${({ open }) => (open ? '0' : '-100%')};
     width: 100%;
     height: 100vh;
     overflow: hidden;
@@ -138,9 +137,9 @@ export const MobileItem = styled(Link)`
     position: relative;
     display: block;
     text-decoration: none;
-    ${props =>
-        fgColor(props.theme.color.textPrimary, props.theme.color.textPrimary)};
-    border-bottom: 1px solid ${props => props.theme.color.backgroundSecondary};
+    ${({ theme }) =>
+        foregroundColor(theme.color.textPrimary, theme.color.textPrimary)};
+    border-bottom: 1px solid ${({ theme }) => theme.color.backgroundSecondary};
 
     &:before {
         content: '';
@@ -150,7 +149,7 @@ export const MobileItem = styled(Link)`
         top: 0;
         left: 0;
         bottom: 0;
-        background-color: ${props => props.theme.color.link.normal};
+        background-color: ${({ theme }) => theme.color.link.normal};
         transition: width 200ms ease;
     }
 

@@ -1,7 +1,6 @@
 import styled from 'styled-components';
-import { backgroundCover } from '@bucket-of-bolts/styled-companion';
+import { backgroundCover, absoluteCover, align } from '@gannochenko/etc';
 import { Button } from '../Button';
-import { absoluteCover, align } from '@bucket-of-bolts/styled-companion/build';
 
 const cookies = require('../../../static/assets/aux/cookies.jpg') as string;
 

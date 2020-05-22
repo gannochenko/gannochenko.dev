@@ -3,7 +3,7 @@ import Img from 'gatsby-image';
 
 import { Link } from '../Link';
 import { Link as GatsbyLink } from 'gatsby';
-import { align } from '@bucket-of-bolts/styled-companion/build';
+import { align } from '@gannochenko/etc';
 import { Typography } from '../Typography';
 
 export const ProjectCardRoot = styled.div`

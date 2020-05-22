@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { backgroundCover } from '@bucket-of-bolts/styled-companion/build';
+import { backgroundCover } from '@gannochenko/etc';
 const image01 = require('../../../static/assets/404/01.jpg') as string;
 
 export const NotFoundFrameRoot = styled.div`

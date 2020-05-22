@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { align, group } from '@bucket-of-bolts/styled-companion';
+import { align, gap } from '@gannochenko/etc';
 
 export const Container = styled.footer`
     position: relative;
@@ -7,9 +7,9 @@ export const Container = styled.footer`
     padding: 4rem 1rem;
     ${align('center', 'center', 'column')}
 
-    background-color: ${props => props.theme.color.backgroundSecondary};
-    color: ${props => props.theme.color.textSecondary};
-    font-size: ${props => props.theme.font.small};
+    background-color: ${({ theme }) => theme.color.backgroundSecondary};
+    color: ${({ theme }) => theme.color.textSecondary};
+    font-size: ${({ theme }) => theme.font.small};
     font-weight: 300;
     overflow-x: hidden;
     overflow-y: hidden;
@@ -18,7 +18,7 @@ export const Container = styled.footer`
 export const Links = styled.div`
     display: flex;
     flex-shrink: 0;
-    ${group('1rem', '1rem')}
+    ${gap('1rem', '1rem')}
 `;
 
 export const Contacts = styled.div`
@@ -45,7 +45,7 @@ export const AT = styled.span<{ show: boolean }>`
 export const Info = styled.div`
     margin-top: 1rem;
     display: flex;
-    ${group(null, '1rem')};
+    ${gap(null, '1rem')};
 `;
 
 export const NoWrap = styled.div`

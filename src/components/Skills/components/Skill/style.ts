@@ -5,7 +5,7 @@ import {
     round,
     align,
     absoluteCover,
-} from '@bucket-of-bolts/styled-companion';
+} from '@gannochenko/etc';
 
 const factor = 1.5;
 const height = 4.2;

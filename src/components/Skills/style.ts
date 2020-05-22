@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { align, group } from '@bucket-of-bolts/styled-companion';
+import { align, gap } from '@gannochenko/etc';
 
 const factor = 1.5;
 const height = 4;
@@ -11,10 +11,9 @@ export const SkillsContainer = styled.div`
 
 export const InnerContainer = styled.div`
     ${align('top', 'center')}
-    ${group('1rem')}
+    ${gap('1rem')}
 `;
 
 export const SkillsOffset = styled.div`
     margin-top: ${factor * Math.round(height / 2)}rem;
-    //margin-bottom: -0.5rem;
 `;
