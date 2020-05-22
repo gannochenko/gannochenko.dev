@@ -4,7 +4,6 @@
     "version": "1.0.0",
     "author": "Sergei Gannochenko <gannochenko.sv@gmail.com>",
     "dependencies": {
-        "@bucket-of-bolts/styled-companion": "^1.0.14",
         "@gannochenko/etc": "^1.0.3",
         "@gannochenko/ui": "^1.0.14",
         "@mdx-js/mdx": "^1.5.7",
