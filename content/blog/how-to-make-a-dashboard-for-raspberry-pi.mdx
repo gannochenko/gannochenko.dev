@@ -18,14 +18,9 @@ import { Container } from 'components/Container';
 
 Once upon a time...
 
-I was not able to build ARM Docker images on my Mac, since I ran into this issue:
-https://github.com/nodejs/docker-node/issues/873
-
-But, I have a virtual machine...
-
-```bash
-sudo printf "\n{\n   \"experimental\": true\n}\n" >> /etc/docker/daemon.json;
-```
+I was not able to build ARM images on both Mac and Linux virtual machine I have, since I ran into some issues on both.
+`docker build --platform linux/arm64` did not help as well.
+So I have decided to not to spend another decade trying to solve the issue, and just build the image on raspberry pi itself.
 
 ```bash
 sudo stress --cpu 8 --timeout 20
