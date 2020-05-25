@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { fgColor } from '@bucket-of-bolts/styled-companion';
+import { foregroundColor } from '@gannochenko/etc';
 import { Link as GatsbyLink } from 'gatsby';
 import { FunctionComponent } from 'react';
 
@@ -23,7 +23,7 @@ const fgColors = ({ bright, theme }: PropLinks) => {
         `;
     }
 
-    return fgColor(
+    return foregroundColor(
         theme.color.link.normal,
         theme.color.link.hover,
         theme.link.hoverEffectDuration,
