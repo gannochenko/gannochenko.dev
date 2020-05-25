@@ -1,6 +1,7 @@
-import { ObjectLiteral } from '../type';
+// import { ObjectLiteral } from '../type';
 import { colorWhite } from '@gannochenko/etc';
-import { grid, makeTheme, cell, media } from './util';
+// import { grid, cell, media } from './util';
+import { makeTheme } from '../lib/make-theme';
 
 export const theme = makeTheme({
     color: {
@@ -21,18 +22,12 @@ export const theme = makeTheme({
     },
     grid: {
         resolution: 12,
-        breakpoints: {
-            xs: [null, 767],
-            sm: [768, 991],
-            md: [992, 1199],
-            lg: [1200, null],
-        },
     },
     fontFamily: {
         roboto: 'Roboto, sans-serif',
         raleway: 'Raleway, sans-serif',
     },
-    font: {
+    fontSize: {
         large: '1.6rem',
         medium: '1.4rem',
         bigger: '1.2rem',
@@ -40,11 +35,11 @@ export const theme = makeTheme({
         small: '0.8rem',
         micro: '0.6rem',
     },
-    util: {
-        media: (rules: ObjectLiteral<string>) => media(rules, theme),
-        grid: (config: ObjectLiteral<string>) => grid(config, theme),
-        cell: (config: ObjectLiteral<string>) => cell(config, theme),
-    },
+    // util: {
+    //     media: (rules: ObjectLiteral<string>) => media(rules, theme),
+    //     grid: (config: ObjectLiteral<string>) => grid(config, theme),
+    //     cell: (config: ObjectLiteral<string>) => cell(config, theme),
+    // },
     zIndex: {
         everest: 1000,
     },
