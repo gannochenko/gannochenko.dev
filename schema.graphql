@@ -1264,6 +1264,9 @@ enum FileFieldsEnum {
     childMdx___rawBody
     childMdx___fileAbsolutePath
     childMdx___frontmatter___title
+    childMdx___frontmatter___description
+    childMdx___frontmatter___preview
+    childMdx___frontmatter___keywords
     childMdx___frontmatter___path
     childMdx___frontmatter___date
     childMdx___frontmatter___published
@@ -3018,6 +3021,9 @@ enum MdxFieldsEnum {
     rawBody
     fileAbsolutePath
     frontmatter___title
+    frontmatter___description
+    frontmatter___preview
+    frontmatter___keywords
     frontmatter___path
     frontmatter___date
     frontmatter___published
@@ -3474,6 +3480,9 @@ input MdxFilterInput {
 
 type MdxFrontmatter {
     title: String!
+    description: String
+    preview: String
+    keywords: String
     path: String
     date(
         """
@@ -3506,6 +3515,9 @@ type MdxFrontmatter {
 
 input MdxFrontmatterFilterInput {
     title: StringQueryOperatorInput
+    description: StringQueryOperatorInput
+    preview: StringQueryOperatorInput
+    keywords: StringQueryOperatorInput
     path: StringQueryOperatorInput
     date: DateQueryOperatorInput
     published: BooleanQueryOperatorInput
@@ -3984,6 +3996,7 @@ enum SiteFieldsEnum {
     siteMetadata___title
     siteMetadata___description
     siteMetadata___author
+    siteMetadata___keywords
     polyfill
     pathPrefix
     buildTime
@@ -4051,11 +4064,27 @@ input SitePageContextFilterInput {
 type SitePageContextFrontmatter {
     title: String
     show_title: Int
+    images: [SitePageContextFrontmatterImages]
 }
 
 input SitePageContextFrontmatterFilterInput {
     title: StringQueryOperatorInput
     show_title: IntQueryOperatorInput
+    images: SitePageContextFrontmatterImagesFilterListInput
+}
+
+type SitePageContextFrontmatterImages {
+    image: String
+    is_cover: Int
+}
+
+input SitePageContextFrontmatterImagesFilterInput {
+    image: StringQueryOperatorInput
+    is_cover: IntQueryOperatorInput
+}
+
+input SitePageContextFrontmatterImagesFilterListInput {
+    elemMatch: SitePageContextFrontmatterImagesFilterInput
 }
 
 type SitePageEdge {
@@ -4159,6 +4188,9 @@ enum SitePageFieldsEnum {
     context___id
     context___frontmatter___title
     context___frontmatter___show_title
+    context___frontmatter___images
+    context___frontmatter___images___image
+    context___frontmatter___images___is_cover
     pluginCreator___id
     pluginCreator___parent___id
     pluginCreator___parent___parent___id
@@ -4215,10 +4247,15 @@ enum SitePageFieldsEnum {
     pluginCreator___pluginOptions___gatsbyRemarkPlugins
     pluginCreator___pluginOptions___gatsbyRemarkPlugins___resolve
     pluginCreator___pluginOptions___short_name
+    pluginCreator___pluginOptions___description
     pluginCreator___pluginOptions___start_url
     pluginCreator___pluginOptions___background_color
     pluginCreator___pluginOptions___theme_color
     pluginCreator___pluginOptions___display
+    pluginCreator___pluginOptions___categories
+    pluginCreator___pluginOptions___icon
+    pluginCreator___pluginOptions___cache_busting_mode
+    pluginCreator___pluginOptions___workboxConfig___globPatterns
     pluginCreator___pluginOptions___trackingId
     pluginCreator___pluginOptions___head
     pluginCreator___pluginOptions___anonymize
@@ -4421,7 +4458,6 @@ enum SitePluginFieldsEnum {
     pluginOptions___gatsbyRemarkPlugins___resolve
     pluginOptions___gatsbyRemarkPlugins___options___name
     pluginOptions___gatsbyRemarkPlugins___options___maxWidth
-    pluginOptions___gatsbyRemarkPlugins___options___sizeByPixelDensity
     pluginOptions___gatsbyRemarkPlugins___options___pathPrefix
     pluginOptions___gatsbyRemarkPlugins___options___wrapperStyle
     pluginOptions___gatsbyRemarkPlugins___options___backgroundColor
@@ -4433,10 +4469,15 @@ enum SitePluginFieldsEnum {
     pluginOptions___gatsbyRemarkPlugins___options___loading
     pluginOptions___gatsbyRemarkPlugins___options___disableBgImageOnAlpha
     pluginOptions___short_name
+    pluginOptions___description
     pluginOptions___start_url
     pluginOptions___background_color
     pluginOptions___theme_color
     pluginOptions___display
+    pluginOptions___categories
+    pluginOptions___icon
+    pluginOptions___cache_busting_mode
+    pluginOptions___workboxConfig___globPatterns
     pluginOptions___trackingId
     pluginOptions___head
     pluginOptions___anonymize
@@ -4566,10 +4607,15 @@ type SitePluginPluginOptions {
     defaultLayouts: SitePluginPluginOptionsDefaultLayouts
     gatsbyRemarkPlugins: [SitePluginPluginOptionsGatsbyRemarkPlugins]
     short_name: String
+    description: String
     start_url: String
     background_color: String
     theme_color: String
     display: String
+    categories: [String]
+    icon: String
+    cache_busting_mode: String
+    workboxConfig: SitePluginPluginOptionsWorkboxConfig
     trackingId: String
     head: Boolean
     anonymize: Boolean
@@ -4594,10 +4640,15 @@ input SitePluginPluginOptionsFilterInput {
     defaultLayouts: SitePluginPluginOptionsDefaultLayoutsFilterInput
     gatsbyRemarkPlugins: SitePluginPluginOptionsGatsbyRemarkPluginsFilterListInput
     short_name: StringQueryOperatorInput
+    description: StringQueryOperatorInput
     start_url: StringQueryOperatorInput
     background_color: StringQueryOperatorInput
     theme_color: StringQueryOperatorInput
     display: StringQueryOperatorInput
+    categories: StringQueryOperatorInput
+    icon: StringQueryOperatorInput
+    cache_busting_mode: StringQueryOperatorInput
+    workboxConfig: SitePluginPluginOptionsWorkboxConfigFilterInput
     trackingId: StringQueryOperatorInput
     head: BooleanQueryOperatorInput
     anonymize: BooleanQueryOperatorInput
@@ -4623,7 +4674,6 @@ input SitePluginPluginOptionsGatsbyRemarkPluginsFilterListInput {
 type SitePluginPluginOptionsGatsbyRemarkPluginsOptions {
     name: String
     maxWidth: Int
-    sizeByPixelDensity: Boolean
     pathPrefix: String
     wrapperStyle: String
     backgroundColor: String
@@ -4639,7 +4689,6 @@ type SitePluginPluginOptionsGatsbyRemarkPluginsOptions {
 input SitePluginPluginOptionsGatsbyRemarkPluginsOptionsFilterInput {
     name: StringQueryOperatorInput
     maxWidth: IntQueryOperatorInput
-    sizeByPixelDensity: BooleanQueryOperatorInput
     pathPrefix: StringQueryOperatorInput
     wrapperStyle: StringQueryOperatorInput
     backgroundColor: StringQueryOperatorInput
@@ -4686,6 +4735,14 @@ input SitePluginPluginOptionsPluginsPluginOptionsFilterInput {
     name: StringQueryOperatorInput
 }
 
+type SitePluginPluginOptionsWorkboxConfig {
+    globPatterns: [String]
+}
+
+input SitePluginPluginOptionsWorkboxConfigFilterInput {
+    globPatterns: StringQueryOperatorInput
+}
+
 input SitePluginSortInput {
     fields: [SitePluginFieldsEnum]
     order: [SortOrderEnum] = [ASC]
@@ -4695,12 +4752,14 @@ type SiteSiteMetadata {
     title: String
     description: String
     author: String
+    keywords: [String]
 }
 
 input SiteSiteMetadataFilterInput {
     title: StringQueryOperatorInput
     description: StringQueryOperatorInput
     author: StringQueryOperatorInput
+    keywords: StringQueryOperatorInput
 }
 
 input SiteSortInput {
