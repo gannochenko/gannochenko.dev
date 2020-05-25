@@ -1,3 +1,5 @@
+import { ObjectLiteral } from '../type';
+
 export interface Graphics {
     source?: string;
     author?: string;
@@ -12,3 +14,23 @@ export interface Node {
         graphics: Graphics[];
     };
 }
+
+export type ThemeInputType = {
+    breakpoints?: {
+        values: ObjectLiteral<number>;
+        unit?: string;
+    };
+};
+
+export type ThemeType = Required<ThemeInputType> &
+    ThemeCacheType &
+    ObjectLiteral;
+
+type ThemeCacheType = {
+    cache: {
+        breakpoints: {
+            values: number[];
+            keys: string[];
+        } & ObjectLiteral;
+    } & ObjectLiteral;
+};
