@@ -20,7 +20,7 @@ export type ThemeInputType = {
         values: ObjectLiteral<number>;
         unit?: string;
     };
-    utils?: ObjectLiteral;
+    util?: ObjectLiteral;
 } & ObjectLiteral;
 
 export type ThemeType = Required<ThemeInputType> &

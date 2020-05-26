@@ -1,4 +1,5 @@
 import { ThemeType } from './type';
+import { ObjectLiteral } from '../type';
 
 const edgeValue = 0.05;
 
@@ -69,3 +70,19 @@ export const breakpointOnly = (
     breakpoint: string,
     prefix = '@media',
 ) => breakpointBetween(theme, breakpoint, breakpoint, prefix);
+
+export const media = (theme: ThemeType, config: ObjectLiteral) =>
+    Object.keys(config).reduce((result, rule) => {
+        const css = config[rule];
+        if (rule[0] === '>') {
+            const bp = rule.substr(1);
+            result += `${breakpointUp(theme, bp)} { ${css} };`;
+        } else if (rule[0] === '<') {
+            const bp = rule.substr(1);
+            result += `${breakpointDown(theme, bp)} { ${css} };`;
+        } else {
+            result += `${breakpointOnly(theme, rule)} { ${css} };`;
+        }
+
+        return result;
+    }, '');

@@ -4,7 +4,9 @@ import {
     breakpointDown,
     breakpointBetween,
     breakpointOnly,
+    media,
 } from './media';
+import { ObjectLiteral } from '../type';
 
 export const makeTheme = (theme: ThemeInputType) => {
     theme = theme || {};
@@ -27,8 +29,8 @@ export const makeTheme = (theme: ThemeInputType) => {
 
     const resultTheme = theme as ThemeType;
 
-    resultTheme.utils = {
-        ...resultTheme.utils,
+    resultTheme.util = {
+        ...resultTheme.util,
         breakpointUp: (breakpoint: string, prefix?: string) =>
             breakpointUp(resultTheme, breakpoint, prefix),
         breakpointDown: (breakpoint: string, prefix?: string) =>
@@ -46,6 +48,7 @@ export const makeTheme = (theme: ThemeInputType) => {
                 breakpointEnd,
                 prefix,
             ),
+        media: (config: ObjectLiteral) => media(resultTheme, config),
     };
 
     resultTheme.cache = {
