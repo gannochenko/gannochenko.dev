@@ -102,13 +102,7 @@ export const Hamburger = styled.div`
     cursor: pointer;
     ${({ theme }) =>
         theme.util.media({
-            sm: css`
-                display: none;
-            `,
-            md: css`
-                display: none;
-            `,
-            lg: css`
+            '>sm': css`
                 display: none;
             `,
         })}

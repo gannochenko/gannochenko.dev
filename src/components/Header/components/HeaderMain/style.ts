@@ -61,16 +61,12 @@ export const Data = styled.div`
     ${align('center', 'center', 'column')}
     ${({ theme }) =>
         theme.util.media({
-            md: expandVertically,
-            lg: expandVertically,
+            '>md': expandVertically,
         })};
     padding: 2rem 1rem;
     ${({ theme }) =>
         theme.util.media({
-            sm: css`
-                padding-top: 4rem;
-            `,
-            xs: css`
+            '<sm': css`
                 padding-top: 4rem;
             `,
         })};
@@ -96,8 +92,7 @@ export const Arrow = withEffects(styled.div<{ theme: typeof theme }>`
     display: none;
     ${({ theme }) =>
         theme.util.media({
-            lg: 'display: block;',
-            md: 'display: block;',
+            '>md': 'display: block;',
         })}
 
     // @ts-ignore

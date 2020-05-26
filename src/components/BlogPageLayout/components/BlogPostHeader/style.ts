@@ -32,8 +32,7 @@ export const Title = styled.h1`
     font-weight: 700;
     ${({ theme }) =>
         theme.util.media({
-            sm: `font-size: 1.5rem;`,
-            xs: `font-size: 1.5rem;`,
+            '<sm': `font-size: 1.5rem;`,
         })}
 `;
 

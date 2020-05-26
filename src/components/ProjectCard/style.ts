@@ -19,13 +19,7 @@ export const ProjectCardRoot = styled.div`
 
 export const Image = styled(Img)`
     background-color: #c4c4c4;
-    ${({ theme }) =>
-        theme.util.media({
-            lg: `max-height: 10rem;`,
-            md: `max-height: 15rem;`,
-            sm: `max-height: 15rem;`,
-            xs: `max-height: 10rem;`,
-        })}
+    max-height: 10rem;
 `;
 
 export const Data = styled.div`
@@ -47,9 +41,7 @@ export const Title = styled(Typography).attrs({ h2: true })`
     font-size: ${({ theme }) => theme.fontSize.standard};
     ${({ theme }) =>
         theme.util.media({
-            md: 'min-height: 5rem;',
-            sm: 'min-height: 0;',
-            xs: 'min-height: 0;',
+            '<md': 'min-height: 5rem;',
         })}
 `;
 

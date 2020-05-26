@@ -33,7 +33,6 @@ export const Left = styled.div`
     position: relative;
     ${({ theme }) =>
         theme.util.media({
-            sm: `display: none;`,
-            xs: `display: none;`,
+            '<sm': 'display: none;',
         })}
 `;
