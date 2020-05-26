@@ -35,6 +35,14 @@ export const theme = makeTheme({
         small: '0.8rem',
         micro: '0.6rem',
     },
+    breakpoints: {
+        values: {
+            xs: 0,
+            sm: 770,
+            md: 990,
+            lg: 1200,
+        },
+    },
     // util: {
     //     media: (rules: ObjectLiteral<string>) => media(rules, theme),
     //     grid: (config: ObjectLiteral<string>) => grid(config, theme),

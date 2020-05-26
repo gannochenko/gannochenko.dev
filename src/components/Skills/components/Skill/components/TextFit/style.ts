@@ -8,7 +8,7 @@ export const TextFitContainer = styled.div<Props>`
     padding: 2.3rem 0.5rem;
     ${align('center', 'center')};
     font-size: ${({ theme, size }) =>
-        size === 'small' ? theme.font.small : theme.font.standard};
+        size === 'small' ? theme.fontSize.small : theme.fontSize.standard};
     text-align: center;
     line-height: 1.1;
 `;

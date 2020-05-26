@@ -32,7 +32,7 @@ export const Picture = styled.div`
 
 export const Text = styled.div`
     padding: 0.5rem 1rem;
-    font-size: ${({ theme }) => theme.font.small};
+    font-size: ${({ theme }) => theme.fontSize.small};
     line-height: 1.5;
     position: relative;
 `;
@@ -55,7 +55,7 @@ export const Copyright = styled.div`
     ${absoluteCover()}
     background-color: white;
     color: ${({ theme }) => theme.color.secondary};
-    font-size: ${({ theme }) => theme.font.micro};
+    font-size: ${({ theme }) => theme.fontSize.micro};
     ${align('center', 'center', 'column')}
     transition: opacity 200ms ease;
 `;

@@ -33,13 +33,13 @@ const fgColors = ({ bright, theme }: PropLinks) => {
 export const GatsbyLinkStyled = styled(GatsbyLink)<PropLinks>`
     ${props => fgColors(props)};
     font-size: ${({ theme, fontSize }) =>
-        fontSize ? theme.font[fontSize] : 'inherit'};
+        fontSize ? theme.fontSize[fontSize] : 'inherit'};
 `;
 
 export const LinkStyled = styled.a<PropLinks>`
     ${props => fgColors(props)};
     font-size: ${({ theme, fontSize }) =>
-        fontSize ? theme.font[fontSize] : 'inherit'};
+        fontSize ? theme.fontSize[fontSize] : 'inherit'};
 `;
 
 export const Link: FunctionComponent<PropLinks> = props => {

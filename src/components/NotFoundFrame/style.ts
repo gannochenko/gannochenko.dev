@@ -24,7 +24,7 @@ export const Code = styled.div`
 `;
 
 export const Explanation = styled.div`
-    font-size: ${({ theme }) => theme.font.bigger};
+    font-size: ${({ theme }) => theme.fontSize.bigger};
     line-height: 1.8;
     margin-top: 1rem;
 `;

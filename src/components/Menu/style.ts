@@ -51,7 +51,7 @@ export const Home = styled(Link)`
     flex-shrink: 0;
     width: 2.5rem;
     height: 2.5rem;
-    font-size: ${({ theme }) => theme.font.small};
+    font-size: ${({ theme }) => theme.fontSize.small};
     font-weight: bold;
 `;
 
@@ -65,7 +65,7 @@ export const Item = styled(Link)`
     text-decoration: none;
     position: relative;
     padding-bottom: 3px;
-    font-size: ${props => props.theme.font.small};
+    font-size: ${props => props.theme.fontSize.small};
     font-weight: bold;
 
     &:after {

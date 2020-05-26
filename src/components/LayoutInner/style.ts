@@ -8,5 +8,5 @@ export const Body = styled.div`
 
 export const BackLink = styled(Link)`
     text-decoration: none;
-    font-size: ${props => props.theme.font.small};
+    font-size: ${props => props.theme.fontSize.small};
 `;

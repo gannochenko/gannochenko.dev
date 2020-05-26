@@ -3,7 +3,7 @@ import { colorEdward, foregroundColor } from '@gannochenko/etc';
 
 export const H1 = styled.h1`
     margin: 4rem 0 2rem 0;
-    font-size: ${({ theme }) => theme.font.large};
+    font-size: ${({ theme }) => theme.fontSize.large};
 `;
 
 export const H2 = styled.h2`

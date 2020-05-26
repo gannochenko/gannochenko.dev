@@ -12,6 +12,18 @@ import { withEffects } from '@gannochenko/ui';
 const arrow = require('./assets/arrow.svg') as string;
 import { theme } from '../../../../style';
 
+////
+const res = theme.util.media({
+    sm: css`
+        padding-top: 4rem;
+    `,
+    xs: css`
+        padding-top: 4rem;
+    `,
+});
+console.log('MEDIA');
+console.log(res);
+
 const bouncedAnimation = keyframes`
   from {
     transform: translateY(0);
@@ -99,26 +111,28 @@ export const DataColumn = styled.div`
     position: relative;
 `;
 
+// ${({ theme }) =>
+// theme.util.grid({
+//     guttersW: { xs: '0', all: '1rem' },
+//     guttersH: { xs: '1.5rem' },
+// })}
 export const HelloBlock = styled.div`
     color: #fff;
-    ${({ theme }) =>
-        theme.util.grid({
-            guttersW: { xs: '0', all: '1rem' },
-            guttersH: { xs: '1.5rem' },
-        })}
+
     ${align('center', 'left')}
     width: 100%;
 `;
 
+// ${({ theme }) => theme.util.cell({ xs: 12, all: 4 })}
 export const HelloLeft = withEffects(styled.div`
-    ${({ theme }) => theme.util.cell({ xs: 12, all: 4 })}
+    
     ${align('top', 'center')}
     // @ts-ignore
     ${props => props.runStandardEffect()}
 `);
 
+// ${({ theme }) => theme.util.cell({ xs: 12, all: 8 })}
 export const HelloRight = styled.div`
-    ${({ theme }) => theme.util.cell({ xs: 12, all: 8 })}
     ${({ theme }) => theme.util.media({ xs: align('top', 'center', 'column') })}
 `;
 
@@ -126,7 +140,7 @@ export const NameBlock = withEffects(styled.h1`
     font-family: ${({ theme }) => theme.fontFamily.raleway};
     font-weight: 600;
     margin: 0 0 0.5rem 0;
-    font-size: ${props => props.theme.font.large};
+    font-size: ${props => props.theme.fontSize.large};
     letter-spacing: 0.05rem;
     ${({ theme }) => theme.util.media({ xs: 'text-align: center;' })}
     // @ts-ignore

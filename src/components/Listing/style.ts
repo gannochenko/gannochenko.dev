@@ -11,7 +11,7 @@ export const Copy = styled.div`
     &:before {
         content: 'Copy';
     }
-    font-size: ${({ theme }) => theme.font.small};
+    font-size: ${({ theme }) => theme.fontSize.small};
     opacity: 0.5;
     &:hover {
         opacity: 1;

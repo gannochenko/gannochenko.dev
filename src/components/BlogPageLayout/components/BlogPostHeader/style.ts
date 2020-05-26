@@ -40,7 +40,7 @@ export const Title = styled.h1`
 export const Date = styled.div`
     text-align: right;
     color: ${props => props.theme.color.backgroundSecondary};
-    font-size: ${props => props.theme.font.standard};
+    font-size: ${props => props.theme.fontSize.standard};
     font-weight: bold;
     background-color: white;
     padding: 0.3rem 1rem;
@@ -49,7 +49,7 @@ export const Date = styled.div`
 export const InfoStripeContainer = styled(Container)`
     display: flex;
     justify-content: space-between;
-    font-size: ${({ theme }) => theme.font.small};
+    font-size: ${({ theme }) => theme.fontSize.small};
 `;
 
 export const DateStripe = styled.div`

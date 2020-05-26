@@ -44,7 +44,7 @@ export const ViewPost = styled(Link)`
 export const Title = styled(Typography).attrs({ h2: true })`
     margin: 0 0 0.5rem 0;
     min-height: 4rem;
-    font-size: ${({ theme }) => theme.font.standard};
+    font-size: ${({ theme }) => theme.fontSize.standard};
     ${({ theme }) =>
         theme.util.media({
             md: 'min-height: 5rem;',
@@ -65,5 +65,5 @@ export const TitleLink = styled(GatsbyLink)`
 `;
 
 export const Date = styled.div`
-    font-size: ${({ theme }) => theme.font.small};
+    font-size: ${({ theme }) => theme.fontSize.small};
 `;

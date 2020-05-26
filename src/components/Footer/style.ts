@@ -9,7 +9,7 @@ export const Container = styled.footer`
 
     background-color: ${({ theme }) => theme.color.backgroundSecondary};
     color: ${({ theme }) => theme.color.textSecondary};
-    font-size: ${({ theme }) => theme.font.small};
+    font-size: ${({ theme }) => theme.fontSize.small};
     font-weight: 300;
     overflow-x: hidden;
     overflow-y: hidden;
@@ -25,7 +25,7 @@ export const Contacts = styled.div`
     display: flex;
     flex-shrink: 0;
     align-items: center;
-    font-size: ${({ theme }) => theme.font.bigger};
+    font-size: ${({ theme }) => theme.fontSize.bigger};
 `;
 
 export const Path = styled.div`

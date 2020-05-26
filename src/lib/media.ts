@@ -6,7 +6,7 @@ const edgeValue = 0.05;
 export const breakpointUp = (
     theme: ThemeType,
     breakpoint: string,
-    prefix = '@media',
+    prefix = '@media ',
 ) => {
     const { values, unit } = theme.breakpoints;
 
@@ -20,7 +20,7 @@ export const breakpointUp = (
 export const breakpointDown = (
     theme: ThemeType,
     breakpoint: string,
-    prefix = '@media',
+    prefix = '@media ',
 ) => {
     const { keys } = theme.cache.breakpoints;
     const { values, unit } = theme.breakpoints;
@@ -48,7 +48,7 @@ export const breakpointBetween = (
     theme: ThemeType,
     breakpointStart: string,
     breakpointEnd: string,
-    prefix = '@media',
+    prefix = '@media ',
 ) => {
     const { keys } = theme.cache.breakpoints;
     const { values, unit } = theme.breakpoints;
@@ -68,7 +68,7 @@ export const breakpointBetween = (
 export const breakpointOnly = (
     theme: ThemeType,
     breakpoint: string,
-    prefix = '@media',
+    prefix = '@media ',
 ) => breakpointBetween(theme, breakpoint, breakpoint, prefix);
 
 export const media = (theme: ThemeType, config: ObjectLiteral) =>
@@ -76,12 +76,12 @@ export const media = (theme: ThemeType, config: ObjectLiteral) =>
         const css = config[rule];
         if (rule[0] === '>') {
             const bp = rule.substr(1);
-            result += `${breakpointUp(theme, bp)} { ${css} };`;
+            result += `${breakpointUp(theme, bp)} { ${css} }; `;
         } else if (rule[0] === '<') {
             const bp = rule.substr(1);
-            result += `${breakpointDown(theme, bp)} { ${css} };`;
+            result += `${breakpointDown(theme, bp)} { ${css} }; `;
         } else {
-            result += `${breakpointOnly(theme, rule)} { ${css} };`;
+            result += `${breakpointOnly(theme, rule)} { ${css} }; `;
         }
 
         return result;

@@ -19,7 +19,7 @@ export const Title = styled.div`
 `;
 
 export const TitleLink = styled(GatsbyLink)`
-    //font-size: ${({ theme }) => theme.font.bigger};
+    //font-size: ${({ theme }) => theme.fontSize.bigger};
     font-weight: 600;
     color: inherit;
     &:focus,
@@ -32,7 +32,7 @@ export const TitleLink = styled(GatsbyLink)`
 `;
 
 export const Date = styled.div`
-    font-size: ${({ theme }) => theme.font.small};
+    font-size: ${({ theme }) => theme.fontSize.small};
     background-color: ${({ theme }) => theme.color.link.normal};
     color: white;
     padding: 0.2rem 0.5rem;
@@ -44,7 +44,7 @@ export const Date = styled.div`
 export const Preview = styled(GatsbyLink)`
     margin-top: 1rem;
     color: ${({ theme }) => theme.color.secondary};
-    font-size: ${({ theme }) => theme.font.standard};
+    font-size: ${({ theme }) => theme.fontSize.standard};
     line-height: 1.5;
     display: block;
     text-decoration: none;
