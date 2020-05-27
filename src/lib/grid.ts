@@ -1,62 +1,19 @@
-import { op } from '@gannochenko/etc';
-import { Theme } from './type';
 import { ObjectLiteral } from '../type';
+import { ThemeType } from './type';
+import { op } from './util';
 
 const toHalf = (x: number) => x / 2;
 const negate = (x: number) => x * -1;
-
-export const media = (config: ObjectLiteral = {}, theme: Theme = {}) => {
-    let result = '';
-
-    if ('all' in config) {
-        result += config.all;
-    }
-
-    Object.keys(theme.breakpoints).forEach(bp => {
-        const mediaInfo = (theme.media as ObjectLiteral)[bp];
-        if (bp in config) {
-            result += `
-                @media screen and ${mediaInfo} {
-                    ${config[bp]}
-                }
-            `;
-        }
-    });
-
-    return result;
+const makeConstraintMix = (width: string) => {
+    return `
+        flex-basis: ${width};
+        width: ${width};
+    `;
 };
+const calcWidth = (width: number, resolution: number) =>
+    Math.floor((width / resolution) * 1000) * 0.1;
 
-export const makeTheme = (theme: ObjectLiteral) => {
-    theme = theme || {};
-    theme.resolution = theme.resolution || 12;
-    theme.breakpoints = theme.breakpoints || {
-        xs: [null, 767], // max-width: 767
-        sm: [768, 991], // min-width: 768 and max-width: 991
-        md: [992, 1199], // min-width: 992 and max-width: 1199
-        lg: [1200, null], // min-width: 1200
-    };
-
-    const bpMedia: { [k: string]: string } = {};
-    Object.keys(theme.breakpoints).forEach((bp: string) => {
-        const item = (theme.breakpoints as { [k: string]: (number | null)[] })[
-            bp
-        ];
-        const range = [];
-        if (item[0]) {
-            range.push(`(min-width: ${item[0]}px)`);
-        }
-        if (item[1]) {
-            range.push(`(max-width: ${item[1]}px)`);
-        }
-        bpMedia[bp] = range.join(' and ');
-    });
-
-    theme.media = bpMedia;
-
-    return theme;
-};
-
-export const grid = (config: ObjectLiteral, theme: Theme = {}) => {
+export const grid = (theme: ThemeType, config: ObjectLiteral) => {
     let cssSelf = '';
     let cssChildren = '';
 
@@ -94,8 +51,8 @@ export const grid = (config: ObjectLiteral, theme: Theme = {}) => {
             `;
         }
 
-        Object.keys(theme.breakpoints).forEach(bp => {
-            const media = (theme.media as ObjectLiteral)[bp];
+        theme.cache.breakpoints.keys.forEach(bp => {
+            const media = theme.util.breakpointOnly(bp, '');
 
             if (guttersW) {
                 if (bp in guttersW) {
@@ -147,26 +104,18 @@ export const grid = (config: ObjectLiteral, theme: Theme = {}) => {
     `;
 };
 
-const makeConstraintMix = (width: string) => {
-    return `
-        flex-basis: ${width};
-        width: ${width};
-    `;
-};
-
-const calcWidth = (width: number, resolution: number) =>
-    Math.floor((width / resolution) * 1000) * 0.1;
-
-export const cell = (config: ObjectLiteral, theme: Theme = {}) => {
+export const cell = (theme: ThemeType, config: ObjectLiteral) => {
     let result = '';
 
-    const { resolution } = theme;
+    const {
+        grid: { resolution },
+    } = theme;
 
-    Object.keys(theme.breakpoints).forEach(bp => {
-        const media = (theme.media as ObjectLiteral)[bp];
+    theme.cache.breakpoints.keys.forEach(bp => {
+        const media = theme.util.breakpointOnly(bp, '');
+
         let width = '';
         if (bp in config) {
-            // todo: cache, but measure the performance
             width = makeConstraintMix(
                 `${calcWidth(config[bp] as number, resolution as number)}%`,
             );

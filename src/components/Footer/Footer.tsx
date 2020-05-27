@@ -4,7 +4,7 @@ import {
     Links,
     Contacts,
     Path,
-    FF,
+    END,
     AT,
     Info,
     NoWrap,
@@ -17,7 +17,8 @@ import { Link } from '../Link';
 
 export const Footer: FunctionComponent<{}> = () => {
     const [showAT, setShowAT] = useState(false);
-    const [showFF, setShowFF] = useState(false);
+    const [showFF, setShowFF] = useState(true);
+    const [showDEV, setShowDEV] = useState(false);
 
     return (
         <Container>
@@ -39,10 +40,10 @@ export const Footer: FunctionComponent<{}> = () => {
                         type="twitter"
                         src={links.twitter}
                         onMouseOver={() => {
-                            setShowFF(true);
+                            setShowDEV(true);
                         }}
                         onMouseOut={() => {
-                            setShowFF(false);
+                            setShowDEV(false);
                         }}
                     />
                     <Social
@@ -60,7 +61,11 @@ export const Footer: FunctionComponent<{}> = () => {
                     <Slash />
                 </SlashContainer>
                 <Path>
-                    <AT show={showAT}>@</AT>gannochenko<FF show={showFF}>ff</FF>
+                    <AT show={showAT}>@</AT>gannochenko
+                    <END show={showDEV || showFF}>
+                        {showFF && 'ff'}
+                        {showDEV && '_dev'}
+                    </END>
                 </Path>
             </Contacts>
             <Info>

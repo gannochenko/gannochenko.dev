@@ -1,6 +1,6 @@
-// import { ObjectLiteral } from '../type';
+import { ObjectLiteral } from '../type';
 import { colorWhite } from '@gannochenko/etc';
-// import { grid, cell, media } from './util';
+import { grid, cell } from '../lib/grid';
 import { makeTheme } from '../lib/make-theme';
 
 export const theme = makeTheme({
@@ -43,11 +43,10 @@ export const theme = makeTheme({
             lg: 1200,
         },
     },
-    // util: {
-    //     media: (rules: ObjectLiteral<string>) => media(rules, theme),
-    //     grid: (config: ObjectLiteral<string>) => grid(config, theme),
-    //     cell: (config: ObjectLiteral<string>) => cell(config, theme),
-    // },
+    util: {
+        grid: (config: ObjectLiteral<string>) => grid(theme, config),
+        cell: (config: ObjectLiteral<string>) => cell(theme, config),
+    },
     zIndex: {
         everest: 1000,
     },

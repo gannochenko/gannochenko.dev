@@ -32,7 +32,9 @@ export const Path = styled.div`
     ${({ theme }) => theme.util.media({ xs: 'display: none;' })}
 `;
 
-export const FF = styled.span<{ show: boolean }>`
+export const END = styled.div<{ show: boolean }>`
+    display: inline-block;
+    width: 2rem;
     opacity: ${props => (props.show ? '1' : '0')};
     transition: opacity 200ms ease;
 `;

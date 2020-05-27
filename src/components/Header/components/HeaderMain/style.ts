@@ -106,28 +106,26 @@ export const DataColumn = styled.div`
     position: relative;
 `;
 
-// ${({ theme }) =>
-// theme.util.grid({
-//     guttersW: { xs: '0', all: '1rem' },
-//     guttersH: { xs: '1.5rem' },
-// })}
 export const HelloBlock = styled.div`
     color: #fff;
-
+    ${({ theme }) =>
+        theme.util.grid({
+            guttersW: { xs: '0', all: '1rem' },
+            guttersH: { xs: '1.5rem' },
+        })}
     ${align('center', 'left')}
     width: 100%;
 `;
 
-// ${({ theme }) => theme.util.cell({ xs: 12, all: 4 })}
 export const HelloLeft = withEffects(styled.div`
-    
+    ${({ theme }) => theme.util.cell({ xs: 12, all: 4 })}
     ${align('top', 'center')}
     // @ts-ignore
     ${props => props.runStandardEffect()}
 `);
 
-// ${({ theme }) => theme.util.cell({ xs: 12, all: 8 })}
 export const HelloRight = styled.div`
+    ${({ theme }) => theme.util.cell({ xs: 12, all: 8 })}
     ${({ theme }) => theme.util.media({ xs: align('top', 'center', 'column') })}
 `;
 
