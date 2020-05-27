@@ -1,7 +1,5 @@
 import { ObjectLiteral } from '../type';
-import { colorWhite } from '@gannochenko/etc';
-import { grid, cell } from '../lib/grid';
-import { makeTheme } from '../lib/make-theme';
+import { colorWhite, makeTheme, grid, cell } from '@gannochenko/etc';
 
 export const theme = makeTheme({
     color: {

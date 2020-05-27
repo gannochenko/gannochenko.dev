@@ -1762,9 +1762,9 @@
   integrity sha512-6PYY5DVdAY1ifaQW6XYTnOMihmBVT27elqSjEoodchsGjzYlEsTQMcEhSud99kVawatyTZRTiVkJ/c6lwbQ7nA==
 
 "@gannochenko/etc@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@gannochenko/etc/-/etc-1.0.3.tgz#2319a179290b3ee6edab4a21b4e8847e092995fc"
-  integrity sha512-OafiwRUMhQUvfGwTf7zzZDM/Ql45rmQlOARuuDYCXDXfA9vGXq4XMsy0/1EKi0lGAS9biuUOlyZShUc6flq5og==
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@gannochenko/etc/-/etc-1.0.4.tgz#862b2e1996ef1d255cf48789ed8bc09398fe20d7"
+  integrity sha512-Z0RY/JP0ibQz7nXHJ5FFepQgMMqbBJpaSrXPqsRnCuu7BbF7nxZlGBP8/PEHPjFbV6zRrWoRvfWa8s2+Ws4MbQ==
   dependencies:
     "@m59/qs" "^2.0.3"
     naming-style "^1.0.1"
