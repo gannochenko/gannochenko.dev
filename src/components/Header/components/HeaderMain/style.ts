@@ -21,8 +21,6 @@ const res = theme.util.media({
         padding-top: 4rem;
     `,
 });
-console.log('MEDIA');
-console.log(res);
 
 const bouncedAnimation = keyframes`
   from {
