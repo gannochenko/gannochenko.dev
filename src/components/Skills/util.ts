@@ -8,8 +8,8 @@ export const detectRange = () => {
 
     const windowWidth = window.innerWidth;
     const {
-        grid: {
-            breakpoints: { xs, sm, md, lg },
+        breakpoints: {
+            values: { xs, sm, md, lg },
         },
     } = theme;
 

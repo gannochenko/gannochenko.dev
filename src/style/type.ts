@@ -1,3 +1,1 @@
-import { theme } from './theme';
-
-export type Theme = typeof theme;
+export const foo = 'bar';

@@ -1,5 +1,6 @@
 import { ObjectLiteral } from '../type';
 import { colorWhite, makeTheme, grid, cell } from '@gannochenko/etc';
+import { fontFamilyRaleway, fontFamilyRoboto } from './tokens';
 
 export const theme = makeTheme({
     color: {
@@ -14,16 +15,25 @@ export const theme = makeTheme({
             altHover: '#ce4f4f',
         },
         secondary: '#6c7a89',
+
+        text: {
+            primary: '#0a0a0a',
+            secondary: colorWhite,
+        },
+        background: {
+            primary: colorWhite,
+            secondary: '#0a0a0a',
+        },
+    },
+    typography: {
+        fontFamily: fontFamilyRoboto,
+        fontFamilyHeader: fontFamilyRaleway,
     },
     link: {
         hoverEffectDuration: '300ms',
     },
     grid: {
         resolution: 12,
-    },
-    fontFamily: {
-        roboto: 'Roboto, sans-serif',
-        raleway: 'Raleway, sans-serif',
     },
     fontSize: {
         large: '1.6rem',

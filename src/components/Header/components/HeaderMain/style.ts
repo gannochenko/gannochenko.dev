@@ -12,16 +12,6 @@ import { withEffects } from '@gannochenko/ui';
 const arrow = require('./assets/arrow.svg') as string;
 import { theme } from '../../../../style';
 
-////
-const res = theme.util.media({
-    sm: css`
-        padding-top: 4rem;
-    `,
-    xs: css`
-        padding-top: 4rem;
-    `,
-});
-
 const bouncedAnimation = keyframes`
   from {
     transform: translateY(0);
@@ -54,7 +44,7 @@ const expandVertically = css`
     overflow-y: hidden;
 `;
 export const Data = styled.div`
-    font-family: ${({ theme }) => theme.fontFamily.raleway};
+    font-family: ${({ theme }) => theme.typography.fontFamilyHeader};
     ${central()}
     ${align('center', 'center', 'column')}
     ${({ theme }) =>
@@ -128,7 +118,7 @@ export const HelloRight = styled.div`
 `;
 
 export const NameBlock = withEffects(styled.h1`
-    font-family: ${({ theme }) => theme.fontFamily.raleway};
+    font-family: ${({ theme }) => theme.typography.fontFamilyHeader};
     font-weight: 600;
     margin: 0 0 0.5rem 0;
     font-size: ${props => props.theme.fontSize.large};
