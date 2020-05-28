@@ -7,6 +7,9 @@ import { Link } from '../Link';
 import { Effect } from '@gannochenko/ui';
 
 export const BlogPostList: FunctionComponent<Props> = ({ data, showLink }) => {
+    console.log('data');
+    console.log(data);
+
     return (
         <BlogPostListContainer>
             <Posts>
