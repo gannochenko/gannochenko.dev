@@ -49,6 +49,7 @@ export const blogPageQuery = graphql`
                 date
                 keywords
                 description
+                published
                 images {
                     image {
                         childImageSharp {

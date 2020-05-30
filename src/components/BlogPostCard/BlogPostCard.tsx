@@ -36,7 +36,7 @@ export const BlogPostCard: FunctionComponent<Props> = ({ data }) => {
 
             <Preview to={realPath}>{preview || description}</Preview>
 
-            <ViewPost to={path} fontSize="small">
+            <ViewPost to={realPath} fontSize="small">
                 Read the post
             </ViewPost>
         </BlogPostCardRoot>
