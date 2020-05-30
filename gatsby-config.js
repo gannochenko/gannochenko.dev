@@ -73,7 +73,7 @@ module.exports = {
         {
             resolve: 'gatsby-plugin-sitemap',
             options: {
-                exclude: [`/blog-drafts*`, '/story/'],
+                exclude: ['/blog-drafts/', '/blog-drafts/*', '/story/'],
             },
         },
         'gatsby-plugin-netlify-cms',
