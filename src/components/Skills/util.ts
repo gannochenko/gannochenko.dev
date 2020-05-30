@@ -1,32 +1,14 @@
-import { theme } from '../../style';
+import { getBreakpointCodeByWidth, ThemeType } from '@gannochenko/etc';
 import { SkillItem } from './type';
 
-export const detectRange = () => {
+export const detectRange = (theme: ThemeType) => {
     if (typeof window === 'undefined') {
         return 'lg';
     }
 
     const windowWidth = window.innerWidth;
-    const {
-        breakpoints: {
-            values: { xs, sm, md, lg },
-        },
-    } = theme;
 
-    if (windowWidth < xs[1]!) {
-        return 'xs';
-    }
-    if (windowWidth > sm[0] && windowWidth < sm[1]) {
-        return 'sm';
-    }
-    if (windowWidth > md[0] && windowWidth < md[1]) {
-        return 'md';
-    }
-    if (windowWidth > lg[0]!) {
-        return 'lg';
-    }
-
-    return 'xs';
+    return getBreakpointCodeByWidth(theme, windowWidth);
 };
 
 export const getDimensions = (range: string) => {

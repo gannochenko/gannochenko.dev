@@ -1,4 +1,5 @@
 import React, { FunctionComponent, useEffect, useState, useMemo } from 'react';
+import { useTheme } from 'styled-components';
 import { throttle } from 'throttle-debounce';
 import { Props } from './type';
 
@@ -8,13 +9,15 @@ import { Skill } from './components/Skill';
 
 import { skills } from '../../skills/skills';
 import { detectRange, getGrid } from './util';
+import { ThemeType } from '@gannochenko/etc';
 
 export const Skills: FunctionComponent<Props> = ({
     type,
     enableEffect = true,
 }) => {
     const data = skills[type] || [];
-    const [range, setRange] = useState(detectRange());
+    const theme = useTheme() as ThemeType;
+    const [range, setRange] = useState(detectRange(theme));
 
     useEffect(() => {
         if (typeof window === 'undefined') {
@@ -22,7 +25,7 @@ export const Skills: FunctionComponent<Props> = ({
         }
 
         const onResize = throttle(200, () => {
-            const currentRange = detectRange();
+            const currentRange = detectRange(theme);
             if (range !== currentRange) {
                 setRange(currentRange);
             }
@@ -31,7 +34,7 @@ export const Skills: FunctionComponent<Props> = ({
         return () => {
             window.removeEventListener('resize', onResize);
         };
-    });
+    }, [theme]);
 
     const grid = useMemo(() => {
         return getGrid(data, range);

@@ -3730,26 +3730,6 @@
                         "defaultValue": null
                     },
                     {
-                        "name": "sourceText",
-                        "description": "",
-                        "type": {
-                            "kind": "INPUT_OBJECT",
-                            "name": "StringQueryOperatorInput",
-                            "ofType": null
-                        },
-                        "defaultValue": null
-                    },
-                    {
-                        "name": "source",
-                        "description": "",
-                        "type": {
-                            "kind": "INPUT_OBJECT",
-                            "name": "StringQueryOperatorInput",
-                            "ofType": null
-                        },
-                        "defaultValue": null
-                    },
-                    {
                         "name": "is_cover",
                         "description": "",
                         "type": {
@@ -3765,6 +3745,26 @@
                         "type": {
                             "kind": "INPUT_OBJECT",
                             "name": "IntQueryOperatorInput",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    },
+                    {
+                        "name": "sourceText",
+                        "description": "",
+                        "type": {
+                            "kind": "INPUT_OBJECT",
+                            "name": "StringQueryOperatorInput",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    },
+                    {
+                        "name": "source",
+                        "description": "",
+                        "type": {
+                            "kind": "INPUT_OBJECT",
+                            "name": "StringQueryOperatorInput",
                             "ofType": null
                         },
                         "defaultValue": null
@@ -7890,30 +7890,6 @@
                         "deprecationReason": null
                     },
                     {
-                        "name": "sourceText",
-                        "description": null,
-                        "args": [],
-                        "type": {
-                            "kind": "SCALAR",
-                            "name": "String",
-                            "ofType": null
-                        },
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
-                        "name": "source",
-                        "description": null,
-                        "args": [],
-                        "type": {
-                            "kind": "SCALAR",
-                            "name": "String",
-                            "ofType": null
-                        },
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
                         "name": "is_cover",
                         "description": null,
                         "args": [],
@@ -7932,6 +7908,30 @@
                         "type": {
                             "kind": "SCALAR",
                             "name": "Int",
+                            "ofType": null
+                        },
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
+                        "name": "sourceText",
+                        "description": null,
+                        "args": [],
+                        "type": {
+                            "kind": "SCALAR",
+                            "name": "String",
+                            "ofType": null
+                        },
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
+                        "name": "source",
+                        "description": null,
+                        "args": [],
+                        "type": {
+                            "kind": "SCALAR",
+                            "name": "String",
                             "ofType": null
                         },
                         "isDeprecated": false,
@@ -9446,18 +9446,6 @@
                         "deprecationReason": null
                     },
                     {
-                        "name": "childMdx___frontmatter___images___sourceText",
-                        "description": null,
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
-                        "name": "childMdx___frontmatter___images___source",
-                        "description": null,
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
                         "name": "childMdx___frontmatter___images___is_cover",
                         "description": null,
                         "isDeprecated": false,
@@ -9465,6 +9453,18 @@
                     },
                     {
                         "name": "childMdx___frontmatter___images___galleryId",
+                        "description": null,
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
+                        "name": "childMdx___frontmatter___images___sourceText",
+                        "description": null,
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
+                        "name": "childMdx___frontmatter___images___source",
                         "description": null,
                         "isDeprecated": false,
                         "deprecationReason": null
@@ -11830,18 +11830,6 @@
                         "deprecationReason": null
                     },
                     {
-                        "name": "frontmatter___images___sourceText",
-                        "description": null,
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
-                        "name": "frontmatter___images___source",
-                        "description": null,
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
                         "name": "frontmatter___images___is_cover",
                         "description": null,
                         "isDeprecated": false,
@@ -11849,6 +11837,18 @@
                     },
                     {
                         "name": "frontmatter___images___galleryId",
+                        "description": null,
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
+                        "name": "frontmatter___images___sourceText",
+                        "description": null,
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
+                        "name": "frontmatter___images___source",
                         "description": null,
                         "isDeprecated": false,
                         "deprecationReason": null
@@ -14511,21 +14511,21 @@
                         "defaultValue": null
                     },
                     {
-                        "name": "show_title",
-                        "description": "",
-                        "type": {
-                            "kind": "INPUT_OBJECT",
-                            "name": "IntQueryOperatorInput",
-                            "ofType": null
-                        },
-                        "defaultValue": null
-                    },
-                    {
                         "name": "images",
                         "description": "",
                         "type": {
                             "kind": "INPUT_OBJECT",
                             "name": "SitePageContextFrontmatterImagesFilterListInput",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    },
+                    {
+                        "name": "show_title",
+                        "description": "",
+                        "type": {
+                            "kind": "INPUT_OBJECT",
+                            "name": "IntQueryOperatorInput",
                             "ofType": null
                         },
                         "defaultValue": null
@@ -15826,18 +15826,6 @@
                         "deprecationReason": null
                     },
                     {
-                        "name": "show_title",
-                        "description": null,
-                        "args": [],
-                        "type": {
-                            "kind": "SCALAR",
-                            "name": "Int",
-                            "ofType": null
-                        },
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
                         "name": "images",
                         "description": null,
                         "args": [],
@@ -15849,6 +15837,18 @@
                                 "name": "SitePageContextFrontmatterImages",
                                 "ofType": null
                             }
+                        },
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
+                        "name": "show_title",
+                        "description": null,
+                        "args": [],
+                        "type": {
+                            "kind": "SCALAR",
+                            "name": "Int",
+                            "ofType": null
                         },
                         "isDeprecated": false,
                         "deprecationReason": null
@@ -17763,12 +17763,6 @@
                         "deprecationReason": null
                     },
                     {
-                        "name": "context___frontmatter___show_title",
-                        "description": null,
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
                         "name": "context___frontmatter___images",
                         "description": null,
                         "isDeprecated": false,
@@ -17782,6 +17776,12 @@
                     },
                     {
                         "name": "context___frontmatter___images___is_cover",
+                        "description": null,
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
+                        "name": "context___frontmatter___show_title",
                         "description": null,
                         "isDeprecated": false,
                         "deprecationReason": null
