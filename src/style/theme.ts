@@ -1,5 +1,7 @@
-import { ObjectLiteral } from '../type';
+import { useContext } from 'react';
+import { ThemeContext } from 'styled-components';
 import { colorWhite, makeTheme, grid, cell } from '@gannochenko/etc';
+import { ObjectLiteral } from '../type';
 import { fontFamilyRaleway, fontFamilyRoboto } from './tokens';
 
 export const theme = makeTheme({
@@ -59,3 +61,8 @@ export const theme = makeTheme({
         everest: 1000,
     },
 });
+
+export const useTheme = () => {
+    const theme = useContext(ThemeContext);
+    return theme || {};
+};

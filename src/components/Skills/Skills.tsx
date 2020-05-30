@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useEffect, useState, useMemo } from 'react';
-import { useTheme } from 'styled-components';
 import { throttle } from 'throttle-debounce';
+import { useTheme } from '../../style';
 import { Props } from './type';
 
 import { SkillsContainer, SkillsOffset, InnerContainer } from './style';
