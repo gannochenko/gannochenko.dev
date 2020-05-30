@@ -70,6 +70,12 @@ module.exports = {
                 ],
             },
         },
+        {
+            resolve: 'gatsby-plugin-sitemap',
+            options: {
+                exclude: [`/blog-drafts*`, '/story/'],
+            },
+        },
         'gatsby-plugin-netlify-cms',
         {
             resolve: 'gatsby-plugin-manifest',
@@ -122,12 +128,6 @@ module.exports = {
                 // sampleRate: 5,
                 // siteSpeedSampleRate: 10,
                 // cookieDomain: "example.com",
-            },
-        },
-        {
-            resolve: 'gatsby-plugin-sitemap',
-            options: {
-                exclude: [`/blog-drafts*`, '/story/'],
             },
         },
     ],

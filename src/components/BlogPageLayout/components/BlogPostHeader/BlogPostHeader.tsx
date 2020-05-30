@@ -22,7 +22,7 @@ export const BlogPostHeader: FunctionComponent<Props> = ({ data }) => {
         return data.frontmatter.images.find((image: any) => image.is_cover);
     }, [data]);
 
-    const { title, date } = data.frontmatter;
+    const { title, date, published } = data.frontmatter;
 
     return (
         <BlogPostHeaderContainer>
@@ -36,7 +36,9 @@ export const BlogPostHeader: FunctionComponent<Props> = ({ data }) => {
                     </Container>
                     <DateStripe>
                         <InfoStripeContainer>
-                            <BlackLink to="/blog">
+                            <BlackLink
+                                to={published ? '/blog' : '/blog-drafts'}
+                            >
                                 &larr; Back to list
                             </BlackLink>
                             <Date>{formatDate(date)}</Date>

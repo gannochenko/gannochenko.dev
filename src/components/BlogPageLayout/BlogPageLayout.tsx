@@ -23,7 +23,15 @@ export const BlogPageLayout: FunctionComponent<Props> = ({
                 <BlogPostPageContainer>
                     <MDXRenderer pageContext={mdx}>{mdx.body}</MDXRenderer>
                     <Container>
-                        <Link to="/blog">&larr; Back to list</Link>
+                        <Link
+                            to={
+                                mdx.frontmatter.published
+                                    ? '/blog'
+                                    : '/blog-drafts'
+                            }
+                        >
+                            &larr; Back to list
+                        </Link>
                     </Container>
                 </BlogPostPageContainer>
             </Article>
