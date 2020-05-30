@@ -43,7 +43,7 @@ export const Calculator = () => {
             />
             ,{' '}
             <Input
-                defaultValue={0.3}
+                defaultValue="0.3"
                 width="4rem"
                 onKeyUp={(e: any) => setOpacity(e.target.value)}
             />{' '}

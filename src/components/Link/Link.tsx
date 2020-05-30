@@ -10,6 +10,8 @@ type PropLinks = {
     fontSize?: string;
     bright?: boolean;
     theme?: any;
+    target?: string;
+    rel?: string;
 };
 
 const fgColors = ({ bright, theme }: PropLinks) => {

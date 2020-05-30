@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-export const Color = styled.span<{ color: string; marginLeft: string }>`
+export const Color = styled.span<{ color: string; marginLeft?: string }>`
     background-color: ${props => props.color};
-    margin-left: ${props => props.marginLeft};
+    margin-left: ${props => props.marginLeft || 0};
     height: 20px;
     width: 20px;
     border-radius: 2px;

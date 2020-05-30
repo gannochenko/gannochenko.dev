@@ -61,7 +61,10 @@ export const Data = styled.div`
     position: relative;
 `;
 
-export const Arrow = withEffects(styled.div<{ theme: typeof theme }>`
+export const Arrow = withEffects(styled.div<{
+    theme: typeof theme;
+    onClick: () => void;
+}>`
     ${backgroundCover(arrow)};
     ${rectangle('72px', '53px', 0.7)};
     position: absolute;
