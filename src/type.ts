@@ -11,3 +11,26 @@ export interface ObjectLiteral<P = any> {
 export type FontSize = 'large' | 'medium' | 'standard' | 'small';
 
 export type Nullable<P> = P | null;
+
+export type ContentRecordImageType = {
+    author?: string;
+    source?: string;
+    sourceText?: string;
+    is_cover?: boolean;
+    image: {
+        childImageSharp: ObjectLiteral;
+    };
+};
+
+export type ContentRecordType = {
+    frontmatter: {
+        images: ContentRecordImageType[];
+        title: string;
+        date: string;
+        backUrl?: string;
+        keywords?: string[];
+        description?: string;
+    } & ObjectLiteral;
+    body: string;
+    id: string;
+};

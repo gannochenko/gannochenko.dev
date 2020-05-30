@@ -14,26 +14,14 @@ export const BlogPageLayout: FunctionComponent<Props> = ({
     data: { mdx },
     path,
 }) => {
-    const pageContext = useMemo(
-        () => ({
-            frontmatter: mdx.frontmatter,
-        }),
-        [mdx.id],
-    );
     const location = useMemo(() => ({ pathname: path }), [path]);
 
     return (
-        <LayoutInner
-            pageContext={pageContext}
-            location={location}
-            showTitle={false}
-        >
+        <LayoutInner pageContext={mdx} location={location} showTitle={false}>
             <Article>
-                <BlogPostHeader data={pageContext} />
+                <BlogPostHeader data={mdx} />
                 <BlogPostPageContainer>
-                    <MDXRenderer pageContext={pageContext}>
-                        {mdx.body}
-                    </MDXRenderer>
+                    <MDXRenderer pageContext={mdx}>{mdx.body}</MDXRenderer>
                     <Container>
                         <Link to="/blog">&larr; Back to list</Link>
                     </Container>

@@ -15,9 +15,10 @@ import { Props } from './type';
 import { Container } from '../../../Container';
 import { Copyright } from '../../../Copyright';
 import { formatDate } from '../../../../lib/util';
+import { ContentRecordImageType } from '../../../../type';
 
 export const BlogPostHeader: FunctionComponent<Props> = ({ data }) => {
-    const headerImage = useMemo(() => {
+    const headerImage = useMemo<ContentRecordImageType | undefined>(() => {
         return data.frontmatter.images.find((image: any) => image.is_cover);
     }, [data]);
 
@@ -26,7 +27,9 @@ export const BlogPostHeader: FunctionComponent<Props> = ({ data }) => {
     return (
         <BlogPostHeaderContainer>
             <BlogPostHeaderContainerInner>
-                <Cover sizes={headerImage.image.childImageSharp.fluid} />
+                {!!headerImage && (
+                    <Cover sizes={headerImage.image.childImageSharp.fluid} />
+                )}
                 <IntroBlock>
                     <Container>
                         <Title>{title}</Title>
@@ -41,11 +44,13 @@ export const BlogPostHeader: FunctionComponent<Props> = ({ data }) => {
                     </DateStripe>
                 </IntroBlock>
             </BlogPostHeaderContainerInner>
-            <Copyright
-                author={headerImage.author}
-                source={headerImage.source}
-                sourceText={headerImage.sourceText}
-            />
+            {!!headerImage && (
+                <Copyright
+                    author={headerImage.author}
+                    source={headerImage.source}
+                    sourceText={headerImage.sourceText}
+                />
+            )}
         </BlogPostHeaderContainer>
     );
 };

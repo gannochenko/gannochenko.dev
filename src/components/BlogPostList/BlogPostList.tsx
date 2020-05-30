@@ -7,15 +7,12 @@ import { Link } from '../Link';
 import { Effect } from '@gannochenko/ui';
 
 export const BlogPostList: FunctionComponent<Props> = ({ data, showLink }) => {
-    console.log('data');
-    console.log(data);
-
     return (
         <BlogPostListContainer>
             <Posts>
                 {data.map((item, index) => {
                     const card = (
-                        <BlogPostCard key={item.node.id} data={item} />
+                        <BlogPostCard key={item.node.id} data={item.node} />
                     );
 
                     if (index > 0) {

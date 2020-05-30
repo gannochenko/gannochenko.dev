@@ -1,18 +1,11 @@
 import { ReactNode } from 'react';
+import { ContentRecordType } from '../../type';
 
 export interface Props {
     children?: ReactNode;
     location: {
         pathname: string;
     };
-    pageContext: {
-        frontmatter: {
-            title?: string;
-            backUrl?: string;
-            keywords?: string[];
-            description?: string;
-            [k: string]: any;
-        };
-    };
+    pageContext: ContentRecordType;
     showTitle?: boolean;
 }

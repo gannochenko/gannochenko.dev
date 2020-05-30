@@ -1,12 +1,8 @@
-import { ObjectLiteral } from '../../type';
+import { ContentRecordType } from '../../type';
 
 export interface Props {
     data: {
-        mdx: {
-            frontmatter: ObjectLiteral;
-            body: string;
-            id: string;
-        };
+        mdx: ContentRecordType;
     };
     path: string;
 }

@@ -1,5 +1,5 @@
-import { ObjectLiteral } from '../../type';
+import { ContentRecordType } from '../../type';
 
 export interface Props {
-    data: ObjectLiteral;
+    data: ContentRecordType;
 }

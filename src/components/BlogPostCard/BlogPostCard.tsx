@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useMemo } from 'react';
+import React, { FunctionComponent } from 'react';
 
 import {
     BlogPostCardRoot,
@@ -13,9 +13,7 @@ import { formatDate } from '../../lib/util';
 
 export const BlogPostCard: FunctionComponent<Props> = ({ data }) => {
     const {
-        node: {
-            frontmatter: { path, preview, description, date, title },
-        },
+        frontmatter: { path, preview, description, date, title },
     } = data;
 
     return (

@@ -1,6 +1,10 @@
-import { ObjectLiteral } from '../../type';
+import { ContentRecordType } from '../../type';
+
+type NodeType = {
+    node: ContentRecordType;
+};
 
 export type Props = {
-    data: ObjectLiteral[];
+    data: NodeType[];
     showLink?: boolean;
 };
