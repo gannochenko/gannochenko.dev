@@ -8,6 +8,7 @@ module.exports = {
             'My name is Sergei, I am a full-stack software engineer in JavaScript / JavaScript domain, open-source contributor, in ❤️ with tech.',
         author: '@gannochenko',
         keywords: ['blog', 'it', 'tech', 'javascript', 'software'],
+        siteUrl: 'https://gannochenko.dev',
     },
     plugins: [
         {
@@ -123,5 +124,6 @@ module.exports = {
                 // cookieDomain: "example.com",
             },
         },
+        'gatsby-plugin-sitemap',
     ],
 };
