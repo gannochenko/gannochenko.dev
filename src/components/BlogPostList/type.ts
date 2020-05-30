@@ -7,4 +7,5 @@ type NodeType = {
 export type Props = {
     data: NodeType[];
     showLink?: boolean;
+    drafts?: boolean;
 };

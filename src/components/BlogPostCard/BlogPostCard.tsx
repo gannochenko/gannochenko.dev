@@ -13,17 +13,28 @@ import { formatDate } from '../../lib/util';
 
 export const BlogPostCard: FunctionComponent<Props> = ({ data }) => {
     const {
-        frontmatter: { path, preview, description, date, title },
+        frontmatter: {
+            path = '',
+            preview,
+            description,
+            date,
+            title,
+            published,
+        },
     } = data;
+
+    const realPath = published
+        ? path
+        : path.replace(/^\/blog\//, '/blog-drafts/');
 
     return (
         <BlogPostCardRoot>
             <Title>
                 <Date>{formatDate(date)}</Date>
-                <TitleLink to={path}>{title}</TitleLink>
+                <TitleLink to={realPath}>{title}</TitleLink>
             </Title>
 
-            <Preview to={path}>{preview || description}</Preview>
+            <Preview to={realPath}>{preview || description}</Preview>
 
             <ViewPost to={path} fontSize="small">
                 Read the post

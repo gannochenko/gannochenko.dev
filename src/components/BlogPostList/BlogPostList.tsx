@@ -6,7 +6,11 @@ import { Props } from './type';
 import { Link } from '../Link';
 import { Effect } from '@gannochenko/ui';
 
-export const BlogPostList: FunctionComponent<Props> = ({ data, showLink }) => {
+export const BlogPostList: FunctionComponent<Props> = ({
+    data,
+    showLink,
+    drafts,
+}) => {
     return (
         <BlogPostListContainer>
             <Posts>
@@ -29,7 +33,9 @@ export const BlogPostList: FunctionComponent<Props> = ({ data, showLink }) => {
             {!!showLink && (
                 <Effect>
                     <LinkContainer>
-                        <Link to="/blog">See all posts &rarr;</Link>
+                        <Link to={drafts ? '/blog-drafts' : '/blog'}>
+                            See all posts &rarr;
+                        </Link>
                     </LinkContainer>
                 </Effect>
             )}

@@ -7,7 +7,7 @@ import { Container } from '../components/Container';
 import { BlogPostList } from '../components/BlogPostList';
 
 <Container>
-    <BlogPostList data={props.data.allMdx.edges} />
+    <BlogPostList data={props.data.allMdx.edges} drafts />
 </Container>
 
 export const blogIndexDraftsQuery = graphql`
@@ -25,6 +25,7 @@ export const blogIndexDraftsQuery = graphql`
                         path
                         preview
                         description
+                        published
                         images {
                             image {
                                 childImageSharp {

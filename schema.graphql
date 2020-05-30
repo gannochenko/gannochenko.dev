@@ -3795,6 +3795,8 @@ type Query {
         children: NodeFilterListInput
         internal: InternalFilterInput
         siteMetadata: SiteSiteMetadataFilterInput
+        port: IntQueryOperatorInput
+        host: StringQueryOperatorInput
         polyfill: BooleanQueryOperatorInput
         pathPrefix: StringQueryOperatorInput
         buildTime: DateQueryOperatorInput
@@ -3858,6 +3860,8 @@ type Site implements Node {
     children: [Node!]!
     internal: Internal!
     siteMetadata: SiteSiteMetadata
+    port: Int
+    host: String
     polyfill: Boolean
     pathPrefix: String
     buildTime(
@@ -3998,6 +4002,8 @@ enum SiteFieldsEnum {
     siteMetadata___author
     siteMetadata___keywords
     siteMetadata___siteUrl
+    port
+    host
     polyfill
     pathPrefix
     buildTime
@@ -4009,6 +4015,8 @@ input SiteFilterInput {
     children: NodeFilterListInput
     internal: InternalFilterInput
     siteMetadata: SiteSiteMetadataFilterInput
+    port: IntQueryOperatorInput
+    host: StringQueryOperatorInput
     polyfill: BooleanQueryOperatorInput
     pathPrefix: StringQueryOperatorInput
     buildTime: DateQueryOperatorInput

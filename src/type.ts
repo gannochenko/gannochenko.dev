@@ -30,6 +30,8 @@ export type ContentRecordType = {
         backUrl?: string;
         keywords?: string[];
         description?: string;
+        published?: boolean;
+        path?: string;
     } & ObjectLiteral;
     body: string;
     id: string;

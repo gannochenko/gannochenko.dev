@@ -47,6 +47,7 @@ exports.createPages = ({ graphql, actions }) => {
                                 id
                                 frontmatter {
                                     path
+                                    published
                                 }
                             }
                         }
@@ -69,9 +70,16 @@ exports.createPages = ({ graphql, actions }) => {
                         edge.node.frontmatter.path.startsWith('/blog'),
                 );
                 edges.forEach(({ node }) => {
+                    const {
+                        frontmatter: { path: pathProperty, published },
+                    } = node;
+                    const realPath = published
+                        ? pathProperty
+                        : pathProperty.replace(/^\/blog\//, '/blog-drafts/');
+
                     actions.createPage({
                         // Encode the route
-                        path: node.frontmatter.path,
+                        path: realPath,
                         // Layout for the page
                         component: path.resolve(
                             './src/components/BlogPageLayout/BlogPageLayout.tsx',
