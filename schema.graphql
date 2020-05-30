@@ -1271,10 +1271,10 @@ enum FileFieldsEnum {
     childMdx___frontmatter___published
     childMdx___frontmatter___images
     childMdx___frontmatter___images___author
-    childMdx___frontmatter___images___is_cover
-    childMdx___frontmatter___images___galleryId
     childMdx___frontmatter___images___sourceText
     childMdx___frontmatter___images___source
+    childMdx___frontmatter___images___is_cover
+    childMdx___frontmatter___images___galleryId
     childMdx___frontmatter___preview
     childMdx___body
     childMdx___excerpt
@@ -3064,10 +3064,10 @@ enum MdxFieldsEnum {
     frontmatter___images___image___publicURL
     frontmatter___images___image___id
     frontmatter___images___image___children
-    frontmatter___images___is_cover
-    frontmatter___images___galleryId
     frontmatter___images___sourceText
     frontmatter___images___source
+    frontmatter___images___is_cover
+    frontmatter___images___galleryId
     frontmatter___preview
     body
     excerpt
@@ -3527,19 +3527,19 @@ input MdxFrontmatterFilterInput {
 type MdxFrontmatterImages {
     author: String
     image: File
-    is_cover: Int
-    galleryId: Int
     sourceText: String
     source: String
+    is_cover: Int
+    galleryId: Int
 }
 
 input MdxFrontmatterImagesFilterInput {
     author: StringQueryOperatorInput
     image: FileFilterInput
-    is_cover: IntQueryOperatorInput
-    galleryId: IntQueryOperatorInput
     sourceText: StringQueryOperatorInput
     source: StringQueryOperatorInput
+    is_cover: IntQueryOperatorInput
+    galleryId: IntQueryOperatorInput
 }
 
 input MdxFrontmatterImagesFilterListInput {
@@ -3795,8 +3795,6 @@ type Query {
         children: NodeFilterListInput
         internal: InternalFilterInput
         siteMetadata: SiteSiteMetadataFilterInput
-        port: IntQueryOperatorInput
-        host: StringQueryOperatorInput
         polyfill: BooleanQueryOperatorInput
         pathPrefix: StringQueryOperatorInput
         buildTime: DateQueryOperatorInput
@@ -3860,8 +3858,6 @@ type Site implements Node {
     children: [Node!]!
     internal: Internal!
     siteMetadata: SiteSiteMetadata
-    port: Int
-    host: String
     polyfill: Boolean
     pathPrefix: String
     buildTime(
@@ -4001,8 +3997,6 @@ enum SiteFieldsEnum {
     siteMetadata___description
     siteMetadata___author
     siteMetadata___keywords
-    port
-    host
     polyfill
     pathPrefix
     buildTime
@@ -4014,8 +4008,6 @@ input SiteFilterInput {
     children: NodeFilterListInput
     internal: InternalFilterInput
     siteMetadata: SiteSiteMetadataFilterInput
-    port: IntQueryOperatorInput
-    host: StringQueryOperatorInput
     polyfill: BooleanQueryOperatorInput
     pathPrefix: StringQueryOperatorInput
     buildTime: DateQueryOperatorInput
@@ -4071,14 +4063,14 @@ input SitePageContextFilterInput {
 
 type SitePageContextFrontmatter {
     title: String
-    images: [SitePageContextFrontmatterImages]
     show_title: Int
+    images: [SitePageContextFrontmatterImages]
 }
 
 input SitePageContextFrontmatterFilterInput {
     title: StringQueryOperatorInput
-    images: SitePageContextFrontmatterImagesFilterListInput
     show_title: IntQueryOperatorInput
+    images: SitePageContextFrontmatterImagesFilterListInput
 }
 
 type SitePageContextFrontmatterImages {
@@ -4195,10 +4187,10 @@ enum SitePageFieldsEnum {
     isCreatedByStatefulCreatePages
     context___id
     context___frontmatter___title
+    context___frontmatter___show_title
     context___frontmatter___images
     context___frontmatter___images___image
     context___frontmatter___images___is_cover
-    context___frontmatter___show_title
     pluginCreator___id
     pluginCreator___parent___id
     pluginCreator___parent___parent___id

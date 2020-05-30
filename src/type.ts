@@ -17,9 +17,9 @@ export type ContentRecordImageType = {
     source?: string;
     sourceText?: string;
     is_cover?: boolean;
-    image: {
+    image: Nullable<{
         childImageSharp: ObjectLiteral;
-    };
+    }>;
 };
 
 export type ContentRecordType = {

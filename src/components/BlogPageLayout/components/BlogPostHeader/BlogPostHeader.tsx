@@ -27,7 +27,7 @@ export const BlogPostHeader: FunctionComponent<Props> = ({ data }) => {
     return (
         <BlogPostHeaderContainer>
             <BlogPostHeaderContainerInner>
-                {!!headerImage && (
+                {!!(headerImage && headerImage.image) && (
                     <Cover sizes={headerImage.image.childImageSharp.fluid} />
                 )}
                 <IntroBlock>

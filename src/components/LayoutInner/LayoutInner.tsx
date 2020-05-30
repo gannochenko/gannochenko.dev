@@ -31,7 +31,7 @@ export const LayoutInner: FunctionComponent<Props> = props => {
     let coverImage = '';
     if (images) {
         const coverImageData = images.find((image: any) => image.is_cover);
-        if (coverImageData) {
+        if (coverImageData && coverImageData.image) {
             if (typeof coverImageData.image === 'string') {
                 coverImage = coverImageData.image;
             } else if (coverImageData.image.childImageSharp) {

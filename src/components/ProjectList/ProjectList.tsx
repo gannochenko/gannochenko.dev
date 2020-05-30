@@ -11,7 +11,7 @@ export const ProjectList: FunctionComponent<Props> = ({ data, showLink }) => {
             <Items>
                 {data.map(item => (
                     <Item key={item.node.id}>
-                        <BlogPostCard data={item} />
+                        <BlogPostCard data={item.node} />
                     </Item>
                 ))}
             </Items>
