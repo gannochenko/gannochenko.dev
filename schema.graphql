@@ -1271,10 +1271,10 @@ enum FileFieldsEnum {
     childMdx___frontmatter___published
     childMdx___frontmatter___images
     childMdx___frontmatter___images___author
-    childMdx___frontmatter___images___sourceText
-    childMdx___frontmatter___images___source
     childMdx___frontmatter___images___is_cover
     childMdx___frontmatter___images___galleryId
+    childMdx___frontmatter___images___sourceText
+    childMdx___frontmatter___images___source
     childMdx___frontmatter___preview
     childMdx___body
     childMdx___excerpt
@@ -3064,10 +3064,10 @@ enum MdxFieldsEnum {
     frontmatter___images___image___publicURL
     frontmatter___images___image___id
     frontmatter___images___image___children
-    frontmatter___images___sourceText
-    frontmatter___images___source
     frontmatter___images___is_cover
     frontmatter___images___galleryId
+    frontmatter___images___sourceText
+    frontmatter___images___source
     frontmatter___preview
     body
     excerpt
@@ -3527,19 +3527,19 @@ input MdxFrontmatterFilterInput {
 type MdxFrontmatterImages {
     author: String
     image: File
-    sourceText: String
-    source: String
     is_cover: Int
     galleryId: Int
+    sourceText: String
+    source: String
 }
 
 input MdxFrontmatterImagesFilterInput {
     author: StringQueryOperatorInput
     image: FileFilterInput
-    sourceText: StringQueryOperatorInput
-    source: StringQueryOperatorInput
     is_cover: IntQueryOperatorInput
     galleryId: IntQueryOperatorInput
+    sourceText: StringQueryOperatorInput
+    source: StringQueryOperatorInput
 }
 
 input MdxFrontmatterImagesFilterListInput {
@@ -4255,6 +4255,7 @@ enum SitePageFieldsEnum {
     pluginCreator___pluginOptions___defaultLayouts___default
     pluginCreator___pluginOptions___gatsbyRemarkPlugins
     pluginCreator___pluginOptions___gatsbyRemarkPlugins___resolve
+    pluginCreator___pluginOptions___exclude
     pluginCreator___pluginOptions___short_name
     pluginCreator___pluginOptions___description
     pluginCreator___pluginOptions___start_url
@@ -4270,7 +4271,6 @@ enum SitePageFieldsEnum {
     pluginCreator___pluginOptions___anonymize
     pluginCreator___pluginOptions___respectDNT
     pluginCreator___pluginOptions___pageTransitionDelay
-    pluginCreator___pluginOptions___exclude
     pluginCreator___pluginOptions___pathCheck
     pluginCreator___nodeAPIs
     pluginCreator___browserAPIs
@@ -4478,6 +4478,7 @@ enum SitePluginFieldsEnum {
     pluginOptions___gatsbyRemarkPlugins___options___tracedSVG
     pluginOptions___gatsbyRemarkPlugins___options___loading
     pluginOptions___gatsbyRemarkPlugins___options___disableBgImageOnAlpha
+    pluginOptions___exclude
     pluginOptions___short_name
     pluginOptions___description
     pluginOptions___start_url
@@ -4493,7 +4494,6 @@ enum SitePluginFieldsEnum {
     pluginOptions___anonymize
     pluginOptions___respectDNT
     pluginOptions___pageTransitionDelay
-    pluginOptions___exclude
     pluginOptions___pathCheck
     nodeAPIs
     browserAPIs
@@ -4617,6 +4617,7 @@ type SitePluginPluginOptions {
     extensions: [String]
     defaultLayouts: SitePluginPluginOptionsDefaultLayouts
     gatsbyRemarkPlugins: [SitePluginPluginOptionsGatsbyRemarkPlugins]
+    exclude: [String]
     short_name: String
     description: String
     start_url: String
@@ -4632,7 +4633,6 @@ type SitePluginPluginOptions {
     anonymize: Boolean
     respectDNT: Boolean
     pageTransitionDelay: Int
-    exclude: [String]
     pathCheck: Boolean
 }
 
@@ -4651,6 +4651,7 @@ input SitePluginPluginOptionsFilterInput {
     extensions: StringQueryOperatorInput
     defaultLayouts: SitePluginPluginOptionsDefaultLayoutsFilterInput
     gatsbyRemarkPlugins: SitePluginPluginOptionsGatsbyRemarkPluginsFilterListInput
+    exclude: StringQueryOperatorInput
     short_name: StringQueryOperatorInput
     description: StringQueryOperatorInput
     start_url: StringQueryOperatorInput
@@ -4666,7 +4667,6 @@ input SitePluginPluginOptionsFilterInput {
     anonymize: BooleanQueryOperatorInput
     respectDNT: BooleanQueryOperatorInput
     pageTransitionDelay: IntQueryOperatorInput
-    exclude: StringQueryOperatorInput
     pathCheck: BooleanQueryOperatorInput
 }
 

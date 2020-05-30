@@ -3,7 +3,7 @@
 module.exports = {
     // pathPrefix: '/gannochenko',
     siteMetadata: {
-        title: 'Gannochenko',
+        title: 'Gannochenko Sergei: full-stack software engineer in JS / JS',
         description:
             'My name is Sergei, I am a full-stack software engineer in JavaScript / JavaScript domain, open-source contributor, in ❤️ with tech.',
         author: '@gannochenko',
