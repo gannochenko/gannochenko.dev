@@ -69,7 +69,7 @@ export const Footer: FunctionComponent<{}> = () => {
                 </Path>
             </Contacts>
             <Info>
-                <NoWrap>&copy; 2017 &mdash; current</NoWrap>
+                <NoWrap>&copy; then &mdash; now</NoWrap>
                 <Link to="/cookie-policy" bright>
                     Cookie policy
                 </Link>
