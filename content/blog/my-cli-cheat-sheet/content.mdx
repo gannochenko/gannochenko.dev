@@ -1,0 +1,46 @@
+---
+title: My console cheat-sheet
+description: There are some things that can be useful to me, but I totally keep forgetting the syntax. Well, not any longer!
+keywords: git, bash, cli, cheatsheet, commands, console
+path: /blog/my-console-cheat-sheet
+date: 2020-06-02
+published: true
+images:
+    - author: David Travis
+      image: ./cover.jpg
+      sourceText: Unsplash
+      source: https://unsplash.com/@dtravisphd
+      is_cover: 1
+      galleryId: 0
+---
+
+There are some things that can be useful to me, but I totally keep forgetting the syntax. Well, not any longer!
+
+## Git
+
+### Display branching tree
+
+```bash
+git log --graph --full-history --all --pretty=format:"%h%x09%d%x20%s"
+git log --graph --decorate --oneline
+```
+
+### Work with tags
+
+```bash
+git fetch --all --tags # get all remote tags
+git push --delete origin v1.2.0 # kill remote tag
+git tag -d v1.2.0 # kill local tag
+```
+
+## Bash
+
+Parametrized alias
+
+```bash
+alias dssh='function __sampleAlias(){ docker exec -it $1 /bin/bash; };__sampleAlias'
+```
+
+---
+
+To be continued...
