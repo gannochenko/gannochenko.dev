@@ -18,4 +18,25 @@ https://www.raspberrypi.org/documentation/usage/gpio/
 
 https://github.com/splitbrain/rpibplusleaf
 
+Datasheet:
 http://pdf.datasheetcatalog.com/datasheet/philips/74HC595PW.pdf
+https://www.ti.com/lit/ds/symlink/cd74hc595.pdf
+
+Q0 - Q7: attach LED 0 - 7
+GND - ground, 0V
+VCC - positive voltage, +5V
+
+OE - output enable
+MR (SRCLR) - master reset
+SHcp (SRCLK) GREEN, GPIO4 - shift register clock input (copyright: A clock signal is provided to this pin. The data from Pin 14 (Serial Data In) is registered only at the rising edge of the clock. In simple words, when the clock signal rises from 0V to 5V, only then the data present at Pin 14 gets stored in the register)
+STcp (RCLK) YELLOW, GPIO17 - storage register clock input (copyright: When this pin is pulled HIGH, the data from the storage register is transferred to the output.)
+Ds (Serial Data In) ORANGE, GPIO27 - serial data input
+
+copyright:
+Note: Rising Edge - Transition from 0V to 5V (LOW to HIGH)
+Falling Edge - Transition from 5V to 0V (HIGH to LOW)
+
+So, if MR is activated on LOW (0V), then, to disable it, we connect it to VCC (+5V).
+If OE is activated on LOW (0V), then, to permanently enable it, we connect it to GND (0V)
+
+You may say "pff, 3 GPIO versus 8, no big deal". But even if you connect a hundred of registers serially, you will always need only 3 GPIO.
