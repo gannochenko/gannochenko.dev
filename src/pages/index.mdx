@@ -5,6 +5,7 @@ title: Home
 import { Container } from '../../src/components/Container';
 import { Effect } from '@gannochenko/ui';
 import { BlogPostList } from '../components/BlogPostList';
+import { Cup } from '../components/Cup';
 import { graphql } from 'gatsby';
 
 ## Latest in Blog
@@ -12,6 +13,8 @@ import { graphql } from 'gatsby';
 <Container>
     <BlogPostList data={props.data.allMdx.edges} showLink />
 </Container>
+
+<Cup frameNumber={1} />
 
 <Effect>
 
