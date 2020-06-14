@@ -1,33 +1,37 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useEffect, useRef } from 'react';
 
-import { CupRoot, CupImage } from './style';
-import { CupFrameNumber, CupPropsType } from './type';
+import { CupRoot, CupImage, CupRefill } from './style';
+import { CupPropsType } from './type';
+import { Container } from '../Container';
 
 export const Cup: FunctionComponent<CupPropsType> = ({
     children,
-    ...restProps
+    frameNumber,
+    verticalConstraint,
 }) => {
-    const [frame, setFrame] = useState<CupFrameNumber>(1);
+    const horizontalConstraint = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        setTimeout(() => {
+            console.log('V');
+            console.log(verticalConstraint.current);
+
+            console.log('H');
+            console.log(horizontalConstraint.current);
+        }, 0);
+    });
 
     return (
-        <CupRoot>
-            <CupImage frameNumber={frame}>{children}</CupImage>
-            <button
-                onClick={() => {
-                    // @ts-ignore
-                    setFrame(frame === 1 ? 5 : frame - 1);
-                }}
-            >
-                {'<'}
-            </button>
-            <button
-                onClick={() => {
-                    // @ts-ignore
-                    setFrame(frame === 5 ? 1 : frame + 1);
-                }}
-            >
-                {'>'}
-            </button>
-        </CupRoot>
+        <>
+            <Container ref={horizontalConstraint}></Container>
+            <CupRoot>
+                <CupImage frameNumber={frameNumber}>{children}</CupImage>
+                <CupRefill>Refill!</CupRefill>
+            </CupRoot>
+        </>
     );
+};
+
+Cup.defaultProps = {
+    frameNumber: 1,
 };

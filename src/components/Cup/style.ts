@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { CupPropsType } from './type';
+import { CupImagePropsType, CupRootPropsType } from './type';
 
 const frame1 = require('./assets/frame1.svg') as string;
 const frame2 = require('./assets/frame2.svg') as string;
@@ -25,9 +25,19 @@ const position = [
     ['19px', '23px'],
 ];
 
-export const CupRoot = styled.div``;
+export const CupRoot = styled.div<CupRootPropsType>`
+    display: flex;
+    bottom: 10rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    cursor: pointer;
+    z-index: 1000;
+    ${({ theme }) => theme.util.media({ '<sm': 'display: none;' })}
+`;
 
-export const CupImage = styled.div<CupPropsType>`
+export const CupImage = styled.div<CupImagePropsType>`
     background-image: url(${({ frameNumber }) => frames[frameNumber - 1]});
     background-repeat: no-repeat;
     background-size: ${({ frameNumber }) => size[frameNumber - 1].join(' ')};
@@ -35,5 +45,14 @@ export const CupImage = styled.div<CupPropsType>`
         position[frameNumber - 1].join(' ')};
     width: 90px;
     height: 90px;
-    cursor: pointer;
+`;
+
+export const CupRefill = styled.div`
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: gray;
+    font-family: Sriracha, serif;
+    background-color: white;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
 `;
