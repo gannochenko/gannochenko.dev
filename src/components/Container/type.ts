@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { MutableRefObject, ReactNode } from 'react';
 
 export type ContainerType = 'standard' | 'wide' | 'narrow';
 
@@ -7,4 +7,5 @@ export interface Props {
     type?: ContainerType;
     contentAlign?: 'center' | 'left' | 'right';
     marginY?: string;
+    ref?: MutableRefObject<HTMLDivElement | undefined>;
 }

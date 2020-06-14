@@ -9,7 +9,7 @@ export const Cup: FunctionComponent<CupPropsType> = ({
     frameNumber,
     verticalConstraint,
 }) => {
-    const horizontalConstraint = useRef<HTMLDivElement>(null);
+    const horizontalConstraint = useRef<HTMLDivElement>();
 
     useEffect(() => {
         setTimeout(() => {
@@ -22,13 +22,12 @@ export const Cup: FunctionComponent<CupPropsType> = ({
     });
 
     return (
-        <>
-            <Container ref={horizontalConstraint}></Container>
+        <Container ref={horizontalConstraint}>
             <CupRoot>
                 <CupImage frameNumber={frameNumber}>{children}</CupImage>
                 <CupRefill>Refill!</CupRefill>
             </CupRoot>
-        </>
+        </Container>
     );
 };
 

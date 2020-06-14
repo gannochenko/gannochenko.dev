@@ -5,14 +5,32 @@ import { ContainerStandard, ContainerWide, ContainerNarrow } from './style';
 import { Props } from './type';
 
 /** this container regulates the size of the content **/
-export const Container: FunctionComponent<Props> = props => {
+export const Container: FunctionComponent<Props> = React.forwardRef<
+    HTMLDivElement | undefined,
+    Props
+>((props, ref) => {
     const { children, type = 'standard' } = props;
 
     if (type === 'wide') {
-        return <ContainerWide {...props}>{children}</ContainerWide>;
+        // @ts-ignore
+        return (
+            <ContainerWide {...props} ref={ref}>
+                {children}
+            </ContainerWide>
+        );
     }
     if (type === 'narrow') {
-        return <ContainerNarrow {...props}>{children}</ContainerNarrow>;
+        // @ts-ignore
+        return (
+            <ContainerNarrow {...props} ref={ref}>
+                {children}
+            </ContainerNarrow>
+        );
     }
-    return <ContainerStandard {...props}>{children}</ContainerStandard>;
-};
+    // @ts-ignore
+    return (
+        <ContainerStandard {...props} ref={ref}>
+            {children}
+        </ContainerStandard>
+    );
+});

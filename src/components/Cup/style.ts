@@ -27,13 +27,13 @@ const position = [
 
 export const CupRoot = styled.div<CupRootPropsType>`
     display: flex;
-    bottom: 10rem;
+    position: absolute;
+    left: -7rem;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    position: fixed;
     cursor: pointer;
-    z-index: 1000;
+    z-index: 500;
     ${({ theme }) => theme.util.media({ '<sm': 'display: none;' })}
 `;
 
