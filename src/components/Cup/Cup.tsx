@@ -1,11 +1,11 @@
 import React, {
     FunctionComponent,
     useCallback,
-    useEffect,
     useLayoutEffect,
     useRef,
     useState,
 } from 'react';
+import animateScrollTo from 'animated-scroll-to';
 
 import { CupRoot, CupImage, CupRefill, CupInner } from './style';
 import { CupPropsType } from './type';
@@ -20,6 +20,12 @@ export const Cup: FunctionComponent<CupPropsType> = ({
     const cup = useRef<HTMLDivElement>(null);
 
     const [cupVisible, setCupVisible] = useState(false);
+
+    const scrollToTop = useCallback(() => {
+        animateScrollTo(0, {
+            speed: 100,
+        });
+    }, []);
 
     useLayoutEffect(() => {
         if (!cup.current) {
@@ -56,7 +62,7 @@ export const Cup: FunctionComponent<CupPropsType> = ({
     return (
         <Container ref={horizontalConstraint}>
             <CupRoot ref={cup}>
-                <CupInner visible={cupVisible}>
+                <CupInner visible={cupVisible} onClick={scrollToTop}>
                     <CupImage frameNumber={frameNumber}>{children}</CupImage>
                     <CupRefill>Refill!</CupRefill>
                 </CupInner>
