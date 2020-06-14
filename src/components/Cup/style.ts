@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { CupImagePropsType, CupRootPropsType } from './type';
+import styled, { css } from 'styled-components';
+import { CupImagePropsType, CupInnerPropsType, CupRootPropsType } from './type';
 
 const frame1 = require('./assets/frame1.svg') as string;
 const frame2 = require('./assets/frame2.svg') as string;
@@ -26,12 +26,9 @@ const position = [
 ];
 
 export const CupRoot = styled.div<CupRootPropsType>`
-    display: flex;
-    position: absolute;
-    left: -7rem;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    position: fixed;
+    left: 1rem;
+    bottom: 10rem;
     cursor: pointer;
     z-index: 500;
     ${({ theme }) => theme.util.media({ '<sm': 'display: none;' })}
@@ -55,4 +52,21 @@ export const CupRefill = styled.div`
     background-color: white;
     padding: 0.2rem 0.5rem;
     border-radius: 4px;
+`;
+
+export const CupInner = styled.div<CupInnerPropsType>`
+    opacity: 1;
+    ${({ visible }) =>
+        visible
+            ? ''
+            : css`
+                  pointer-events: none;
+                  opacity: 0;
+                  transform: translateX(-0.5rem);
+              `};
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: opacity ease 200ms, transform ease 200ms;
 `;

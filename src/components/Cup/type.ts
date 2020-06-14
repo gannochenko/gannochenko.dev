@@ -10,3 +10,7 @@ export type CupPropsType = {
 
 export type CupRootPropsType = {};
 export type CupImagePropsType = Pick<CupPropsType, 'frameNumber'>;
+
+export type CupInnerPropsType = {
+    visible: boolean;
+};
