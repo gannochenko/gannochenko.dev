@@ -39,14 +39,14 @@ export const Cup: FunctionComponent<CupPropsType> = ({
             const windowScrollTop = window.pageYOffset;
             const windowHeight = window.innerHeight;
 
-            const cupRect = cupNode.getBoundingClientRect();
+            // const cupRect = cupNode.getBoundingClientRect();
             const verticalConstraintRect = verticalConstraintNode.getBoundingClientRect();
 
-            if (verticalConstraintRect.y < cupRect.y) {
-                setCupVisible(true);
-            } else {
-                setCupVisible(false);
-            }
+            // if (verticalConstraintRect.y < cupRect.y) {
+            //     setCupVisible(true);
+            // } else {
+            //     setCupVisible(false);
+            // }
 
             const topEdge = windowScrollTop + verticalConstraintRect.y;
             const bottomEdge =
@@ -71,8 +71,6 @@ export const Cup: FunctionComponent<CupPropsType> = ({
 
             const step = Math.floor(percent / 20);
             setFrameNumber(step);
-
-            // console.log('0 >> '+position+' << '+endPosition);
         };
 
         window.addEventListener('scroll', handler);
@@ -88,7 +86,7 @@ export const Cup: FunctionComponent<CupPropsType> = ({
     return (
         <Container ref={horizontalConstraint}>
             <CupRoot ref={cup}>
-                <CupInner visible={cupVisible} onClick={scrollToTop}>
+                <CupInner visible={true} onClick={scrollToTop}>
                     <CupImage frameNumber={frameNumber} />
                     <CupRefill visible={frameNumber >= 4}>Refill!</CupRefill>
                 </CupInner>
