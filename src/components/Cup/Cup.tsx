@@ -13,13 +13,13 @@ import { Container } from '../Container';
 
 export const Cup: FunctionComponent<CupPropsType> = ({
     children,
-    frameNumber,
     verticalConstraint,
 }) => {
     const horizontalConstraint = useRef<HTMLDivElement>();
     const cup = useRef<HTMLDivElement>(null);
 
     const [cupVisible, setCupVisible] = useState(false);
+    const [frameNumber, setFrameNumber] = useState(0);
 
     const scrollToTop = useCallback(() => {
         animateScrollTo(0, {
@@ -48,6 +48,7 @@ export const Cup: FunctionComponent<CupPropsType> = ({
                 setCupVisible(false);
             }
 
+            const topEdge = windowScrollTop + verticalConstraintRect.y;
             const bottomEdge =
                 windowScrollTop +
                 verticalConstraintRect.y +
@@ -62,6 +63,16 @@ export const Cup: FunctionComponent<CupPropsType> = ({
             } else {
                 cupNode.style.bottom = '32px';
             }
+
+            const position = windowBottomEdge - topEdge;
+            const endPosition = bottomEdge - topEdge;
+
+            const percent = Math.floor((position / endPosition) * 100);
+
+            const step = Math.floor(percent / 20);
+            setFrameNumber(step);
+
+            // console.log('0 >> '+position+' << '+endPosition);
         };
 
         window.addEventListener('scroll', handler);
@@ -79,13 +90,11 @@ export const Cup: FunctionComponent<CupPropsType> = ({
             <CupRoot ref={cup}>
                 <CupInner visible={cupVisible} onClick={scrollToTop}>
                     <CupImage frameNumber={frameNumber}>{children}</CupImage>
-                    <CupRefill>Refill!</CupRefill>
+                    <CupRefill visible={frameNumber == 4}>Refill!</CupRefill>
                 </CupInner>
             </CupRoot>
         </Container>
     );
 };
 
-Cup.defaultProps = {
-    frameNumber: 1,
-};
+Cup.defaultProps = {};

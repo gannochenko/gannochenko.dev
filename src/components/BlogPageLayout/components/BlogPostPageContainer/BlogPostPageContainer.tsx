@@ -11,7 +11,7 @@ export const BlogPostPageContainer: FunctionComponent<Props> = ({
 
     return (
         <BlogPostPageContainerContainer ref={containerRef}>
-            <Cup frameNumber={4} verticalConstraint={containerRef} />
+            <Cup verticalConstraint={containerRef} />
             {children}
         </BlogPostPageContainerContainer>
     );

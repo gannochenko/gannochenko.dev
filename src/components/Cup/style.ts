@@ -35,16 +35,18 @@ export const CupRoot = styled.div<CupRootPropsType>`
 `;
 
 export const CupImage = styled.div<CupImagePropsType>`
-    background-image: url(${({ frameNumber }) => frames[frameNumber - 1]});
+    background-image: url(${({ frameNumber }) =>
+        frames[frameNumber > 4 ? 4 : frameNumber]});
     background-repeat: no-repeat;
-    background-size: ${({ frameNumber }) => size[frameNumber - 1].join(' ')};
+    background-size: ${({ frameNumber }) =>
+        size[frameNumber > 4 ? 4 : frameNumber].join(' ')};
     background-position: ${({ frameNumber }) =>
-        position[frameNumber - 1].join(' ')};
+        position[frameNumber > 4 ? 4 : frameNumber].join(' ')};
     width: 90px;
     height: 90px;
 `;
 
-export const CupRefill = styled.div`
+export const CupRefill = styled.div<{ visible: boolean }>`
     font-size: 0.8rem;
     text-transform: uppercase;
     color: gray;
@@ -52,6 +54,7 @@ export const CupRefill = styled.div`
     background-color: white;
     padding: 0.2rem 0.5rem;
     border-radius: 4px;
+    visibility: ${({ visible }) => (visible ? 'visible' : 'hidden')};
 `;
 
 export const CupInner = styled.div<CupInnerPropsType>`
@@ -62,11 +65,10 @@ export const CupInner = styled.div<CupInnerPropsType>`
             : css`
                   pointer-events: none;
                   opacity: 0;
-                  transform: translateX(-0.5rem);
               `};
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    transition: opacity ease 200ms, transform ease 200ms;
+    transition: opacity ease 200ms;
 `;
