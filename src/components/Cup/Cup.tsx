@@ -53,15 +53,14 @@ export const Cup: FunctionComponent<CupPropsType> = ({
                 verticalConstraintRect.y +
                 verticalConstraintRect.height;
             const windowBottomEdge = windowScrollTop + windowHeight;
-            // const cupBottom = windowScrollTop + cupRect.y + cupRect.height;
 
             const extra = 80;
 
             if (windowBottomEdge > bottomEdge + extra) {
-                console.log('over!');
+                const diff = windowBottomEdge - (bottomEdge + extra);
+                cupNode.style.bottom = `${32 + diff}px`;
             } else {
-                console.log('not over');
-                // cupNode.style.bottom = '2rem';
+                cupNode.style.bottom = '32px';
             }
         };
 

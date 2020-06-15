@@ -28,7 +28,7 @@ const position = [
 export const CupRoot = styled.div<CupRootPropsType>`
     position: fixed;
     left: 1rem;
-    bottom: 2rem;
+    bottom: 32px;
     cursor: pointer;
     z-index: 500;
     ${({ theme }) => theme.util.media({ '<sm': 'display: none;' })}
