@@ -90,7 +90,7 @@ export const Cup: FunctionComponent<CupPropsType> = ({
             <CupRoot ref={cup}>
                 <CupInner visible={cupVisible} onClick={scrollToTop}>
                     <CupImage frameNumber={frameNumber}>{children}</CupImage>
-                    <CupRefill visible={frameNumber == 4}>Refill!</CupRefill>
+                    <CupRefill visible={frameNumber >= 4}>Refill!</CupRefill>
                 </CupInner>
             </CupRoot>
         </Container>
