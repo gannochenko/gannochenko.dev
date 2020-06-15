@@ -3,7 +3,7 @@ import { Link } from 'gatsby';
 
 export const Body = styled.div`
     flex-grow: 2;
-    margin-bottom: 5rem;
+    padding-bottom: 5rem;
 `;
 
 export const BackLink = styled(Link)`

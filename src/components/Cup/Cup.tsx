@@ -36,8 +36,8 @@ export const Cup: FunctionComponent<CupPropsType> = ({
             const cupNode = cup.current!;
             const verticalConstraintNode = verticalConstraint.current!;
 
-            // const windowScrollTop = window.pageYOffset;
-            // const windowHeight = window.innerHeight;
+            const windowScrollTop = window.pageYOffset;
+            const windowHeight = window.innerHeight;
 
             const cupRect = cupNode.getBoundingClientRect();
             const verticalConstraintRect = verticalConstraintNode.getBoundingClientRect();
@@ -46,6 +46,22 @@ export const Cup: FunctionComponent<CupPropsType> = ({
                 setCupVisible(true);
             } else {
                 setCupVisible(false);
+            }
+
+            const bottomEdge =
+                windowScrollTop +
+                verticalConstraintRect.y +
+                verticalConstraintRect.height;
+            const windowBottomEdge = windowScrollTop + windowHeight;
+            // const cupBottom = windowScrollTop + cupRect.y + cupRect.height;
+
+            const extra = 80;
+
+            if (windowBottomEdge > bottomEdge + extra) {
+                console.log('over!');
+            } else {
+                console.log('not over');
+                // cupNode.style.bottom = '2rem';
             }
         };
 
