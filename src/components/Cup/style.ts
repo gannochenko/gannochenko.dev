@@ -72,3 +72,8 @@ export const CupInner = styled.div<CupInnerPropsType>`
     justify-content: center;
     transition: opacity ease 200ms;
 `;
+
+export const CupPreload = styled.div`
+    height: 0;
+    overflow: hidden;
+`;

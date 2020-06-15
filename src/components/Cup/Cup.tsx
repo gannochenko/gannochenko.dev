@@ -7,7 +7,7 @@ import React, {
 } from 'react';
 import animateScrollTo from 'animated-scroll-to';
 
-import { CupRoot, CupImage, CupRefill, CupInner } from './style';
+import { CupRoot, CupImage, CupRefill, CupInner, CupPreload } from './style';
 import { CupPropsType } from './type';
 import { Container } from '../Container';
 
@@ -89,10 +89,17 @@ export const Cup: FunctionComponent<CupPropsType> = ({
         <Container ref={horizontalConstraint}>
             <CupRoot ref={cup}>
                 <CupInner visible={cupVisible} onClick={scrollToTop}>
-                    <CupImage frameNumber={frameNumber}>{children}</CupImage>
+                    <CupImage frameNumber={frameNumber} />
                     <CupRefill visible={frameNumber >= 4}>Refill!</CupRefill>
                 </CupInner>
             </CupRoot>
+            <CupPreload>
+                <CupImage frameNumber={0} />
+                <CupImage frameNumber={1} />
+                <CupImage frameNumber={2} />
+                <CupImage frameNumber={3} />
+                <CupImage frameNumber={4} />
+            </CupPreload>
         </Container>
     );
 };
