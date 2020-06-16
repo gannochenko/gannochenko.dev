@@ -18,7 +18,7 @@ const size = [
 ];
 
 const position = [
-    ['5px', '0px'],
+    ['3px', '0px'],
     ['17px', '22px'],
     ['15px', '22px'],
     ['17px', '23px'],
