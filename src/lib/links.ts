@@ -3,6 +3,6 @@ export const links = {
     github: 'https://github.com/gannochenko',
     medium: 'https://medium.com/@gannochenko',
     twitter: 'https://twitter.com/gannochenko_dev',
-    instagram: 'https://www.instagram.com/gannochenkoff/',
+    instagram: 'https://www.instagram.com/gannochenko_arch/',
     devto: 'https://dev.to/gannochenko',
 };
