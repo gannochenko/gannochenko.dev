@@ -30,13 +30,13 @@
     An awesome GatsbyJS template to build a smiple landing fast
     <br />
     <br />
-    <a href="https://gannochenko.github.io/gannochenko/">Site</a>
+    <a href="https://gannochenko.vercel.app/">Site</a>
     ·
     <a href="https://gannochenko.netlify.com/admin/">Admin</a>
     ·
     <a href="https://analytics.google.com/analytics/web/?authuser=1#/report-home/a162152239w227268972p214636537">Analytics</a>
     ·
-    <a href="https://github.com/gannochenko/gannochenko/actions">CI/CD</a>
+    <a href="https://vercel.com/gannochenko/gannochenko/deployments">CI/CD</a>
     ·
     <a href="https://trello.com/b/Z3LyNiKQ/blog">Todo</a>
     ·
