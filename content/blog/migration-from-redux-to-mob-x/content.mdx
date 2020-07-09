@@ -1,0 +1,27 @@
+---
+title: Migration from Redux to MobX
+description: Dont forget to write good description
+keywords: sex, drugs, rocknroll
+path: /blog/migration-from-redux-to-mob-x-
+date: 2020-07-08
+published: false
+images:
+    - author: SwapnIl Dwivedi
+      image: ./cover.jpg
+      sourceText: Unsplash
+      source: https://unsplash.com/@momentance
+      is_cover: 1
+      galleryId: 0
+---
+
+import { Container } from 'components/Container';
+
+Once upon a time...
+
+Про actions очень важно:
+https://mobx.js.org/best/actions.html
+
+Каждый action выполняется в транзакции, но если херачить асинхронный action, то все что после первого await попадает в microtask queue и поэтому выпадет из транзакции.
+
+Поэтому надо либо враппить все в экшны, либо разбивать на под-экшны, но лучше всего юзать flow()! потому что flow это генератор, а генераторы можно прерывать вручную.
+

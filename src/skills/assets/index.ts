@@ -33,6 +33,7 @@ const angularjs = require('./logo/angularjs.svg') as string;
 const perl = require('./logo/perl.svg') as string;
 const python = require('./logo/python.svg') as string;
 const hg = require('./logo/hg.png') as string;
+const mobx = require('./logo/mobx.png') as string;
 const csharp = require('./logo/csharp.svg') as string;
 
 export const logo = {
@@ -72,4 +73,5 @@ export const logo = {
     python,
     hg,
     csharp,
+    mobx,
 };

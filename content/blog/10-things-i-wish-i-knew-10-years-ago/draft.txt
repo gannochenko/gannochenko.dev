@@ -1,0 +1,82 @@
+---
+title: "My daily mantra or “13 things I wish I knew 13 years ago„"
+description:
+keywords:
+path: /blog/12-things-i-wish-i-knew-10-years-ago
+date: 2020-03-27
+published: false
+images:
+    - author: Nicolas Häns
+      image: ./cover.jpg
+      sourceText: Unsplash
+      source: https://unsplash.com/@nhphoto
+      is_cover: 1
+      galleryId: 0
+---
+
+Every time I feel something is going off with my professional attitude, I come back here and re-read this list of pivot points. It really helps me to move forward. So, here we go...
+
+## 1. Coding is my zone of comfort {a}
+
+There is no point in coding for coding.
+Помните, что когда вы кодите, вы просто переупорядочиваете электрический заряд в огромном массиве конденсаторов, сидя на шаре, который несется в звездном пространстве.
+Поэтому ваш код должен хотя бы минимально делать мир лучше - изучить новую библиотеку и написать howto статью. Сделать проект для решения проблем миллионов.
+Закодить и положить на полку, не показав никому - в этом нет смысла.
+
+## 2. Start small, but go full-cycle {a}
+
+Тут пример про 3d-моделирование
+"Огромный проект тебя проглотит"
+
+## 3. Make a small step, get feedback, repeat {a}
+
+"Я не могу показать тебе пока оно не будет готово" - дерьмовая фраза. В реальной жизни это не работает.
+Tell people about every tiny thing you make (unless it is not a secret): write an article, make a post in Twitter, shoot a video at Youtube.
+
+## 4. Don't jump between projects {a}
+
+Unless you are stuck or unsure whether it worth it, don't jump between project. Commitment is the key.
+
+## 5. Enjoy testing ideas, not code {a}
+
+Работающие идеи приносят гораздо большее удовлетворение, чем работающий код
+Find a way to battle-test your ideas as fast as possible
+Stop enjoying the process, the working idea is the result.
+
+## 6. There is no point in perfect code {a}
+
+Рассказать о ситуациях в твоей жизни: битрикс, sl, zj
+Рассказать о бедном программисте и богатом.
+"Если вы зарелизили что-то, за что вам не стыдно - вы зарелизили слишком поздно."
+
+## 7. The best code is the code never written {a}
+
+It is about re-use. Licensing is basically about whether the other party is willing to share and co-operate and on what terms.
+
+## 8. Make something only when you have something new to say {a}
+
+## 9. Threat your time dedication as an investment {a}
+
+Посчитай количество свободных часов в неделю и ты поймешь что время это ресурс.
+
+## 10. Delegate {a}
+
+It is not about you being or being not capable of doing something. It is about spending time efficiently by doing what you do best as a professional in your sphere, while delegating all the rest to professionals in other spheres. It is about getting yourself paralleled to save time. Or it is about you struggling with Illustrator and searching for a video on Youtube about how to tackle the next problem you ran into.
+
+Не будь человеком-оркестром. Это не про то, что ты чего-то можешь или не можешь. Это про то, что ты параллелишь себя в более эффективном ключе.
+
+It is not about you being uncapeable of doing something. I am sure you are clever enough to build a spaceship for Musk or create a vaccine against Covid. The only thing you will need in this case is another 10 years to make a PhD in the corresponding sphere and then another 5 to make simpler project of that style.
+
+Don't try to be everybody. You only need to be somebody who knows your field of expertise, be open for brief experiencing other fields and knows how to organise everyone else to make a dream project.
+
+Заметил, что когда переключаю контекст с технического на дизайнерски, то потом очень сложно вернуться к техническому - выбивает из колеи на некоторое время.
+Проще всю графику заказывать у фрилансеров.
+"Что делать если я вижу красивую картинку в голове, но не могу перенести ее в фотошоп?" - "Это называется Быть арт директором, в этом нет ничего плохого"
+
+I imagined myself being somehow like Tony Stark, who can design the whole suit overnight. But reality is nothing like this.
+
+## 11. Automate everything you do, but only when it worth it {a}
+
+## 12. Think, but not too much (or too long) {a}
+
+## 13. Do digital detox

@@ -63,12 +63,6 @@ export const skills = {
             size: '4.5rem',
         },
         {
-            key: 'redux',
-            logo: logo.redux,
-            title: 'Redux',
-            size: '4rem',
-        },
-        {
             key: 'javascript',
             logo: logo.js,
             title: 'JavaScript',
@@ -82,13 +76,6 @@ export const skills = {
             size: '4.5rem',
         },
         {
-            key: 'saga',
-            logo: logo.saga,
-            title: 'Redux Saga',
-            size: '2.2rem',
-            width: '3.6rem',
-        },
-        {
             key: 'apollo',
             title: 'Apollo GraphQL',
             logo: logo.apollo,
@@ -97,6 +84,12 @@ export const skills = {
             key: 'gatsbyjs',
             logo: logo.gatsbyjs,
             title: 'GatsbyJS',
+            size: '3.5rem',
+        },
+        {
+            key: 'mobx',
+            logo: logo.mobx,
+            title: 'MobX',
             size: '3.5rem',
         },
     ],
@@ -174,6 +167,19 @@ export const skills = {
             title: 'LESS',
             size: '2.0rem',
             width: '4.5rem',
+        },
+        {
+            key: 'redux',
+            logo: logo.redux,
+            title: 'Redux',
+            size: '4rem',
+        },
+        {
+            key: 'saga',
+            logo: logo.saga,
+            title: 'Redux Saga',
+            size: '2.2rem',
+            width: '3.6rem',
         },
     ],
     util: [
