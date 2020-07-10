@@ -1,7 +1,7 @@
 ---
-title: Migration from Redux to MobX
-description: Dont forget to write good description
-keywords: sex, drugs, rocknroll
+title: My escape from Redux and Saga to MobX
+description: For quite a while I was using Redux along with Redux Saga and was satisfied. Well, sort of, because I was constantly asking myself "Should the state management always be that complex?" Redux was a great library for it's time, when the concept of a centralized state was not well-coined yet. Nevertheless, one day came, and I have decided it was time to move.
+keywords: mobx, redux, saga, react, ui, frontend, state management
 path: /blog/migration-from-redux-to-mob-x-
 date: 2020-07-08
 published: false
@@ -14,9 +14,83 @@ images:
       galleryId: 0
 ---
 
-import { Container } from 'components/Container';
+For quite a while I was using Redux along with Redux Saga and was satisfied. Well, sort of, because I was constantly asking myself "Should the state management always be that complex?"
+Redux was a great library for it's time, when the concept of a centralized state was not well-coined yet. Nevertheless, one day came, and I have decided it was time to move.
 
-Once upon a time...
+## Requirements
+
+In my applications I had:
+
+* one special reducer that keeps data of the currently authenticated user, feature flags and some other different stuff,
+* one reducer per page, combined all together with `combineReducers`,
+* one saga per page,
+* a way to observe and affect the state outside of the rendering context.
+
+### Step 1. Root state
+
+```ts
+import { observable, computed, configure } from 'mobx';
+import { ApplicationState } from '../Application/state';
+import { HomePageState } from '../pages/home';
+import { ProducListPageState } from '../pages/productList';
+import { ProducDetailPageState } from '../pages/productDetail';
+
+configure({ enforceActions: 'observed', computedRequiresReaction: true });
+
+export class State {
+    // main state where user and feature flags are stored
+    @observable public application = new ApplicationState(this);
+
+    // page states, one per page
+    @observable public homePage = new HomePageState(this);
+    @observable public productListPage = new ProducListPageState(this);
+    @observable public productDetailPage = new ProducDetailPageState(this);
+
+    @computed get loading(): boolean {
+        if (this.application.loading) {
+            return true;
+        }
+
+        return this.homePage.loading || this.productListPage.loading || this.productDetailPage.loading;
+    }
+}
+```
+
+### Step 2. Sub-states
+
+### Step 3. Context
+
+### Step 5. Actions
+
+### Step 4. Observers
+
+## Conclusion
+
+### Pros of MobX
+
+* (Almost) completely decoupled from the rendering cycle. For me it is a plus, since personally I don't like the do-everything-in-the-component approach. IMO, React should only know how to render the UI, and everything else should be delegated to other parties.
+
+### Cons of MobX
+
+* Decorators work only with class components. If you need to turn a function component into an observer, you need to use alternative `observer()` syntax, which does not please the eye at all.
+* MobX is completely decoupled from React and uses another module to connect to it. It means that one day MobX may become ideologically incompatible with some upcoming React features.
+* No time travel debugging and undo ability
+
+## Alternatives
+
+If `MobX` does not suit you well, there are many-many alternatives out there. Just check them out.
+
+* [Apollo link state](https://www.apollographql.com/docs/link/links/state/)
+* [Overmind](https://overmindjs.org/)
+* [Recoil](https://recoiljs.org/) by Facebook
+* [Context API](https://reactjs.org/docs/context.html)
+* ... and many others :)
+
+### Just a personal opinion: why not Apollo link state
+
+----
+
+What do you think of MobX? Text me a message on Linkedin!
 
 Про actions очень важно:
 https://mobx.js.org/best/actions.html
@@ -25,3 +99,4 @@ https://mobx.js.org/best/actions.html
 
 Поэтому надо либо враппить все в экшны, либо разбивать на под-экшны, но лучше всего юзать flow()! потому что flow это генератор, а генераторы можно прерывать вручную.
 
+https://github.com/gannochenko/poc_mobx
