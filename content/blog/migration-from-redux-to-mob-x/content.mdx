@@ -122,7 +122,7 @@ export const Application: FunctionComponent<ApplicationProps> = () => {
 
 ### Reacting to state changes
 
-Having the state consumed does not automatically mean we react on it's changes. However, just like Redux has a connector module called `react-redux`, there is a module `mobx-react`.
+Having the state consumed does not automatically mean the component will react on it's changes. However, just like Redux has a connector module `react-redux`, there is a module called `mobx-react`.
 
 ```ts
 const Loader = observer(({ state }: StatePropsType) => <span>{state.ready ? '' : 'Loading...'}</span>);
@@ -279,12 +279,14 @@ export class HomePageState {
 
 * `MobX` is (almost) completely decoupled from the rendering cycle. For me it is a plus, since personally I don't like the do-everything-in-the-component approach. IMO, React should only know how to render the UI, and everything else should be delegated to other parties. Unfortunately, this can also manifest itself as a drawback (see below).
 * `State`, `Reducer` and `Action` entities are now united into one single entity called `State`. It just feels more natural. I can also treat the entire thing as a blackbox when needed.
+* All the complexity introduced by `Redux` is no longer required (Phewww...)
 
 ### Cons of MobX
 
 * Decorators work only with class components. If you need to turn a function component into an observer, you need to use alternative `observer()` syntax, which does not please the eye at all.
 * `MobX` is (almost) completely decoupled from `React`. It means that one day `MobX` may become ideologically incompatible with some upcoming `React` features.
-* No time travel debugging and undo ability
+* The state changes are not discreet, which makes it more difficult to debug.
+* Therefore, No time travel debugging and undo ability
 
 ## Alternatives
 
