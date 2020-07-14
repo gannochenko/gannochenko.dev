@@ -24,56 +24,267 @@ In my applications I had:
 * one special reducer that keeps data of the currently authenticated user, feature flags and some other different stuff,
 * one reducer per page, combined all together with `combineReducers`,
 * one saga per page,
-* a way to observe and affect the state outside of the rendering context.
+* a way to observe and affect the state outside of the rendering context,
+* a way to keep routing history and state in sync.
 
-### Step 1. Root state
+So will see how I'll tackle all of this with `MobX`. But first, a short intro to `MobX` is required.
+
+### The State
+
+According to `MobX`, a state is the heart of an application.
+
+As a substitution for reducers I have decided to make several sub-states. So, there is a `root` state, which has an `applicatoin state` and several page `states` as a composition.
 
 ```ts
 import { observable, computed, configure } from 'mobx';
-import { ApplicationState } from '../Application/state';
-import { HomePageState } from '../pages/home';
-import { ProducListPageState } from '../pages/productList';
-import { ProducDetailPageState } from '../pages/productDetail';
+import { Nullable } from '../../type';
 
+// pre-configure MobX to have better experience
+// see https://mobx.js.org/refguide/api.html
 configure({ enforceActions: 'observed', computedRequiresReaction: true });
 
 export class State {
-    // main state where user and feature flags are stored
-    @observable public application = new ApplicationState(this);
+    @observable public loading = false;
+    @observable public error: Nullable<Error> = null;
 
-    // page states, one per page
-    @observable public homePage = new HomePageState(this);
-    @observable public productListPage = new ProducListPageState(this);
-    @observable public productDetailPage = new ProducDetailPageState(this);
-
-    @computed get loading(): boolean {
-        if (this.application.loading) {
-            return true;
-        }
-
-        return this.homePage.loading || this.productListPage.loading || this.productDetailPage.loading;
+    @computed get ready(): boolean {
+        return this.loading || !this.error;
     }
 }
 ```
 
-### Step 2. Sub-states
+The `MobX` state is not just a plain object. The state object has a prototype, which automatically enables the ultimate fun with all that OOP paradigm stuff: getters / setters, methods, inheritance and so on.  
 
-### Step 3. Context
+You may have already noticed a couple of decorators back there.
 
-### Step 5. Actions
+* [@observable](https://mobx.js.org/refguide/observable-decorator.html) decorator tells `MobX` to observe this particular property for changes,
+* [@computed](https://mobx.js.org/refguide/computed-decorator.html) decorator tells that there is a getter returning a value that is dependent on some observed properties and does not have side effects. This enables memoization.   
 
-### Step 4. Observers
+### Consuming the state
+
+First thing first, I need to inject my state into components. React context and hooks are to my rescue here!
+
+```ts
+import React, { useContext } from 'react';
+
+import { State } from './state';
+import { Nullable } from '../../type';
+
+type NullableState = Nullable<State>;
+
+export type StatePropsType = {
+    state: State;
+};
+
+export const StateContext = React.createContext<NullableState>(null);
+
+export const StateProvider = StateContext.Provider;
+
+export const useGlobalState = () => useContext<NullableState>(StateContext);
+```
+
+Then I modify my `Providers` component like this:
+
+```ts
+import React, { FunctionComponent } from 'react';
+
+import { State } from '../../state/state';
+import { StateProvider } from '../../state/context';
+
+const state = new State();
+
+export const Providers: FunctionComponent = ({ children }) => (
+    <StateProvider value={state}>
+        {children}
+    </StateProvider>
+);
+```
+
+And finally, everywhere I want this state consumed I just use `useGlobalState` hook:
+
+```ts
+import React, { useEffect, FunctionComponent } from 'react';
+
+import { ApplicationProps } from './type';
+import { useGlobalState } from '../state/context';
+
+export const Application: FunctionComponent<ApplicationProps> = () => {
+    const state = useGlobalState()!;
+
+    return (
+        <div>
+            MobX is cool!
+            <Loader state={state} />
+        </div>
+    );
+};
+```
+
+### Reacting to state changes
+
+Having the state consumed does not automatically mean we react on it's changes. However, just like Redux has a connector module called `react-redux`, there is a module `mobx-react`.
+
+```ts
+const Loader = observer(({ state }: StatePropsType) => <span>{state.ready ? '' : 'Loading...'}</span>);
+```
+
+A few important things here:
+
+* [observer](https://mobx.js.org/refguide/observer-component.html) is a wrapper function that makes our component reactable on state changes. This is the analog of `connect()` from 'react-redux'.
+* There is also an [@observer](https://mobx.js.org/refguide/observer-component.html) decorator, but it works only with `class components` (which I use less and less frequently today).
+* I will keep my `observers` as tiny as possible, to avoid re-rendering of different neighboring chunks of UI that do not care about the state at all.
+
+### Changing the state
+
+There are different ways to get the state changed. Personally, I prefer doing it Redux-way, via actions. But actions in `MobX` is nothing like in `Redux`: I don't need to dispatch anything hopefully :) An action here is just a method of the `State` class.
+
+Let's modify the `State` class by adding an action or two!
+
+```ts
+import { observable, computed, configure, action } from 'mobx';
+import { Nullable } from '../../type';
+
+// pre-configure MobX to have better experience
+// see https://mobx.js.org/refguide/api.html
+configure({ enforceActions: 'observed', computedRequiresReaction: true });
+
+export class State {
+    @observable public loading = false;
+    @observable public error: Nullable<Error> = null;
+
+    @computed get ready(): boolean {
+        return this.loading || !this.error;
+    }
+
+    @action.bound
+    public start() {
+        this.error = null;
+        this.loading = true;
+    }
+
+    @action.bound
+    public stop(error?: Error) {
+        if (error) {
+            this.error = Error;
+        }
+        this.loading = false;
+    }
+}
+```
+
+Here we have an [@action.bound](https://mobx.js.org/refguide/action.html) decorator (*bound* means that I can safely use `this` inside).
+
+Then nothing stops me from calling these two beautiful actions to change the state:
+
+```ts
+import React, { useEffect, FunctionComponent } from 'react';
+
+import { ApplicationProps } from './type';
+import { useGlobalState } from '../state/context';
+
+export const Application: FunctionComponent<ApplicationProps> = () => {
+    const state = useGlobalState()!;
+
+    return (
+        <div>
+            MobX is cool!<br />
+            <button onClick={state.start()}>Start</button>{'  '}<button onClick={state.stop()}>Start</button><br />
+            <Loader state={state} />
+        </div>
+    );
+};
+```
+
+While `@action.bound` works nicely for sync actions, for async ones the things turn a bit more complicated.
+
+It might seem in at the beginning, that I just need to add `async / await` to an action, and that will be enough. Well, yeh, it will technically solve the case, but what if I need for something more reliable?
+The problem with `async / await` is that I don't really have control over the flow, and if an action takes longer to execute than anticipated initially, I might get into race condition troubles there.
+
+### Step 2. Page state and actions
+
+```ts
+import { action, observable, flow, isFlowCancellationError } from 'mobx';
+import { CancellablePromise } from 'mobx/lib/api/flow';
+import { Nullable, ObjectLiteral } from '../../../type';
+import { State } from '../../state/state';
+import { SubState } from '../../state/type';
+
+export class HomePageState implements SubState {
+    @observable ready = false;
+    @observable loading = false;
+    @observable error: Nullable<Error> = null;
+
+    private queryLoad: Nullable<CancellablePromise<unknown>> = null;
+
+    onLoad() {
+        if (this.queryLoad) {
+            this.queryLoad.cancel();
+        }
+
+        this.queryLoad = this.startLoading();
+        this.queryLoad.catch((error) => {
+            if (!isFlowCancellationError(error)) {
+                console.error(error);
+            }
+        });
+    }
+
+    onUnload() {
+        if (this.queryLoad) {
+            this.queryLoad.cancel();
+            this.queryLoad = null;
+        }
+        this.reset();
+    }
+
+    @action.bound
+    reset(): void {
+        this.ready = false;
+        this.loading = false;
+        this.error = null;
+    }
+
+    // flow is a substitution for Redux Saga
+    startLoading = flow(function* startLoading() {
+        // @ts-ignore
+        const self = this as HomePageState;
+
+        self.loading = true;
+        self.error = null;
+        self.ready = false;
+
+        // load something really heavy
+        yield new Promise((resolve) => {
+            setTimeout(resolve, 5000);
+        });
+
+        yield self.finishLoading();
+    });
+
+    @action.bound
+    finishLoading(error?: Error): void {
+        this.loading = false;
+
+        if (error) {
+            this.error = error;
+        }
+
+        this.ready = true;
+    }
+}
+```
 
 ## Conclusion
 
 ### Pros of MobX
 
-* (Almost) completely decoupled from the rendering cycle. For me it is a plus, since personally I don't like the do-everything-in-the-component approach. IMO, React should only know how to render the UI, and everything else should be delegated to other parties.
+* `MobX` is (almost) completely decoupled from the rendering cycle. For me it is a plus, since personally I don't like the do-everything-in-the-component approach. IMO, React should only know how to render the UI, and everything else should be delegated to other parties. Unfortunately, this can also manifest itself as a drawback (see below).
+* `State`, `Reducer` and `Action` entities are now united into one single entity called `State`. It just feels more natural. I can also treat the entire thing as a blackbox when needed.
 
 ### Cons of MobX
 
 * Decorators work only with class components. If you need to turn a function component into an observer, you need to use alternative `observer()` syntax, which does not please the eye at all.
-* MobX is completely decoupled from React and uses another module to connect to it. It means that one day MobX may become ideologically incompatible with some upcoming React features.
+* `MobX` is (almost) completely decoupled from `React`. It means that one day `MobX` may become ideologically incompatible with some upcoming `React` features.
 * No time travel debugging and undo ability
 
 ## Alternatives
@@ -84,6 +295,7 @@ If `MobX` does not suit you well, there are many-many alternatives out there. Ju
 * [Overmind](https://overmindjs.org/)
 * [Recoil](https://recoiljs.org/) by Facebook
 * [Context API](https://reactjs.org/docs/context.html)
+* [Unstated](https://github.com/jamiebuilds/unstated)
 * ... and many others :)
 
 ### Just a personal opinion: why not Apollo link state
