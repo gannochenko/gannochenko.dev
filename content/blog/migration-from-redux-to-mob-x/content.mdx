@@ -130,13 +130,13 @@ const Loader = observer(({ state }: StatePropsType) => <span>{state.ready ? '' :
 
 A few important things here:
 
-* [observer](https://mobx.js.org/refguide/observer-component.html) is a wrapper function that makes our component reactable on state changes. This is the analog of `connect()` from 'react-redux'.
+* [observer](https://mobx.js.org/refguide/observer-component.html) is a wrapper function that makes our component "sensitive" to state changes. This is an analog of `connect()` from 'react-redux'.
 * There is also an [@observer](https://mobx.js.org/refguide/observer-component.html) decorator, but it works only with `class components` (which I use less and less frequently today).
-* I will keep my `observers` as tiny as possible, to avoid re-rendering of different neighboring chunks of UI that do not care about the state at all.
+* I shall keep my `observers` as tiny as possible, to avoid re-rendering of different neighboring chunks of UI that do not care about the state at all.
 
 ### Changing the state
 
-There are different ways to get the state changed. Personally, I prefer doing it Redux-way, via actions. But actions in `MobX` is nothing like in `Redux`: I don't need to dispatch anything hopefully :) An action here is just a method of the `State` class.
+There are different ways to get the state changed. Personally, I prefer doing it Redux-way: via actions. But actions in `MobX` is nothing like in `Redux`: I don't need to dispatch anything anywhere hopefully :) An action here is just a method of the `State` class.
 
 Let's modify the `State` class by adding an action or two!
 
@@ -197,7 +197,7 @@ export const Application: FunctionComponent<ApplicationProps> = () => {
 
 While `@action.bound` works nicely for sync actions, for async ones the things turn a bit more complicated.
 
-It might seem in at the beginning, that I just need to add `async / await` to an action, and that will be enough. Well, yeh, it will technically solve the case, but what if I need for something more reliable?
+It might seem at the beginning, that I just need to add `async / await` to an action, and that will be enough. Well, yeh, technically it will solve the case, but what if I need for something more reliable?
 The problem with `async / await` is that I don't really have control over the flow, and if an action takes longer to execute than anticipated initially, I might get into race condition troubles there.
 
 ### Step 2. Page state and actions
@@ -207,9 +207,8 @@ import { action, observable, flow, isFlowCancellationError } from 'mobx';
 import { CancellablePromise } from 'mobx/lib/api/flow';
 import { Nullable, ObjectLiteral } from '../../../type';
 import { State } from '../../state/state';
-import { SubState } from '../../state/type';
 
-export class HomePageState implements SubState {
+export class HomePageState {
     @observable ready = false;
     @observable loading = false;
     @observable error: Nullable<Error> = null;
