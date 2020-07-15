@@ -1,23 +1,23 @@
 ---
-title: My escape from Redux and Saga to MobX
-description: For quite a while I was using Redux along with Redux Saga and was satisfied. Well, sort of, because I was constantly asking myself "Should the state management always be that complex?" Redux was a great library for it's time, when the concept of a centralized state was not well-coined yet. Nevertheless, one day came, and I have decided it was time to move.
+title: How I migrated from Redux and Saga to MobX and became a happier person
+description: For quite a while I was using Redux together with Redux Saga and was satisfied. Well, sort of, because I was constantly asking myself "Should the state management always be that complex?" Redux was a great library for it's time, when the concept of a centralized state was not well-coined yet. Nevertheless, one day came, and I have decided it was time to move.
 keywords: mobx, redux, saga, react, ui, frontend, state management
-path: /blog/migration-from-redux-to-mob-x-
-date: 2020-07-08
-published: false
+path: /blog/how-i-migrated-from-redux-and-saga-to-mobx-and-became-a-happier-person
+date: 2020-07-15
+published: true
 images:
-    - author: SwapnIl Dwivedi
+    - author: Kin Li
       image: ./cover.jpg
       sourceText: Unsplash
-      source: https://unsplash.com/@momentance
+      source: https://unsplash.com/@kinli
       is_cover: 1
       galleryId: 0
 ---
 
 import { LinkedInLink } from 'components';
 
-For quite a while I was using Redux along with Redux Saga and was satisfied. Well, sort of, because I was constantly asking myself "Should the state management always be that complex?"
-Redux was a great library for it's time, when the concept of a centralized state was not well-coined yet. Nevertheless, one day came, and I have decided it was time to move.
+For quite a while I was using `Redux` together with `Redux Saga` and was satisfied. Well, sort of, because I was constantly asking myself "Should the state management always be that complex?"
+`Redux` was a great library for it's time, when the concept of a centralized state was not well-coined yet. Nevertheless, one day came, and I have decided it was time to move.
 
 ## Requirements
 
@@ -35,7 +35,7 @@ So will see how I'll tackle all of this with `MobX`. But first, a short intro to
 
 According to `MobX`, a state is the heart of an application.
 
-As a substitution for reducers I have decided to make several sub-states. So, there is a `root` state, which has an `applicatoin state` and several page `states` as a composition.
+As a substitution for reducers I have decided to make several sub-states. So, there is a "root" state called `State`:
 
 ```ts
 import { observable, computed, configure } from 'mobx';
@@ -55,7 +55,7 @@ export class State {
 }
 ```
 
-The `MobX` state is not just a plain object. The state object has a prototype, which automatically enables the ultimate fun with all that OOP paradigm stuff: getters / setters, methods, inheritance and so on.  
+The `MobX` state is not just a plain object. The state object has a prototype, which automatically enables the ultimate fun with all that OOP stuff: getters / setters, methods, incapsulation and so on. I am not a huge fan of OOP though, but occasionally it may be helpful.
 
 You may have already noticed a couple of decorators back there.
 
@@ -127,13 +127,15 @@ export const Application: FunctionComponent<ApplicationProps> = () => {
 Having the state consumed does not automatically mean the component will react on it's changes. However, just like Redux has a connector module `react-redux`, there is a module called `mobx-react`.
 
 ```ts
+import { observer } from 'mobx-react';
+
 const Loader = observer(({ state }: StatePropsType) => <span>{state.ready ? '' : 'Loading...'}</span>);
 ```
 
 A few important things here:
 
 * [observer](https://mobx.js.org/refguide/observer-component.html) is a wrapper function that makes our component "sensitive" to state changes. This is an analog of `connect()` from 'react-redux'.
-* There is also an [@observer](https://mobx.js.org/refguide/observer-component.html) decorator, but it works only with `class components` (which I use less and less frequently today).
+* There is also an [@observer](https://mobx.js.org/refguide/observer-component.html) decorator, but it works only with `class components` (which I use less and less frequently as time goes by).
 * I shall keep my `observers` as tiny as possible, to avoid re-rendering of different neighboring chunks of UI that do not care about the state at all.
 
 ### Changing the state
@@ -223,7 +225,7 @@ So this is how I have implemented this.
 
 ### Sub-states
 
-I have decided to make a sub-state for each page of my application, just like I used to have separate reducers in `Redux` before. That is my home page:
+I have decided to make a sub-state for each page of my application, just like I used to have separate reducers in `Redux` before. That is my home page for instance:
 
 ```ts
 import React, { FunctionComponent, useEffect } from 'react';
@@ -370,7 +372,7 @@ export class State {
 
 ## Conclusion
 
-That is basically it! For me the codebase shrank significantly. All the cryptic reducers and the "plain object" state concept is now gone. This all brings us to the following outcome:
+That is basically it! For me the codebase shrank significantly. All the cryptic reducers and the "plain object" state concept is now gone. This all brings me to the following outcome:
 
 ### Pros of MobX
 
