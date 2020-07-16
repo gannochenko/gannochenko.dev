@@ -39,6 +39,6 @@ export const markdownComponents = {
             <ol {...props} />
         </Container>
     ),
-    hr: (props: any) => <HR />,
+    hr: () => <HR />,
     pre: Listing,
 };
