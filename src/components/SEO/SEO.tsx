@@ -38,7 +38,7 @@ export const SEO: FunctionComponent<Props> = ({
                             // twitter
                             {
                                 name: 'twitter:card',
-                                content: metaDescription,
+                                content: 'summary',
                             },
                             {
                                 name: 'twitter:creator',
