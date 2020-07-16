@@ -17,7 +17,7 @@ import { Link } from '../Link';
 
 export const Footer: FunctionComponent<{}> = () => {
     const [showAT, setShowAT] = useState(false);
-    const [showFF, setShowFF] = useState(true);
+    const [showArch, setShowArch] = useState(false);
     const [showDEV, setShowDEV] = useState(false);
 
     return (
@@ -50,10 +50,10 @@ export const Footer: FunctionComponent<{}> = () => {
                         type="instagram"
                         src={links.instagram}
                         onMouseOver={() => {
-                            setShowFF(true);
+                            setShowArch(true);
                         }}
                         onMouseOut={() => {
-                            setShowFF(false);
+                            setShowArch(false);
                         }}
                     />
                 </Links>
@@ -62,8 +62,8 @@ export const Footer: FunctionComponent<{}> = () => {
                 </SlashContainer>
                 <Path>
                     <AT show={showAT}>@</AT>gannochenko
-                    <END show={showDEV || showFF}>
-                        {showFF && 'ff'}
+                    <END show={showDEV || showArch}>
+                        {showArch && '_arch'}
                         {showDEV && '_dev'}
                     </END>
                 </Path>
