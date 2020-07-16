@@ -35,21 +35,30 @@ export const SEO: FunctionComponent<Props> = ({
                         title={title}
                         titleTemplate={`%s | ${data.site.siteMetadata.title}`}
                         meta={[
+                            // twitter
                             {
-                                name: `description`,
+                                name: 'twitter:card',
                                 content: metaDescription,
                             },
                             {
-                                property: `og:title`,
+                                name: 'twitter:creator',
+                                content: '@gannochenko',
+                            },
+                            {
+                                name: 'description',
+                                content: metaDescription,
+                            },
+                            {
+                                property: 'og:title',
                                 content: title,
                             },
                             {
-                                property: `og:description`,
+                                property: 'og:description',
                                 content: metaDescription,
                             },
                             {
-                                property: `og:type`,
-                                content: `website`,
+                                property: 'og:type',
+                                content: 'website',
                             },
                             image
                                 ? {
