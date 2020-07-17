@@ -192,7 +192,7 @@ export const Application: FunctionComponent<ApplicationProps> = () => {
     return (
         <div>
             MobX is cool!<br />
-            <button onClick={state.start()}>Start</button>{'  '}<button onClick={state.stop()}>Start</button><br />
+            <button onClick={() => state.start()}>Start</button>{'  '}<button onClick={() => state.stop()}>Start</button><br />
             <Loader state={state} />
         </div>
     );
@@ -209,7 +209,7 @@ The problem with `async / await` is that I don't really have any control over th
 So consider the following situation: 
 
 1. A user opens a page. 
-2. The page data started being loaded, the user is looking at the loading indicator meanwhile.
+2. The page data starts to load, the user is looking at the loading indicator meanwhile.
 3. The user leaves the page.
 4. It takes some time to load the data due to poor network connection.
 5. The data arrives, the state gets updated even if the displayed page is not the same the data was obtained for.
