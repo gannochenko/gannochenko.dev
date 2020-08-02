@@ -3763,6 +3763,8 @@ type Query {
     site(
         buildTime: DateQueryOperatorInput
         siteMetadata: SiteSiteMetadataFilterInput
+        port: DateQueryOperatorInput
+        host: StringQueryOperatorInput
         polyfill: BooleanQueryOperatorInput
         pathPrefix: StringQueryOperatorInput
         id: StringQueryOperatorInput
@@ -3900,6 +3902,32 @@ type Site implements Node {
         locale: String
     ): Date
     siteMetadata: SiteSiteMetadata
+    port(
+        """
+        Format the date using Moment.js' date tokens, e.g. `date(formatString: "YYYY
+        MMMM DD")`. See https://momentjs.com/docs/#/displaying/format/ for
+        documentation for different tokens.
+        """
+        formatString: String
+
+        """
+        Returns a string generated with Moment.js' `fromNow` function
+        """
+        fromNow: Boolean
+
+        """
+        Returns the difference between this date and the current time. Defaults to
+        "milliseconds" but you can also pass in as the measurement "years",
+        "months", "weeks", "days", "hours", "minutes", and "seconds".
+        """
+        difference: String
+
+        """
+        Configures the locale Moment.js will use to format the date.
+        """
+        locale: String
+    ): Date
+    host: String
     polyfill: Boolean
     pathPrefix: String
     id: ID!
@@ -4097,6 +4125,8 @@ enum SiteFieldsEnum {
     siteMetadata___author
     siteMetadata___keywords
     siteMetadata___siteUrl
+    port
+    host
     polyfill
     pathPrefix
     id
@@ -4190,6 +4220,8 @@ enum SiteFieldsEnum {
 input SiteFilterInput {
     buildTime: DateQueryOperatorInput
     siteMetadata: SiteSiteMetadataFilterInput
+    port: DateQueryOperatorInput
+    host: StringQueryOperatorInput
     polyfill: BooleanQueryOperatorInput
     pathPrefix: StringQueryOperatorInput
     id: StringQueryOperatorInput
