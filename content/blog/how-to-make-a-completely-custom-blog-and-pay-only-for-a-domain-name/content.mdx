@@ -1,0 +1,36 @@
+---
+title: "How to make a completely custom blog and pay only for the domain name"
+description: Dont forget to write good description
+keywords: sex, drugs, rocknroll
+path: /blog/how-to-make-a-completely-custom-blog-and-pay-only-for-the-domain-name-
+date: 2020-08-02
+published: false
+images:
+    - author: Max Mustermann
+      image: ./cover.jpg
+      sourceText: Unsplash
+      source: https://unsplash.com/@mustermann
+      is_cover: 1
+      galleryId: 0
+---
+
+import { Container } from 'components/Container';
+
+## Frontend
+
+React. Gatsby. Vercel.
+
+First I hosted on Github pages, it even seemed faster than anything else (according to the Lighthouse), but when it came to Russia, the .dev domain showed stupid 404 no matter what I have tried to manage. I guess, it has something to do with RKN and black russian helicopters. So I moved to Vercel shortly after.
+
+## Backend
+
+At first, wanted to run a container. But for running a container I will have to pay even when it is idle. That is why, serverless is a perfect choice here.
+
+Especially when it comes to AWS, where, by chance, one can have a free tier.
+
+I would use Terraform to deploy a thing even that small, because I really hate AWS UI (no offense).
+
+## Alternatives
+
+NextJS
+
