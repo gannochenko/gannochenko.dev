@@ -35,7 +35,7 @@ So I made a MobX abstraction over Auth0 hooks, called `auth-state`. It helps als
 
 ### AuthWidget
 
-## RBAC
+## RBAC and "protected" routes
 
 I could have had `RBAC` on my backend side, but it is quite expensive (or time consuming) to make. Instead, I decided to check out what Auth0 has to offer.
 
@@ -49,16 +49,62 @@ Then I came across the [extensions](https://auth0.com/docs/extensions/authorizat
 
 https://manage.auth0.com/dashboard/eu/gannochenko/extensions
 
+~~~js
+try {
+    // load metadata
+    const accessToken = await this.getAccessTokenMethod!({
+        audience: `https://${this.domain}/api/v2/`,
+        scope: 'read:current_user',
+    });
 
-Well it is not ideal, it makes the first query unnecessary and slows the app down...
+    const userDetailsByIdUrl = `https://${this.domain}/api/v2/users/${user.sub}`;
 
-## Protected client-side route
+    const metadataResponse = await fetch(userDetailsByIdUrl, {
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+        },
+    });
+
+    const data = await metadataResponse.json();
+    const roles = data.app_metadata.authorization.roles as string[];
+
+    // ...
+} catch (error) {
+    console.error(error);
+}
+~~~
+
+This solution solves the case, yet it is far from ideal: I have to re-get user info, and that is +1 query that delays the first meaningful data paint.
+
+I want my app work faster, that is why I have decided to put roles into a token itself. To do that, I create another rule AFTER the Auth Extension rule:
+
+~~~js
+function (user, context, callback) {
+    var namespace = 'http://auth0-test/claims/'; // You can set your own namespace, but do not use an Auth0 domain
+    
+    // Add the namespaced tokens. Remove any which is not necessary for your scenario
+    context.idToken[namespace + "permissions"] = user.permissions;
+    context.idToken[namespace + "groups"] = user.groups;
+    context.idToken[namespace + "roles"] = user.roles;
+    
+    callback(null, user, context);
+}
+~~~
+
+The value of the `namespace` should be of format `http://your-domain/claims/`, otherwise the thing does not work. This is weird, not to say the least, but it eventually the roles get available via the `http://auth0-test/claims/roles` key in the user object.
+
+This solution is not ideal too: in case if I update a user, they will have to re-login to make effect. In my case it is not crucial since I don't plan to update users often.
+
+## Protected route component
 
 ## Validating token on your API's side
 
 ## Terraform
 
-Bonus.
+If you don't use protected routes, then you don't need to pull roles client-side. In this case installation of Auth Extension is not required, and you can keep roles and operation on the Auth0 side.
+If that is your case, you can make use of [the official Auth0 provider](https://www.terraform.io/docs/providers/auth0/index.html) and do everything you need to do.
+
+Otherwise, bad news for you: [Auth Extension can not be terraformed](https://github.com/alexkappa/terraform-provider-auth0/issues/85) (at least not yet) :(
 
 ## Hooks
 
