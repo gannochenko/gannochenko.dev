@@ -1154,6 +1154,26 @@
                                 "defaultValue": null
                             },
                             {
+                                "name": "port",
+                                "description": "",
+                                "type": {
+                                    "kind": "INPUT_OBJECT",
+                                    "name": "DateQueryOperatorInput",
+                                    "ofType": null
+                                },
+                                "defaultValue": null
+                            },
+                            {
+                                "name": "host",
+                                "description": "",
+                                "type": {
+                                    "kind": "INPUT_OBJECT",
+                                    "name": "StringQueryOperatorInput",
+                                    "ofType": null
+                                },
+                                "defaultValue": null
+                            },
+                            {
                                 "name": "polyfill",
                                 "description": "",
                                 "type": {
@@ -3728,16 +3748,6 @@
                         "defaultValue": null
                     },
                     {
-                        "name": "preview",
-                        "description": "",
-                        "type": {
-                            "kind": "INPUT_OBJECT",
-                            "name": "StringQueryOperatorInput",
-                            "ofType": null
-                        },
-                        "defaultValue": null
-                    },
-                    {
                         "name": "keywords",
                         "description": "",
                         "type": {
@@ -3783,6 +3793,16 @@
                         "type": {
                             "kind": "INPUT_OBJECT",
                             "name": "MdxFrontmatterImagesFilterListInput",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    },
+                    {
+                        "name": "preview",
+                        "description": "",
+                        "type": {
+                            "kind": "INPUT_OBJECT",
+                            "name": "StringQueryOperatorInput",
                             "ofType": null
                         },
                         "defaultValue": null
@@ -3840,26 +3860,6 @@
                         "defaultValue": null
                     },
                     {
-                        "name": "sourceText",
-                        "description": "",
-                        "type": {
-                            "kind": "INPUT_OBJECT",
-                            "name": "StringQueryOperatorInput",
-                            "ofType": null
-                        },
-                        "defaultValue": null
-                    },
-                    {
-                        "name": "source",
-                        "description": "",
-                        "type": {
-                            "kind": "INPUT_OBJECT",
-                            "name": "StringQueryOperatorInput",
-                            "ofType": null
-                        },
-                        "defaultValue": null
-                    },
-                    {
                         "name": "is_cover",
                         "description": "",
                         "type": {
@@ -3875,6 +3875,26 @@
                         "type": {
                             "kind": "INPUT_OBJECT",
                             "name": "IntQueryOperatorInput",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    },
+                    {
+                        "name": "sourceText",
+                        "description": "",
+                        "type": {
+                            "kind": "INPUT_OBJECT",
+                            "name": "StringQueryOperatorInput",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    },
+                    {
+                        "name": "source",
+                        "description": "",
+                        "type": {
+                            "kind": "INPUT_OBJECT",
+                            "name": "StringQueryOperatorInput",
                             "ofType": null
                         },
                         "defaultValue": null
@@ -8221,18 +8241,6 @@
                         "deprecationReason": null
                     },
                     {
-                        "name": "preview",
-                        "description": null,
-                        "args": [],
-                        "type": {
-                            "kind": "SCALAR",
-                            "name": "String",
-                            "ofType": null
-                        },
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
                         "name": "keywords",
                         "description": null,
                         "args": [],
@@ -8336,6 +8344,18 @@
                         },
                         "isDeprecated": false,
                         "deprecationReason": null
+                    },
+                    {
+                        "name": "preview",
+                        "description": null,
+                        "args": [],
+                        "type": {
+                            "kind": "SCALAR",
+                            "name": "String",
+                            "ofType": null
+                        },
+                        "isDeprecated": false,
+                        "deprecationReason": null
                     }
                 ],
                 "inputFields": null,
@@ -8373,30 +8393,6 @@
                         "deprecationReason": null
                     },
                     {
-                        "name": "sourceText",
-                        "description": null,
-                        "args": [],
-                        "type": {
-                            "kind": "SCALAR",
-                            "name": "String",
-                            "ofType": null
-                        },
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
-                        "name": "source",
-                        "description": null,
-                        "args": [],
-                        "type": {
-                            "kind": "SCALAR",
-                            "name": "String",
-                            "ofType": null
-                        },
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
                         "name": "is_cover",
                         "description": null,
                         "args": [],
@@ -8415,6 +8411,30 @@
                         "type": {
                             "kind": "SCALAR",
                             "name": "Int",
+                            "ofType": null
+                        },
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
+                        "name": "sourceText",
+                        "description": null,
+                        "args": [],
+                        "type": {
+                            "kind": "SCALAR",
+                            "name": "String",
+                            "ofType": null
+                        },
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
+                        "name": "source",
+                        "description": null,
+                        "args": [],
+                        "type": {
+                            "kind": "SCALAR",
+                            "name": "String",
                             "ofType": null
                         },
                         "isDeprecated": false,
@@ -9893,12 +9913,6 @@
                         "deprecationReason": null
                     },
                     {
-                        "name": "childMdx___frontmatter___preview",
-                        "description": null,
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
                         "name": "childMdx___frontmatter___keywords",
                         "description": null,
                         "isDeprecated": false,
@@ -9935,6 +9949,18 @@
                         "deprecationReason": null
                     },
                     {
+                        "name": "childMdx___frontmatter___images___is_cover",
+                        "description": null,
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
+                        "name": "childMdx___frontmatter___images___galleryId",
+                        "description": null,
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
                         "name": "childMdx___frontmatter___images___sourceText",
                         "description": null,
                         "isDeprecated": false,
@@ -9947,13 +9973,7 @@
                         "deprecationReason": null
                     },
                     {
-                        "name": "childMdx___frontmatter___images___is_cover",
-                        "description": null,
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
-                        "name": "childMdx___frontmatter___images___galleryId",
+                        "name": "childMdx___frontmatter___preview",
                         "description": null,
                         "isDeprecated": false,
                         "deprecationReason": null
@@ -17671,6 +17691,71 @@
                         "deprecationReason": null
                     },
                     {
+                        "name": "port",
+                        "description": null,
+                        "args": [
+                            {
+                                "name": "formatString",
+                                "description": "Format the date using Moment.js' date tokens, e.g. `date(formatString: \"YYYY MMMM DD\")`. See https://momentjs.com/docs/#/displaying/format/ for documentation for different tokens.",
+                                "type": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                },
+                                "defaultValue": null
+                            },
+                            {
+                                "name": "fromNow",
+                                "description": "Returns a string generated with Moment.js' `fromNow` function",
+                                "type": {
+                                    "kind": "SCALAR",
+                                    "name": "Boolean",
+                                    "ofType": null
+                                },
+                                "defaultValue": null
+                            },
+                            {
+                                "name": "difference",
+                                "description": "Returns the difference between this date and the current time. Defaults to \"milliseconds\" but you can also pass in as the measurement \"years\", \"months\", \"weeks\", \"days\", \"hours\", \"minutes\", and \"seconds\".",
+                                "type": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                },
+                                "defaultValue": null
+                            },
+                            {
+                                "name": "locale",
+                                "description": "Configures the locale Moment.js will use to format the date.",
+                                "type": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                },
+                                "defaultValue": null
+                            }
+                        ],
+                        "type": {
+                            "kind": "SCALAR",
+                            "name": "Date",
+                            "ofType": null
+                        },
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
+                        "name": "host",
+                        "description": null,
+                        "args": [],
+                        "type": {
+                            "kind": "SCALAR",
+                            "name": "String",
+                            "ofType": null
+                        },
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
                         "name": "polyfill",
                         "description": null,
                         "args": [],
@@ -17872,6 +17957,26 @@
                         "defaultValue": null
                     },
                     {
+                        "name": "port",
+                        "description": "",
+                        "type": {
+                            "kind": "INPUT_OBJECT",
+                            "name": "DateQueryOperatorInput",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    },
+                    {
+                        "name": "host",
+                        "description": "",
+                        "type": {
+                            "kind": "INPUT_OBJECT",
+                            "name": "StringQueryOperatorInput",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    },
+                    {
                         "name": "polyfill",
                         "description": "",
                         "type": {
@@ -18015,6 +18120,18 @@
                     },
                     {
                         "name": "siteMetadata___siteUrl",
+                        "description": null,
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
+                        "name": "port",
+                        "description": null,
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
+                        "name": "host",
                         "description": null,
                         "isDeprecated": false,
                         "deprecationReason": null
@@ -21916,12 +22033,6 @@
                         "deprecationReason": null
                     },
                     {
-                        "name": "frontmatter___preview",
-                        "description": null,
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
                         "name": "frontmatter___keywords",
                         "description": null,
                         "isDeprecated": false,
@@ -22174,6 +22285,18 @@
                         "deprecationReason": null
                     },
                     {
+                        "name": "frontmatter___images___is_cover",
+                        "description": null,
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
+                        "name": "frontmatter___images___galleryId",
+                        "description": null,
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
                         "name": "frontmatter___images___sourceText",
                         "description": null,
                         "isDeprecated": false,
@@ -22186,13 +22309,7 @@
                         "deprecationReason": null
                     },
                     {
-                        "name": "frontmatter___images___is_cover",
-                        "description": null,
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
-                        "name": "frontmatter___images___galleryId",
+                        "name": "frontmatter___preview",
                         "description": null,
                         "isDeprecated": false,
                         "deprecationReason": null

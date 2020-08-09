@@ -19,7 +19,48 @@ import { Container } from 'components/Container';
 Why Auth0? The service is mature and has a truly generous free plan (...describe).
 I like when everything is free or almost free (yes, I am a SAAS gypsy).
 
-So... blah blah
+## Basic stuff, with React npm packages
+
+### Auth
+
+#### Provider
+ 
+ 
+#### Auth0-to-MobX bridge
+
+I am not a huge fan of "put-all-you-have-into-a-hook-and-use-it". Even though hooks is a great feature by itself, I usually prefer using only basic hooks, and keep my logic somewhere else.
+In this case, in MobX state. If you don't want to do this, just skip this part.
+
+So I made an MobX abstraction over Auth0 hooks, called `auth-state`. It helps also to hide all the complexity of Auth0 response behind a rather simple abstraction.
+
+### AuthWidget
+
+## RBAC
+
+I could have had `RBAC` on my backend side, but it is quite expensive (or time consuming) to make. Instead, I decided to check out what Auth0 has to offer.
+
+Up to this point everything was smooth... except that I needed to know roles client-side to enable the "protected routes" feature in my SPA.
+Roles are [not included into the user object](https://auth0.com/docs/api/authentication#get-user-info), and there is no way to get it unless I call [the management api](https://auth0.com/docs/api/management/v2#!/Users/get_user_roles).
+To call this API I apparently need a special kind of management token, which is not possible to get from the client side (without knowing the app secret).
+
+It is funny to notice once in a while, how a tiny misconception is able ruin great overall experience and make you bump against a wall for a couple of hours =( For an SPA there is an obvious urge to have roles accessible via a "user"-type token! That is where I felt like stuck and depressed.
+
+Then I came across the [extensions](https://auth0.com/docs/extensions/authorization-extension/v2)
+
+https://manage.auth0.com/dashboard/eu/gannochenko/extensions
+
+
+Well it is not ideal, it makes the first query unnecessary and slows the app down...
+
+## Protected client-side route
+
+## Validating token on your API's side
+
+## Terraform
+
+Bonus.
+
+## Hooks
 
 In case if you live in a country where paranoid government forbids keeping user personal data outside of the great iron curtain, we will have to manage profiles on our own...
 
