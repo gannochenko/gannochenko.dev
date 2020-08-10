@@ -101,13 +101,15 @@ If you update users often, then on each update you need to invalidate all the to
 
 ## Backend part
 
-It is possible to implement all endpoints on the side of your own application. There is [a great tutorial](https://auth0.com/docs/quickstart/webapp/nodejs) which describes that.
-Since we consume Auth0 infrastructure directly, this is not our case.
+The backend part is no less complex than the front.
 
-If you don't rely on what is inside of a token, you have to make an additional query to get the user's data. You can theoretically cache user data in Redis, but then you will have to add a hook on Auth0 side which will invalidate your cache. Since their's Auth0 and your's Redis do not share a demitiarized Virtual Network, you will have to expose an endpoint, come up with a some sort of a token, rotate it, add rate limiter... Or make an SSH tunnel (not sure if Auth0 supports that) A lot of trouble, in other words!
+First of all, it worth to mention, that it is totally doable to implement all the endpoints on the side of your own application. There is [a great tutorial](https://auth0.com/docs/quickstart/webapp/nodejs) to the rescue.
+I did not want this complexity in the first place, that is why I consume Auth0 infrastructure directly.
 
-My case is simpler.
-Instead, we just need to find a way to 1. check if the token is valid, 2. get the token payload and deserialize it, 3. check if a user has permissions.
+Secondly, if you don't rely on what is inside of a token, you have to make an additional query to get the user's data. So this would be +1 remote call per each endpoint hit.
+You can, however, cache the obtained user data to Redis. Unfortunately, then you would be forced to add a cache invalidation hook on the Auth0 side. Since theirs and yours infras do not share a common demilitarized Virtual Network (like a microservice grid typically does), you will have to expose an outer-world endpoint. To secure the endpoint you would have to come up with some sort of a token. Token needs to be rotated on a regular basis. Instead of a token-based system, a SSH tunnel can be established, but I doubt Auth0 supports this feature so easily. A rate limiter would be also a strong plus. Anyways, a lot of trouble!
+
+My case is simpler, since I 100% rely on the token payload, I just need to find a way to 1. check if the token is valid, 2. deserialize the token payload, 3. check if a user has permissions for each particular case in the app.
 
 ## Terraform
 
