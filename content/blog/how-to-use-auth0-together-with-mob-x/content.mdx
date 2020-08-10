@@ -93,11 +93,21 @@ function (user, context, callback) {
 
 The value of the `namespace` should be of format `http://your-domain/claims/`, otherwise the thing does not work. This is weird, not to say the least, but it eventually the roles get available via the `http://auth0-test/claims/roles` key in the user object.
 
-This solution is not ideal too: in case if I update a user, they will have to re-login to make effect. In my case it is not crucial since I don't plan to update users often.
+This solution is not ideal too: in case if I update a user, they will have to re-login to make effect. In my case it is not crucial since I seldom update my users.
+
+If you update users often, then on each update you need to invalidate all the tokens. Plus, you will have to make that extra query all the time.
 
 ## Protected route component
 
-## Validating token on your API's side
+## Backend part
+
+It is possible to implement all endpoints on the side of your own application. There is [a great tutorial](https://auth0.com/docs/quickstart/webapp/nodejs) which describes that.
+Since we consume Auth0 infrastructure directly, this is not our case.
+
+If you don't rely on what is inside of a token, you have to make an additional query to get the user's data. You can theoretically cache user data in Redis, but then you will have to add a hook on Auth0 side which will invalidate your cache. Since their's Auth0 and your's Redis do not share a demitiarized Virtual Network, you will have to expose an endpoint, come up with a some sort of a token, rotate it, add rate limiter... Or make an SSH tunnel (not sure if Auth0 supports that) A lot of trouble, in other words!
+
+My case is simpler.
+Instead, we just need to find a way to 1. check if the token is valid, 2. get the token payload and deserialize it, 3. check if a user has permissions.
 
 ## Terraform
 
