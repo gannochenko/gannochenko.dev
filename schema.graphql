@@ -1244,17 +1244,17 @@ enum FileFieldsEnum {
     childMdx___fileAbsolutePath
     childMdx___frontmatter___title
     childMdx___frontmatter___description
+    childMdx___frontmatter___preview
     childMdx___frontmatter___keywords
     childMdx___frontmatter___path
     childMdx___frontmatter___date
     childMdx___frontmatter___published
     childMdx___frontmatter___images
     childMdx___frontmatter___images___author
-    childMdx___frontmatter___images___is_cover
-    childMdx___frontmatter___images___galleryId
     childMdx___frontmatter___images___sourceText
     childMdx___frontmatter___images___source
-    childMdx___frontmatter___preview
+    childMdx___frontmatter___images___is_cover
+    childMdx___frontmatter___images___galleryId
     childMdx___body
     childMdx___excerpt
         @deprecated(
@@ -3028,6 +3028,7 @@ enum MdxFieldsEnum {
     fileAbsolutePath
     frontmatter___title
     frontmatter___description
+    frontmatter___preview
     frontmatter___keywords
     frontmatter___path
     frontmatter___date
@@ -3070,11 +3071,10 @@ enum MdxFieldsEnum {
     frontmatter___images___image___publicURL
     frontmatter___images___image___id
     frontmatter___images___image___children
-    frontmatter___images___is_cover
-    frontmatter___images___galleryId
     frontmatter___images___sourceText
     frontmatter___images___source
-    frontmatter___preview
+    frontmatter___images___is_cover
+    frontmatter___images___galleryId
     body
     excerpt
         @deprecated(
@@ -3487,6 +3487,7 @@ input MdxFilterInput {
 type MdxFrontmatter {
     title: String!
     description: String
+    preview: String
     keywords: String
     path: String
     date(
@@ -3516,36 +3517,35 @@ type MdxFrontmatter {
     ): Date
     published: Boolean
     images: [MdxFrontmatterImages]
-    preview: String
 }
 
 input MdxFrontmatterFilterInput {
     title: StringQueryOperatorInput
     description: StringQueryOperatorInput
+    preview: StringQueryOperatorInput
     keywords: StringQueryOperatorInput
     path: StringQueryOperatorInput
     date: DateQueryOperatorInput
     published: BooleanQueryOperatorInput
     images: MdxFrontmatterImagesFilterListInput
-    preview: StringQueryOperatorInput
 }
 
 type MdxFrontmatterImages {
     author: String
     image: File
-    is_cover: Int
-    galleryId: Int
     sourceText: String
     source: String
+    is_cover: Int
+    galleryId: Int
 }
 
 input MdxFrontmatterImagesFilterInput {
     author: StringQueryOperatorInput
     image: FileFilterInput
-    is_cover: IntQueryOperatorInput
-    galleryId: IntQueryOperatorInput
     sourceText: StringQueryOperatorInput
     source: StringQueryOperatorInput
+    is_cover: IntQueryOperatorInput
+    galleryId: IntQueryOperatorInput
 }
 
 input MdxFrontmatterImagesFilterListInput {
