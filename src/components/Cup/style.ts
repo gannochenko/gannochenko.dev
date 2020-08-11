@@ -34,16 +34,21 @@ export const CupRoot = styled.div<CupRootPropsType>`
     ${({ theme }) => theme.util.media({ '<sm': 'display: none;' })}
 `;
 
+const getCupAppearance = ({ frameNumber }: CupImagePropsType) => {
+    const frameNumberSafe = frameNumber > 4 ? 4 : frameNumber;
+
+    return css`
+        background-image: url(${frames[frameNumberSafe]});
+        background-size: ${size[frameNumberSafe].join(' ')};
+        background-position: ${position[frameNumberSafe].join(' ')};
+    `;
+};
+
 export const CupImage = styled.div<CupImagePropsType>`
-    background-image: url(${({ frameNumber }) =>
-        frames[frameNumber > 4 ? 4 : frameNumber]});
     background-repeat: no-repeat;
-    background-size: ${({ frameNumber }) =>
-        size[frameNumber > 4 ? 4 : frameNumber].join(' ')};
-    background-position: ${({ frameNumber }) =>
-        position[frameNumber > 4 ? 4 : frameNumber].join(' ')};
     width: 90px;
     height: 90px;
+    ${getCupAppearance}
 `;
 
 export const CupRefill = styled.div<{ visible: boolean }>`

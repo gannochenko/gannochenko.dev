@@ -65,6 +65,7 @@ export const CICDLink = styled.a`
     width: 20px;
     height: 20px;
     cursor: default;
+    ${({ theme }) => theme.util.media({ '<sm': 'display: none;' })}
 `;
 
 export const AnalyticsLink = styled.a`
@@ -74,4 +75,5 @@ export const AnalyticsLink = styled.a`
     width: 20px;
     height: 20px;
     cursor: default;
+    ${({ theme }) => theme.util.media({ '<sm': 'display: none;' })}
 `;
