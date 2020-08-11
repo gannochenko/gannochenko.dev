@@ -57,3 +57,21 @@ export const NoWrap = styled.div`
 export const SlashContainer = styled.div`
     ${({ theme }) => theme.util.media({ xs: 'display: none;' })}
 `;
+
+export const CICDLink = styled.a`
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    cursor: default;
+`;
+
+export const AnalyticsLink = styled.a`
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    cursor: default;
+`;

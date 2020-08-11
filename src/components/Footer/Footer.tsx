@@ -9,13 +9,15 @@ import {
     Info,
     NoWrap,
     SlashContainer,
+    CICDLink,
+    AnalyticsLink,
 } from './style';
 import { Social } from '../Social';
 import { links } from '../../lib/links';
 import { Slash } from '../Slash';
 import { Link } from '../Link';
 
-export const Footer: FunctionComponent<{}> = () => {
+export const Footer: FunctionComponent = () => {
     const [showAT, setShowAT] = useState(false);
     const [showArch, setShowArch] = useState(false);
     const [showDEV, setShowDEV] = useState(false);
@@ -74,6 +76,14 @@ export const Footer: FunctionComponent<{}> = () => {
                     Cookie policy
                 </Link>
             </Info>
+            <CICDLink
+                href="https://vercel.com/gannochenko/gannochenko/deployments"
+                rel="noreferrer noopener nofollow"
+            />
+            <AnalyticsLink
+                href="https://analytics.google.com/analytics/web/?authuser=1#/report-home/a162152239w227268972p214636537"
+                rel="noreferrer noopener nofollow"
+            />
         </Container>
     );
 };
