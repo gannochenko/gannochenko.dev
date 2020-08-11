@@ -8,6 +8,7 @@ export const Copyright: FunctionComponent<Props> = ({
     author,
     source,
     sourceText,
+    authorPrefix,
 }) => {
     if (!author && !source) {
         return null;
@@ -15,7 +16,11 @@ export const Copyright: FunctionComponent<Props> = ({
 
     return (
         <CopyrightContainer>
-            {!!author && <span>Photo by {author}</span>}
+            {!!author && (
+                <span>
+                    {authorPrefix} {author}
+                </span>
+            )}
             {!!source && (
                 <span>
                     {author ? ' on ' : ''}
@@ -26,4 +31,8 @@ export const Copyright: FunctionComponent<Props> = ({
             )}
         </CopyrightContainer>
     );
+};
+
+Copyright.defaultProps = {
+    authorPrefix: 'Photo by ',
 };

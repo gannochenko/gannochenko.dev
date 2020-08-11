@@ -18,9 +18,8 @@ There are some things that can be useful to me, but I totally keep forgetting th
 
 ## Git
 
-### Display branching tree
-
 ```bash
+# display branching tree
 git log --graph --full-history --all --pretty=format:"%h%x09%d%x20%s"
 git log --graph --decorate --oneline
 ```
@@ -28,23 +27,28 @@ git log --graph --decorate --oneline
 ### Work with tags
 
 ```bash
-git fetch --all --tags # get all remote tags
-git push --delete origin v1.2.0 # kill remote tag
-git tag -d v1.2.0 # kill local tag
+# get all remote tags
+git fetch --all --tags
+# kill remote tag
+git push --delete origin v1.2.0
+# kill local tag
+git tag -d v1.2.0
 ```
 
 ## Bash
 
-Parametrized alias
-
 ```bash
+# parametrized alias
 alias dssh='function __sampleAlias(){ docker exec -it $1 /bin/bash; };__sampleAlias'
+# launch chrome from the command line in Mac
+alias chrome="/Applications/Google\\ \\Chrome.app/Contents/MacOS/Google\\ \\Chrome";
 ```
 
 ## Yarn
 
 ```bash
-yarn upgrade <package-name> --major # make a total package upgrade
+# make a total package upgrade
+yarn upgrade <package-name> --major
 ```
 
 ---
