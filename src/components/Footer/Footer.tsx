@@ -79,10 +79,12 @@ export const Footer: FunctionComponent = () => {
             <CICDLink
                 href="https://vercel.com/gannochenko/gannochenko/deployments"
                 rel="noreferrer noopener nofollow"
+                target="_blank"
             />
             <AnalyticsLink
                 href="https://analytics.google.com/analytics/web/?authuser=1#/report-home/a162152239w227268972p214636537"
                 rel="noreferrer noopener nofollow"
+                target="_blank"
             />
         </Container>
     );
