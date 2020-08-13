@@ -95,14 +95,14 @@ module.exports = {
         'gatsby-plugin-styled-components',
         'gatsby-plugin-typescript',
         'gatsby-plugin-catch-links',
-        {
-            resolve: 'gatsby-plugin-offline',
-            options: {
-                workboxConfig: {
-                    globPatterns: ['**/*'],
-                },
-            },
-        },
+        // {
+        //     resolve: 'gatsby-plugin-offline',
+        //     options: {
+        //         workboxConfig: {
+        //             globPatterns: ['**/*'],
+        //         },
+        //     },
+        // },
         {
             resolve: `gatsby-plugin-google-analytics`,
             options: {
