@@ -7,7 +7,9 @@ export type CupPropsType = {
     // custom props here
 } & HTMLAttributes<HTMLElement>;
 
-export type CupRootPropsType = {};
+export type CupRootPropsType = {
+    visible?: boolean;
+};
 export type CupImagePropsType = { frameNumber: CupFrameNumber };
 
 export type CupInnerPropsType = {

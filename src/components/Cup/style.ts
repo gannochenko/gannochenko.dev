@@ -31,6 +31,10 @@ export const CupRoot = styled.div<CupRootPropsType>`
     bottom: 32px;
     cursor: pointer;
     z-index: 500;
+    ${({ visible }) =>
+        css`
+            visibility: ${visible ? 'visible' : 'hidden'};
+        `}
     ${({ theme }) => theme.util.media({ '<sm': 'display: none;' })}
 `;
 

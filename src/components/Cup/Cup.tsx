@@ -12,7 +12,6 @@ import { CupPropsType } from './type';
 import { Container } from '../Container';
 
 export const Cup: FunctionComponent<CupPropsType> = ({
-    children,
     verticalConstraint,
 }) => {
     const horizontalConstraint = useRef<HTMLDivElement>();
@@ -71,6 +70,7 @@ export const Cup: FunctionComponent<CupPropsType> = ({
 
             const step = Math.floor(percent / 20);
             setFrameNumber(step);
+            setCupVisible(true);
         };
 
         window.addEventListener('scroll', handler);
@@ -85,7 +85,7 @@ export const Cup: FunctionComponent<CupPropsType> = ({
 
     return (
         <Container ref={horizontalConstraint}>
-            <CupRoot ref={cup}>
+            <CupRoot ref={cup} visible={cupVisible}>
                 <CupInner visible={true} onClick={scrollToTop}>
                     <CupImage frameNumber={frameNumber} />
                     <CupRefill visible={frameNumber >= 4}>Refill!</CupRefill>
