@@ -101,13 +101,17 @@ If you update users often, then on each update you need to invalidate all the to
 
 ## Backend part
 
-The backend part is no less complex than the front.
+The backend part is no less complex than the front, but not without nuances.
 
-First of all, it worth to mention, that it is totally doable to implement all the endpoints on the side of your own application. There is [a great tutorial](https://auth0.com/docs/quickstart/webapp/nodejs) to the rescue.
-I did not want this complexity in the first place, that is why I consume Auth0 infrastructure directly.
+First of all, it worth to mention, that it is totally doable to [implement the signup, signin and user profile endpoints on the side of your API](https://auth0.com/docs/quickstart/webapp/nodejs). However, as I don't want that complexity in the first place, tha case is not mine, since I consume the Auth0 API directly.
 
-Secondly, if you don't rely on what is inside of a token, you have to make an additional query to get the user's data. So this would be +1 remote call per each endpoint hit.
-You can, however, cache the obtained user data to Redis. Unfortunately, then you would be forced to add a cache invalidation hook on the Auth0 side. Since theirs and yours infras do not share a common demilitarized Virtual Network (like a microservice grid typically does), you will have to expose an outer-world endpoint. To secure the endpoint you would have to come up with some sort of a token. Token needs to be rotated on a regular basis. Instead of a token-based system, a SSH tunnel can be established, but I doubt Auth0 supports this feature so easily. A rate limiter would be also a strong plus. Anyways, a lot of trouble!
+The next thing is: if you don't rely on what is inside of the token you receive, you have to make an additional query to get the user's data. So this would be +1 remote call per each endpoint hit.
+
+What you can do, however, is to cache the user data to Redis and get it from here instead of doing a remote call. Unfortunately, then you would be forced to add a special hook on the Auth0 side, so whenever you update a user, your cache gets busted.
+Since yours and Auth0 infrastructures do not share any common trusted Virtual Network (like a microservice grid typically does), you will have to expose an endpoint.
+To secure the endpoint you would have to come up with some sort of a token. The token needs to be rotated on a regular basis. Instead of a token-based system, a SSH tunnel can be established, but I possess no information regarding solid support for that on the Auth0 side.
+
+Anyways, lots of trouble!
 
 My case is simpler, since I 100% rely on the token payload, I just need to find a way to 1. check if the token is valid, 2. deserialize the token payload, 3. check if a user has permissions for each particular case in the app.
 
