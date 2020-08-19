@@ -39,9 +39,11 @@ git tag -d v1.2.0
 
 ```bash
 # parametrized alias
-alias dssh='function __sampleAlias(){ docker exec -it $1 /bin/bash; };__sampleAlias'
+alias dssh='function __sampleAlias(){ docker exec -it $1 /bin/bash; };__sampleAlias';
 # launch chrome from the command line in Mac
 alias chrome="/Applications/Google\\ \\Chrome.app/Contents/MacOS/Google\\ \\Chrome";
+# get console command by its PID
+ps -p [PID] -o args;
 ```
 
 ## Yarn
