@@ -18,21 +18,25 @@ There are some things that can be useful to me, but I totally keep forgetting th
 
 ## Git
 
+### History
+
 ```bash
 # display branching tree
-git log --graph --full-history --all --pretty=format:"%h%x09%d%x20%s"
-git log --graph --decorate --oneline
+git log --graph --full-history --all --pretty=format:"%h%x09%d%x20%s";
+git log --graph --decorate --oneline;
+# display history of commits for a specific branch
+git log --walk-reflogs master;
 ```
 
 ### Work with tags
 
 ```bash
 # get all remote tags
-git fetch --all --tags
+git fetch --all --tags;
 # kill remote tag
-git push --delete origin v1.2.0
+git push --delete origin v1.2.0;
 # kill local tag
-git tag -d v1.2.0
+git tag -d v1.2.0;
 ```
 
 ## Bash
@@ -50,7 +54,9 @@ ps -p [PID] -o args;
 
 ```bash
 # make a total package upgrade
-yarn upgrade <package-name> --major
+yarn upgrade <package-name> --major;
+# find out why the package was installed
+yarn why <package-name>;
 ```
 
 ---

@@ -133,7 +133,7 @@ export const NameBlock = withEffects(styled.h1`
 
 export const GreetingBlock = withEffects(styled.div`
     letter-spacing: 0.05rem;
-    line-height: 1.2;
+    line-height: 1.4;
     ${({ theme }) => theme.util.media({ xs: 'text-align: center;' })}
     // @ts-ignore
     ${props => props.runStandardEffect()}
