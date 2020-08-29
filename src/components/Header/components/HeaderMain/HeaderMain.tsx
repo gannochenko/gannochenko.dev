@@ -77,7 +77,7 @@ export const HeaderMain: FunctionComponent<Props> = ({
                                             Business-oriented software dev, in
                                             ❤️ with Tech
                                             <br />
-                                            JS / JS stack (but not limited to)
+                                            JS/JS stack (but not limited to)
                                             <br />
                                             15+ years in engineering
                                         </GreetingBlock>
