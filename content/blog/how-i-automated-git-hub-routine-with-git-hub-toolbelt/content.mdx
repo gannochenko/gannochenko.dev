@@ -1,9 +1,9 @@
 ---
 title: "How I automated day to day GitHub routine with GitHub Toolbelt"
-description: Dont forget to write good description
-keywords: sex, drugs, rocknroll
+description: Time is not money. Time is a more precious thing. After getting tired of constant mis-clicks and repeated keyboard work, decided to save some of my time and build a tool for managing a GitHub PR pipeline.
+keywords: git, github, automation, node, javascript
 path: /blog/how-i-automated-day-to-day-github-routine-with-github-toolbelt-
-date: 2020-08-29
+date: 2020-09-03
 published: false
 images:
     - author: Logan Ingalls
@@ -15,5 +15,73 @@ images:
 ---
 
 import { Container } from 'components/Container';
+import { Copyright } from 'components/Copyright';
+import { Align } from 'components/Align';
 
-Once upon a time...
+Time is not money. Time is a more precious thing. Getting tired of constant mis-clicks and repeated keyboard work, decided to build a tool that saves some.
+
+In most of my projects I have the following pipeline:
+
+👉 each feature is developed in a *feature branch* named like `[feat|fix|...]/ticket-text-ticket-id`,<br />
+👉 the ongoing release consists of many features *squashed* into `dev`,<br />
+👉 the deployment happens when `dev` gets *merged* into `master`.<br />
+
+If you have the same workflow as mine, let me show how GitHub Toolbelt helps me out in automation of the GitHub daily routine.
+
+<Align>
+
+![Doctor Who](https://media4.giphy.com/media/SVI9nccwH3sz5XJhbK/giphy.gif "Doctor Who")
+<Copyright source="https://giphy.com/gifs/doctorwho-doctor-who-dr-patrick-troughton-SVI9nccwH3sz5XJhbK" authorPrefix="Picture by" author="doctorwho.tv" sourceText="Giphy" />
+
+</Align>
+
+## Step 0: installation
+
+The thing is written in `node`, so you have to [have node runtime installed](https://github.com/nvm-sh/nvm). Also I still prefer [yarn](https://yarnpkg.com/) over npm. If you are a JS developer, you already should have all of this on-board anyway.
+
+So, just install the package then:
+
+~~~bash
+yarn global add @gannochenko/gbelt
+~~~
+
+or, to install just for the current user:
+
+~~~bash
+mkdir ~/.node;
+yarn global add @gannochenko/gbelt --prefix ~/.node;
+printf "\nexport PATH=\$PATH:\$HOME/.node/bin\n" >> ~/.bash_profile; # .bashrc for *nix
+source ~/.bash_profile; # .bashrc for *nix
+~~~
+
+After doing so, a CLI command `gbelt` should become available:
+
+~~~bash
+gbelt -h;
+~~~
+
+Now I'll explain how to get your feature to production :)
+
+## Step 1: create a local feature branch with conventional-compliant name
+
+Lets assume I am in the `dev` branch now, and about to begin developing a new contribution. I need a branch for that, so I type
+
+~~~bash
+gbelt feature branch
+~~~
+
+The app will ask me then what kind of contribution is that: feature, fix or something else.
+The next question will be to describe the update, and provide a ticket number.
+
+
+
+## Step 2: create a draft feature PR to `dev` being in the previously created branch locally
+
+## Step 3: merge the **feature PR** after it's approval
+
+## Step 4: create a **release PR** for production deployment (`dev` -> `master`)
+
+...so the continuous delivery can do its work
+
+## Step 5: merge the **release PR** to `master`
+ 

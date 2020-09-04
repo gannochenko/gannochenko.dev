@@ -90,6 +90,7 @@ export const GlobalStyle = createGlobalStyle<{ theme: typeof theme }>`
     b,
     strong {
       font-weight: bolder;
+      color: #000;
     }
     
     code,

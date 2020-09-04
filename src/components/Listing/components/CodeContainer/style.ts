@@ -9,6 +9,7 @@ export const CodeContainerContainer = styled.div<{
     line-height: 1.4rem;
     position: relative;
     margin: 2rem 0;
+    min-height: 3rem;
     ${({ theme }) =>
         theme.util.media({
             xs: 'font-size: 1.1rem;',
