@@ -125,7 +125,7 @@ export const skills = {
             logo: logo.vagrant,
             title: 'Vagrant',
             size: '1.15rem',
-            width: '4.2rem',
+            width: '4.4rem',
         },
     ],
     saas: [

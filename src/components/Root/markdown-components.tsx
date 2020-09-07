@@ -4,6 +4,7 @@ import { Typography } from '../Typography';
 import { Link } from '../Link';
 import { Listing } from '../Listing';
 import { HR } from '../HR';
+import { InlineCode } from '../InlineCode';
 
 const margins = { marginTop: '2rem', marginBottom: '2rem' };
 
@@ -41,4 +42,5 @@ export const markdownComponents = {
     ),
     hr: () => <HR />,
     pre: Listing,
+    inlineCode: InlineCode,
 };
