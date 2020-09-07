@@ -35,6 +35,9 @@ const python = require('./logo/python.svg') as string;
 const hg = require('./logo/hg.png') as string;
 const mobx = require('./logo/mobx.png') as string;
 const csharp = require('./logo/csharp.svg') as string;
+const auth0 = require('./logo/auth0.svg') as string;
+const netlify = require('./logo/netlify.svg') as string;
+const vercel = require('./logo/vercel.svg') as string;
 
 export const logo = {
     apollo,
@@ -74,4 +77,7 @@ export const logo = {
     hg,
     csharp,
     mobx,
+    auth0,
+    netlify,
+    vercel,
 };

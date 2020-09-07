@@ -108,12 +108,6 @@ export const skills = {
             width: '4.8rem',
         },
         {
-            key: 'aws',
-            logo: logo.aws,
-            title: 'AWS',
-            size: '4.5rem',
-        },
-        {
             key: 'kubernetes',
             logo: logo.kubernetes,
             title: 'Kubernetes',
@@ -132,6 +126,35 @@ export const skills = {
             title: 'Vagrant',
             size: '1.15rem',
             width: '4.2rem',
+        },
+    ],
+    saas: [
+        {
+            key: 'aws',
+            logo: logo.aws,
+            title: 'AWS',
+            size: '4.5rem',
+        },
+        {
+            key: 'auth0',
+            logo: logo.auth0,
+            title: 'Auth0',
+            size: '3rem',
+            width: '2.7rem',
+        },
+        {
+            key: 'netlify',
+            logo: logo.netlify,
+            title: 'Netlify',
+            size: '3.5rem',
+            width: '3.5rem',
+        },
+        {
+            key: 'vercel',
+            logo: logo.vercel,
+            title: 'Vercel',
+            size: '2.5rem',
+            width: '3.0rem',
         },
     ],
     dated: [
@@ -233,7 +256,7 @@ export const skills = {
         {
             key: 'postgressql',
             logo: logo.postgressql,
-            title: 'PostgresSQL',
+            title: 'PostgreSQL',
             size: '4.0rem',
         },
         {
