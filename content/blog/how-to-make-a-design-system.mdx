@@ -95,3 +95,12 @@ Build basic components and only then offer collaboration, otherwise they will st
 Об именовании токенов первого уровня: мы пытались придать именам семантику, называть например spacing как spacingSingle, spacingDouble или spacingMD, spacingXL, ... но это плохо работало, поскольку если нам нужно больше градаций или значения между, то у нас будет проблема. Поэтому решили остановиться на числах с шагом.
 
 Every Tuesday is a release day. Every other Thursday is an update day.
+
+### Architecture
+
+react hook based library is a fresh way of looking at things, but we decided to go more classic way, because
+
+1. our design is not separable from the logic we provide, that is why shipping hooks and elements separately into an application space is not an option
+2. we wanted to make the components as simple for an end user as possible
+3. high visual customisation is not needed, and in fact it is even discouraged (as we want the same look and feel across all the apps)
+
