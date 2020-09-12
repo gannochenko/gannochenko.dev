@@ -3,13 +3,13 @@ title: "How I automated day to day GitHub routine with GitHub Toolbelt"
 description: Time is not money. Time is a more precious thing. After getting tired of constant mis-clicks and repeated keyboard work, decided to save some of my time and build a tool for managing a GitHub PR pipeline.
 keywords: git, github, automation, node, javascript
 path: /blog/how-i-automated-day-to-day-github-routine-with-github-toolbelt-
-date: 2020-09-03
-published: false
+date: 2020-09-12
+published: true
 images:
-    - author: Logan Ingalls
+    - author: ot0rip 604
       image: ./cover.jpg
       sourceText: Flickr
-      source: https://www.flickr.com/photos/plutor/
+      source: https://www.flickr.com/photos/143466180@N07/
       is_cover: 1
       galleryId: 0
 ---
@@ -18,7 +18,7 @@ import { Container } from 'components/Container';
 import { Copyright } from 'components/Copyright';
 import { Align } from 'components/Align';
 
-Time is not money. Time is a more precious thing. Getting tired of constant mis-clicks and repeated keyboard work, decided to build a tool that saves some.
+Time is not money. Time is a more precious thing. I really like automating the day-to-day routine, so after getting tired of constant mis-clicks and repeated keyboard work, decided to build a tool that saves a couple of minutes.
 
 In most of my projects I have the following pipeline:
 
@@ -26,7 +26,7 @@ In most of my projects I have the following pipeline:
 👉 the ongoing release consists of many features *squashed* into `dev`,<br />
 👉 the deployment happens when `dev` gets *merged* into `master`.<br />
 
-If you have the same workflow as mine, let me show how GitHub Toolbelt helps me out in automation of the GitHub daily routine.
+If you have the same workflow as mine, let me show how the `GitHub Toolbelt` helped me out to automate the thing.
 
 <Align>
 
@@ -37,7 +37,7 @@ If you have the same workflow as mine, let me show how GitHub Toolbelt helps me 
 
 ## Step 0: installation
 
-The thing is written in `node`, so you have to [have node runtime installed](https://github.com/nvm-sh/nvm). Also I still prefer [yarn](https://yarnpkg.com/) over npm. If you are a JS developer, you already should have all of this on-board anyway.
+The tool is written in `node`, so you have to [have node runtime installed](https://github.com/nvm-sh/nvm). Also I still prefer [yarn](https://yarnpkg.com/) over npm. If you are a JS developer, you already should have all of this on-board anyway.
 
 So, to install the package:
 
@@ -108,7 +108,7 @@ gbelt feature create
 
 Hopefully, if everything is arright, I am able to see this message:
 
-![Feature submit](./gbelt_feature_submit.png)
+![Feature submit](./gbelt_feature_create.png)
 
 **Mega tip** 👉 if somewhere in the root of the project there is a file called `.github/PULL_REQUEST_TEMPLATE.md`, its content will be used for the PR description, just like Github itself does that. The placeholder `#TICKET_ID#` will be replaced meanwhile:
 
@@ -121,7 +121,7 @@ Hopefully, if everything is arright, I am able to see this message:
 https://your-bugtracker.com/ticket/#TICKET_ID#/
 ~~~
 
-## Step 3: merge the **feature PR** after it's approval
+## Step 3: merge the feature PR after its approval
 
 So instead of going at github and pressing buttons there, `gbelt` allows to `squash-and-merge` the PR from the command line. I just type
 
@@ -135,9 +135,65 @@ And here we go (yeh, the PR number is different, cos I kind of screwed up the pr
 
 ![Merged PR](./merged_pr.png)
 
-## Step 4: create a **release PR** for production deployment (`dev` -> `master`)
+## Step 4: create a release PR for production
 
-...so the continuous delivery can do its work
+It is almost like with features, but just a different command:
 
-## Step 5: merge the **release PR** to `master`
- 
+~~~bash
+gbelt release create
+~~~
+
+![Release create](./gbelt_release_create.png)
+
+## Step 5: merge the release PR
+
+So the last part is tricky. Since the release PR is able to trigger the Continuous Delivery pipeline, it can potentially do harmful things.
+
+~~~bash
+gbelt release merge
+~~~
+
+Therefore, the confirmation for this action is required from my side:
+
+![Release merge](./gbelt_release_merge.png)
+
+Here goes the PR. Note that the PR was `merged`, not `squashed`, so I allow CD to work our properly with all that stuff with tags and changelog.
+
+![Merged PR](./merged_release_pr.png)
+
+And that is it! Since this release is out, I can now go to step 1 and create new features, and then do everything all over again.
+
+## Config
+
+Of course there is a possibility to config the tool :) Just create a file `.gbeltrc` in your project root folder, with the following content:
+
+~~~js
+module.exports = {
+    developmentBranch: 'dev', // the main dev branch where all the features go
+    releaseBranch: 'master', // the branch a CD tool listens to
+    ticketIdPrefix: 'GT-', // if you work somewhere like Jira and you need you tickets to be auto-prefixed
+    useDraftPR: false, // create a draft feature PR when possible
+    releasePRName: 'New release', // the default name for the release PR
+};
+~~~
+
+---
+
+## Conclusion
+
+Of course, all of this can be done manually via GitHub web interface. In time the routine actions become automatic and basically work on a subconscious level.
+
+And yet we are human, we are error-prone.
+Being part of a team, you most certainly don't want to mess up with the development pipeline, as well as with the production deployment. So, if there is a way to automate your actions, to have some tool which can give a rap over the knuckles when needed, it could come handy indeed.
+
+### Possible improvements
+
+Sure thing the tool is not perfect. I still need to have way to ensure all the check are green and the PR is ready to merge before actually merge it. This is something I am gonna improve soon.
+
+---
+
+### Credits
+
+* Gorgeous [GitHub RESP API](https://docs.github.com/en/rest) which made this all possible
+
+Thanks for reading! Don't mess up with your dev process ;)
