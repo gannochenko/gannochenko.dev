@@ -62,7 +62,16 @@ gbelt -h
 
 ## Step 0: obtain a GitHub token
 
-... todo
+To call GitHub endpoints, I need to [issue a token first](https://github.com/settings/tokens/new), with the following scope:
+
+![New Github token](./new-github-token.png)
+
+Then I put the token to the `GBELT_GITHUB_TOKEN` env variable:
+
+~~~bash
+printf "\nexport GBELT_GITHUB_TOKEN=TOKEN_VALUE\n" >> ~/.bash_profile
+source ~/.bash_profile # bashrc for *nix
+~~~
 
 ## Step 1: create a local feature branch with a pretty name
 
