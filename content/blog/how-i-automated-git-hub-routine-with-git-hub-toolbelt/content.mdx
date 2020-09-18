@@ -1,6 +1,6 @@
 ---
 title: "How I automated day to day GitHub routine with GitHub Toolbelt"
-description: Time is not money. Time is a more precious thing. After getting tired of constant mis-clicks and repeated keyboard work, decided to save some of my time and build a tool for managing a GitHub PR pipeline.
+description: Time is not money. Time is a more precious thing. After getting tired of constant misclicks and repeated keyboard work, decided to save some of my time and build a tool for managing a GitHub PR pipeline.
 keywords: git, github, automation, node, javascript
 path: /blog/how-i-automated-day-to-day-github-routine-with-github-toolbelt-
 date: 2020-09-12
@@ -18,7 +18,7 @@ import { Container } from 'components/Container';
 import { Copyright } from 'components/Copyright';
 import { Align } from 'components/Align';
 
-Time is not money. Time is a more precious thing. I really like automating the day-to-day routine, so after getting tired of constant mis-clicks and repeated keyboard work, decided to build a tool that saves a couple of minutes.
+Time is not money. Time is a more precious thing. I really like automating the day-to-day routine, so after getting tired of constant misclicks and repeated keyboard work, decided to build a tool that saves a couple of minutes.
 
 In most of my projects I have the following pipeline:
 
@@ -90,7 +90,7 @@ The next question will be to describe the update, and provide a ticket number.
 
 </Align>
 
-The exact answers get stored in description of the branch as serialized JSON. The command
+The exact answers get stored in the description of the branch as serialized JSON. The command
 
 ~~~sh
 git config "branch.fix/update-margin-10001.description"
@@ -113,7 +113,7 @@ git commit -am "great job"
 git push origin fix/update-margin-10001
 ~~~
 
-Then to crate a PR, I just type
+Then to create a PR, I just type
 
 ~~~bash
 gbelt feature create
@@ -136,7 +136,7 @@ https://your-bugtracker.com/ticket/#TICKET_ID#/
 
 ## Step 3: merge the feature PR after its approval
 
-So instead of going at github and pressing buttons there, `gbelt` allows to `squash-and-merge` the PR from the command line. I just type
+So instead of going at Github and pressing buttons there, `gbelt` allows to `squash-and-merge` the PR from the command line. I just type
 
 ~~~bash
 gbelt feature merge
@@ -197,11 +197,11 @@ module.exports = {
 Of course, all of this can be done manually via GitHub web interface. In time the routine actions turn into a habit and basically work on a subconscious level.
 
 And yet we are human, no matter how careful we are, there is always a chance of making a mistake.
-Being part of a team, you most certainly don't want to mess up with the development pipeline, as well as with the production deployment. So, if there is a way to automate your actions, to have some tool which can give a rap over the knuckles when needed, it could come handy indeed.
+Being part of a team, you most certainly don't want to mess up with the development pipeline, as well as with the production deployment. So, if there is a way to automate your actions, to have some tool that can give a rap over the knuckles when needed, it could come handy indeed.
 
 ### Possible improvements
 
-Sure thing the tool is not perfect. I still need to have way to ensure all the check are green and the PR is ready to merge before actually merge it. This is something I am gonna improve soon.
+Sure thing the tool is not perfect. I still need to have a way to ensure all the checks are green and the PR is ready to merge before actually merge it. This is something I am gonna improve soon.
 
 ---
 
