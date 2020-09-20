@@ -3748,6 +3748,16 @@
                         "defaultValue": null
                     },
                     {
+                        "name": "preview",
+                        "description": "",
+                        "type": {
+                            "kind": "INPUT_OBJECT",
+                            "name": "StringQueryOperatorInput",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    },
+                    {
                         "name": "keywords",
                         "description": "",
                         "type": {
@@ -3793,16 +3803,6 @@
                         "type": {
                             "kind": "INPUT_OBJECT",
                             "name": "MdxFrontmatterImagesFilterListInput",
-                            "ofType": null
-                        },
-                        "defaultValue": null
-                    },
-                    {
-                        "name": "preview",
-                        "description": "",
-                        "type": {
-                            "kind": "INPUT_OBJECT",
-                            "name": "StringQueryOperatorInput",
                             "ofType": null
                         },
                         "defaultValue": null
@@ -3860,26 +3860,6 @@
                         "defaultValue": null
                     },
                     {
-                        "name": "is_cover",
-                        "description": "",
-                        "type": {
-                            "kind": "INPUT_OBJECT",
-                            "name": "IntQueryOperatorInput",
-                            "ofType": null
-                        },
-                        "defaultValue": null
-                    },
-                    {
-                        "name": "galleryId",
-                        "description": "",
-                        "type": {
-                            "kind": "INPUT_OBJECT",
-                            "name": "IntQueryOperatorInput",
-                            "ofType": null
-                        },
-                        "defaultValue": null
-                    },
-                    {
                         "name": "sourceText",
                         "description": "",
                         "type": {
@@ -3895,6 +3875,26 @@
                         "type": {
                             "kind": "INPUT_OBJECT",
                             "name": "StringQueryOperatorInput",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    },
+                    {
+                        "name": "is_cover",
+                        "description": "",
+                        "type": {
+                            "kind": "INPUT_OBJECT",
+                            "name": "IntQueryOperatorInput",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    },
+                    {
+                        "name": "galleryId",
+                        "description": "",
+                        "type": {
+                            "kind": "INPUT_OBJECT",
+                            "name": "IntQueryOperatorInput",
                             "ofType": null
                         },
                         "defaultValue": null
@@ -8241,6 +8241,18 @@
                         "deprecationReason": null
                     },
                     {
+                        "name": "preview",
+                        "description": null,
+                        "args": [],
+                        "type": {
+                            "kind": "SCALAR",
+                            "name": "String",
+                            "ofType": null
+                        },
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
                         "name": "keywords",
                         "description": null,
                         "args": [],
@@ -8344,18 +8356,6 @@
                         },
                         "isDeprecated": false,
                         "deprecationReason": null
-                    },
-                    {
-                        "name": "preview",
-                        "description": null,
-                        "args": [],
-                        "type": {
-                            "kind": "SCALAR",
-                            "name": "String",
-                            "ofType": null
-                        },
-                        "isDeprecated": false,
-                        "deprecationReason": null
                     }
                 ],
                 "inputFields": null,
@@ -8393,30 +8393,6 @@
                         "deprecationReason": null
                     },
                     {
-                        "name": "is_cover",
-                        "description": null,
-                        "args": [],
-                        "type": {
-                            "kind": "SCALAR",
-                            "name": "Int",
-                            "ofType": null
-                        },
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
-                        "name": "galleryId",
-                        "description": null,
-                        "args": [],
-                        "type": {
-                            "kind": "SCALAR",
-                            "name": "Int",
-                            "ofType": null
-                        },
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
                         "name": "sourceText",
                         "description": null,
                         "args": [],
@@ -8435,6 +8411,30 @@
                         "type": {
                             "kind": "SCALAR",
                             "name": "String",
+                            "ofType": null
+                        },
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
+                        "name": "is_cover",
+                        "description": null,
+                        "args": [],
+                        "type": {
+                            "kind": "SCALAR",
+                            "name": "Int",
+                            "ofType": null
+                        },
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
+                        "name": "galleryId",
+                        "description": null,
+                        "args": [],
+                        "type": {
+                            "kind": "SCALAR",
+                            "name": "Int",
                             "ofType": null
                         },
                         "isDeprecated": false,
@@ -9913,6 +9913,12 @@
                         "deprecationReason": null
                     },
                     {
+                        "name": "childMdx___frontmatter___preview",
+                        "description": null,
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
                         "name": "childMdx___frontmatter___keywords",
                         "description": null,
                         "isDeprecated": false,
@@ -9949,18 +9955,6 @@
                         "deprecationReason": null
                     },
                     {
-                        "name": "childMdx___frontmatter___images___is_cover",
-                        "description": null,
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
-                        "name": "childMdx___frontmatter___images___galleryId",
-                        "description": null,
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
                         "name": "childMdx___frontmatter___images___sourceText",
                         "description": null,
                         "isDeprecated": false,
@@ -9973,7 +9967,13 @@
                         "deprecationReason": null
                     },
                     {
-                        "name": "childMdx___frontmatter___preview",
+                        "name": "childMdx___frontmatter___images___is_cover",
+                        "description": null,
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
+                        "name": "childMdx___frontmatter___images___galleryId",
                         "description": null,
                         "isDeprecated": false,
                         "deprecationReason": null
@@ -21957,6 +21957,12 @@
                         "deprecationReason": null
                     },
                     {
+                        "name": "frontmatter___preview",
+                        "description": null,
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
                         "name": "frontmatter___keywords",
                         "description": null,
                         "isDeprecated": false,
@@ -22209,18 +22215,6 @@
                         "deprecationReason": null
                     },
                     {
-                        "name": "frontmatter___images___is_cover",
-                        "description": null,
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
-                        "name": "frontmatter___images___galleryId",
-                        "description": null,
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
                         "name": "frontmatter___images___sourceText",
                         "description": null,
                         "isDeprecated": false,
@@ -22233,7 +22227,13 @@
                         "deprecationReason": null
                     },
                     {
-                        "name": "frontmatter___preview",
+                        "name": "frontmatter___images___is_cover",
+                        "description": null,
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
+                        "name": "frontmatter___images___galleryId",
                         "description": null,
                         "isDeprecated": false,
                         "deprecationReason": null
