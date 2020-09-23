@@ -54,9 +54,11 @@ ps -p [PID] -o args;
 
 ```bash
 # make a total package upgrade
-yarn upgrade <package-name> --major;
+yarn upgrade <package-name> --major
 # find out why the package was installed
-yarn why <package-name>;
+yarn why <package-name>
+# get version of an installed package
+yarn info <package-name> | grep version:
 ```
 
 ---
