@@ -38,7 +38,7 @@ export const HeaderMain: FunctionComponent<Props> = ({
         }
     };
 
-    const timeoutBase = 500;
+    const timeoutBase = 0;
     const timeoutRight = timeoutBase + 200;
     const timeoutArrow = timeoutRight + 1000;
 
