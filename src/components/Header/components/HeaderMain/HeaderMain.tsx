@@ -74,12 +74,12 @@ export const HeaderMain: FunctionComponent<Props> = ({
                                             effectTimeout={timeoutRight + 300}
                                             effectEaseA="preset:bounce"
                                         >
-                                            Business-oriented software dev, in
-                                            ❤️ with Tech
+                                            Business-oriented fullstack
+                                            engineer, in ❤️ with Tech.
                                             <br />
-                                            JS/JS stack (but not limited to)
+                                            JS / JS stack: React, Node, AWS.
                                             <br />
-                                            15+ years in engineering
+                                            15+ years in dev.
                                         </GreetingBlock>
                                         <SocialBar
                                             effectName="fade-slide-bottom"
