@@ -5,3 +5,4 @@ export * from './Layout';
 export * from './Link';
 export * from './Menu';
 export * from './Typography';
+export * from './Etc';
