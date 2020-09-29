@@ -1,6 +1,7 @@
 import * as path from 'path';
 import * as fs from 'fs';
 import { promisify } from 'util';
+import { getImages } from '../../../lib/getImages';
 
 const readFile = promisify(fs.readFile);
 
@@ -26,7 +27,8 @@ export default async (req: any, res: any) => {
         }
 
         const slug = searchResult[0].replace('path: /blog/', '');
-        console.log(slug);
+
+        await getImages(slug);
     } catch (e) {
         return res.status(500).json({});
     }
