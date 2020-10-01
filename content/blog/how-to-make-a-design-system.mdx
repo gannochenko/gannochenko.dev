@@ -9,7 +9,7 @@ images:
     - author: Hal Gatewood
       image: /assets/blog/covers/how-to-make-a-design-system.jpg
       sourceText: Unsplash
-      source: hhttps://unsplash.com/@halgatewood
+      source: https://unsplash.com/@halgatewood
       is_cover: 1
       galleryId: 0
 ---
@@ -28,7 +28,6 @@ Speak same language. Establish common terminology.
 
 Start with 0.0.0
 Don't use ^ in semver
-Advertise as soon as possible, let everybody know.
 Describe 3-level token system, draw a picture.
 
 Token system is essentially a contract between designers and devs. Initially, it is a subject to negotiations, done in several iterations. Dark theme should also follow the contract.
@@ -37,12 +36,13 @@ Describe the minimum set of components. Describe color and typography naming.
 
 ### Testing
 
-Loki может тестить только статичные состояния
-Jest более ориентирован на тест логики
-Значит нужно еще E2E тестирование!
+Loki может тестить только статичные состояния - его используем как альтернативу react testing library snapshots
+Jest более ориентирован на тест логики - тестим API компонентов, хелперные функции, темы, комбинации параметров компонента, вызовы callbacks и тд
+E2E тестирование с TestCafe или Cypress - натравливаем на storybook и тестируем сценарии, комплексные комбинации компонентов, как они взаимодействуют и т.д. Кроме того, можно тестить mouse events, чего jest не позволяет.
 
 ### Marketing
 
+Advertise as soon as possible, let everybody know.
 Each project is actually a client. Don't jump too early, otherwise they get burned up with terrible experience, and they will pull back.
 Remember the competition.
 
