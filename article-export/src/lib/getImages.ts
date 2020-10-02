@@ -24,6 +24,13 @@ export const getImages = async (slug: string) => {
             }
         });
 
+        const headerImage = document.querySelector(
+            '[class^="style__BlogPostHeaderContainer"] picture img',
+        );
+        if (headerImage) {
+            images['__COVER__'] = headerImage!.getAttribute('src');
+        }
+
         return images;
     });
 

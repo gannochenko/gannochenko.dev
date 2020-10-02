@@ -16,13 +16,13 @@ export default async (req: any, res: any) => {
     }
 
     const slug = await post.getSlug();
+
     const remoteImages = await getImages(slug);
     await post.replaceImages(remoteImages);
 
-    const devTo = await export2DevTo(post);
-    console.log(devTo);
+    const result = await export2DevTo(post);
 
     return res.status(200).json({
-        data: {},
+        data: result,
     });
 };

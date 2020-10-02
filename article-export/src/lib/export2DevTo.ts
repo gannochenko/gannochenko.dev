@@ -7,13 +7,12 @@ title: "${await post.getTitle()}"
 published: false
 description: ${await post.getDescription()}
 tags: ${await post.getKeywords()}
-cover_image: https://gannochenko.dev/static/bf6d3abc8db62617881c7743fa0a6285/11042/cover.jpg
+cover_image: https://gannochenko.dev${await post.getCoverImage()}
 canonical_url: https://gannochenko.dev${await post.getPath()}
 ---
 ${await post.getCleanContent()}
-
 ---
 
-Cover image by ot0rip 604 at https://www.flickr.com/photos/143466180@N07/
+Cover image by ${await post.getCoverImageAuthor()} at [${await post.getCoverImageSourceText()}](${await post.getCoverImageSourceUrl()})
 `;
 };

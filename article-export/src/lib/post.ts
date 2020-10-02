@@ -40,6 +40,22 @@ export class Post {
         return (await this.getPath()).replace(/^\/blog\//, '');
     }
 
+    public async getCoverImage() {
+        return (await this.getFrontmatter())?.images[0]?.image || '';
+    }
+
+    public async getCoverImageAuthor() {
+        return (await this.getFrontmatter())?.images[0]?.author || '';
+    }
+
+    public async getCoverImageSourceText() {
+        return (await this.getFrontmatter())?.images[0]?.sourceText || '';
+    }
+
+    public async getCoverImageSourceUrl() {
+        return (await this.getFrontmatter())?.images[0]?.source || '';
+    }
+
     public async getContent() {
         await this.initialize();
 
@@ -65,6 +81,10 @@ export class Post {
                 `![${alt}](${PRODUCTION_URL}${image})`,
             );
         });
+
+        if (images.__COVER__) {
+            this.frontmatter.images[0].image = images.__COVER__;
+        }
 
         this.content = content;
     }

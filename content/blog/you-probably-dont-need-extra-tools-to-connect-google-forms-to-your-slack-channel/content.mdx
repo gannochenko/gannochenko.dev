@@ -16,8 +16,8 @@ images:
 
 import { Container, Copyright, Align, Comment } from 'components';
 
-One day came, and I have faced a challenge of how to post a new message on Slack when someone submits a Google Form. Well, not a challenge really.
-At the beginning I thought to just plug in `Zapier` or any other tool like that.
+One day came, and I have faced the challenge of how to post a new message on Slack when someone submits a Google Form. Well, not a challenge really.
+In the beginning, I thought to just plug in `Zapier` or any other tool like that.
 
 But then I asked myself "I am a developer, am I not? Could it be done by using glue, duct tape and a hammer, like in old times?" And in fact, it could be.
 
@@ -38,7 +38,7 @@ So yeah, here goes my form.
 
 </Align>
 
-I know, I know, it is better to have a fully-featured bugtracker here, but I wanted to keep it simple for now.
+I know, I know, it is better to have a fully-featured bug tracker here, but I wanted to keep it simple for now.
 So the idea would be: whenever someone submits the form, I want to receive a message in Slack right away.
 
 ## Step 2: A little bit of engineering
@@ -61,7 +61,7 @@ If I press it, a simple IDE will appear.
 
 Meet `Google Script`!
 
-`GS` is sort of like `VBA` (if you know what it is 🤪), but with `ECMAScript` syntax. I got an impression that `GS` was initially built to automate Google Sheets, but for other types of documents it also can do a trick or two.
+`GS` is sort of like `VBA` (if you know what it is 🤪), but with `ECMAScript` syntax. I got the impression that `GS` was initially built to automate Google Sheets, but for other types of documents it also can do a trick or two.
 
 Replace the content of the tab with the following listing:
 
@@ -130,7 +130,7 @@ Wow, it works! What a twist!
 
 ## Step 3: Wire up Slack
 
-Before I go further, I need to set `Slack` up a bit. So, `Slack` allows to post a message to a channel, by providing a secret URL (`Webhook`). To create such `webhook` I need to create a `Slack` application first.
+Before I go further, I need to set `Slack` up a bit. So, `Slack` allows posting a message to a channel, by providing a secret URL (`Webhook`). To create such `webhook` I need to create a `Slack` application first.
 So I go to [Slack API panel](https://api.slack.com/apps/) and hit `Create an App`. Here I need to specify the app name and the workspace.
 
 When the app is ready, I go to `Add features and functionality` and then click on `Incoming Webhooks`.
@@ -197,12 +197,12 @@ function postMessage(summary, severity) {
 }
 ~~~
 
-⚠️⚠️⚠️ Please replace my stub URL with your own one! There is also a link to a spreadsheet with all the submissions, and it's URL is stubbed as well.
+⚠️⚠️⚠️ Please replace my stub URL with your own one! There is also a link to a spreadsheet with all the submissions, and its URL is stubbed as well.
 
-Well it is not a very brilliant code though, and it most definitely can be improved. Later. For now I save the code in the editor and submit the form once again.
+Well, it is not a very brilliant code though, and it most definitely can be improved. Later. For now, I save the code in the editor and submit the form once again.
 
-Aaaaaand nothing works. In the ouput of the execution there is an error `Exception: You do not have permission to call UrlFetchApp.fetch.`
-Well this happens because I created a trigger when there was no `UrlFetchApp.fetch()` call in the code. Since it needs elevated permission, my trigger does not work anymore.
+Aaaaaand nothing works. In the output of the execution, there is an error `Exception: You do not have permission to call UrlFetchApp.fetch.`
+Well, this happens because I created a trigger when there was no `UrlFetchApp.fetch()` call in the code. Since it needs elevated permission, my trigger does not work anymore.
 
 I need:
 
@@ -223,4 +223,4 @@ Oh. My. Glob. It worked! Now I am not gonna miss another bug report ever!
 
 ## Conclusion
 
-Sometimes instead of rushing into a third-party overkilling solution, it may be preferable to utilise your engineering skills. Of course, this is always a trade-off, but if you have time, then why not dare?
+Sometimes instead of rushing into a third-party overkilling solution, it may be preferable to utilize your engineering skills. Of course, this is always a trade-off, but if you have time, then why not dare?
