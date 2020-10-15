@@ -1,0 +1,92 @@
+---
+title: "My TypeScript tips and tricks"
+description: Dont forget to write good description
+keywords: sex, drugs, rocknroll
+path: /blog/my-typescript-tips-tricks-
+date: 2020-10-13
+published: false
+images:
+    - author: Max Mustermann
+      image: ./cover.jpg
+      sourceText: Unsplash
+      source: https://unsplash.com/@mustermann
+      is_cover: 1
+      galleryId: 0
+---
+
+import { Container } from 'components/Container';
+
+## Extend one complex type from another
+
+I am not a huge fan of interfaces and inheritance, since there is plenty of ways to create a derivative type, via "union" and a few extra tricks:
+
+~~~ts
+type CarType = {
+    speed: number;
+    color: string;
+    model: string;
+};
+
+// Add a subset of properties from CarType
+type PlaneTypeA = { 
+    class: string
+} & Pick<CarType, 'speed' | 'model'>;
+
+// Add one property from CarType
+type PlaneType = { 
+    class: string;
+    speed: CarType["speed"];
+};
+
+// "Inherit" type
+type SuperCarType = {
+    super: boolean;
+} & CarType;
+~~~
+
+## Class has static methods
+
+~~~ts
+interface CommandProcessorInstance {}
+
+export interface CommandProcessor {
+    new (): CommandProcessorInstance;
+    attach(program: CommanderCommand): void;
+    process(args?: CommandActionArguments): Promise<void>;
+}
+
+export function Implements<T>() {
+    return <U extends T>(constructor: U) => {
+        // eslint-disable-next-line no-unused-expressions
+        constructor;
+    };
+}
+
+@Implements<CommandProcessor>()
+export class CommandRun {
+    public static attach(
+        program: CommanderCommand,
+    ) {
+        // ...
+    }
+
+    public static async process(
+        args: CommandActionArguments,
+    ) {
+        // ...
+    }
+}
+~~~
+
+## Typeof
+
+Sometimes I can't import types from a thrid-party library, or I simply don't have types explicitly defined. Nevertheless, there is a way to declare a variable of the same type as the other:
+
+~~~
+const data = [
+    { name: 'Alex', position: 'pilot' },
+    { name: 'Amos', position: 'tech' },
+];
+
+const crewMember: typeof data[0] | undefined;
+~~~
