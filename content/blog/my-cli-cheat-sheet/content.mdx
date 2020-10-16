@@ -70,6 +70,19 @@ yarn why <package-name>
 yarn info <package-name> | grep version:
 ```
 
+## Docker
+
+```bash
+# remove all exited containers
+docker rm $(docker ps -a -f status=exited -q)
+# remove all working containers
+docker rm $(docker ps -a -q)
+# remove all images
+docker rmi $(docker images -a -q)
+# remove volumes, networks
+docker system prune
+```
+
 ---
 
 To be continued...
