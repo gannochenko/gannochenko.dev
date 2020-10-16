@@ -4,14 +4,13 @@ description: Dont forget to write good description
 keywords: sex, drugs, rocknroll
 path: /blog/my-typescript-tips-tricks-
 date: 2020-10-13
-published: false
+published: true
 images:
-    - author: Max Mustermann
+    - author: Web Donut
       image: ./cover.jpg
       sourceText: Unsplash
-      source: https://unsplash.com/@mustermann
+      source: https://unsplash.com/@webdonut
       is_cover: 1
-      galleryId: 0
 ---
 
 import { Container } from 'components/Container';
@@ -44,7 +43,9 @@ type SuperCarType = {
 } & CarType;
 ~~~
 
-## Class has static methods
+## Typing static class methods
+
+Not a huge sucker for OOP either, but occasionally I have to deal with it. So,
 
 ~~~ts
 interface CommandProcessorInstance {}
@@ -80,7 +81,7 @@ export class CommandRun {
 
 ## Typeof
 
-Sometimes I can't import types from a thrid-party library, or I simply don't have types explicitly defined. Nevertheless, there is a way to declare a variable of the same type as the other:
+Sometimes I can't import types from a third-party library, or I simply don't have types explicitly defined. Nevertheless, there is a way to declare a variable of the same type as the other:
 
 ~~~
 const data = [
