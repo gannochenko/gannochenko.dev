@@ -71,7 +71,9 @@ export const Footer: FunctionComponent = () => {
                 </Path>
             </Contacts>
             <Info>
-                <NoWrap>&copy; then &mdash; now</NoWrap>
+                <NoWrap>
+                    &copy; then &mdash; now ({new Date().getFullYear()})
+                </NoWrap>
                 <Link to="/cookie-policy" bright>
                     Cookie policy
                 </Link>

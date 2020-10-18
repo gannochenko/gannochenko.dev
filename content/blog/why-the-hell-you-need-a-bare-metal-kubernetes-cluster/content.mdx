@@ -1,0 +1,136 @@
+---
+title: 'Why the hell you need a bare-metal Kubernetes cluster?'
+description:
+keywords:
+path: /blog/why-the-hell-you-need-a-bare-metal-kubernetes-cluster-
+date: 2020-06-02
+published: false
+images:
+    - author: Toni Vuohelainen
+      image: ./cover.jpg
+      sourceText: Flickr
+      source: https://www.flickr.com/photos/tonivuohelainen/
+      is_cover: 1
+      galleryId: 0
+---
+
+Yeh, maybe you already have the following question popped up in your mind:
+
+![Why the hell](./why-the-hell.jpg)
+
+Well, you may want to consider setting up a bare-metal cluster, because
+
+👉 it is a good opportunity to receive close-to-production experience with you own pet K8s,<br />
+👉 you are well-aware of Minikube, MicroK8s, etc, but always wanted to have a real multi-node cluster out there,<br />
+👉 you don't want to pay for a pre-configured AKS/GKE/EKS/whatever solution... just yet,<br />
+👉 you want to set everything up from scratch, at least once, out of curiosity,<br />
+👉 you have free time :)<br />
+
+What you should understand just before I continue.
+
+☝️ It still won't be a production-ready environment for mature projects.<br />
+☝️ However, it will be good enough for hobby projects, proof of concepts, learning and exploration.<br />
+☝️ You will not receive any GUI control panel, only raw `kubectl`.<br />
+
+Still good enough for you? Then let's go!
+
+## Nodes
+
+Kubernetes is a `cluster`, it means that typically more than one machine is involved.
+I got for myself two instances of VDS (VPS), with 2 Cores and 4 GB of RAM each, Centos7 on-board. It was a cheap russian hosting with a data center in Moscow and unlimited bandwidth.
+It works for me just fine, but you can pick AWS's EC2, DigitalOcean or Vultr, or any other provider.
+
+You may as well get two virtual machines with VirtualBox and Vagrant, but it will not give you the same experience.
+
+* `X.X.X.X` - IP address of Node A
+* `Y.Y.Y.Y` - IP address of Node B
+
+Just as a part of pre-flight preparations, I run the following commands to make the whole process a bit easier.
+
+On my machine:
+
+~~~bash
+printf "\nX.X.X.X k8s-master\nY.Y.Y.Y k8s-node01\n" | sudo tee -a /etc/hosts;
+scp ~/.ssh/id_rsa.pub root@X.X.X.X:~
+~~~
+
+On each node under `root`:
+
+~~~bash bashRoot
+yum update
+
+# create a non-root user
+useradd admin
+
+# enable sudo
+usermod -aG wheel admin
+passwd admin
+passwd -l admin
+
+# enable key-based sign-in
+cd /home/admin/
+mkdir ./.ssh
+chmod 711 ./.ssh
+cat ~/id_rsa.pub >> ./.ssh/authorized_keys
+chmod 600 ./.ssh/authorized_keys
+chown -R admin:admin ./.ssh
+~~~
+
+You may also want to disable password-based authentication, disable root login and switch SSH to a different port to ward off brute-forcers.
+
+Now I can sign-in the nodes by typing `ssh admin@k8s-node01` without password and able to run sudo under `admin`.
+
+## Per-Node setup
+
+Kubernetes logically consists of two parts: `Control plane` and `Compute`.
+
+* `Control plane` operates the cluster, and it is hosted on so-called `master node(s)`.
+* `Compute` runs containerized applications and is hosted on `worker nodes`.
+
+Therefore, I choose `Node A` to be the `master node`, whereas `Node B` - `worker node`.
+
+The following setup I need to perform <ins>on each node</ins> of my future cluster:
+
+➡️ Allow nodes to address each other by name, so I don't hard-code IP addresses:
+
+~~~bash
+printf "\nX.X.X.X master\nY.Y.Y.Y node01\n" | sudo tee -a /etc/hosts;
+~~~
+
+➡️ K8s does not play nicely with SELinux, switching it off:
+
+~~~bash
+sudo setenforce 0
+sudo sed -i --follow-symlinks 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux
+~~~
+
+➡️ K8s uses `br_netfilter` kernel module for it's internal networking. So I check if module even exists, load it, and enable on-boot load: 
+
+~~~bash
+sudo modprobe br_netfilter
+sudo echo "br_netfilter" | sudo tee -a /etc/modules-load.d/br_netfilter.conf
+~~~
+
+
+## Concept
+
+
+
+## Shortly about architecture
+
+If you are not familiar with K8s, here are the key concepts:
+
+* K8s logically consists of two parts: `Control plane` and `Compute`.
+* `Control plane` manages cluster functioning, and it is hosted on so-called `master node(s)`.
+* `Compute` runs `pods` and is hosted on `worker nodes`.
+* A `pod` is a group of `containers`, which share common resources.
+* `Container` is a containerized application written in any language (Node, Java, Go, ...) and running inside the cluster.
+* `Container` is exposed via `services`.
+* `Services` are exposed via `ingress` and `load balancer`.
+
+## dasdfsd
+
+Okay, now that we have done all of this, it is just about time to tell you there are plenty of tools to automate the process. Meet:
+
+* [kops](https://kops.sigs.k8s.io/) - K8s installer on AWS/GCE/OpenStack/Digital Ocean/Spot Ocean
+* [kubespray](https://kubespray.io/) - another installer
