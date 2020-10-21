@@ -14,30 +14,37 @@ images:
       galleryId: 0
 ---
 
+A while ago, being on sick leave, I challenged myself with setting up a bare-metal K8s cluster. I chose `Kubeadm` back then, and so now I am sharing the results.
+
 Yeh, maybe you already have the following question popped up in your mind:
 
 ![Why the hell](./why-the-hell.jpg)
 
 Well, you may want to consider setting up a bare-metal cluster, because
 
-👉 it is a good opportunity to receive close-to-production experience with you own pet K8s,<br />
+👉 you are setting up an internal infrastructure for your company, and using cloud providers is not an option,<br />
+👉 you wish to receive close-to-production experience with you own pet K8s,<br />
 👉 you are well-aware of Minikube, MicroK8s, etc, but always wanted to have a real multi-node cluster out there,<br />
-👉 you don't want to pay for a pre-configured AKS/GKE/EKS/whatever solution... just yet,<br />
+👉 you don't want to pay for a pre-configured AKS/GKE/EKS/whatever solution just yet, or not allowed to use it,<br />
 👉 you want to set everything up from scratch, at least once, out of curiosity,<br />
 👉 you have free time :)<br />
 
-What you should understand just before I continue.
+Why making another article while there is plenty of them already? Well because most of the material is obviously not for beginners.
+Sometimes the material feels fragmented, ripped ouf of the context of something bigger or simply not covering the entire process.
 
-☝️ It still won't be a production-ready environment for mature projects.<br />
-☝️ However, it will be good enough for hobby projects, proof of concepts, learning and exploration.<br />
+What you should understand just before we continue.
+
+☝️ It still won't be a production-ready environment for mature projects! 🚨🚨🚨<br />
+☝️ However, with extra hours dedicated, the cluster can become production-ready.<br />
+☝️ But even so, it will be good enough for hobby projects, proof of concepts, learning and exploration.<br />
 ☝️ You will not receive any GUI control panel, only raw `kubectl`.<br />
 
-Still good enough for you? Then let's go!
+Resonates with your needs? Then let's go!
 
 ## Nodes
 
 Kubernetes is a `cluster`, it means that typically more than one machine is involved.
-I got for myself two instances of VDS (VPS), with 2 Cores and 4 GB of RAM each, Centos7 on-board. It was a cheap russian hosting with a data center in Moscow and unlimited bandwidth.
+I got for myself two instances of VDS (VPS), with 2 Cores and 4 GB of RAM each (those are the minimum requirements), Centos7 on-board. It was a cheap russian hosting with a data center in Moscow and unlimited bandwidth.
 It works for me just fine, but you can pick AWS's EC2, DigitalOcean or Vultr, or any other provider.
 
 You may as well get two virtual machines with VirtualBox and Vagrant, but it will not give you the same experience.
@@ -52,6 +59,7 @@ On my machine:
 ~~~bash
 printf "\nX.X.X.X k8s-master\nY.Y.Y.Y k8s-node01\n" | sudo tee -a /etc/hosts;
 scp ~/.ssh/id_rsa.pub root@X.X.X.X:~
+scp ~/.ssh/id_rsa.pub root@Y.Y.Y.Y:~
 ~~~
 
 On each node under `root`:
@@ -76,11 +84,11 @@ chmod 600 ./.ssh/authorized_keys
 chown -R admin:admin ./.ssh
 ~~~
 
-You may also want to disable password-based authentication, disable root login and switch SSH to a different port to ward off brute-forcers.
+You may also want to disable password-based SSH authentication, disable root login and switch SSH to a different port to ward off brute-forcers.
 
-Now I can sign-in the nodes by typing `ssh admin@k8s-node01` without password and able to run sudo under `admin`.
+Now I can sign-in the nodes by typing `ssh admin@k8s-node01` without password and able to run `sudo`.
 
-## Per-Node setup
+## Common setup
 
 Kubernetes logically consists of two parts: `Control plane` and `Compute`.
 
@@ -89,12 +97,19 @@ Kubernetes logically consists of two parts: `Control plane` and `Compute`.
 
 Therefore, I choose `Node A` to be the `master node`, whereas `Node B` - `worker node`.
 
-The following setup I need to perform <ins>on each node</ins> of my future cluster:
+The following set of commands I need to run <ins>on each node</ins>:
 
 ➡️ Allow nodes to address each other by name, so I don't hard-code IP addresses:
 
 ~~~bash
 printf "\nX.X.X.X master\nY.Y.Y.Y node01\n" | sudo tee -a /etc/hosts;
+~~~
+
+Make sure nodes can see each other:
+
+~~~bash
+ping master
+ping node01
 ~~~
 
 ➡️ K8s does not play nicely with SELinux, switching it off:
@@ -111,26 +126,134 @@ sudo modprobe br_netfilter
 sudo echo "br_netfilter" | sudo tee -a /etc/modules-load.d/br_netfilter.conf
 ~~~
 
+➡️ Tell the `bridge module` to use `iptables`:
 
-## Concept
+~~~bash
+echo '1' | sudo tee -a /proc/sys/net/bridge/bridge-nf-call-iptables
+printf "\nnet.bridge.bridge-nf-call-iptables = 1\nnet.ipv4.ip_forward=1\n" | sudo tee -a /etc/sysctl.conf
+sudo sysctl -p
+~~~
+
+➡️ Some default firewall rules are set in a way it paralyzes cluster networking. In production it totally makes sense to find what causes that and fix the issue. Since I am building a non-production environment, I don't bother investing time. So I just disable `firewalld` and by doing so I wipe out all firewall rules.
+
+~~~bash
+sudo systemctl stop firewalld
+sudo systemctl disable firewalld
+sudo systemctl mask --now firewalld
+
+# making sure there is not a single rule left, and the policy is "ACCEPT" on every chain
+sudo iptables -L -v -n
+~~~
+
+➡️ K8s demands the `swap` partition to be disabled for good:
+
+~~~bash
+sudo swapoff -a
+sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab;
+~~~
+
+➡️ Install and configure `Docker`
+
+~~~bash
+sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+sudo yum install -y docker-ce
+
+# changing docker cgroupdriver to "systemd" 
+sudo mkdir /etc/docker
+sudo tee /etc/docker/daemon.json > /dev/null <<'EOF'
+{
+  "exec-opts": ["native.cgroupdriver=systemd"],
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "100m"
+  },
+  "storage-driver": "overlay2",
+  "storage-opts": [
+    "overlay2.override_kernel_check=true"
+  ]
+}
+EOF
+~~~
+
+➡️ Install `Kubernetes` and `kubeadm`. Yep, `kubeadm` will take care of all the boring stuff here.
+
+~~~bash
+sudo tee /etc/yum.repos.d/kubernetes.repo > /dev/null <<'EOF'
+[kubernetes]
+name=Kubernetes
+baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg
+        https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+EOF
+
+sudo yum install -y kubelet kubeadm kubectl
+~~~
+
+➡️ Start `Docker` and `Kubelet` - a daemon that is in charge of doing all K8s-related stuff on this particular node.
+
+~~~bash
+sudo systemctl start docker
+sudo systemctl enable docker
+sudo systemctl start kubelet
+sudo systemctl enable kubelet
+~~~
+
+Allright, hopefully no errors there, and we can proceed to more neat stuff.
+
+## Master-specific setup
+
+The commands below should be executed <ins>on the master node only</ins>.
 
 
+➡️ Let `kubeadm` do all the heavy lifting:
+~~~bash
+sudo kubeadm init --apiserver-advertise-address=X.X.X.X --apiserver-cert-extra-sans=localhost,127.0.0.1;
+~~~
 
-## Shortly about architecture
+If everything went well, I just need to do a few more extra steps.
 
-If you are not familiar with K8s, here are the key concepts:
+➡️ Create a configuration file for the current user (admin)
 
-* K8s logically consists of two parts: `Control plane` and `Compute`.
-* `Control plane` manages cluster functioning, and it is hosted on so-called `master node(s)`.
-* `Compute` runs `pods` and is hosted on `worker nodes`.
-* A `pod` is a group of `containers`, which share common resources.
-* `Container` is a containerized application written in any language (Node, Java, Go, ...) and running inside the cluster.
+~~~bash
+mkdir -p ${HOME}/.kube
+sudo cp -i /etc/kubernetes/admin.conf ${HOME}/.kube/config
+sudo chown $(id -u):$(id -g) ${HOME}/.kube/config
+~~~
+
+➡️ Deploy a pod network.
+
+So we have containers. A `container` is a containerized application written in any language (Node, Java, Go, ...) and running inside of the cluster.
+A `pod` is a group of `containers`, which share common resources.
+`Pods` are exposed to the outer world via `services`.
+
+Yeh, sounds complicated. But this is what makes K8s quite abstracted and therefore unbiased and flexible.
+
+So the `pod network` then is an implementation of K8s networking model: it enables pods talking to each other, to services, and via services - to the outer world.
+
+There are numerous implementations out there, but I will stick to the kinda default one, which is called `Flannel`. It is basic and proven to be working.
+
+~~~bash
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+~~~
+
+## Worker-specific setup
+
+The commands below should be executed <ins>on the worker node(s) only</ins>.
+
+sudo ./kubeadm_join_cmd.sh
+
+## Foo
+
 * `Container` is exposed via `services`.
 * `Services` are exposed via `ingress` and `load balancer`.
 
-## dasdfsd
+## Useful links
 
-Okay, now that we have done all of this, it is just about time to tell you there are plenty of tools to automate the process. Meet:
-
+* [kubeadm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/) - K8s's official bootstrapping tool
 * [kops](https://kops.sigs.k8s.io/) - K8s installer on AWS/GCE/OpenStack/Digital Ocean/Spot Ocean
 * [kubespray](https://kubespray.io/) - another installer
+* [Pod networks in the alphabetical order](https://kubernetes.io/docs/concepts/cluster-administration/networking/)
