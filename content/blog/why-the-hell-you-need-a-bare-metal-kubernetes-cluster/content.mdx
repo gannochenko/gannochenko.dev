@@ -20,7 +20,7 @@ Yeh, maybe you already have the following question popped up in your mind:
 
 ![Why the hell](./why-the-hell.jpg)
 
-Well, you may want to consider setting up a bare-metal cluster, because
+Well, you may want to consider a bare-metal cluster, because
 
 👉 you are setting up an internal infrastructure for your company, and using cloud providers is not an option,<br />
 👉 you wish to receive close-to-production experience with you own pet K8s,<br />
@@ -193,11 +193,18 @@ EOF
 sudo yum install -y kubelet kubeadm kubectl
 ~~~
 
-➡️ Start `Docker` and `Kubelet` - a daemon that is in charge of doing all K8s-related stuff on this particular node.
+➡️ Launch `Docker` daemon
 
 ~~~bash
 sudo systemctl start docker
 sudo systemctl enable docker
+~~~
+
+➡️ Launch `Kubelet` daemon
+
+Kubeled daemon in charge of doing all K8s-related stuff on this particular node.
+
+~~~bash
 sudo systemctl start kubelet
 sudo systemctl enable kubelet
 ~~~
@@ -237,14 +244,97 @@ So the `pod network` then is an implementation of K8s networking model: it enabl
 There are numerous implementations out there, but I will stick to the kinda default one, which is called `Flannel`. It is basic and proven to be working.
 
 ~~~bash
-kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+sudo kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
 ~~~
+
+## Joining the nodes
+
+Hooray! Technically nothing stops us from joining the nodes together now.
+
+On the master node I create a new token for joining the cluster:
+
+~~~bash
+sudo kubeadm token create
+~~~
+
+This will get me the token of format `xxxxxx.xxxxxxxxxxxxxxxx`.
 
 ## Worker-specific setup
 
 The commands below should be executed <ins>on the worker node(s) only</ins>.
 
-sudo ./kubeadm_join_cmd.sh
+➡️ Add a worker node to the cluster
+
+Member that token I made? I need that one to execute the `join` command <ins>on each worker node</ins>:
+
+~~~bash
+sudo kubeadm join X.X.X.X:6443 --token xxxxxx.xxxxxxxxxxxxxxxx --discovery-token-unsafe-skip-ca-verification
+~~~
+
+From this moment on, there will be no need to do something else on the `worker` node, so I may end that ssh session.
+
+## Checking the status of the cluster
+
+I can now go back to the `master` node and check how the cluster is doing:
+
+~~~bash
+kubectl get nodes
+~~~
+
+If I see something like this...
+
+~~~txt
+NAME     STATUS   ROLES    AGE    VERSION
+node01   Ready    <none>   4h7m   v1.19.3
+master   Ready    master   45h    v1.19.3
+~~~
+
+... that means: "Congratulations 🎉🎉🎉 You and I just got our own K8s clusters up and running!" Most of the tutorials usually end here, or they maybe show how to expose an Apache container via some random port.
+
+But that is not where I want to have this finished! So instead of creating `NodePort`-type services, let's go a bit further and setup `ingress`. 
+
+➡️ Ingress
+
+So ingress is another step forward. Basically, ingress tells the cluster "Hey, for this domain, path and protocol route all requests to a service A. For other domain and path - to service B" (and so on). So ingress works as a router for the incoming requests.
+
+Sounds quite powerful, doesn't it?
+
+~~~bash
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.40.2/deploy/static/provider/baremetal/deploy.yaml
+~~~
+
+~~~bash
+kubectl get pods --all-namespaces -l app.kubernetes.io/name=ingress-nginx;
+~~~
+
+➡️ Metal load balancer
+
+~~~bash
+kubectl apply -f https://raw.githubusercontent.com/google/metallb/v0.8.3/manifests/metallb.yaml
+cat <<EOF | kubectl apply -f -
+    tee /tmp/metallb-conf.yml > /dev/null <<'EOF'
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    namespace: metallb-system
+    name: config
+data:
+    config: |
+        address-pools:
+        - name: default
+          protocol: layer2
+          addresses:
+          - 10.0.15.21-10.0.15.22
+EOF
+kubectl apply -f /tmp/metallb-conf.yml
+rm /tmp/metallb-conf.yml
+~~~
+
+## Troubleshooting
+
+### 👉🐛 When joining a new node, the process hangs at the "[preflight] Running pre-flight checks" stage forever.
+
+Endless process or timeout error sometimes lie in the I/O plane. Please make sure that nodes can ping each other by IP and the `master` node has only kubelet-produced rules in `iptables`.
 
 ## Foo
 
