@@ -215,10 +215,9 @@ Allright, hopefully no errors there, and we can proceed to more neat stuff.
 
 The commands below should be executed <ins>on the master node only</ins>.
 
-
 ➡️ Let `kubeadm` do all the heavy lifting:
 ~~~bash
-sudo kubeadm init --apiserver-advertise-address=X.X.X.X --apiserver-cert-extra-sans=localhost,127.0.0.1;
+sudo kubeadm init --apiserver-advertise-address=X.X.X.X --pod-network-cidr=10.244.0.0/16 --apiserver-cert-extra-sans=localhost,127.0.0.1
 ~~~
 
 If everything went well, I just need to do a few more extra steps.
@@ -244,7 +243,7 @@ So the `pod network` then is an implementation of K8s networking model: it enabl
 There are numerous implementations out there, but I will stick to the kinda default one, which is called `Flannel`. It is basic and proven to be working.
 
 ~~~bash
-sudo kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
 ~~~
 
 ## Joining the nodes
@@ -283,7 +282,7 @@ kubectl get nodes
 
 If I see something like this...
 
-~~~txt
+~~~text
 NAME     STATUS   ROLES    AGE    VERSION
 node01   Ready    <none>   4h7m   v1.19.3
 master   Ready    master   45h    v1.19.3
@@ -291,11 +290,11 @@ master   Ready    master   45h    v1.19.3
 
 ... that means: "Congratulations 🎉🎉🎉 You and I just got our own K8s clusters up and running!" Most of the tutorials usually end here, or they maybe show how to expose an Apache container via some random port.
 
-But that is not where I want to have this finished! So instead of creating `NodePort`-type services, let's go a bit further and setup `ingress`. 
+But that is not where I want to have this finished! So instead of creating `NodePort`-type services, let's go a bit further and setup `ingress` and `load balancer`. 
 
 ➡️ Ingress
 
-So ingress is another step forward. Basically, ingress tells the cluster "Hey, for this domain, path and protocol route all requests to a service A. For other domain and path - to service B" (and so on). So ingress works as a router for the incoming requests.
+Basically, ingress tells the cluster "Hey, for this given domain, path and protocol route all requests to a service A. For other domain and path - to service B" (and so on). So ingress works as a router for the incoming requests.
 
 Sounds quite powerful, doesn't it?
 
@@ -303,31 +302,44 @@ Sounds quite powerful, doesn't it?
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.40.2/deploy/static/provider/baremetal/deploy.yaml
 ~~~
 
+Let's check how ingress is doing:
+
 ~~~bash
-kubectl get pods --all-namespaces -l app.kubernetes.io/name=ingress-nginx;
+kubectl get pods -n ingress-nginx
 ~~~
 
-➡️ Metal load balancer
+In a few minutes, the status should look somewhat like this:
+
+~~~text
+NAME                                        READY   STATUS      RESTARTS   AGE
+ingress-nginx-admission-create-7dhcj        0/1     Completed   0          22m
+ingress-nginx-admission-patch-kcsvt         0/1     Completed   0          22m
+ingress-nginx-controller-785557f9c9-7ldcl   1/1     Running     0          22m
+~~~
+
+➡️ External load balancer
+
+Please find [the latest version of Metallb](https://metallb.universe.tf/). Also, sometimes they do backward-incompatible installation instruction updates, so if something does not work, feel free to [check their docs out](https://metallb.universe.tf/installation/)!
 
 ~~~bash
-kubectl apply -f https://raw.githubusercontent.com/google/metallb/v0.8.3/manifests/metallb.yaml
-cat <<EOF | kubectl apply -f -
-    tee /tmp/metallb-conf.yml > /dev/null <<'EOF'
-apiVersion: v1
-kind: ConfigMap
-metadata:
-    namespace: metallb-system
-    name: config
-data:
-    config: |
-        address-pools:
-        - name: default
-          protocol: layer2
-          addresses:
-          - 10.0.15.21-10.0.15.22
-EOF
-kubectl apply -f /tmp/metallb-conf.yml
-rm /tmp/metallb-conf.yml
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.4/manifests/namespace.yaml
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.4/manifests/metallb.yaml
+kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
+~~~
+
+To see how the balancer is doing:
+
+~~~bash
+kubectl get pods -n metallb-system
+~~~
+
+It should look like this:
+
+~~~text
+NAME                         READY   STATUS    RESTARTS   AGE
+controller-8687cdc65-h6d5m   1/1     Running   0          14s
+speaker-b4p95                1/1     Running   0          14s
+speaker-xhm72                1/1     Running   0          14s
 ~~~
 
 ## Troubleshooting
@@ -335,6 +347,28 @@ rm /tmp/metallb-conf.yml
 ### 👉🐛 When joining a new node, the process hangs at the "[preflight] Running pre-flight checks" stage forever.
 
 Endless process or timeout error sometimes lie in the I/O plane. Please make sure that nodes can ping each other by IP and the `master` node has only kubelet-produced rules in `iptables`.
+
+### 👉🐛 Pods are stuck at "ContainerCreating" step
+
+kubectl describe pods -n ingress-nginx
+kubectl describe pods -n metallb-system
+
+// revert all
+sudo kubeadm reset -f
+sudo rm -rf /etc/cni/net.d
+
+sudo iptables -P INPUT ACCEPT
+sudo iptables -P FORWARD ACCEPT
+sudo iptables -P OUTPUT ACCEPT
+sudo iptables -t nat -F
+sudo iptables -t mangle -F
+sudo iptables -F
+sudo iptables -X
+
+sudo systemctl restart docker
+sudo systemctl restart kubelet
+
+rm -rf ${HOME}/.kube
 
 ## Foo
 
@@ -346,4 +380,5 @@ Endless process or timeout error sometimes lie in the I/O plane. Please make sur
 * [kubeadm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/) - K8s's official bootstrapping tool
 * [kops](https://kops.sigs.k8s.io/) - K8s installer on AWS/GCE/OpenStack/Digital Ocean/Spot Ocean
 * [kubespray](https://kubespray.io/) - another installer
-* [Pod networks in the alphabetical order](https://kubernetes.io/docs/concepts/cluster-administration/networking/)
+* [k8s cheatsheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)
+* [pod networks in the alphabetical order](https://kubernetes.io/docs/concepts/cluster-administration/networking/)
