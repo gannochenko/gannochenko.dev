@@ -1,10 +1,10 @@
 ---
-title: 'Why the hell you need a bare-metal Kubernetes cluster?'
+title: 'Baremetal Kubernetes with kubeadm in 10 minutes? Easy!'
 description:
 keywords:
-path: /blog/why-the-hell-you-need-a-bare-metal-kubernetes-cluster-
-date: 2020-06-02
-published: false
+path: /blog/baremetal-kubernetes-with-kubeadm-in-minutes-easy-
+date: 2020-10-23
+published: true
 images:
     - author: Toni Vuohelainen
       image: ./cover.jpg
@@ -24,8 +24,8 @@ Well, you may want to consider a bare-metal cluster, because
 
 👉 you are setting up an internal infrastructure for your company, and using cloud providers is not an option,<br />
 👉 you wish to receive close-to-production experience with you own pet K8s,<br />
-👉 you are well-aware of Minikube, MicroK8s, etc, but always wanted to have a real multi-node cluster out there,<br />
-👉 you don't want to pay for a pre-configured AKS/GKE/EKS/whatever solution just yet, or not allowed to use it,<br />
+👉 you are well-aware of Minikube, MicroK8s and others, but always wanted to have a real multi-node cluster out there,<br />
+👉 you don't want to pay for a pre-configured AKS/GKE/EKS/whatever solution just yet,<br />
 👉 you want to set everything up from scratch, at least once, out of curiosity,<br />
 👉 you have free time :)<br />
 
@@ -39,7 +39,7 @@ What you should understand just before we continue.
 ☝️ But even so, it will be good enough for hobby projects, proof of concepts, learning and exploration.<br />
 ☝️ You will not receive any GUI control panel, only raw `kubectl`.<br />
 
-Resonates with your needs? Then let's go!
+Resonates with your needs? Then let's do it!
 
 ## Nodes
 
@@ -99,13 +99,13 @@ Therefore, I choose `Node A` to be the `master node`, whereas `Node B` - `worker
 
 The following set of commands I need to run <ins>on each node</ins>:
 
-➡️ Allow nodes to address each other by name, so I don't hard-code IP addresses:
+➡️ Allow nodes to address each other by name:
 
 ~~~bash
 printf "\nX.X.X.X master\nY.Y.Y.Y node01\n" | sudo tee -a /etc/hosts;
 ~~~
 
-Make sure nodes can see each other:
+Make sure nodes can actually talk to see each other:
 
 ~~~bash
 ping master
@@ -134,7 +134,9 @@ printf "\nnet.bridge.bridge-nf-call-iptables = 1\nnet.ipv4.ip_forward=1\n" | sud
 sudo sysctl -p
 ~~~
 
-➡️ Some default firewall rules are set in a way it paralyzes cluster networking. In production it totally makes sense to find what causes that and fix the issue. Since I am building a non-production environment, I don't bother investing time. So I just disable `firewalld` and by doing so I wipe out all firewall rules.
+➡️ Disable firewalld 👻 😱
+
+Some out-of-the-box firewall rules are set in a way it paralyzes cluster networking. In production it totally makes sense to find what causes that and fix the issue. Since I am building a non-production environment, I don't bother investing time. So I just disable `firewalld` and by doing so I wipe out all firewall rules.
 
 ~~~bash
 sudo systemctl stop firewalld
@@ -145,7 +147,7 @@ sudo systemctl mask --now firewalld
 sudo iptables -L -v -n
 ~~~
 
-➡️ K8s demands the `swap` partition to be disabled for good:
+➡️ K8s requires the `swap` partition to be disabled for good:
 
 ~~~bash
 sudo swapoff -a
@@ -176,7 +178,7 @@ sudo tee /etc/docker/daemon.json > /dev/null <<'EOF'
 EOF
 ~~~
 
-➡️ Install `Kubernetes` and `kubeadm`. Yep, `kubeadm` will take care of all the boring stuff here.
+➡️ Install `Kubernetes` and `kubeadm`
 
 ~~~bash
 sudo tee /etc/yum.repos.d/kubernetes.repo > /dev/null <<'EOF'
@@ -230,7 +232,7 @@ sudo cp -i /etc/kubernetes/admin.conf ${HOME}/.kube/config
 sudo chown $(id -u):$(id -g) ${HOME}/.kube/config
 ~~~
 
-➡️ Deploy a pod network.
+➡️ Deploy a pod network
 
 So we have containers. A `container` is a containerized application written in any language (Node, Java, Go, ...) and running inside of the cluster.
 A `pod` is a group of `containers`, which share common resources.
@@ -240,7 +242,7 @@ Yeh, sounds complicated. But this is what makes K8s quite abstracted and therefo
 
 So the `pod network` then is an implementation of K8s networking model: it enables pods talking to each other, to services, and via services - to the outer world.
 
-There are numerous implementations out there, but I will stick to the kinda default one, which is called `Flannel`. It is basic and proven to be working.
+There are numerous implementations out there, but I will stick to the kinda default one, which is called `flannel`. It is basic and proven to be working.
 
 ~~~bash
 kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
@@ -288,15 +290,15 @@ node01   Ready    <none>   4h7m   v1.19.3
 master   Ready    master   45h    v1.19.3
 ~~~
 
-... that means: "Congratulations 🎉🎉🎉 You and I just got our own K8s clusters up and running!" Most of the tutorials usually end here, or they maybe show how to expose an Apache container via some random port.
+... that means: "Congratulations 🎉🎉🎉 You and I just got our own K8s clusters up and running!" 
 
-But that is not where I want to have this finished! So instead of creating `NodePort`-type services, let's go a bit further and setup `ingress` and `load balancer`. 
+Most of the tutorials usually end here, or they maybe show how to expose an Apache container via a `NodePort`-type service (make a container accessible on the worker node directly via a random port greater than 1023). This obviously is not commonly-used IRL, as it defeats one of the key advantages of K8s. So instead let's go a bit further and setup `ingress`. 
 
 ➡️ Ingress
 
-Basically, ingress tells the cluster "Hey, for this given domain, path and protocol route all requests to a service A. For other domain and path - to service B" (and so on). So ingress works as a router for the incoming requests.
+Basically, ingress tells the cluster *&laquo;Hey, for this given domain, path and protocol route all requests to the service A. For other domain, path and protocol - to the service B (and so on)&raquo;*. So ingress works as a router for the incoming requests.
 
-Sounds quite powerful, doesn't it?
+Sounds quite powerful, doesn't it? I am gonna use `ingress-nginx`, the default kubernetes ingress, as it is pretty simple and easily configurable:
 
 ~~~bash
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.40.2/deploy/static/provider/baremetal/deploy.yaml
@@ -317,14 +319,37 @@ ingress-nginx-admission-patch-kcsvt         0/1     Completed   0          22m
 ingress-nginx-controller-785557f9c9-7ldcl   1/1     Running     0          22m
 ~~~
 
-➡️ External load balancer
+➡️ Load balancer
 
-Please find [the latest version of Metallb](https://metallb.universe.tf/). Also, sometimes they do backward-incompatible installation instruction updates, so if something does not work, feel free to [check their docs out](https://metallb.universe.tf/installation/)!
+What ingress does not know, obviously, is how exactly the cluster is connected to the outer world. This task is solved by a `load balancer` that typically works outside of the cluster. Every cloud provider implements it's own one, and their load balancers vary from one to another. Since I don't have any cloud provider here, I need a substitution.
+
+So there is a project called `Metallb`, which I am going to leverage for this matter. Please find which version is [the latest](https://metallb.universe.tf/). Also, sometimes they do backward-incompatible installation instruction updates, so if something does not work, feel free to [check their docs out](https://metallb.universe.tf/installation/)!
 
 ~~~bash
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.4/manifests/namespace.yaml
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.4/manifests/metallb.yaml
 kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
+~~~
+
+I also need to provide a config file, otherwise the balancer stays dormant.
+
+~~~bash
+tee /tmp/metallb-conf.yml > /dev/null <<'EOF'
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    namespace: metallb-system
+    name: config
+data:
+    config: |
+        address-pools:
+        - name: default
+          protocol: layer2
+          addresses:
+          - Y.Y.Y.Y
+EOF
+kubectl apply -f /tmp/metallb-conf.yml;
+rm /tmp/metallb-conf.yml;
 ~~~
 
 To see how the balancer is doing:
@@ -342,6 +367,10 @@ speaker-b4p95                1/1     Running   0          14s
 speaker-xhm72                1/1     Running   0          14s
 ~~~
 
+***
+
+Okay, so this is pretty it. I have set the cluster up, and it is working. In the next article (which is coming soon) I will deploy an infrastructure using Terraform, with actual domains and SSL support! Stay tuned.
+
 ## Troubleshooting
 
 ### 👉🐛 When joining a new node, the process hangs at the "[preflight] Running pre-flight checks" stage forever.
@@ -350,10 +379,15 @@ Endless process or timeout error sometimes lie in the I/O plane. Please make sur
 
 ### 👉🐛 Pods are stuck at "ContainerCreating" step
 
-kubectl describe pods -n ingress-nginx
-kubectl describe pods -n metallb-system
+This problem may have many causes. In general, to see the events of a pod and where it stuck, a `describe pods` command is used:
 
-// revert all
+~~~bash
+kubectl describe pods -n ingress-nginx
+~~~
+
+If something goes totally pear-shaped, you may consider running the following piece of commands <ins>on each node</ins> to revert the cluster to pre `kubectl init (join)` state:
+
+~~~bash
 sudo kubeadm reset -f
 sudo rm -rf /etc/cni/net.d
 
@@ -369,11 +403,7 @@ sudo systemctl restart docker
 sudo systemctl restart kubelet
 
 rm -rf ${HOME}/.kube
-
-## Foo
-
-* `Container` is exposed via `services`.
-* `Services` are exposed via `ingress` and `load balancer`.
+~~~
 
 ## Useful links
 
@@ -381,4 +411,5 @@ rm -rf ${HOME}/.kube
 * [kops](https://kops.sigs.k8s.io/) - K8s installer on AWS/GCE/OpenStack/Digital Ocean/Spot Ocean
 * [kubespray](https://kubespray.io/) - another installer
 * [k8s cheatsheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)
-* [pod networks in the alphabetical order](https://kubernetes.io/docs/concepts/cluster-administration/networking/)
+* [list of pod networks in the alphabetical order](https://kubernetes.io/docs/concepts/cluster-administration/networking/)
+* [list of ingress controllers](https://medium.com/flant-com/comparing-ingress-controllers-for-kubernetes-9b397483b46b)
