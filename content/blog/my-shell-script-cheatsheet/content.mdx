@@ -1,0 +1,49 @@
+---
+title: "My Shell Script cheatsheet"
+description: Dont forget to write good description
+keywords: sex, drugs, rocknroll
+path: /blog/my-bash-cheatsheet
+date: 2020-10-24
+published: false
+images:
+    - author: Max Mustermann
+      image: ./cover.jpg
+      sourceText: Unsplash
+      source: https://unsplash.com/@mustermann
+      is_cover: 1
+---
+
+## Save command output to a variable
+
+~~~bash
+LIST=$(ls -l)
+~~~
+
+## Get the basename of the full path to the script file
+
+~~~bash
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+~~~
+
+## Assign the default value to a variable
+
+~~~bash
+VERSION="${1:-latest}"
+~~~
+
+## Execute a command for each file in the folder
+
+~~~bash
+FOLDER="$(pwd)"
+
+for file in ${FOLDER}/*
+do
+  ls -l "$file"
+done
+~~~
+
+## Get basename of a path
+
+~~~bash
+basename /foo/bar/baz/wheel.txt
+~~~
