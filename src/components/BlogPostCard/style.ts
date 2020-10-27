@@ -5,21 +5,17 @@ import { Link as GatsbyLink } from 'gatsby';
 
 export const BlogPostCardRoot = styled.div``;
 
-export const Data = styled.div`
-    padding: 1rem;
-`;
-
 export const ViewPost = styled(Link)`
     text-align: right;
 `;
 
 export const Title = styled.div`
     display: flex;
-    align-items: baseline;
+    align-items: flex-start;
 `;
 
 export const TitleLink = styled(GatsbyLink)`
-    //font-size: ${({ theme }) => theme.fontSize.bigger};
+    font-family: ${props => props.theme.typography.fontFamilyTitle};
     font-weight: 600;
     color: inherit;
     &:focus,
@@ -39,6 +35,7 @@ export const Date = styled.div`
     border-radius: 2px;
     flex-shrink: 0;
     margin-right: 1rem;
+    margin-top: 0.3rem;
 `;
 
 export const Preview = styled(GatsbyLink)`

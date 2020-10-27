@@ -28,6 +28,7 @@ export const Title = styled.h1`
     padding: 2rem 0;
     margin: 0;
     color: ${props => props.theme.color.textSecondary};
+    font-family: ${props => props.theme.typography.fontFamilyTitle};
     font-size: 2.4rem;
     font-weight: 700;
     ${({ theme }) =>

@@ -2,7 +2,11 @@ import { useContext } from 'react';
 import { ThemeContext } from 'styled-components';
 import { colorWhite, makeTheme, grid, cell } from '@gannochenko/etc';
 import { ObjectLiteral } from '../type';
-import { fontFamilyRaleway, fontFamilyRoboto } from './tokens';
+import {
+    fontFamilyRaleway,
+    fontFamilyRoboto,
+    fontFamilyOswald,
+} from './tokens';
 
 export const theme = makeTheme({
     color: {
@@ -29,7 +33,9 @@ export const theme = makeTheme({
     },
     typography: {
         fontFamily: fontFamilyRoboto,
-        fontFamilyHeader: fontFamilyRaleway,
+        fontFamilyHeader: fontFamilyRoboto,
+        fontFamilyName: fontFamilyOswald,
+        fontFamilyTitle: fontFamilyOswald,
     },
     link: {
         hoverEffectDuration: '300ms',

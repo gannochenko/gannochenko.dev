@@ -4281,14 +4281,14 @@ input SitePageContextFilterInput {
 
 type SitePageContextFrontmatter {
     title: String
-    images: [SitePageContextFrontmatterImages]
     show_title: Int
+    images: [SitePageContextFrontmatterImages]
 }
 
 input SitePageContextFrontmatterFilterInput {
     title: StringQueryOperatorInput
-    images: SitePageContextFrontmatterImagesFilterListInput
     show_title: IntQueryOperatorInput
+    images: SitePageContextFrontmatterImagesFilterListInput
 }
 
 type SitePageContextFrontmatterImages {
@@ -4406,10 +4406,10 @@ enum SitePageFieldsEnum {
     isCreatedByStatefulCreatePages
     context___id
     context___frontmatter___title
+    context___frontmatter___show_title
     context___frontmatter___images
     context___frontmatter___images___image
     context___frontmatter___images___is_cover
-    context___frontmatter___show_title
     pluginCreator___id
     pluginCreator___parent___id
     pluginCreator___parent___parent___id
