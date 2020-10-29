@@ -35,6 +35,10 @@ git log --graph --full-history --all --pretty=format:"%h%x09%d%x20%s";
 git log --graph --decorate --oneline;
 # display history of commits for a specific branch
 git log --walk-reflogs master;
+# un-stage all uncommitted changes
+git reset HEAD
+# un-stage all uncommitted changes and erase them
+git reset HEAD --hard
 ```
 
 ### Work with tags
@@ -66,7 +70,7 @@ ps -p [PID] -o args;
 yarn upgrade <package-name> --major
 # find out why the package was installed
 yarn why <package-name>
-# get version of an installed package
+# get the latest version of a package that exists on NPM
 yarn info <package-name> | grep version:
 ```
 
