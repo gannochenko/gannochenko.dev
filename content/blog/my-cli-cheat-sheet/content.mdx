@@ -39,6 +39,9 @@ git log --walk-reflogs master;
 git reset HEAD
 # un-stage all uncommitted changes and erase them
 git reset HEAD --hard
+# remove un-tracked files
+git clean -fd
+git clean -fX
 ```
 
 ### Work with tags

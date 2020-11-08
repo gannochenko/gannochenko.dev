@@ -96,6 +96,18 @@ const data = [
 const crewMember: typeof data[0] | undefined;
 ~~~
 
+## Indexed vs Mapped Object
+
+~~~
+type MyMappedObjectType = {
+    [k in string | number]: string;
+};
+
+type MyIndexedType = {
+    [k: string]: string;
+};
+~~~
+
 ***
 
 No rest for an engineer, so, yeh, to be continued...
