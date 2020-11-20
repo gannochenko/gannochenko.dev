@@ -13,7 +13,7 @@ images:
       is_cover: 1
 ---
 
-Can't say I use shell scripting a lot, but when I do, I always struggling with remembering certain useful syntax. So, this is just a reminder to myself.
+Can't say I use shell scripting a lot, but when I do, I always struggling with remembering certain useful syntax. So, this is just a reminder for the most frequently-used syntax.
 
 ## Save command output to a variable
 
@@ -49,3 +49,23 @@ done
 ~~~bash
 basename /foo/bar/baz/wheel.txt
 ~~~
+
+## Check if file exists
+
+~~~bash
+FILE=/etc/hosts
+
+if [[ -f "$FILE" ]]; then
+    echo "$FILE exists."
+else 
+    echo "$FILE does not exist."
+fi
+
+if [[ ! -f "$FILE" ]]; then
+    echo "$FILE does not exist."
+else 
+    echo "$FILE exists."
+fi
+~~~
+
+[Other different file test operators](https://tldp.org/LDP/abs/html/fto.html).
