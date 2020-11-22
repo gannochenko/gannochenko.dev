@@ -16,7 +16,29 @@ images:
 
 import { Container } from 'components/Container';
 
-Once upon a time...
+### LCD screen setup
+
+Installing Git
+
+~~~bash
+sudo apt-get install git -y
+~~~
+
+Then, set up the driver itself:
+
+~~~bash
+sudo rm -rf LCD-show
+git clone https://github.com/goodtft/LCD-show.git
+chmod -R 755 LCD-show
+cd LCD-show
+sudo ./LCD7C-show
+~~~
+
+### Gnome setup
+
+~~~bash
+sudo tasksel
+~~~
 
 Reference articles:
 
