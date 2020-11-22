@@ -140,6 +140,12 @@ PermitRootLogin no
 PasswordAuthentication no
 ```
 
+Also may be useful to prolong SSH session timeout:
+
+```text
+ClientAliveInterval 3600
+```
+
 Then restart the `sshd`:
 
 ```bash
