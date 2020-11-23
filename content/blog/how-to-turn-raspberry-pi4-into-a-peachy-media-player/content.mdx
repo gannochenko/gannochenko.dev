@@ -36,9 +36,19 @@ sudo ./LCD7C-show
 
 ### Gnome setup
 
+Unfortunately, I was not able to complete this process via SSH, I tried two times and both times I got `Broken pipe` on 76%. That is why I had to run it on `Raspberry` itself, using real the keyboard and the monitor I just bought.
+
 ~~~bash
 sudo tasksel
 ~~~
+
+### Give more memory to the GPU
+
+~~~bash
+sudo raspi-config
+~~~
+
+Select 'Gnome' and hit `OK`;
 
 Reference articles:
 
