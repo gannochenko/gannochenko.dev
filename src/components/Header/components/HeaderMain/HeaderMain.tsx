@@ -77,7 +77,8 @@ export const HeaderMain: FunctionComponent<Props> = ({
                                             Business-oriented fullstack
                                             engineer, in ❤️ with Tech.
                                             <br />
-                                            JS / JS stack: React, Node, AWS.
+                                            JS / JS stack: React, Node, Docker,
+                                            AWS.
                                             <br />
                                             15+ years in dev.
                                         </GreetingBlock>
@@ -94,10 +95,10 @@ export const HeaderMain: FunctionComponent<Props> = ({
                                                 type="linkedin"
                                                 src={links.linkedin}
                                             />
-                                            <Social
-                                                type="medium"
-                                                src={links.medium}
-                                            />
+                                            {/*<Social*/}
+                                            {/*    type="medium"*/}
+                                            {/*    src={links.medium}*/}
+                                            {/*/>*/}
                                             <Social
                                                 type="twitter"
                                                 src={links.twitter}
@@ -105,6 +106,10 @@ export const HeaderMain: FunctionComponent<Props> = ({
                                             <Social
                                                 type="instagram"
                                                 src={links.instagram}
+                                            />
+                                            <Social
+                                                type="devto"
+                                                src={links.devto}
                                             />
                                         </SocialBar>
                                     </HelloRight>
