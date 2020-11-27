@@ -22,6 +22,7 @@ import { Social } from '../../../Social';
 import { Copyright } from '../../../Copyright';
 import { links } from '../../../../lib/links';
 import { Menu } from '../../../Menu';
+import { authorName, AuthorIntro } from '../../../../lib/author';
 
 export const HeaderMain: FunctionComponent<Props> = ({
     backgroundImage,
@@ -67,20 +68,14 @@ export const HeaderMain: FunctionComponent<Props> = ({
                                             effectTimeout={timeoutRight}
                                             effectEaseA="preset:bounce"
                                         >
-                                            Sergei Gannochenko
+                                            {authorName}
                                         </NameBlock>
                                         <GreetingBlock
                                             effectName="fade-slide-bottom"
                                             effectTimeout={timeoutRight + 300}
                                             effectEaseA="preset:bounce"
                                         >
-                                            Business-oriented fullstack
-                                            engineer, in ❤️ with Tech.
-                                            <br />
-                                            JS / JS stack: React, Node, Docker,
-                                            AWS.
-                                            <br />
-                                            15+ years in dev.
+                                            <AuthorIntro />
                                         </GreetingBlock>
                                         <SocialBar
                                             effectName="fade-slide-bottom"

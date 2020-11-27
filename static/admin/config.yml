@@ -34,7 +34,7 @@ collections:
                   media_library:
                       config:
                       multiple: true
-                - name: author
+                - name: authorName
                   label: 'Author'
                   widget: string
                   required: false
