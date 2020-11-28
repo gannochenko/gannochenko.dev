@@ -1,20 +1,20 @@
 ---
-title: Blog
+title: Projects
 ---
 
 import { graphql } from 'gatsby';
 import { Container } from '../components/Container';
-import { BlogPostList } from '../components/BlogPostList';
+import { BlogPostList } from '../components/ProjectList';
 
 <Container>
-    <BlogPostList data={props.data.allMdx.edges} />
+    <ProjectList data={props.data.allMdx.edges} />
 </Container>
 
-export const blogIndexQuery = graphql`
-    query blogIndexQuery {
+export const projectIndexQuery = graphql`
+    query projectIndexQuery {
         allMdx(
             sort: { fields: [frontmatter___date], order: DESC }
-            filter: { frontmatter: { published: { eq: true }, path: { regex: "/\/blog/i" } } }
+            filter: { frontmatter: { published: { eq: true }, path: { regex: "/\/projects/i" } } }
         ) {
             edges {
                 node {

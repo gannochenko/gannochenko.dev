@@ -6,6 +6,7 @@ import { Props } from './type';
 import { Link } from '../Link';
 
 export const ProjectList: FunctionComponent<Props> = ({ data, showLink }) => {
+    console.log(data);
     return (
         <ProjectListRoot>
             <Items>
