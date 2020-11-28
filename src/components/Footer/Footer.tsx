@@ -28,16 +28,16 @@ export const Footer: FunctionComponent = () => {
                 <Links>
                     <Social type="github" src={links.github} />
                     <Social type="linkedin" src={links.linkedin} />
-                    <Social
-                        type="medium"
-                        src={links.medium}
-                        onMouseOver={() => {
-                            setShowAT(true);
-                        }}
-                        onMouseOut={() => {
-                            setShowAT(false);
-                        }}
-                    />
+                    {/*<Social*/}
+                    {/*    type="medium"*/}
+                    {/*    src={links.medium}*/}
+                    {/*    onMouseOver={() => {*/}
+                    {/*        setShowAT(true);*/}
+                    {/*    }}*/}
+                    {/*    onMouseOut={() => {*/}
+                    {/*        setShowAT(false);*/}
+                    {/*    }}*/}
+                    {/*/>*/}
                     <Social
                         type="twitter"
                         src={links.twitter}
@@ -58,6 +58,7 @@ export const Footer: FunctionComponent = () => {
                             setShowArch(false);
                         }}
                     />
+                    <Social type="devto" src={links.devto} />
                 </Links>
                 <SlashContainer>
                     <Slash />
