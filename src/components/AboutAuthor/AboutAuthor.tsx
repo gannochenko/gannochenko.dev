@@ -1,33 +1,34 @@
 import React, { FunctionComponent } from 'react';
 import { Avatar } from '../Avatar';
-import { HR } from '../HR';
 import {
+    AboutAuthorBackground,
     AboutAuthorRoot,
-    AboutAuthorAvatarWrapper,
     AboutAuthorRootLeft,
     AboutAuthorHelloRight,
     AboutAuthorNameBlock,
     AboutAuthorGreetingBlock,
 } from './style';
 import { authorName, AuthorIntro } from '../../lib/author';
+import { Container } from '../Container';
 
 export const AboutAuthor: FunctionComponent = () => {
     return (
-        <>
-            <HR />
-            <AboutAuthorRoot>
-                <AboutAuthorRootLeft>
-                    <AboutAuthorAvatarWrapper>
+        <AboutAuthorBackground>
+            <Container>
+                <AboutAuthorRoot>
+                    <AboutAuthorRootLeft>
                         <Avatar />
-                    </AboutAuthorAvatarWrapper>
-                </AboutAuthorRootLeft>
-                <AboutAuthorHelloRight>
-                    <AboutAuthorNameBlock>{authorName}</AboutAuthorNameBlock>
-                    <AboutAuthorGreetingBlock>
-                        <AuthorIntro />
-                    </AboutAuthorGreetingBlock>
-                </AboutAuthorHelloRight>
-            </AboutAuthorRoot>
-        </>
+                    </AboutAuthorRootLeft>
+                    <AboutAuthorHelloRight>
+                        <AboutAuthorNameBlock>
+                            {authorName}
+                        </AboutAuthorNameBlock>
+                        <AboutAuthorGreetingBlock>
+                            <AuthorIntro />
+                        </AboutAuthorGreetingBlock>
+                    </AboutAuthorHelloRight>
+                </AboutAuthorRoot>
+            </Container>
+        </AboutAuthorBackground>
     );
 };

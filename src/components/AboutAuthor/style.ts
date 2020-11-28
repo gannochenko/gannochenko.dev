@@ -1,5 +1,10 @@
 import styled from 'styled-components';
-import { align, gap, round } from '@gannochenko/etc';
+import { align, round } from '@gannochenko/etc';
+
+export const AboutAuthorBackground = styled.div`
+    margin-top: 4rem;
+    background-color: #2a2734;
+`;
 
 export const AboutAuthorRoot = styled.div`
     ${({ theme }) =>
@@ -9,7 +14,8 @@ export const AboutAuthorRoot = styled.div`
         })}
     ${align('center', 'left')}
     width: 100%;
-    margin-top: 0rem;
+    padding: 3rem 0;
+    color: #fff;
 `;
 
 export const AboutAuthorRootLeft = styled.div`
@@ -36,9 +42,4 @@ export const AboutAuthorGreetingBlock = styled.div`
     letter-spacing: 0.05rem;
     line-height: 1.4;
     ${({ theme }) => theme.util.media({ xs: 'text-align: center;' })}
-`;
-
-export const AboutAuthorAvatarWrapper = styled.div`
-    border: 5px solid #ce4f4f;
-    ${round()}
 `;
