@@ -11,7 +11,7 @@ import {
     TitleLink,
 } from './style';
 import { Props } from './type';
-import { formatDate } from '../../lib/util';
+import { getYear } from '../../lib/util';
 import { Link } from 'gatsby';
 
 export const ProjectCard: FunctionComponent<Props> = ({ data }) => {
@@ -33,9 +33,11 @@ export const ProjectCard: FunctionComponent<Props> = ({ data }) => {
                     <TitleLink to={url}>{data.frontmatter.title}</TitleLink>
                 </Title>
                 <LinkContainer>
-                    <Date>{formatDate(data.frontmatter.date)}</Date>
+                    <Date>
+                        First released in {getYear(data.frontmatter.date)}
+                    </Date>
                     <ViewPost to={url} fontSize="small">
-                        Read the post
+                        View details
                     </ViewPost>
                 </LinkContainer>
             </Data>

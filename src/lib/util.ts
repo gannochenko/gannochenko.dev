@@ -15,4 +15,14 @@ export const formatDate = (date: string | null) => {
     return `${day}.${month}.${year}`;
 };
 
+export const getYear = (date?: string) => {
+    if (!date) {
+        return '';
+    }
+
+    const dateInstance = new Date(date);
+
+    return dateInstance.getFullYear();
+};
+
 export type Scalar = string | number;

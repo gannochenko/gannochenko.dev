@@ -5,13 +5,13 @@ export const skills = {
         {
             key: 'reactjs',
             logo: logo.reactjs,
-            title: 'ReactJS',
+            title: 'React',
             size: '4rem',
         },
         {
             key: 'expressjs',
             logo: logo.expressjs,
-            title: 'ExpressJS',
+            title: 'Express',
             size: '4rem',
         },
         {
@@ -24,7 +24,7 @@ export const skills = {
         {
             key: 'nodejs',
             logo: logo.nodejs,
-            title: 'NodeJS',
+            title: 'Node',
             size: '2.5rem',
             width: '4rem',
         },
@@ -39,7 +39,7 @@ export const skills = {
         {
             key: 'reactjs',
             logo: logo.reactjs,
-            title: 'ReactJS',
+            title: 'React',
             size: '4rem',
         },
         {
@@ -83,7 +83,7 @@ export const skills = {
         {
             key: 'gatsbyjs',
             logo: logo.gatsbyjs,
-            title: 'GatsbyJS',
+            title: 'Gatsby',
             size: '3.5rem',
         },
         {
@@ -167,7 +167,7 @@ export const skills = {
         {
             key: 'meteorjs',
             logo: logo.meteorjs,
-            title: 'MeteorJS',
+            title: 'Meteor',
             size: '4rem',
         },
         {
@@ -224,20 +224,20 @@ export const skills = {
         {
             key: 'nodejs',
             logo: logo.nodejs,
-            title: 'NodeJS',
+            title: 'Node',
             size: '2.5rem',
             width: '4rem',
         },
         {
             key: 'expressjs',
             logo: logo.expressjs,
-            title: 'ExpressJS',
+            title: 'Express',
             size: '4rem',
         },
         {
             key: 'nestjs',
             logo: logo.nestjs,
-            title: 'NestJS',
+            title: 'Nest',
             size: '3.5rem',
         },
         {
@@ -284,7 +284,7 @@ export const skills = {
         {
             key: 'angular',
             logo: logo.angularjs,
-            title: 'AngularJS',
+            title: 'Angular',
             size: '4rem',
         },
         {
