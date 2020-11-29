@@ -17,12 +17,11 @@ import { Link } from 'gatsby';
 export const ProjectCard: FunctionComponent<Props> = ({ data }) => {
     const image = useMemo(() => {
         return (
-            data.node.frontmatter.images.find((image: any) => image.is_cover) ||
-            {}
+            data.frontmatter.images.find((image: any) => image.is_cover) || {}
         );
     }, [data]);
 
-    const url = data.node.frontmatter.path;
+    const url = data.frontmatter.path;
 
     return (
         <ProjectCardRoot>
@@ -31,12 +30,10 @@ export const ProjectCard: FunctionComponent<Props> = ({ data }) => {
             </Link>
             <Data>
                 <Title>
-                    <TitleLink to={url}>
-                        {data.node.frontmatter.title}
-                    </TitleLink>
+                    <TitleLink to={url}>{data.frontmatter.title}</TitleLink>
                 </Title>
                 <LinkContainer>
-                    <Date>{formatDate(data.node.frontmatter.date)}</Date>
+                    <Date>{formatDate(data.frontmatter.date)}</Date>
                     <ViewPost to={url} fontSize="small">
                         Read the post
                     </ViewPost>

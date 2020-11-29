@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 import { align, gap } from '@gannochenko/etc';
 
-export const Container = styled.footer`
+export const FooterRoot = styled.footer`
     position: relative;
     margin: 0;
-    padding: 4rem 1rem;
+    padding: 2rem 1rem;
     ${align('center', 'center', 'column')}
 
     background-color: ${({ theme }) => theme.color.backgroundSecondary};
@@ -13,15 +13,16 @@ export const Container = styled.footer`
     font-weight: 300;
     overflow-x: hidden;
     overflow-y: hidden;
+    flex-shrink: 0;
 `;
 
 export const Links = styled.div`
     display: flex;
     flex-shrink: 0;
-    ${gap('1rem', '1rem')}
+    ${gap(null, '1rem')}
 `;
 
-export const Contacts = styled.div`
+export const FooterContacts = styled.div`
     display: flex;
     flex-shrink: 0;
     align-items: center;
@@ -44,7 +45,7 @@ export const AT = styled.span<{ show: boolean }>`
     transition: opacity 200ms ease;
 `;
 
-export const Info = styled.div`
+export const FooterLinks = styled.div`
     margin-top: 1rem;
     display: flex;
     ${gap(null, '1rem')};

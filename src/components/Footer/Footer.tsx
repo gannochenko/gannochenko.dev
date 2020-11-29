@@ -1,12 +1,12 @@
 import React, { FunctionComponent, useState } from 'react';
 import {
-    Container,
+    FooterRoot,
     Links,
-    Contacts,
+    FooterContacts,
     Path,
     END,
     AT,
-    Info,
+    FooterLinks,
     NoWrap,
     SlashContainer,
     CICDLink,
@@ -23,21 +23,11 @@ export const Footer: FunctionComponent = () => {
     const [showDEV, setShowDEV] = useState(false);
 
     return (
-        <Container>
-            <Contacts>
+        <FooterRoot>
+            <FooterContacts>
                 <Links>
                     <Social type="github" src={links.github} />
                     <Social type="linkedin" src={links.linkedin} />
-                    {/*<Social*/}
-                    {/*    type="medium"*/}
-                    {/*    src={links.medium}*/}
-                    {/*    onMouseOver={() => {*/}
-                    {/*        setShowAT(true);*/}
-                    {/*    }}*/}
-                    {/*    onMouseOut={() => {*/}
-                    {/*        setShowAT(false);*/}
-                    {/*    }}*/}
-                    {/*/>*/}
                     <Social
                         type="twitter"
                         src={links.twitter}
@@ -70,15 +60,15 @@ export const Footer: FunctionComponent = () => {
                         {showDEV && '_dev'}
                     </END>
                 </Path>
-            </Contacts>
-            <Info>
+            </FooterContacts>
+            <FooterLinks>
                 <NoWrap>
                     &copy; then &mdash; now ({new Date().getFullYear()})
                 </NoWrap>
                 <Link to="/cookie-policy" bright>
                     Cookie policy
                 </Link>
-            </Info>
+            </FooterLinks>
             <CICDLink
                 href="https://vercel.com/gannochenko/gannochenko/deployments"
                 rel="noreferrer noopener nofollow"
@@ -89,6 +79,6 @@ export const Footer: FunctionComponent = () => {
                 rel="noreferrer noopener nofollow"
                 target="_blank"
             />
-        </Container>
+        </FooterRoot>
     );
 };
