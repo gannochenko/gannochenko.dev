@@ -1,7 +1,7 @@
 module.exports.meta = {
     application: {
-        name: 'Article export',
-        description: 'Article export',
+        name: 'ProjectDetails export',
+        description: 'ProjectDetails export',
     },
     twitter: {
         creator: '@gannochenko',

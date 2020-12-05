@@ -59,31 +59,45 @@ exports.createPages = ({ graphql, actions }) => {
                     reject(result.errors);
                 }
 
-                let edges = result.data.allMdx.edges;
-                if (!edges) {
+                const entries = result.data.allMdx.edges;
+                if (!entries) {
                     return;
                 }
 
-                edges = edges.filter(
-                    edge =>
-                        edge.node.frontmatter.path &&
-                        edge.node.frontmatter.path.startsWith('/blog'),
-                );
-                edges.forEach(({ node }) => {
+                entries.forEach(({ node }) => {
                     const {
                         frontmatter: { path: pathProperty, published },
                     } = node;
-                    const realPath = published
-                        ? pathProperty
-                        : pathProperty.replace(/^\/blog\//, '/blog-drafts/');
+
+                    let realPath = '';
+                    let componentPath = null;
+                    if (pathProperty.startsWith('/blog')) {
+                        realPath = published
+                            ? pathProperty
+                            : pathProperty.replace(
+                                  /^\/blog\//,
+                                  '/blog-drafts/',
+                              );
+                        componentPath = path.resolve(
+                            './src/components/BlogPageLayout/BlogPageLayout.tsx',
+                        );
+                    } else if (pathProperty.startsWith('/projects')) {
+                        realPath = pathProperty;
+                        componentPath = path.resolve(
+                            './src/components/ProjectDetailsPageLayout/ProjectDetailsPageLayout.tsx',
+                        );
+                    } else {
+                        console.error(
+                            `There is an entry, but I cant create a page for it: ${pathProperty}`,
+                        );
+                        return;
+                    }
 
                     actions.createPage({
                         // Encode the route
                         path: realPath,
                         // Layout for the page
-                        component: path.resolve(
-                            './src/components/BlogPageLayout/BlogPageLayout.tsx',
-                        ),
+                        component: componentPath,
                         // Values defined here are injected into the page as props and can
                         // be passed to a GraphQL query as arguments
                         context: {

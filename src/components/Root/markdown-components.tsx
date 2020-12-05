@@ -15,6 +15,11 @@ export const markdownComponents = {
             <p {...props} style={margins} />
         </Container>
     ),
+    h1: (props: any) => (
+        <Container>
+            <Typography h1 showAnchor {...props} />
+        </Container>
+    ),
     h2: (props: any) => (
         <Container>
             <Typography h2 showAnchor {...props} />
