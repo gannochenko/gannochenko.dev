@@ -11,6 +11,27 @@ images:
       galleryId: 0
 ---
 
+import { ProjectReleaseDate } from 'components/ProjectDetailsPageLayout/components/ProjectReleaseDate';
+
 # GBelt &mdash; a CLI tool for GitHub pipeline automation
 
-To be filled...
+<ProjectReleaseDate date={props.pageContext.frontmatter.date} />
+
+## Problem
+
+👉 Day to day GitHub routine swallows precious time.<br />
+👉 High probability of making human mistakes when writing a PR name, description, merging PRs.<br />
+👉 Need to keep the entire <s>ritual</s> process in mind and know it by heart.<br />
+
+## Solution
+
+Create a tool which
+
+👉 hides the process complexity behind a barebone and high-level set of instructions,<br />
+👉 covers the all the use-cases and follows gitflow workflow,<br />
+👉 is easy to install and utilize.<br />
+
+## Implementation
+
+👉 [Howto-post](/blog/how-i-automated-day-to-day-github-routine-with-github-toolbelt-)<br />
+👉 [Source code](https://github.com/gannochenko/gbelt)<br />

@@ -30,3 +30,9 @@ export const Anchor = styled.a`
     ${({ theme }) =>
         foregroundColor(colorEdward, theme.color.link.hover, '300ms')}
 `;
+
+export const Label = styled.span`
+    text-decoration: none;
+    font-size: 1rem;
+    ${() => foregroundColor(colorEdward, colorEdward)}
+`;

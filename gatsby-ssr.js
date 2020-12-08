@@ -4,10 +4,10 @@
  * See: https://www.gatsbyjs.org/docs/ssr-apis/
  */
 
+import React from 'react';
 import { getRenderedEffectNodeIdCollector } from '@gannochenko/ui';
 import { Root } from './src/components/Root/Root';
 import { Layout } from './src/components/Layout';
-import React from 'react';
 
 export const onRenderBody = ({ setPostBodyComponents }) => {
     setPostBodyComponents([getRenderedEffectNodeIdCollector()]);
