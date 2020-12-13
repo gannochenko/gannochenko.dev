@@ -1,0 +1,172 @@
+---
+title: "One immersive React component boilerplate I am eager to share with you"
+description: Dont forget to write good description
+keywords: sex, drugs, rocknroll
+path: "/blog/react-component-boilerplate-you-will-fall-in-love-with-"
+date: 2020-12-12
+published: false
+images:
+    - author: Francisco Moreno
+      image: ./cover.jpg
+      sourceText: Unsplash
+      source: https://unsplash.com/@franciscomoreno
+      is_cover: 1
+      galleryId: 0
+---
+
+import { Container } from 'components/Container';
+
+When I build just another web application after the spec made by designers, I create very simple component layouts. The situation drastically changes when building a *design system*, where each component should be reusable and highly sustainable.
+
+So, I have experimented a lot with different ways, and, eventually, I developed the best (as I see it) component layout. Here it is.
+
+## Must have-s
+
+My gear of choice is CSS-in-JS with [Styled-components](https://styled-components.com/) or [Emotion](https://emotion.sh/). It turns quite dull CSS into a fully-featured programming language based on JavaScript. Also please upgrade your React to the one which supports hooks.
+
+## The basics
+
+First and foremost, I start with the component shell itself. I choose a function component over a class component, according to the latest trends and best practices. I also refrain from using default exports everywhere, since named exports make future in-IDE refactoring easier:
+
+~~~typescript jsx
+import React, { FC } from 'react';
+
+export const AmazingForm: FC = () => {
+    
+};
+~~~
+
+## The scope of responsibility
+
+Now every component should have a `scope of responsibility`. It other words, a component is only responsible for what is inside of it, and completely unaware of its siblings or a parent node.
+
+Therefore, there is always a *root node* and some optional sub-nodes in case if the component is a complex one:
+
+~~~typescript jsx
+import React, { FC } from 'react';
+import styled from 'styled-components';
+
+const AmazingFormRoot = styled.div`
+`;
+
+const AmazingFormFields = styled.div`
+`;
+
+const AmazingFormSubmitButton = styled.button`
+`;
+
+export const AmazingForm: FC = () => {
+    return (
+        <AmazingFormRoot>
+            <AmazingFormFields />
+            <AmazingFormSubmitButton>
+                Submit!
+            </AmazingFormSubmitButton>
+        </AmazingFormRoot>
+    );    
+};
+~~~
+
+## The component props
+
+I never ever use `interface` to declare prop types.
+The reason for that - an interface provokes use of OOP-ish inheritance, which can be a real mess. So instead of stepping onto that ground, I stick to *&laquo;prefer composition over inheritance&raquo;* rule and use `type`.
+
+👉 I use `***Type` postfix for types to explicitly indicate the fact that this is not a variable.<br />
+👉 All properties of the component should be declared as optional, because the component should gracefully handle situations when it was called without any props.<br />
+👉 A few words regarding naming for the component props. So I have chosen the following agreement:
+
+* all callback and event handler props should start with *&laquo;on&raquo;* prefix (e.g. `onSubmitButtonClick`),
+* all render props should start with *&laquo;render&raquo;* prefix (e.g. `renderActionBar`),
+* all react node containing props should be just nouns (e.g. `actionBar`),
+* all feature flag props should start with *&laquo;enable&raquo;* prefix and be set to either `false` or `true` via `defaultProps` (e.g. `enableSubmission`),
+* I refrain from the negative declarations (e.g. prefer `enableRendering` by default set to `true` over `disableRendering` set to `false`).
+
+~~~typescript jsx
+import React, { FC, MouseEvent } from 'react';
+import styled from 'styled-components';
+
+// //////// Types
+
+type AmazingFormPropType = {
+    onClick?: (event: MouseEvent<HTMLElement>) => void;
+    enableErrorChecks?: boolean;
+    // any other props
+} & HTMLDivElement; // I prefer composition to say that all native props are also supported
+
+type AmazingFormFieldsPropType = { /* ... */ } & HTMLDivElement;
+
+type AmazingFormSubmitButtonPropType = { /* ... */ } & HTMLButtonElement;
+
+// //////// Styles
+
+const AmazingFormRoot = styled.div<AmazingFormPropType>`
+`;
+
+const AmazingFormFields = styled.div<AmazingFormFieldsPropType>`
+`;
+
+const AmazingFormSubmitButton = styled.button<AmazingFormSubmitButtonPropType>`
+`;
+
+// //////// Component
+
+export const AmazingForm<AmazingFormPropType>: FC = ({
+    onClick,
+    enableErrorChecks,
+    ...props
+}) => {
+    return (
+        <AmazingFormRoot>
+            <AmazingFormFields />
+            <AmazingFormSubmitButton>
+                Submit!
+            </AmazingFormSubmitButton>
+        </AmazingFormRoot>
+    );    
+};
+~~~
+
+## Multiple files
+
+I could not help noticing the listing getting bigger and bigger.
+
+Some of the developers prefer keeping all the accompanying stuff (line style and types declarations) next to the component itself. I tend to disagree with that, because the more complex your component gets, the more code you will have to keep there. And personally I hate files which are more than two screens tall.
+
+So I offer the following file structure:
+
+~~~text
+AmazingForm/
+    index.ts
+    AmazingForm.tsx <-- the component itself goes here
+    styles.ts
+    types.ts
+~~~
+
+The index file `index.ts` is needed to narrow the scope of what I expose to the end user. For instance, if I intend to export only the component itself together with its prop type, my index file will be the following:
+
+~~~typescript
+export { AmazingForm } from './AmazingForm';
+export type { AmazingFormPropType } from './types';
+~~~
+
+## UI and logic separation
+
+useAmazingForm
+
+## forwardRef
+
+...
+
+## Styling
+
+reset + dynamic style function
+
+## Class names
+
+useAmazingFormClassNames + styling example
+
+## Built-in props
+
+margin, padding, width, height
+
