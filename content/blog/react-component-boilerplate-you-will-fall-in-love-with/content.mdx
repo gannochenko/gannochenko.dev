@@ -20,7 +20,7 @@ When I build just another web application after the spec made by designers, I cr
 
 So, I have experimented a lot with different ways, and, eventually, I developed the best (as I see it) component layout. Here it is.
 
-## Must have-s
+## The must have-s
 
 My gear of choice is CSS-in-JS with [Styled-components](https://styled-components.com/) or [Emotion](https://emotion.sh/). It turns quite dull CSS into a fully-featured programming language based on JavaScript. Also please upgrade your React to the one which supports hooks.
 
@@ -76,7 +76,7 @@ The reason for that - an interface provokes use of OOP-ish inheritance, which ca
 👉 All properties of the component should be declared as optional, because the component should gracefully handle situations when it was called without any props.<br />
 👉 A few words regarding naming for the component props. So I have chosen the following agreement:
 
-* all callback and event handler props should start with *&laquo;on&raquo;* prefix (e.g. `onSubmitButtonClick`),
+* name of all callback and event handler props should start with *&laquo;on&raquo;* prefix (e.g. `onSubmitButtonClick`),
 * all render props should start with *&laquo;render&raquo;* prefix (e.g. `renderActionBar`),
 * all react node containing props should be just nouns (e.g. `actionBar`),
 * all feature flag props should start with *&laquo;enable&raquo;* prefix and be set to either `false` or `true` via `defaultProps` (e.g. `enableSubmission`),
@@ -89,8 +89,10 @@ import styled from 'styled-components';
 // //////// Types
 
 type AmazingFormPropType = {
-    onClick?: (event: MouseEvent<HTMLElement>) => void;
-    enableErrorChecks?: boolean;
+    highlighted?: boolean;
+    disabled?: boolean;
+    onSubmitClick?: (event: MouseEvent<HTMLElement>) => void;
+    enableSubmitButton?: boolean;
     // any other props
 } & HTMLDivElement; // I prefer composition to say that all native props are also supported
 
@@ -112,16 +114,20 @@ const AmazingFormSubmitButton = styled.button<AmazingFormSubmitButtonPropType>`
 // //////// Component
 
 export const AmazingForm<AmazingFormPropType>: FC = ({
-    onClick,
-    enableErrorChecks,
+    onSubmitClick,
+    enableSubmitButton,
     ...props
 }) => {
     return (
-        <AmazingFormRoot>
+        <AmazingFormRoot {...props}>
             <AmazingFormFields />
-            <AmazingFormSubmitButton>
-                Submit!
-            </AmazingFormSubmitButton>
+            {
+                enableSubmitButton
+                &&
+                <AmazingFormSubmitButton onClick={onSubmitClick}>
+                    Submit!
+                </AmazingFormSubmitButton>
+            }
         </AmazingFormRoot>
     );    
 };
@@ -131,7 +137,7 @@ export const AmazingForm<AmazingFormPropType>: FC = ({
 
 I could not help noticing the listing getting bigger and bigger.
 
-Some of the developers prefer keeping all the accompanying stuff (line style and types declarations) next to the component itself. I tend to disagree with that, because the more complex your component gets, the more code you will have to keep there. And personally I hate files which are more than two screens tall.
+Some of the developers prefer keeping all the accompanying stuff (like style and types declarations) next to the component itself. I tend to disagree with that, because the more complex your component gets, the more code you will have to keep there. And personally I hate files which are more than two screens tall.
 
 So I offer the following file structure:
 
@@ -143,24 +149,184 @@ AmazingForm/
     types.ts
 ~~~
 
-The index file `index.ts` is needed to narrow the scope of what I expose to the end user. For instance, if I intend to export only the component itself together with its prop type, my index file will be the following:
+The index file `index.ts` is needed to narrow the scope of what I expose to the end user. For instance, if I intend to export only the component itself along with its prop type, my index file will be the following:
 
 ~~~typescript
 export { AmazingForm } from './AmazingForm';
 export type { AmazingFormPropType } from './types';
 ~~~
 
-## UI and logic separation
+## Styling
 
-useAmazingForm
+All the components are being developed in greenhouse conditions. But the thing is, a real project (especially a legacy one) is a much more hostile environment, rather than any Storybook. There may be global CSS that could potentially distort the component appearance.
+That is why I create a helper function to reset at least box-sizing, margin, padding and maybe some of the [inherited CSS properties](https://stackoverflow.com/questions/5612302/which-css-properties-are-inherited):
+
+~~~typescript
+import { css } from 'styled-components';
+
+export const resetCSS = () => css`
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    // something else
+`;
+~~~
+
+And apply the function in styles:
+
+~~~typescript
+import styled from 'styled-components';
+import { AmazingFormPropType, AmazingFormFieldsPropType, AmazingFormSubmitButtonPropType } from './types.ts';
+import { resetCSS } from '../../util/resetCSS';
+
+const AmazingFormRoot = styled.div<AmazingFormPropType>`
+    ${resetCSS};
+    font-size: 1.5rem;
+    // ...
+`;
+const AmazingFormFields = styled.div<AmazingFormFieldsPropType>`
+    ${resetCSS};
+    font-weight: 500;
+    // ...
+`;
+const AmazingFormSubmitButton = styled.button<AmazingFormSubmitButtonPropType>`
+    ${resetCSS};
+    color: #f00;
+    // ...
+`;
+~~~
+
+👉 Props-related CSS. Usually, when it comes to `styled-components`, things become really messy with lots of unreadable figure and square brackets involved. Nevertheless, I have tried to minimize the negative impact by moving everything to a separate helper:
+
+~~~typescript
+import styled, { css } from 'styled-components';
+import { AmazingFormPropType, AmazingFormFieldsPropType, AmazingFormSubmitButtonPropType } from './types.ts';
+import { resetCSS } from '../../util/resetCSS';
+
+const getRootStyle = ({ highlighted, disabled }: AmazingFormPropType) => {
+    let result = {};
+    
+    if (highlighted) {
+        result = css`
+            ${result};
+            border: 1px solid red;
+        `;
+    }
+    
+    if (disabled) {
+        result = css`
+            ${result};
+            opacity: 0.5;
+            pointer-events: none;
+        `;
+    }
+    
+    return result;
+};
+
+const AmazingFormRoot = styled.div<AmazingFormPropType>`
+    ${resetCSS};
+    font-size: 1.5rem;
+    // ...
+    ${getRootStyle};
+`;
+
+// ...
+~~~
+
+👉 When a custom prop falls down to the DOM node, React pollutes the console with a bunch of warnings.
+To prevent this, in `styled-components` there is a helper called `shouldForwardProps`.
+Unfortunately, the thing gets really bulky since the set of props is blacklisted and no rule of a thumb is applicable here:
+
+~~~typescript
+// ...
+
+const rootCustomProps = {
+    highlighted: true,
+    disabled: true,
+};
+
+const AmazingFormRoot = styled.div<AmazingFormPropType>.shouldForwardProps(prop => !(prop in rootCustomProps))`
+    ${resetCSS};
+    font-size: 1.5rem;
+    // ...
+    ${getRootStyle};
+`;
+
+// ...
+~~~
+
+## Visual and logic parts separation
+
+Every components have the UI and &laquo;brains&raquo;. While some of components may have more one than the other, or visa versa, definitely that would be a good idea to decouple it.
+
+So I am gonna put all the logic into a hook called `useAmazingForm` and put into `useAmazingForm.ts` next to the other files.
+
+Doing so I aim to achieve the following:
+
+👉 the logic is decoupled and separated, the UI stays pretty clean and easily perceivable by just glancing at it,<br />
+👉 I prepare props for each visual node, and feed these props via object spread,<br />
+👉 the hook can be maintained and tested separately.
+
+Please also note that the rest props are always forwarded to the root node.
+
+~~~typescript
+import { AmazingFormPropType } from './types.ts';
+
+export const useAmazingForm = ({
+   onSubmitClick,
+   enableSubmitButton,
+   ...props
+}: AmazingFormPropType) => {
+    // put all your logic here: call some useMemo, useEffect or useCallback, or any other custom hook
+    
+    return {
+        rootProps: props,
+        fieldsProps: {  
+        },
+        submitButtonProps: {
+            onClick: onSubmitClick,
+        },
+        
+        enableSubmitButton,
+    };
+};
+~~~
+
+Then I consume the hook in `AmazingForm.tsx`:
+
+~~~typescript jsx
+import { AmazingFormRoot, AmazingFormFields, AmazingFormSubmitButton } from './styles.ts'; 
+import { AmazingFormPropType } from './types.ts';
+import { useAmazingForm } from './useAmazingForm.ts';
+
+export const AmazingForm<AmazingFormPropType>: FC = (props) => {
+    
+    const {
+        rootProps,
+        fieldsProps,
+        submitButtonProps,
+        enableSubmitButton,
+    } = useAmazingForm(props);
+    
+    return (
+        <AmazingFormRoot {...rootProps}>
+            <AmazingFormFields {...fieldsProps} />
+            {
+                enableSubmitButton
+                &&
+                <AmazingFormSubmitButton {...submitButtonProps}>
+                    Submit!
+                </AmazingFormSubmitButton>
+            }
+        </AmazingFormRoot>
+    );    
+};
+~~~
 
 ## forwardRef
 
 ...
-
-## Styling
-
-reset + dynamic style function
 
 ## Class names
 
