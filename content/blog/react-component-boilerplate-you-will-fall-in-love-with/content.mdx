@@ -16,150 +16,124 @@ images:
 
 import { Container } from 'components/Container';
 
-When I build just another web application after the spec made by designers, I create very simple component layouts. The situation drastically changes when building a *design system*, where each component should be reusable and highly sustainable.
+Front-end engineers create dozens of components with relatively short life cycle every month. But building just another web application is one thing, when it comes to reusable components within a unified and sustainable design system, the situation changes drastically.
 
-So, I have experimented a lot with different ways, and, eventually, I developed the best (as I see it) component layout. Here it is.
+While working on a design system, I have experimented a lot, and came up with a quite promising component boilerplate for such occasion. Here it is.
 
-## The must have-s
+TL;DR: codesandbox link here.
 
-My gear of choice is CSS-in-JS with [Styled-components](https://styled-components.com/) or [Emotion](https://emotion.sh/). It turns quite dull CSS into a fully-featured programming language based on JavaScript. Also please upgrade your React to the one which supports hooks.
+## Prerequisites
 
-## The basics
+👉 CSS-in-JS with [Styled-components](https://styled-components.com/) or [Emotion](https://emotion.sh/) for styling. It turns boring CSS into a fully-featured programming language based on JavaScript.<br />
+👉 React that supports hooks.<br />
+👉 TypeScript.
 
-First and foremost, I start with the component shell itself. I choose a function component over a class component, according to the latest trends and best practices. I also refrain from using default exports everywhere, since named exports make future in-IDE refactoring easier:
+## First step
+
+I took a boring sign-in as a today's challenge:
+
+![Signup form](./wireframe.png)
+
+The starter code is a function component, according to the latest trends. I also refrain from using default exports everywhere, since named exports make future in-IDE refactoring easier:
 
 ~~~typescript jsx
 import React, { FC } from 'react';
 
-export const AmazingForm: FC = () => {
+export const SignInForm: FC = () => {
     
 };
 ~~~
 
-## The scope of responsibility
+## File structure
 
-Now every component should have a `scope of responsibility`. It other words, a component is only responsible for what is inside of it, and completely unaware of its siblings or a parent node.
+Some of the developers prefer keeping things like styles and type declarations next to the component itself in the same file. I usually don't do that, because the more complex the component gets, the more code you will have to keep. Several-screens-tall files is not an option for me.
 
-Therefore, there is always a *root node* and some optional sub-nodes in case if the component is a complex one:
-
-~~~typescript jsx
-import React, { FC } from 'react';
-import styled from 'styled-components';
-
-const AmazingFormRoot = styled.div`
-`;
-
-const AmazingFormFields = styled.div`
-`;
-
-const AmazingFormSubmitButton = styled.button`
-`;
-
-export const AmazingForm: FC = () => {
-    return (
-        <AmazingFormRoot>
-            <AmazingFormFields />
-            <AmazingFormSubmitButton>
-                Submit!
-            </AmazingFormSubmitButton>
-        </AmazingFormRoot>
-    );    
-};
-~~~
-
-## The component props
-
-I never ever use `interface` to declare prop types.
-The reason for that - an interface provokes use of OOP-ish inheritance, which can be a real mess. So instead of stepping onto that ground, I stick to *&laquo;prefer composition over inheritance&raquo;* rule and use `type`.
-
-👉 I use `***Type` postfix for types to explicitly indicate the fact that this is not a variable.<br />
-👉 All properties of the component should be declared as optional, because the component should gracefully handle situations when it was called without any props.<br />
-👉 A few words regarding naming for the component props. So I have chosen the following agreement:
-
-* name of all callback and event handler props should start with *&laquo;on&raquo;* prefix (e.g. `onSubmitButtonClick`),
-* all render props should start with *&laquo;render&raquo;* prefix (e.g. `renderActionBar`),
-* all react node containing props should be just nouns (e.g. `actionBar`),
-* all feature flag props should start with *&laquo;enable&raquo;* prefix and be set to either `false` or `true` via `defaultProps` (e.g. `enableSubmission`),
-* I refrain from the negative declarations (e.g. prefer `enableRendering` by default set to `true` over `disableRendering` set to `false`).
-
-~~~typescript jsx
-import React, { FC, MouseEvent } from 'react';
-import styled from 'styled-components';
-
-// //////// Types
-
-type AmazingFormPropType = {
-    highlighted?: boolean;
-    disabled?: boolean;
-    onSubmitClick?: (event: MouseEvent<HTMLElement>) => void;
-    enableSubmitButton?: boolean;
-    // any other props
-} & HTMLDivElement; // I prefer composition to say that all native props are also supported
-
-type AmazingFormFieldsPropType = { /* ... */ } & HTMLDivElement;
-
-type AmazingFormSubmitButtonPropType = { /* ... */ } & HTMLButtonElement;
-
-// //////// Styles
-
-const AmazingFormRoot = styled.div<AmazingFormPropType>`
-`;
-
-const AmazingFormFields = styled.div<AmazingFormFieldsPropType>`
-`;
-
-const AmazingFormSubmitButton = styled.button<AmazingFormSubmitButtonPropType>`
-`;
-
-// //////// Component
-
-export const AmazingForm<AmazingFormPropType>: FC = ({
-    onSubmitClick,
-    enableSubmitButton,
-    ...props
-}) => {
-    return (
-        <AmazingFormRoot {...props}>
-            <AmazingFormFields />
-            {
-                enableSubmitButton
-                &&
-                <AmazingFormSubmitButton onClick={onSubmitClick}>
-                    Submit!
-                </AmazingFormSubmitButton>
-            }
-        </AmazingFormRoot>
-    );    
-};
-~~~
-
-## Multiple files
-
-I could not help noticing the listing getting bigger and bigger.
-
-Some of the developers prefer keeping all the accompanying stuff (like style and types declarations) next to the component itself. I tend to disagree with that, because the more complex your component gets, the more code you will have to keep there. And personally I hate files which are more than two screens tall.
-
-So I offer the following file structure:
+That is why I offer the following file structure:
 
 ~~~text
-AmazingForm/
+SignInForm/
     index.ts
-    AmazingForm.tsx <-- the component itself goes here
+    SignInForm.tsx <-- the component itself goes here
     styles.ts
     types.ts
 ~~~
 
-The index file `index.ts` is needed to narrow the scope of what I expose to the end user. For instance, if I intend to export only the component itself along with its prop type, my index file will be the following:
+Why is there an `index.ts` file?
+
+First of all, this kind of import will work:<br />`import { SignInForm } from './components/SignInForm'`
+
+Secondly, via `index.ts` file I can explicitly tell which part of the component I wish to expose to the end user, like this:
 
 ~~~typescript
-export { AmazingForm } from './AmazingForm';
-export type { AmazingFormPropType } from './types';
+export { SignInForm } from './SignInForm';
+export type { SignInFormPropType } from './types';
+// maybe something else ...
+~~~
+
+## The scope of responsibility
+
+Every component has a `scope of responsibility`. It other words, a component is only responsible for what is inside of it, and completely unaware of its siblings or a parent node.
+
+Therefore, there is always a *root node*:
+
+~~~typescript jsx
+...
+
+export const SignInForm: FC<SignInFormPropType> = () => {
+    return (
+        <SignInFormRoot>
+            <SignInInput />
+            <SignInInput type="password" />
+            <SignInFormSubmitButton>
+                Sign-in
+            </SignInFormSubmitButton>
+        </SignInFormRoot>
+    );    
+};
+
+...
+~~~
+
+## Component props
+
+As you may have already noticed, I used `type`, not `interface` when declaring the typings. While interfaces have their advantages in some way,
+I prefer going with types. This way the paradigm «prefer composition over inheritance» becomes easily feasible through `union`, in contrast with OOP-ish inheritance via `extends` keyword. 
+
+I also
+
+👉 use `Type` postfix for types to explicitly indicate the fact that this is not a variable,<br />
+👉 have all props of the component declared as optional, because the component should gracefully handle situations when it was called without parameters.<br />
+
+It is also nice to have property naming agreements, for example like these ones:
+
+👉 names of all callback props should begin with `on` prefix (e.g. `onSubmitButtonClick`),<br />
+👉 if a property is used as a feature flag, its name should begin with `enable` prefix (like `enablePasswordless`),<br />
+👉 names of all render props should start with `render` prefix (e.g. `renderActionBar`)<br />
+
+...and so on.
+
+It may seem too much in the beginning, but when you build a long-lasting design system and wish to remain consistent, not following the rules quickly starts causing problems.
+
+So, the form props:
+
+~~~typescript jsx
+...
+
+// compose custom props with native ones via union
+type SignInFormPropType = HTMLFormElement & Partial<{
+    loading: boolean;
+    onSubmit: ({ login: string; password: string; }) => void;
+    enablePasswordless: boolean;
+}>;
+
+...
 ~~~
 
 ## Styling
 
-All the components are being developed in greenhouse conditions. But the thing is, a real project (especially a legacy one) is a much more hostile environment, rather than any Storybook. There may be global CSS that could potentially distort the component appearance.
-That is why I create a helper function to reset at least box-sizing, margin, padding and maybe some of the [inherited CSS properties](https://stackoverflow.com/questions/5612302/which-css-properties-are-inherited):
+Normally I develop components in greenhouse conditions somewhere in Storybook. But the thing is, a real project (especially a legacy one) is a much more hostile environment. There may be global CSS defined that could potentially distort the component appearance drastically.
+
+That is why I created a helper function to reset at least box-sizing and margin as well as maybe some of the [inherited CSS properties](https://stackoverflow.com/questions/5612302/which-css-properties-are-inherited):
 
 ~~~typescript
 import { css } from 'styled-components';
@@ -167,100 +141,102 @@ import { css } from 'styled-components';
 export const resetCSS = () => css`
     box-sizing: border-box;
     margin: 0;
-    padding: 0;
-    // something else
 `;
 ~~~
 
 And apply the function in styles:
 
 ~~~typescript
-import styled from 'styled-components';
-import { AmazingFormPropType, AmazingFormFieldsPropType, AmazingFormSubmitButtonPropType } from './types.ts';
-import { resetCSS } from '../../util/resetCSS';
+...
 
-const AmazingFormRoot = styled.div<AmazingFormPropType>`
+const SignInFormRoot = styled.form<SignInFormRootPropType>`
     ${resetCSS};
-    font-size: 1.5rem;
+    padding: 1rem;
+`;
+
+const SignInInput = styled.input<SignInInputPropType>`
+    ${resetCSS};
+    border: 1px solid gray;
+    border-radius: 2px;
     // ...
 `;
-const AmazingFormFields = styled.div<AmazingFormFieldsPropType>`
+
+const SignInFormSubmitButton = styled.button<SignInFormSubmitButtonPropType>`
     ${resetCSS};
-    font-weight: 500;
+    border-radius: 2px;
+    background-color: blue;
+    color: white;
     // ...
 `;
-const AmazingFormSubmitButton = styled.button<AmazingFormSubmitButtonPropType>`
-    ${resetCSS};
-    color: #f00;
-    // ...
-`;
+
+...
 ~~~
 
-👉 Props-related CSS. Usually, when it comes to `styled-components`, things become really messy with lots of unreadable figure and square brackets involved. Nevertheless, I have tried to minimize the negative impact by moving everything to a separate helper:
+## Conditional styles
+
+Usually when it comes to conditional styling with `styled-components`, things turn into unreadable porridge of figure and square brackets very quickly. Nevertheless, I have tried to minimize the negative impact by moving everything to a separate helper:
 
 ~~~typescript
-import styled, { css } from 'styled-components';
-import { AmazingFormPropType, AmazingFormFieldsPropType, AmazingFormSubmitButtonPropType } from './types.ts';
-import { resetCSS } from '../../util/resetCSS';
+...
 
-const getRootStyle = ({ highlighted, disabled }: AmazingFormPropType) => {
+const getRootStyle = ({ loading, disabled }: SignInFormRootPropType) => {
     let result = {};
     
-    if (highlighted) {
+    if (loading) {
         result = css`
             ${result};
-            border: 1px solid red;
+            color: grey;
+            // some other css
         `;
     }
     
     if (disabled) {
         result = css`
             ${result};
-            opacity: 0.5;
-            pointer-events: none;
+            display: none;
+            // some other css
         `;
     }
+    
+    // maybe some other props
     
     return result;
 };
 
-const AmazingFormRoot = styled.div<AmazingFormPropType>`
+const SignInFormRoot = styled.form<SignInFormRootPropType>`
     ${resetCSS};
-    font-size: 1.5rem;
-    // ...
+    padding: 1rem;
     ${getRootStyle};
 `;
 
-// ...
+...
 ~~~
 
-👉 When a custom prop falls down to the DOM node, React pollutes the console with a bunch of warnings.
-To prevent this, in `styled-components` there is a helper called `shouldForwardProps`.
-Unfortunately, the thing gets really bulky since the set of props is blacklisted and no rule of a thumb is applicable here:
+When a custom property goes through the onion of wrappers and lands on the DOM node, React starts polluting the console with a bunch of annoying warnings.
+To prevent this, `styled-components` starting from v5 has a helper called `shouldForwardProps`.
 
 ~~~typescript
 // ...
 
 const rootCustomProps = {
-    highlighted: true,
+    loading: true,
     disabled: true,
 };
 
-const AmazingFormRoot = styled.div<AmazingFormPropType>.shouldForwardProps(prop => !(prop in rootCustomProps))`
+const SignInFormRoot = styled.div<SignInFormRootPropType>.shouldForwardProps(prop => !(prop in rootCustomProps))`
     ${resetCSS};
-    font-size: 1.5rem;
-    // ...
+    padding: 1rem;
     ${getRootStyle};
 `;
 
 // ...
 ~~~
 
-## Visual and logic parts separation
+## View and controller separation
 
 Every components have the UI and &laquo;brains&raquo;. While some of components may have more one than the other, or visa versa, definitely that would be a good idea to decouple it.
 
-So I am gonna put all the logic into a hook called `useAmazingForm` and put into `useAmazingForm.ts` next to the other files.
+So I am gonna put all the logic into a hook called `useSignInForm` and put into `useSignInForm.ts` next to the other files.
 
 Doing so I aim to achieve the following:
 
@@ -271,13 +247,13 @@ Doing so I aim to achieve the following:
 Please also note that the rest props are always forwarded to the root node.
 
 ~~~typescript
-import { AmazingFormPropType } from './types.ts';
+import { SignInFormPropType } from './types.ts';
 
-export const useAmazingForm = ({
+export const useSignInForm = ({
    onSubmitClick,
    enableSubmitButton,
    ...props
-}: AmazingFormPropType) => {
+}: SignInFormPropType) => {
     // put all your logic here: call some useMemo, useEffect or useCallback, or any other custom hook
     
     return {
@@ -293,33 +269,33 @@ export const useAmazingForm = ({
 };
 ~~~
 
-Then I consume the hook in `AmazingForm.tsx`:
+Then I consume the hook in `SignInForm.tsx`:
 
 ~~~typescript jsx
-import { AmazingFormRoot, AmazingFormFields, AmazingFormSubmitButton } from './styles.ts'; 
-import { AmazingFormPropType } from './types.ts';
-import { useAmazingForm } from './useAmazingForm.ts';
+import { SignInFormRoot, SignInFormFields, SignInFormSubmitButton } from './styles.ts'; 
+import { SignInFormPropType } from './types.ts';
+import { useSignInForm } from './useSignInForm.ts';
 
-export const AmazingForm<AmazingFormPropType>: FC = (props) => {
+export const SignInForm<SignInFormPropType>: FC = (props) => {
     
     const {
         rootProps,
         fieldsProps,
         submitButtonProps,
         enableSubmitButton,
-    } = useAmazingForm(props);
+    } = useSignInForm(props);
     
     return (
-        <AmazingFormRoot {...rootProps}>
-            <AmazingFormFields {...fieldsProps} />
+        <SignInFormRoot {...rootProps}>
+            <SignInFormFields {...fieldsProps} />
             {
                 enableSubmitButton
                 &&
-                <AmazingFormSubmitButton {...submitButtonProps}>
+                <SignInFormSubmitButton {...submitButtonProps}>
                     Submit!
-                </AmazingFormSubmitButton>
+                </SignInFormSubmitButton>
             }
-        </AmazingFormRoot>
+        </SignInFormRoot>
     );    
 };
 ~~~
@@ -330,7 +306,7 @@ export const AmazingForm<AmazingFormPropType>: FC = (props) => {
 
 ## Class names
 
-useAmazingFormClassNames + styling example
+useSignInFormClassNames + styling example
 
 ## Built-in props
 
