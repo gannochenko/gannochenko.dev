@@ -34,7 +34,7 @@ So,
 
 ## Prerequisites
 
-👉 CSS-in-JS with [Styled-components](https://styled-components.com/) or [Emotion](https://emotion.sh/) for styling. It turns boring CSS into a fully-featured programming language based on JavaScript.<br />
+👉 CSS-in-JS with [Styled-components](https://styled-components.com/) or [Emotion](https://emotion.sh/) for styling. It turns boring CSS into a fully-featured programming language based on JavaScript, so cool.<br />
 👉 React that supports hooks.<br />
 👉 TypeScript.
 
@@ -84,7 +84,7 @@ export type { SignInFormPropType } from './types';
 
 Every component has a `scope of responsibility`. It other words, a component is only responsible for what is inside of it, and completely unaware of its siblings or a parent node.
 
-Therefore, there is always a *root node*:
+There is always a *root node*:
 
 ~~~typescript jsx
 ...
@@ -98,7 +98,7 @@ export const SignInForm: FC<SignInFormPropType> = () => {
                 Sign-in
             </SignInFormSubmitButton>
         </SignInFormRoot>
-    );    
+    );
 };
 
 ...
@@ -107,12 +107,12 @@ export const SignInForm: FC<SignInFormPropType> = () => {
 ## Component props
 
 As you may have already noticed, I used `type`, not `interface` when declaring the typings. While interfaces have their advantages in some way,
-I prefer going with types. This way the paradigm «prefer composition over inheritance» becomes easily feasible through `union`, in contrast with OOP-ish inheritance via `extends` keyword. 
+I prefer going with types. This way the paradigm «prefer composition over inheritance» becomes easily feasible through `union`, unlike the OOP-ish inheritance via `extends` keyword. 
 
 I also
 
 👉 use `Type` postfix for types to explicitly indicate the fact that this is not a variable,<br />
-👉 have all props of the component declared as optional, because the component should gracefully handle situations when it was called without parameters.<br />
+👉 have all props optional, because the component should gracefully handle situations when it was called without parameters.<br />
 
 It is also nice to have property naming agreements, for example like these ones:
 
@@ -124,7 +124,7 @@ It is also nice to have property naming agreements, for example like these ones:
 
 It may seem too much in the beginning, but when you build a long-lasting design system and wish to remain consistent, not following the rules quickly starts causing problems.
 
-So, the form props:
+So, the props could be:
 
 ~~~typescript jsx
 ...
@@ -141,7 +141,7 @@ type SignInFormPropType = HTMLFormElement & Partial<{
 
 ## Styling
 
-Normally I develop components in greenhouse conditions somewhere in Storybook. But the thing is, a real project (especially a legacy one) is a much more hostile environment. There may be global CSS defined that could potentially distort the component appearance drastically.
+Normally I develop components in greenhouse conditions somewhere in Storybook. But the thing is, real projects (especially legacy ones) provide a much more &laquo;hostile&raquo; environment, since there may be global CSS defined that could potentially distort appearance of the component drastically.
 
 That is why I created a helper function to reset at least box-sizing and margin as well as maybe some of the [inherited CSS properties](https://stackoverflow.com/questions/5612302/which-css-properties-are-inherited):
 
@@ -228,6 +228,7 @@ To prevent this, `styled-components` starting from v5 has a helper called `shoul
 ~~~typescript
 // ...
 
+// all unwanted custom props should be blacklisted
 const rootCustomProps = {
     loading: true,
     disabled: true,
@@ -244,37 +245,49 @@ const SignInFormRoot = styled.div<SignInFormRootPropType>.shouldForwardProps(pro
 
 ## View and controller separation
 
-Every components have the UI and &laquo;brains&raquo;. While some of components may have more one than the other, or visa versa, definitely that would be a good idea to decouple it.
+Now the cool part comes out!
 
-So I am gonna put all the logic into a hook called `useSignInForm` and put into `useSignInForm.ts` next to the other files.
+Back in early days logic and view (UI) of a component were mixed together in a class. Then there was that concept of smart and dumb components.
+When hooks came on stage, it became really easy to decouple logic from UI, by creating custom hooks.
 
-Doing so I aim to achieve the following:
+So, following this pattern, I am gonna put all the logic into a hook called `useSignInForm` and put into `useSignInForm.ts` next to the other files.
+UI stays pretty clean and easily perceivable by just quickly glancing on it.
 
-👉 the logic is decoupled and separated, the UI stays pretty clean and easily perceivable by just glancing at it,<br />
-👉 I prepare props for each visual node, and feed these props via object spread,<br />
-👉 the hook can be maintained and tested separately.
-
-Please also note that the rest props are always forwarded to the root node.
+The result of the hook is a structure that contains props forwarded to the UI elements.
 
 ~~~typescript
 import { SignInFormPropType } from './types.ts';
 
 export const useSignInForm = ({
-   onSubmitClick,
-   enableSubmitButton,
+   loading,
+   onSubmit,
+   enablePasswordless,
    ...props
 }: SignInFormPropType) => {
     // put all your logic here: call some useMemo, useEffect or useCallback, or any other custom hook
-    
+    // ...
+
+    // for example,
+    const onSubmitClick = useCallback(() => {
+        onSubmit({ login, password }); // take from local state updated by callbacks for inputs
+    }, [onSubmit, login, password]);
+
     return {
-        rootProps: props,
-        fieldsProps: {  
+        rootProps: props, // the rest props are always forwarded to the root node
+        loginInputProps: {
+            disabled: loading,
+            onChange: onLoginInputChange, // defined somewhere above
+        },
+        passwordInputProps: {
+            type: 'password',
+            disabled: loading,
+            onChange: onPasswordInputChange, // defined somewhere above
         },
         submitButtonProps: {
             onClick: onSubmitClick,
+            disabled: loading,
         },
-        
-        enableSubmitButton,
+        showPasswordField: !enablePasswordless,
     };
 };
 ~~~
@@ -282,31 +295,33 @@ export const useSignInForm = ({
 Then I consume the hook in `SignInForm.tsx`:
 
 ~~~typescript jsx
-import { SignInFormRoot, SignInFormFields, SignInFormSubmitButton } from './styles.ts'; 
-import { SignInFormPropType } from './types.ts';
+...
+
 import { useSignInForm } from './useSignInForm.ts';
 
-export const SignInForm<SignInFormPropType>: FC = (props) => {
-    
+export const SignInForm: FC<SignInFormPropType> = (props) => {
+
     const {
         rootProps,
-        fieldsProps,
+        loginInputProps,
+        passwordInputProps,
         submitButtonProps,
-        enableSubmitButton,
+        showPasswordField
     } = useSignInForm(props);
-    
+
     return (
         <SignInFormRoot {...rootProps}>
-            <SignInFormFields {...fieldsProps} />
+            <SignInInput {...loginInputProps} />
             {
-                enableSubmitButton
+                showPasswordField
                 &&
-                <SignInFormSubmitButton {...submitButtonProps}>
-                    Submit!
-                </SignInFormSubmitButton>
+                <SignInInput {...passwordInputProps} />
             }
+            <SignInFormSubmitButton {...submitButtonProps}>
+                Sign-in
+            </SignInFormSubmitButton>
         </SignInFormRoot>
-    );    
+    );
 };
 ~~~
 
