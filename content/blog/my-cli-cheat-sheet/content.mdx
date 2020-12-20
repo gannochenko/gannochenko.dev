@@ -48,24 +48,38 @@ git clean -fX
 
 ```bash
 # get all remote tags
-git fetch --all --tags;
+git fetch --all --tags
 # kill remote tag
-git push --delete origin v1.2.0;
+git push --delete origin v1.2.0
 # kill local tag
-git tag -d v1.2.0;
+git tag -d v1.2.0
 ```
 
 ## Bash
 
 ```bash
 # parametrized alias
-alias dssh='function __sampleAlias(){ docker exec -it $1 /bin/bash; };__sampleAlias';
+alias dssh='function __sampleAlias(){ docker exec -it $1 /bin/bash; };__sampleAlias'
 # launch chrome from the command line in Mac
-alias chrome="/Applications/Google\\ \\Chrome.app/Contents/MacOS/Google\\ \\Chrome";
+alias chrome="/Applications/Google\\ \\Chrome.app/Contents/MacOS/Google\\ \\Chrome"
 # get console command by its PID
-ps -p [PID] -o args;
+ps -p [PID] -o args
 # find where a binary is installed
 which [CLI_COMMAND]
+# list all files sorting by date, human readable size
+ls -ltah
+# ... or reverse
+ls -ltahr
+# ... or by size
+ls -lSah
+# ... or by size reverse
+ls -lSahr
+# copy a file from a remote host 123.123.123.123 over ssh working on port 55332
+scp -P 55332 admin@123.123.123.123:/home/remote/path/to/file.gz ./
+# zip a folder
+zip -r folder.zip folder/
+# un-gz an archive
+gunzip archive.gz
 ```
 
 ## Yarn
