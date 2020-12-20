@@ -20,7 +20,17 @@ Front-end engineers create dozens of components with relatively short life cycle
 
 While working on a design system, I have experimented a lot, and came up with a quite promising component boilerplate for such occasion. Here it is.
 
-TL;DR: codesandbox link here.
+### TL;DR
+
+Codesandbox link here.
+
+A boilerplate generator:
+
+~~~bash
+npx @generilla/cli run https://github.com/gannochenko/generators/tree/master/machine
+~~~
+
+So,
 
 ## Prerequisites
 
@@ -212,7 +222,7 @@ const SignInFormRoot = styled.form<SignInFormRootPropType>`
 ...
 ~~~
 
-When a custom property goes through the onion of wrappers and lands on the DOM node, React starts polluting the console with a bunch of annoying warnings.
+When a custom property goes through a cabbage of wrappers and lands on the DOM node, React starts polluting the console with a bunch of annoying warnings.
 To prevent this, `styled-components` starting from v5 has a helper called `shouldForwardProps`.
 
 ~~~typescript
