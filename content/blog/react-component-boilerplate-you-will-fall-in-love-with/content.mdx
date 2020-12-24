@@ -1,8 +1,8 @@
 ---
-title: "One immersive React component boilerplate I am eager to share with you"
+title: "One highly reusable and immersive React component boilerplate for your design system"
 description: Dont forget to write good description
 keywords: sex, drugs, rocknroll
-path: "/blog/react-component-boilerplate-you-will-fall-in-love-with-"
+path: "/blog/one-highly-reusable-and-immersive-react-component-boilerplate-for-your-design-system-"
 date: 2020-12-12
 published: false
 images:
@@ -16,13 +16,13 @@ images:
 
 import { Container } from 'components/Container';
 
-Front-end engineers create dozens of components with relatively short life cycle every month. But building just another web application is one thing, when it comes to reusable components within a unified and sustainable design system, the situation changes drastically.
+Front-end engineers create dozens of components every week. Building just another web application is one thing, but when it comes to reusable components within a unified and sustainable design system, the situation changes drastically.
 
 While working on a design system, I have experimented a lot, and came up with a quite promising component boilerplate for such occasion. Here it is.
 
 ### TL;DR
 
-Codesandbox link here.
+[Codesandbox here](https://codesandbox.io/s/green-snowflake-nih5j?file=/src/App.js).
 
 A boilerplate generator:
 
@@ -44,21 +44,24 @@ I took a boring sign-in as a today's challenge:
 
 ![Signup form](./wireframe.png)
 
-The starter code is a function component, according to the latest trends. I also refrain from using default exports everywhere, since named exports make future in-IDE refactoring easier:
+The starter code is a function component, according to the latest trends.
+I also refrain from using default exports, since named exports make in-IDE refactoring easier in the future:
 
 ~~~typescript jsx
 import React, { FC } from 'react';
 
 export const SignInForm: FC = () => {
-    
+    return null;
 };
 ~~~
 
 ## File structure
 
-Many developers prefer keeping styles and type declarations next to the component itself in the same file. I usually don't do that, because the more complex the component gets, the more code you will have to keep. Several-screens-tall files is not an option for me.
+Many developers prefer keeping styles and type declarations next to the component itself.
+I usually don't do that, because the more complex the component gets, the more code I will have to co-locate in one file.
+Several-screens-tall file is difficult to maintain and comprehend.
 
-That is why I offer the following file structure:
+That is why in my projects I propose the following file structure:
 
 ~~~text
 SignInForm/
@@ -68,11 +71,11 @@ SignInForm/
     types.ts
 ~~~
 
-Why is there an `index.ts` file?
+Why `index.ts` file?
 
 First of all, this kind of import will work:<br />`import { SignInForm } from './components/SignInForm'`
 
-Secondly, via `index.ts` file I can explicitly tell which part of the component I wish to expose to the end user, like this:
+Secondly, via `index.ts` file I can explicitly tell which part of the component I wish to expose to the end user:
 
 ~~~typescript
 export { SignInForm } from './SignInForm';
@@ -84,22 +87,26 @@ export type { SignInFormPropType } from './types';
 
 Every component has a `scope of responsibility`. It other words, a component is only responsible for what is inside of it, and completely unaware of its siblings or a parent node.
 
-There is always a *root node*:
-
 ~~~typescript jsx
 ...
 
-export const SignInForm: FC<SignInFormPropType> = () => {
-    return (
-        <SignInFormRoot>
-            <SignInInput />
-            <SignInInput type="password" />
-            <SignInFormSubmitButton>
-                Sign-in
-            </SignInFormSubmitButton>
-        </SignInFormRoot>
-    );
-};
+import React, { forwardRef, FC } from 'react';
+
+export const SignInForm: FC = forwardRef(
+    function SignInForm(props, ref) {
+        // every component should have a root node
+        // also,I am forwarding ref to the root node
+        return (
+            <SignInFormRoot ref={ref}>
+                <SignInInput />
+                <SignInInput type="password" />
+                <SignInFormSubmitButton>
+                    Sign-in
+                </SignInFormSubmitButton>
+            </SignInFormRoot>
+        );
+    }
+);
 
 ...
 ~~~
@@ -117,7 +124,7 @@ I also
 It is also nice to have property naming agreements, for example like these ones:
 
 👉 names of all callback props should begin with `on` prefix (e.g. `onSubmitButtonClick`),<br />
-👉 if a property is used as a feature flag, its name should begin with `enable` prefix (like `enablePasswordless`),<br />
+👉 if a property is used as a feature flag, its name should begin with `enable` prefix (like `enablePasswordLess`),<br />
 👉 names of all render props should start with `render` prefix (e.g. `renderActionBar`)<br />
 
 ...and so on.
@@ -127,59 +134,70 @@ It may seem too much in the beginning, but when you build a long-lasting design 
 So, the props could be:
 
 ~~~typescript jsx
-...
+type ObjectLiteralType<V = any> = { [k: string]: V };
 
-// compose custom props with native ones via union
-type SignInFormPropType = HTMLFormElement & Partial<{
-    loading: boolean;
-    onSubmit: ({ login: string; password: string; }) => void;
-    enablePasswordless: boolean;
-}>;
+type ThemeType = {}; // replace this with your own theme type
 
-...
+type StylePropType = {
+    theme: ThemeType;
+};
+
+export type SignInFormPropType =
+    // first, take all native props for a desired type of DOM node
+    HTMLFormElement &
+    // declare all custom props here
+    Partial<{
+      loading: boolean;
+      onSubmit: (result: { login: string; password: string }) => void;
+      enablePasswordLess: boolean;
+    }> &
+    // allow any other custom props, like data- props to pass as well
+    ObjectLiteralType;
+
+export type SignInFormRootPropType = StylePropType & SignInFormPropType;
+
+export type SignInFormInputPropType = StylePropType & ObjectLiteralType;
+
+export type SignInFormSubmitButtonPropType = StylePropType & ObjectLiteralType;
 ~~~
 
 ## Styling
 
-Normally I develop components in greenhouse conditions somewhere in Storybook. But the thing is, real projects (especially legacy ones) provide a much more &laquo;hostile&raquo; environment, since there may be global CSS defined that could potentially distort appearance of the component drastically.
+Normally I develop components in greenhouse conditions somewhere in Storybook.
+But the thing is, real projects (especially legacy ones) provide a much more &laquo;hostile&raquo; environment,
+since there may be global CSS defined that could potentially distort appearance of the component drastically.
 
-That is why I created a helper function to reset at least box-sizing and margin as well as maybe some of the [inherited CSS properties](https://stackoverflow.com/questions/5612302/which-css-properties-are-inherited):
+That is why I created a helper function to reset at least box-sizing and margin as well as maybe
+some of the [inherited CSS properties](https://stackoverflow.com/questions/5612302/which-css-properties-are-inherited).
 
 ~~~typescript
-import { css } from 'styled-components';
+import styled, { css } from 'styled-components';
+import { SignInFormRootPropType, SignInFormInputPropType, SignInFormSubmitButtonPropType } from './types';
 
-export const resetCSS = () => css`
+export const getResetStyle = () => css`
     box-sizing: border-box;
     margin: 0;
 `;
-~~~
 
-And apply the function in styles:
-
-~~~typescript
-...
-
-const SignInFormRoot = styled.form<SignInFormRootPropType>`
-    ${resetCSS};
+export const SignInFormRoot = styled.form<SignInFormRootPropType>`
+    ${getResetStyle};
     padding: 1rem;
 `;
 
-const SignInInput = styled.input<SignInInputPropType>`
-    ${resetCSS};
+export const SignInInput = styled.input<SignInFormInputPropType>`
+    ${getResetStyle};
     border: 1px solid gray;
     border-radius: 2px;
     // ...
 `;
 
-const SignInFormSubmitButton = styled.button<SignInFormSubmitButtonPropType>`
-    ${resetCSS};
+export const SignInFormSubmitButton = styled.button<SignInFormSubmitButtonPropType>`
+    ${getResetStyle};
     border-radius: 2px;
     background-color: blue;
     color: white;
     // ...
 `;
-
-...
 ~~~
 
 ## Conditional styles
@@ -213,8 +231,8 @@ const getRootStyle = ({ loading, disabled }: SignInFormRootPropType) => {
     return result;
 };
 
-const SignInFormRoot = styled.form<SignInFormRootPropType>`
-    ${resetCSS};
+export const SignInFormRoot = styled.form<SignInFormRootPropType>`
+    ${getResetStyle};
     padding: 1rem;
     ${getRootStyle};
 `;
@@ -222,20 +240,22 @@ const SignInFormRoot = styled.form<SignInFormRootPropType>`
 ...
 ~~~
 
-When a custom property goes through a cabbage of wrappers and lands on the DOM node, React starts polluting the console with a bunch of annoying warnings.
-To prevent this, `styled-components` starting from v5 has a helper called `shouldForwardProps`.
+When a custom property goes through a cabbage of wrappers and lands on the DOM node, React starts polluting the console with a bunch of annoying warnings like &laquo;Warning: React does not recognize the `loading` prop on a DOM element. Blah, blah...&raquo;
+To prevent this, `styled-components` starting from v5 has a helper called `shouldForwardProp`.
 
 ~~~typescript
 // ...
 
 // all unwanted custom props should be blacklisted
-const rootCustomProps = {
+const customProps = {
     loading: true,
     disabled: true,
 };
 
-const SignInFormRoot = styled.div<SignInFormRootPropType>.shouldForwardProps(prop => !(prop in rootCustomProps))`
-    ${resetCSS};
+export const SignInFormRoot = styled.div.withConfig({
+    shouldForwardProp: prop => !(prop in customProps),
+})<SignInFormRootPropType>`
+    ${getResetStyle};
     padding: 1rem;
     ${getRootStyle};
 `;
@@ -245,25 +265,30 @@ const SignInFormRoot = styled.div<SignInFormRootPropType>.shouldForwardProps(pro
 
 ## View and controller separation
 
-Now the cool part comes out!
+Now comes the cool part!
 
-Back in early days logic and view (UI) of a component were mixed together in a class. Then there was that concept of smart and dumb components.
-When hooks came on stage, it became really easy to decouple logic from UI, by creating custom hooks.
+Back in early days the controller and the view (UI) of a component were sort of fused together within a *class component*.
+Some tried to abuse inheritance, others came up with that &laquo;concept of smart and dumb components&raquo;. None of it really worked out well.
+With react hooks it became really easy to decouple the code.
 
-So, following this pattern, I am gonna put all the logic into a hook called `useSignInForm` and put into `useSignInForm.ts` next to the other files.
-UI stays pretty clean and easily perceivable by just quickly glancing on it.
+I am gonna put all the logic into a hook `useSignInForm` located in a separate file.
+UI stays pretty clean and easily perceivable by just quick glancing at.
 
 The result of the hook is a structure that contains props forwarded to the UI elements.
 
 ~~~typescript
-import { SignInFormPropType } from './types.ts';
+import { Ref, useCallback } from 'react';
+import { SignInFormPropType } from './types';
 
-export const useSignInForm = ({
-   loading,
-   onSubmit,
-   enablePasswordless,
-   ...props
-}: SignInFormPropType) => {
+export const useSignInForm = (
+    ref: Ref<unknown>,
+    {
+        loading,
+        onSubmit,
+        enablePasswordLess,
+        ...props
+    }: SignInFormPropType
+) => {
     // put all your logic here: call some useMemo, useEffect or useCallback, or any other custom hook
     // ...
 
@@ -273,7 +298,10 @@ export const useSignInForm = ({
     }, [onSubmit, login, password]);
 
     return {
-        rootProps: props, // the rest props are always forwarded to the root node
+        rootProps: {
+            ...props, // rest props go to the root node, as before
+            ref, // same for the ref
+        },
         loginInputProps: {
             disabled: loading,
             onChange: onLoginInputChange, // defined somewhere above
@@ -287,7 +315,7 @@ export const useSignInForm = ({
             onClick: onSubmitClick,
             disabled: loading,
         },
-        showPasswordField: !enablePasswordless,
+        showPasswordInput: !enablePasswordLess,
     };
 };
 ~~~
@@ -297,43 +325,223 @@ Then I consume the hook in `SignInForm.tsx`:
 ~~~typescript jsx
 ...
 
-import { useSignInForm } from './useSignInForm.ts';
+import { useSignInForm } from './hooks/useSignInForm.ts';
 
-export const SignInForm: FC<SignInFormPropType> = (props) => {
+export const SignInForm: FC<SignInFormPropType> = forwardRef(
+    function SignInForm(props, ref) {
 
-    const {
-        rootProps,
-        loginInputProps,
-        passwordInputProps,
-        submitButtonProps,
-        showPasswordField
-    } = useSignInForm(props);
+        const {
+            rootProps,
+            loginInputProps,
+            passwordInputProps,
+            submitButtonProps,
+            showPasswordInput
+        } = useSignInForm(ref, props);
 
-    return (
-        <SignInFormRoot {...rootProps}>
-            <SignInInput {...loginInputProps} />
-            {
-                showPasswordField
-                &&
-                <SignInInput {...passwordInputProps} />
-            }
-            <SignInFormSubmitButton {...submitButtonProps}>
-                Sign-in
-            </SignInFormSubmitButton>
-        </SignInFormRoot>
-    );
-};
+        return (
+            <SignInFormRoot {...rootProps}>
+                <SignInInput {...loginInputProps} />
+                {
+                    showPasswordInput
+                    &&
+                    <SignInInput {...passwordInputProps} />
+                }
+                <SignInFormSubmitButton {...submitButtonProps}>
+                    Sign-in
+                </SignInFormSubmitButton>
+            </SignInFormRoot>
+        );
+    }
+);
 ~~~
-
-## forwardRef
-
-...
 
 ## Class names
 
-useSignInFormClassNames + styling example
+There should be a way to customise not only the root node, but also all inner nodes.
+One of the options could be to define class names to address the nodes via `styled`.
 
-## Built-in props
+The format of a class name could be different, I personally prefer `BEM` (e.g. `SignInForm-Input--disabled`).
 
-margin, padding, width, height
+So first of all, I define a custom hook:
 
+~~~typescript
+import { useMemo } from 'react';
+
+const makeClassName = (blockName: string, elementName = 'Root', modifier?: string) => 
+    `${blockName}-${elementName}${modifier ? `--${modifier}` : ''}`;
+
+export const useSignInFormClassNames = (
+    componentName: string,
+    className: string,
+) => useMemo(() => ({
+    Root: `${className} ${makeClassName(componentName)}`,
+    LoginInput: makeClassName(componentName, 'LoginInput'),
+    PasswordInput: makeClassName(componentName, 'PasswordInput'),
+    SubmitButton: makeClassName(componentName, 'SubmitButton'),
+}), [ componentName, className ]);
+~~~
+
+Then I consume the hook right next to the first one:
+
+~~~typescript jsx
+import { useSignInFormClassNames } from './hooks/useSignInFormClassNames';
+
+export const SignInForm: FC<SignInFormPropType> = forwardRef(
+    function SignInForm({ className, ...props}, ref) {
+
+        const {
+            rootProps,
+            loginInputProps,
+            passwordInputProps,
+            submitButtonProps,
+            showPasswordInput
+        } = useSignInForm(ref, props);
+
+        const classNames = useSignInFormClassNames('SignInForm', className);
+
+        return (
+            <SignInFormRoot 
+                {...rootProps}
+                className={classNames.Root}
+            >
+                <SignInInput
+                    {...loginInputProps}
+                    className={classNames.LoginInput}
+                />
+                {
+                    showPasswordInput
+                    &&
+                    <SignInInput
+                        {...passwordInputProps}
+                        className={classNames.PasswordInput}
+                    />
+                }
+                <SignInFormSubmitButton
+                    {...submitButtonProps}
+                    className={classNames.SubmitButton}
+                >
+                    Sign-in
+                </SignInFormSubmitButton>
+            </SignInFormRoot>
+        );
+    }
+);
+~~~
+
+If this is done, the customization works like this:
+
+~~~typescript
+const CustomSignInForm = styled(SignInForm)`
+    color: red;
+    .SignInForm-Input {
+        border-radius: 4px;
+    }
+    .SignInForm-SubmitButton {
+        color: white;
+    }
+`;
+~~~
+
+## Atomic props
+
+In general I would not go with this too far. Atomic props introduce additional computation, sometimes unnecessary.
+Nevertheless, sometimes it make sense to have at least `margin`, `padding`, `width`, `height` defined as atomic.
+
+Margin props could look somewhat like this:
+
+~~~typescript
+import { css } from 'styled-components';
+
+export type ScalarType = string | number;
+
+export type MarginPropType = Partial<{
+    margin: ScalarType;
+    marginTop: ScalarType;
+    marginBottom: ScalarType;
+    marginLeft: ScalarType;
+    marginRight: ScalarType;
+}>;
+
+const getValue = (value?: ScalarType) => {
+    if (typeof value === 'string') {
+        return value;
+    }
+
+    // in case of number, can do something fun here,
+    // like converting spacing unit to pixels, or pixels to rem
+    return value;
+};
+
+const getStyleFor = (property: string, value?: ScalarType) => 
+    value !== undefined ? `${property}: ${getValue(value)};` : '';
+
+export const getMarginStyle = ({
+    margin,
+    marginTop,
+    marginBottom,
+    marginLeft,
+    marginRight,
+}: MarginPropType) => css`
+    ${getStyleFor('margin', margin)}
+    ${getStyleFor('margin-top', marginTop)}
+    ${getStyleFor('margin-bottom', marginBottom)}
+    ${getStyleFor('margin-left', marginLeft)}
+    ${getStyleFor('margin-right', marginRight)}
+`;
+~~~
+
+Then plug the mixin into the component.
+
+To styles:
+
+~~~typescript
+import { getMarginStyle } from '../../utils/getMarginStyle';
+
+const SignInFormRoot = styled.div.withConfig({
+    shouldForwardProp: prop => !(prop in customProps),
+})<SignInFormRootPropType>`
+    ${getResetStyle};
+    padding: 1rem;
+    ${getRootStyle};
+    ${getMarginStyle}; // <-- injected here
+`;
+~~~
+
+To types:
+
+~~~typescript
+import { MarginPropType } from '../style/getMarginStyle';
+
+type SignInFormPropType =
+    HTMLFormElement & 
+    Partial<{
+        loading: boolean;
+        onSubmit: ({ login: string; password: string; }) => void;
+        enablePasswordLess: boolean;
+    }> &
+    MarginPropType & // <-- injected here
+    ObjectLiteralType;
+~~~
+
+When this is done, the atomic props become available:
+
+~~~typescript jsx
+<SignInForm marginTop="10px" marginLeft="2rem" />
+~~~
+
+## Prop types
+
+Sometimes when building a reusable component written in `TypeScript`, it is easy to forget, that a component can be used in a project written in plain `JavaScript`.
+`PropTypes` can be a big deal of help in this case, acting as a drop-in replacement for TS types. Also, `PropTypes` do *runtime* prop validation, whereas TS types only do *static code analysis* (which is sufficient in most of the cases though).
+
+## Default props
+
+Default props is a nice addition when you want to have some props set to something else than *undefined*.
+
+~~~typescript
+...
+
+SignInForm.defaultProps = {
+  onSubmit: () => {}
+};
+~~~

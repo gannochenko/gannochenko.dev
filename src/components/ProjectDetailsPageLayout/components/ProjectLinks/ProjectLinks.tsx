@@ -5,6 +5,7 @@ import { backgroundCover, colorLynch, foregroundColor } from '@gannochenko/etc';
 
 const githubLogo = require('./github.png') as string;
 const poolIcon = require('./pool.svg') as string;
+const dockerIcon = require('./docker.png') as string;
 
 const ProjectLinksRoot = styled(Container)`
     margin-bottom: 5rem;
@@ -33,11 +34,13 @@ const ProjectLinksGithubLogo = styled.div<{ logo: string }>`
 type ProjectLinksPropsType = {
     source?: string;
     article?: string;
+    dockerhub?: string;
 };
 
 export const ProjectLinks: FC<ProjectLinksPropsType> = ({
     source,
     article,
+    dockerhub,
 }) => {
     return (
         <ProjectLinksRoot>
@@ -55,6 +58,16 @@ export const ProjectLinks: FC<ProjectLinksPropsType> = ({
                 <ProjectLinksLink href={article}>
                     <ProjectLinksGithubLogo logo={poolIcon} />
                     Howto article
+                </ProjectLinksLink>
+            )}
+            {!!dockerhub && (
+                <ProjectLinksLink
+                    href={dockerhub}
+                    target="_blank"
+                    rel="noreferrer nofollower"
+                >
+                    <ProjectLinksGithubLogo logo={dockerIcon} />
+                    Docker Image
                 </ProjectLinksLink>
             )}
         </ProjectLinksRoot>
