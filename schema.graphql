@@ -1244,6 +1244,7 @@ enum FileFieldsEnum {
     childMdx___fileAbsolutePath
     childMdx___frontmatter___title
     childMdx___frontmatter___description
+    childMdx___frontmatter___preview
     childMdx___frontmatter___keywords
     childMdx___frontmatter___path
     childMdx___frontmatter___date
@@ -1254,7 +1255,6 @@ enum FileFieldsEnum {
     childMdx___frontmatter___images___source
     childMdx___frontmatter___images___is_cover
     childMdx___frontmatter___images___galleryId
-    childMdx___frontmatter___preview
     childMdx___body
     childMdx___excerpt
         @deprecated(
@@ -3028,6 +3028,7 @@ enum MdxFieldsEnum {
     fileAbsolutePath
     frontmatter___title
     frontmatter___description
+    frontmatter___preview
     frontmatter___keywords
     frontmatter___path
     frontmatter___date
@@ -3074,7 +3075,6 @@ enum MdxFieldsEnum {
     frontmatter___images___source
     frontmatter___images___is_cover
     frontmatter___images___galleryId
-    frontmatter___preview
     body
     excerpt
         @deprecated(
@@ -3487,6 +3487,7 @@ input MdxFilterInput {
 type MdxFrontmatter {
     title: String!
     description: String
+    preview: String
     keywords: String
     path: String
     date(
@@ -3516,18 +3517,17 @@ type MdxFrontmatter {
     ): Date
     published: Boolean
     images: [MdxFrontmatterImages]
-    preview: String
 }
 
 input MdxFrontmatterFilterInput {
     title: StringQueryOperatorInput
     description: StringQueryOperatorInput
+    preview: StringQueryOperatorInput
     keywords: StringQueryOperatorInput
     path: StringQueryOperatorInput
     date: DateQueryOperatorInput
     published: BooleanQueryOperatorInput
     images: MdxFrontmatterImagesFilterListInput
-    preview: StringQueryOperatorInput
 }
 
 type MdxFrontmatterImages {
@@ -4458,8 +4458,6 @@ enum SitePageFieldsEnum {
     pluginCreator___pluginOptions___plugins___version
     pluginCreator___pluginOptions___plugins___browserAPIs
     pluginCreator___pluginOptions___plugins___pluginFilepath
-    pluginCreator___pluginOptions___fonts
-    pluginCreator___pluginOptions___display
     pluginCreator___pluginOptions___name
     pluginCreator___pluginOptions___path
     pluginCreator___pluginOptions___extensions
@@ -4472,6 +4470,7 @@ enum SitePageFieldsEnum {
     pluginCreator___pluginOptions___start_url
     pluginCreator___pluginOptions___background_color
     pluginCreator___pluginOptions___theme_color
+    pluginCreator___pluginOptions___display
     pluginCreator___pluginOptions___categories
     pluginCreator___pluginOptions___icon
     pluginCreator___pluginOptions___cache_busting_mode
@@ -4672,8 +4671,6 @@ enum SitePluginFieldsEnum {
     pluginOptions___plugins___pluginOptions___name
     pluginOptions___plugins___browserAPIs
     pluginOptions___plugins___pluginFilepath
-    pluginOptions___fonts
-    pluginOptions___display
     pluginOptions___name
     pluginOptions___path
     pluginOptions___extensions
@@ -4699,6 +4696,7 @@ enum SitePluginFieldsEnum {
     pluginOptions___start_url
     pluginOptions___background_color
     pluginOptions___theme_color
+    pluginOptions___display
     pluginOptions___categories
     pluginOptions___icon
     pluginOptions___cache_busting_mode
@@ -4828,8 +4826,6 @@ input SitePluginPackageJsonPeerDependenciesFilterListInput {
 
 type SitePluginPluginOptions {
     plugins: [SitePluginPluginOptionsPlugins]
-    fonts: [String]
-    display: String
     name: String
     path: String
     extensions: [String]
@@ -4841,6 +4837,7 @@ type SitePluginPluginOptions {
     start_url: String
     background_color: String
     theme_color: String
+    display: String
     categories: [String]
     icon: String
     cache_busting_mode: String
@@ -4865,8 +4862,6 @@ input SitePluginPluginOptionsDefaultLayoutsFilterInput {
 
 input SitePluginPluginOptionsFilterInput {
     plugins: SitePluginPluginOptionsPluginsFilterListInput
-    fonts: StringQueryOperatorInput
-    display: StringQueryOperatorInput
     name: StringQueryOperatorInput
     path: StringQueryOperatorInput
     extensions: StringQueryOperatorInput
@@ -4878,6 +4873,7 @@ input SitePluginPluginOptionsFilterInput {
     start_url: StringQueryOperatorInput
     background_color: StringQueryOperatorInput
     theme_color: StringQueryOperatorInput
+    display: StringQueryOperatorInput
     categories: StringQueryOperatorInput
     icon: StringQueryOperatorInput
     cache_busting_mode: StringQueryOperatorInput
