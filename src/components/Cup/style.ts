@@ -41,10 +41,17 @@ export const CupRoot = styled.div<CupRootPropsType>`
 const getCupAppearance = ({ frameNumber }: CupImagePropsType) => {
     const frameNumberSafe = frameNumber > 4 ? 4 : frameNumber;
 
+    const bgSize = size[frameNumberSafe];
+    const bgPosition = position[frameNumberSafe];
+
+    if (!bgPosition || !bgSize) {
+        return '';
+    }
+
     return css`
         background-image: url(${frames[frameNumberSafe]});
-        background-size: ${size[frameNumberSafe].join(' ')};
-        background-position: ${position[frameNumberSafe].join(' ')};
+        background-size: ${bgSize.join(' ')};
+        background-position: ${bgPosition.join(' ')};
     `;
 };
 
