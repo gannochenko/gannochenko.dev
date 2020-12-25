@@ -15,22 +15,29 @@ images:
 ---
 
 import { Container } from 'components/Container';
+import { TwitterLink } from 'components/TwitterLink';
 
 Front-end engineers create dozens of components every week. Building just another web application is one thing, but when it comes to reusable components within a unified and sustainable design system, the situation changes drastically.
 
 While working on a design system, I have experimented a lot, and came up with a quite promising component boilerplate for such occasion. Here it is.
 
-### TL;DR
+## TL;DR
 
 [Codesandbox here](https://codesandbox.io/s/green-snowflake-nih5j?file=/src/App.js).
 
-A boilerplate generator:
+...or
+
+Generate common code (utils and types that can be re-used in all components):
 
 ~~~bash
-npx @generilla/cli run https://github.com/gannochenko/generators/tree/master/machine
+npx @generilla/cli run https://github.com/gannochenko/react-component-boilerplate/tree/master/commons
 ~~~
 
-So,
+Generate the component itself:
+
+~~~bash
+cd components && npx @generilla/cli run https://github.com/gannochenko/react-component-boilerplate/tree/master/component
+~~~
 
 ## Prerequisites
 
@@ -134,6 +141,8 @@ It may seem too much in the beginning, but when you build a long-lasting design 
 So, the props could be:
 
 ~~~typescript jsx
+import { HTMLAttributes } from 'react';
+
 type ObjectLiteralType<V = any> = { [k: string]: V };
 
 type ThemeType = {}; // replace this with your own theme type
@@ -144,7 +153,7 @@ type StylePropType = {
 
 export type SignInFormPropType =
     // first, take all native props for a desired type of DOM node
-    HTMLFormElement &
+    HTMLAttributes<HTMLFormElement> &
     // declare all custom props here
     Partial<{
       loading: boolean;
@@ -545,3 +554,11 @@ SignInForm.defaultProps = {
   onSubmit: () => {}
 };
 ~~~
+
+***
+
+That is pretty much it for this boilerplate! Certainly, not all of the features are needed when it comes to making actual components IRL.
+But, it is still nice to have all of these features in one place. Every time we build a component or a set of components which should be
+consistent, we can easily take this code as a starter!
+
+If you still have any questions left, or something does not work, feel free to <TwitterLink>react out to me</TwitterLink> and discuss the issue.
