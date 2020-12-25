@@ -13448,6 +13448,26 @@
                         "defaultValue": null
                     },
                     {
+                        "name": "fonts",
+                        "description": "",
+                        "type": {
+                            "kind": "INPUT_OBJECT",
+                            "name": "StringQueryOperatorInput",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    },
+                    {
+                        "name": "display",
+                        "description": "",
+                        "type": {
+                            "kind": "INPUT_OBJECT",
+                            "name": "StringQueryOperatorInput",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    },
+                    {
                         "name": "name",
                         "description": "",
                         "type": {
@@ -13549,16 +13569,6 @@
                     },
                     {
                         "name": "theme_color",
-                        "description": "",
-                        "type": {
-                            "kind": "INPUT_OBJECT",
-                            "name": "StringQueryOperatorInput",
-                            "ofType": null
-                        },
-                        "defaultValue": null
-                    },
-                    {
-                        "name": "display",
                         "description": "",
                         "type": {
                             "kind": "INPUT_OBJECT",
@@ -14857,6 +14867,34 @@
                         "deprecationReason": null
                     },
                     {
+                        "name": "fonts",
+                        "description": null,
+                        "args": [],
+                        "type": {
+                            "kind": "LIST",
+                            "name": null,
+                            "ofType": {
+                                "kind": "SCALAR",
+                                "name": "String",
+                                "ofType": null
+                            }
+                        },
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
+                        "name": "display",
+                        "description": null,
+                        "args": [],
+                        "type": {
+                            "kind": "SCALAR",
+                            "name": "String",
+                            "ofType": null
+                        },
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
                         "name": "name",
                         "description": null,
                         "args": [],
@@ -14990,18 +15028,6 @@
                     },
                     {
                         "name": "theme_color",
-                        "description": null,
-                        "args": [],
-                        "type": {
-                            "kind": "SCALAR",
-                            "name": "String",
-                            "ofType": null
-                        },
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
-                        "name": "display",
                         "description": null,
                         "args": [],
                         "type": {
@@ -16840,6 +16866,18 @@
                         "deprecationReason": null
                     },
                     {
+                        "name": "pluginCreator___pluginOptions___fonts",
+                        "description": null,
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
+                        "name": "pluginCreator___pluginOptions___display",
+                        "description": null,
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
                         "name": "pluginCreator___pluginOptions___name",
                         "description": null,
                         "isDeprecated": false,
@@ -16907,12 +16945,6 @@
                     },
                     {
                         "name": "pluginCreator___pluginOptions___theme_color",
-                        "description": null,
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
-                        "name": "pluginCreator___pluginOptions___display",
                         "description": null,
                         "isDeprecated": false,
                         "deprecationReason": null
@@ -24944,6 +24976,18 @@
                         "deprecationReason": null
                     },
                     {
+                        "name": "pluginOptions___fonts",
+                        "description": null,
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
+                        "name": "pluginOptions___display",
+                        "description": null,
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
                         "name": "pluginOptions___name",
                         "description": null,
                         "isDeprecated": false,
@@ -25089,12 +25133,6 @@
                     },
                     {
                         "name": "pluginOptions___theme_color",
-                        "description": null,
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
-                        "name": "pluginOptions___display",
                         "description": null,
                         "isDeprecated": false,
                         "deprecationReason": null

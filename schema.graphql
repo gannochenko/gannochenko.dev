@@ -4458,6 +4458,8 @@ enum SitePageFieldsEnum {
     pluginCreator___pluginOptions___plugins___version
     pluginCreator___pluginOptions___plugins___browserAPIs
     pluginCreator___pluginOptions___plugins___pluginFilepath
+    pluginCreator___pluginOptions___fonts
+    pluginCreator___pluginOptions___display
     pluginCreator___pluginOptions___name
     pluginCreator___pluginOptions___path
     pluginCreator___pluginOptions___extensions
@@ -4470,7 +4472,6 @@ enum SitePageFieldsEnum {
     pluginCreator___pluginOptions___start_url
     pluginCreator___pluginOptions___background_color
     pluginCreator___pluginOptions___theme_color
-    pluginCreator___pluginOptions___display
     pluginCreator___pluginOptions___categories
     pluginCreator___pluginOptions___icon
     pluginCreator___pluginOptions___cache_busting_mode
@@ -4671,6 +4672,8 @@ enum SitePluginFieldsEnum {
     pluginOptions___plugins___pluginOptions___name
     pluginOptions___plugins___browserAPIs
     pluginOptions___plugins___pluginFilepath
+    pluginOptions___fonts
+    pluginOptions___display
     pluginOptions___name
     pluginOptions___path
     pluginOptions___extensions
@@ -4696,7 +4699,6 @@ enum SitePluginFieldsEnum {
     pluginOptions___start_url
     pluginOptions___background_color
     pluginOptions___theme_color
-    pluginOptions___display
     pluginOptions___categories
     pluginOptions___icon
     pluginOptions___cache_busting_mode
@@ -4826,6 +4828,8 @@ input SitePluginPackageJsonPeerDependenciesFilterListInput {
 
 type SitePluginPluginOptions {
     plugins: [SitePluginPluginOptionsPlugins]
+    fonts: [String]
+    display: String
     name: String
     path: String
     extensions: [String]
@@ -4837,7 +4841,6 @@ type SitePluginPluginOptions {
     start_url: String
     background_color: String
     theme_color: String
-    display: String
     categories: [String]
     icon: String
     cache_busting_mode: String
@@ -4862,6 +4865,8 @@ input SitePluginPluginOptionsDefaultLayoutsFilterInput {
 
 input SitePluginPluginOptionsFilterInput {
     plugins: SitePluginPluginOptionsPluginsFilterListInput
+    fonts: StringQueryOperatorInput
+    display: StringQueryOperatorInput
     name: StringQueryOperatorInput
     path: StringQueryOperatorInput
     extensions: StringQueryOperatorInput
@@ -4873,7 +4878,6 @@ input SitePluginPluginOptionsFilterInput {
     start_url: StringQueryOperatorInput
     background_color: StringQueryOperatorInput
     theme_color: StringQueryOperatorInput
-    display: StringQueryOperatorInput
     categories: StringQueryOperatorInput
     icon: StringQueryOperatorInput
     cache_busting_mode: StringQueryOperatorInput
