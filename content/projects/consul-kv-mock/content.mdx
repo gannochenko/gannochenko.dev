@@ -4,7 +4,7 @@ description:
 keywords:
 path: "/projects/consul-kv-mock-"
 date: 2019-02-20
-published: false
+published: true
 images:
     - image: ./cover.png
       is_cover: 1
@@ -18,15 +18,9 @@ import { ProjectLinks } from 'components/ProjectDetailsPageLayout/components/Pro
 
 <ProjectReleaseDate date={props.pageContext.frontmatter.date} />
 
-## Problem
+While working for one of my employers I faced a problem of missing Consul ersatz parts for development purpose. The infrastructure team was using the Key-Value store, and there was no way to mock it locally.
 
-👉 
-
-## Solution
-
-Create a tool which
-
-👉 
+So one Friday evening <s>after a beer or two</s> I have decided to make a tiny Docker image that settled this.
 
 ## Implementation
 
