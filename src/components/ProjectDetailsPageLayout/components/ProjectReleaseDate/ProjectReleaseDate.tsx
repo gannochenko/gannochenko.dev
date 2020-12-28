@@ -8,12 +8,18 @@ export const ProjectReleaseDateRoot = styled(Container)`
     margin-top: -1rem;
 `;
 
-export const ProjectReleaseDate = ({ date }: ObjectLiteral) => {
+export const ProjectReleaseDate = ({ date, released }: ObjectLiteral) => {
     const year = useMemo(() => new Date(date).getFullYear(), [date]);
 
     return (
         <ProjectReleaseDateRoot>
-            <Typography label>First released in {year}</Typography>
+            <Typography label>
+                {released ? 'First' : 'Supposed to be'} released in {year}
+            </Typography>
         </ProjectReleaseDateRoot>
     );
+};
+
+ProjectReleaseDate.defaultProps = {
+    released: true,
 };

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const ProjectListRoot = styled.div`
-    padding-bottom: 1rem;
+    padding-bottom: 5rem;
 `;
 
 export const Items = styled.div`

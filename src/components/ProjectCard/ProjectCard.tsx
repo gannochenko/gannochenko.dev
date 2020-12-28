@@ -21,7 +21,7 @@ export const ProjectCard: FunctionComponent<Props> = ({ data }) => {
         );
     }, [data]);
 
-    const url = data.frontmatter.path;
+    const { path: url, released } = data.frontmatter;
 
     return (
         <ProjectCardRoot>
@@ -34,7 +34,8 @@ export const ProjectCard: FunctionComponent<Props> = ({ data }) => {
                 </Title>
                 <LinkContainer>
                     <Date>
-                        First released in {getYear(data.frontmatter.date)}
+                        {released === false ? 'Supposed to be' : 'First'}{' '}
+                        released in {getYear(data.frontmatter.date)}
                     </Date>
                     <ViewPost to={url} fontSize="small">
                         View details
