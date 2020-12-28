@@ -18,9 +18,16 @@ export const ImageView: FC<ImageViewPropsType> = forwardRef(function ImageView(
     { className, ...props },
     ref,
 ) {
-    const { rootProps, relativeProps } = useImageView(ref, props);
+    const { rootProps, relativeProps, imageProps, open } = useImageView(
+        ref,
+        props,
+    );
 
     const classNames = useImageViewClassNames('ImageView', className);
+
+    if (!open) {
+        return null;
+    }
 
     return (
         <>
@@ -30,7 +37,7 @@ export const ImageView: FC<ImageViewPropsType> = forwardRef(function ImageView(
                     {...relativeProps}
                     className={classNames.relative}
                 >
-                    <ImageViewImage src="/static/23361d302162a070a9b889a096ae8b83/bf093/why-the-hell.jpg" />
+                    <ImageViewImage {...imageProps} />
                     <ImageViewCloseButton>
                         <ImageViewCloseButtonRelative>
                             <ImageViewCrossLine />
