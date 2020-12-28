@@ -2,9 +2,10 @@ import React, { FunctionComponent, ReactNode } from 'react';
 import { MDXProvider } from '@mdx-js/react';
 import { ThemeProvider } from 'styled-components';
 // import { Provider as StateProvider } from "unstated"
-import { theme, GlobalStyle, markdownComponents } from '../../style';
+import { theme, GlobalStyle } from '../../style';
+import { markdownComponents } from './markdown-components';
 
-export const Root: FunctionComponent<{ element: ReactNode }> = ({
+export const Providers: FunctionComponent<{ element: ReactNode }> = ({
     element,
 }) => {
     return (

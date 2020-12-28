@@ -6,14 +6,14 @@
 
 import React from 'react';
 import { getRenderedEffectNodeIdCollector } from '@gannochenko/ui';
-import { Root } from './src/components/Root/Root';
+import { Providers } from './src/components/Providers/Providers';
 import { Layout } from './src/components/Layout';
 
 export const onRenderBody = ({ setPostBodyComponents }) => {
     setPostBodyComponents([getRenderedEffectNodeIdCollector()]);
 };
 
-export const wrapRootElement = Root;
+export const wrapRootElement = Providers;
 export const wrapPageElement = ({ element, props }) => {
     return <Layout props={props}>{element}</Layout>;
 };

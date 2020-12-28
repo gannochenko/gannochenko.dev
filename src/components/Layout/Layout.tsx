@@ -3,6 +3,7 @@ import { Body, Main } from './style';
 import { Props } from './type';
 import { Header, Footer } from '../';
 import { CookiePopup } from '../CookiePopup';
+import { ImageView } from '../ImageView';
 
 export const Layout: FunctionComponent<Props> = ({ children, props = {} }) => {
     const { location: { pathname = '' } = {} } = props;
@@ -15,6 +16,7 @@ export const Layout: FunctionComponent<Props> = ({ children, props = {} }) => {
             <Body>{children}</Body>
             <Footer />
             <CookiePopup />
+            <ImageView />
         </Main>
     );
 };
