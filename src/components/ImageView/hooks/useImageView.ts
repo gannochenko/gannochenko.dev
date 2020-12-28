@@ -2,10 +2,7 @@ import { Ref } from 'react';
 import { ImageViewPropsType } from '../type';
 import { useImageViewContext } from '../ImageViewContext';
 
-export const useImageView = (
-    ref: Ref<unknown>,
-    { propA, propB, ...props }: ImageViewPropsType,
-) => {
+export const useImageView = (ref: Ref<unknown>, props: ImageViewPropsType) => {
     const contextValue = useImageViewContext();
 
     return {
