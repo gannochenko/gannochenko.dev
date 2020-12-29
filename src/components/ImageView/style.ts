@@ -42,6 +42,7 @@ export const ImageViewRoot = styled.div.withConfig({
 
     ${fixedCover()};
     z-index: 1500;
+    pointer-events: none;
     ${align('center', 'center')};
 
     ${getRootStyle};
@@ -59,6 +60,7 @@ export const ImageViewBackdrop = styled.div`
 export const ImageViewRelative = styled.div<ImageViewInnerNodePropsType>`
     ${getResetStyle};
     position: relative;
+    pointer-events: initial;
 `;
 
 export const ImageViewImage = styled.img`
@@ -73,6 +75,7 @@ export const ImageViewCloseButton = styled.div`
     position: absolute;
     top: 0;
     right: -35px;
+    cursor: pointer;
 `;
 
 export const ImageViewCloseButtonRelative = styled.div`

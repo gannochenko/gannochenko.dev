@@ -1,20 +1,36 @@
-import { Ref } from 'react';
+import { Ref, useCallback, MouseEvent } from 'react';
 import { ImageViewPropsType } from '../type';
 import { useImageViewContext } from '../ImageViewContext';
 
 export const useImageView = (ref: Ref<unknown>, props: ImageViewPropsType) => {
-    const contextValue = useImageViewContext();
+    const { state, dispatch } = useImageViewContext();
+
+    const onCloseClick = useCallback(
+        (event: MouseEvent<unknown>) => {
+            console.log('close');
+            dispatch({
+                type: 'close',
+            });
+        },
+        [dispatch],
+    );
 
     return {
+        backDropProps: {
+            onClick: onCloseClick,
+        },
         rootProps: {
             ...props, // rest props go to the root node, as before
             ref, // same for the ref
         },
         relativeProps: {},
         imageProps: {
-            src: contextValue.src,
+            src: state.src,
+        },
+        closeButtonProps: {
+            onClick: onCloseClick,
         },
 
-        open: contextValue.open,
+        open: state.open,
     };
 };

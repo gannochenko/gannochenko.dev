@@ -48,9 +48,20 @@ export const Link: FunctionComponent<PropLinks> = props => {
     const { to, href } = props;
     const link = to || href || '';
 
-    if (!link.startsWith('/')) {
-        return <LinkStyled {...props} href={link} target="_blank" />;
+    if (link.startsWith('/static/')) {
+        return <a {...props} />;
     }
 
-    return <GatsbyLinkStyled to={link} {...props} />;
+    if (link.startsWith('/')) {
+        return <GatsbyLinkStyled to={link} {...props} />;
+    }
+
+    return (
+        <LinkStyled
+            {...props}
+            href={link}
+            target="_blank"
+            rel="noreferrer nofollower"
+        />
+    );
 };

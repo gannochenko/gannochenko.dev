@@ -1,5 +1,5 @@
 import React, { forwardRef, FC } from 'react';
-import PropsTypes from 'prop-types';
+// import PropsTypes from 'prop-types';
 
 import { ImageViewPropsType } from './type';
 import {
@@ -18,10 +18,14 @@ export const ImageView: FC<ImageViewPropsType> = forwardRef(function ImageView(
     { className, ...props },
     ref,
 ) {
-    const { rootProps, relativeProps, imageProps, open } = useImageView(
-        ref,
-        props,
-    );
+    const {
+        backDropProps,
+        closeButtonProps,
+        rootProps,
+        relativeProps,
+        imageProps,
+        open,
+    } = useImageView(ref, props);
 
     const classNames = useImageViewClassNames('ImageView', className);
 
@@ -31,14 +35,14 @@ export const ImageView: FC<ImageViewPropsType> = forwardRef(function ImageView(
 
     return (
         <>
-            <ImageViewBackdrop />
+            <ImageViewBackdrop {...backDropProps} />
             <ImageViewRoot {...rootProps} className={classNames.root}>
                 <ImageViewRelative
                     {...relativeProps}
                     className={classNames.relative}
                 >
                     <ImageViewImage {...imageProps} />
-                    <ImageViewCloseButton>
+                    <ImageViewCloseButton {...closeButtonProps}>
                         <ImageViewCloseButtonRelative>
                             <ImageViewCrossLine />
                             <ImageViewCrossLine other />
