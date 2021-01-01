@@ -7,7 +7,6 @@ export const useImageView = (ref: Ref<unknown>, props: ImageViewPropsType) => {
 
     const onCloseClick = useCallback(
         (event: MouseEvent<unknown>) => {
-            console.log('close');
             dispatch({
                 type: 'close',
             });

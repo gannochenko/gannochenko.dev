@@ -4,6 +4,7 @@ import Img from 'gatsby-image';
 import { gap } from '@gannochenko/etc';
 import { ObjectLiteral } from '../../../../type';
 import { Container } from '../../../Container';
+import { ImageViewScope } from '../../../ImageView';
 
 const ProjectGalleryRoot = styled(Container)`
     margin-bottom: 5rem;
@@ -26,22 +27,24 @@ const ProjectGalleryImage = styled(Img)`
 
 export const ProjectGallery = ({ images, galleryId }: ObjectLiteral) => {
     return (
-        <ProjectGalleryRoot>
-            <ProjectGalleryImages>
-                {images.map((image: any, index: number) => {
-                    if (image.galleryId !== galleryId) {
-                        return null;
-                    }
+        <ImageViewScope>
+            <ProjectGalleryRoot>
+                <ProjectGalleryImages>
+                    {images.map((image: any, index: number) => {
+                        if (image.galleryId !== galleryId) {
+                            return null;
+                        }
 
-                    return (
-                        <ProjectGalleryImage
-                            sizes={image.image.childImageSharp.fluid}
-                            key={index}
-                        />
-                    );
-                })}
-            </ProjectGalleryImages>
-        </ProjectGalleryRoot>
+                        return (
+                            <ProjectGalleryImage
+                                sizes={image.image.childImageSharp.fluid}
+                                key={index}
+                            />
+                        );
+                    })}
+                </ProjectGalleryImages>
+            </ProjectGalleryRoot>
+        </ImageViewScope>
     );
 };
 

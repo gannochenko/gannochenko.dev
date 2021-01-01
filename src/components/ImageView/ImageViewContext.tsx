@@ -71,19 +71,27 @@ export const ImageViewContextProvider: FC<ImageViewContextProviderPropsType> = (
         const onDocumentClick = (event: MouseEvent) => {
             let next = event.target as (Node & ParentNode) | null;
             let safe = 50;
+            let prevent = false;
             while (next && safe >= 0) {
                 safe -= 1;
 
                 const tagName = (next as HTMLElement).tagName;
 
                 if (tagName === 'A') {
+                    const classNames = (next as HTMLElement).classList;
                     const href = (next as HTMLElement).getAttribute('href');
-                    if (isImage(href)) {
-                        dispatch({
-                            type: 'open',
-                            value: href,
-                        });
+
+                    if (classNames.contains('gatsby-resp-image-link')) {
+                        // mdx inline image
+                        if (isImage(href)) {
+                            dispatch({
+                                type: 'open',
+                                value: href,
+                            });
+                            prevent = true;
+                        }
                     }
+
                     break;
                 }
 
@@ -92,10 +100,14 @@ export const ImageViewContextProvider: FC<ImageViewContextProviderPropsType> = (
                     if (image) {
                         const src = image.getAttribute('src');
                         if (isImage(src)) {
-                            dispatch({
-                                type: 'open',
-                                value: src,
-                            });
+                            const scope = image.closest('.image-value-scope');
+                            if (scope) {
+                                dispatch({
+                                    type: 'open',
+                                    value: src,
+                                });
+                            }
+                            prevent = true;
                         }
                     }
                     break;
@@ -104,8 +116,10 @@ export const ImageViewContextProvider: FC<ImageViewContextProviderPropsType> = (
                 next = next.parentNode;
             }
 
-            event.preventDefault();
-            event.stopImmediatePropagation();
+            if (prevent) {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+            }
         };
 
         document.addEventListener('click', onDocumentClick);

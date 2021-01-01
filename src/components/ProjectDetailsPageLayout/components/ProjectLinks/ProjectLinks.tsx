@@ -7,6 +7,7 @@ const githubLogo = require('./github.png') as string;
 const poolIcon = require('./pool.svg') as string;
 const dockerIcon = require('./docker.png') as string;
 const npmIcon = require('./npm.svg') as string;
+const modDbIcon = require('./moddb.png') as string;
 
 const ProjectLinksRoot = styled(Container)`
     margin-bottom: 5rem;
@@ -35,6 +36,13 @@ const ProjectLinksLogo = styled.div<{ logo: string }>`
     margin-right: 0.5rem;
 `;
 
+const ProjectLinksLogoModdb = styled.div`
+    ${backgroundCover(modDbIcon)};
+    height: 0.8rem;
+    width: 2rem;
+    margin-right: 0.5rem;
+`;
+
 export const ProjectLinksCredit = styled.div`
     font-size: 0.7rem;
     margin-top: 1.5rem;
@@ -54,6 +62,7 @@ type ProjectLinksPropsType = {
     article?: string;
     dockerhub?: string;
     npm?: string;
+    moddb?: string;
 };
 
 export const ProjectLinks: FC<ProjectLinksPropsType> = ({
@@ -61,6 +70,7 @@ export const ProjectLinks: FC<ProjectLinksPropsType> = ({
     article,
     dockerhub,
     npm,
+    moddb,
 }) => {
     return (
         <ProjectLinksRoot>
@@ -99,6 +109,16 @@ export const ProjectLinks: FC<ProjectLinksPropsType> = ({
                     >
                         <ProjectLinksLogo logo={npmIcon} />
                         NPM
+                    </ProjectLinksLink>
+                )}
+                {!!moddb && (
+                    <ProjectLinksLink
+                        href={moddb}
+                        target="_blank"
+                        rel="noreferrer nofollower"
+                    >
+                        <ProjectLinksLogoModdb />
+                        Moddb
                     </ProjectLinksLink>
                 )}
             </ProjectLinksLinks>
