@@ -14,7 +14,7 @@ export const ProjectReleaseDate = ({ date, released }: ObjectLiteral) => {
     return (
         <ProjectReleaseDateRoot>
             <Typography label>
-                {released ? 'First' : 'Supposed to be'} released in {year}
+                {released ? 'First' : 'Was supposed to be'} released in {year}
             </Typography>
         </ProjectReleaseDateRoot>
     );

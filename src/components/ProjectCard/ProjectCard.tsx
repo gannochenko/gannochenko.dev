@@ -34,7 +34,7 @@ export const ProjectCard: FunctionComponent<Props> = ({ data }) => {
                 </Title>
                 <LinkContainer>
                     <Date>
-                        {released === false ? 'Supposed to be' : 'First'}{' '}
+                        {released === false ? 'Was supposed to be' : 'First'}{' '}
                         released in {getYear(data.frontmatter.date)}
                     </Date>
                     <ViewPost to={url} fontSize="small">
