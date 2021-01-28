@@ -44,6 +44,7 @@
     },
     "devDependencies": {
         "@babel/core": "^7.6.0",
+        "@generilla/cli": "^2.0.4",
         "@types/color": "^3.0.1",
         "@types/debounce": "^1.2.0",
         "@types/events": "^3.0.0",
@@ -88,7 +89,8 @@
         "test": "echo \"Write tests! -> https://gatsby.app/unit-testing\"",
         "lint": "eslint ./src/ --ext .jsx,.tsx",
         "lint:fix": "eslint ./src/ --ext .ts,.tsx --fix",
-        "start:local": "yarn build; yarn serve"
+        "start:local": "yarn build; yarn serve",
+        "scaffold:post": "generilla run scaffolders/post -o content/blog"
     },
     "repository": {
         "type": "git",
