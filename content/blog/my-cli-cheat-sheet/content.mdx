@@ -96,10 +96,18 @@ yarn info <package-name> | grep version:
 ## Docker
 
 ```bash
+# build an image
+docker build -t vendor-name/image-name .
+# run an image
+docker run vendor-name/image-name
 # run an image (e.g. a mongodb image) in daemon mode
 docker run --name some-mongo -d mongo:latest
 # "ssh" into a container with ID 9a54dd26acb2
 docker exec -it 9a54dd26acb2 bash
+# see all running containers
+docker ps
+# see logs of a container with id 9a54dd26acb2
+docker logs 9a54dd26acb2
 # copy file "config.txt" into a container with ID 9a54dd26acb2 into /root folder
 docker cp ./config.txt 9a54dd26acb2:/root/
 # remove all exited containers
