@@ -97,19 +97,21 @@ yarn info <package-name> | grep version:
 
 ```bash
 # build an image
-docker build -t vendor-name/image-name .
+docker build -t [vendor_name]/[image_name] .
 # run an image
-docker run vendor-name/image-name
-# run an image (e.g. a mongodb image) in daemon mode
-docker run --name some-mongo -d mongo:latest
-# "ssh" into a container with ID 9a54dd26acb2
-docker exec -it 9a54dd26acb2 bash
+docker run [vendor_name]/[image_name]
+# run an image in daemon mode
+docker run -d [vendor_name]/[image_name]
+# run an image of a web application interactively, and forward a port
+docker run -it -p [host_port]:[image_port] [vendor_name]/[image_name]
+# "ssh" into a container with ID=[container_id]
+docker exec -it [container_id] bash
 # see all running containers
 docker ps
-# see logs of a container with id 9a54dd26acb2
-docker logs 9a54dd26acb2
-# copy file "config.txt" into a container with ID 9a54dd26acb2 into /root folder
-docker cp ./config.txt 9a54dd26acb2:/root/
+# see logs of a container with ID=[container_id]
+docker logs [container_id]
+# copy file "config.txt" into a container with ID=[container_id] into /root folder
+docker cp ./config.txt [container_id]:/root/
 # remove all exited containers
 docker rm $(docker ps -a -f status=exited -q)
 # remove all working containers
@@ -119,6 +121,31 @@ docker rmi $(docker images -a -q)
 # remove volumes, networks
 docker system prune
 ```
+
+## Kubernetes
+
+~~~bash
+# list pods
+kubectl get pods
+# exec a command on a pod
+kubectl exec -it [pod_name] [cmd]
+# get logs of a pod
+kubectl logs [pod_name]
+# delete a pod
+kubectl delete pod [pod_name]
+# apply a config file
+kubectl apply -f [config_file]
+# get information about a pod
+kubectl describe pod [pod_name]
+# list deployments
+kubectl get deployments
+# get information about a deployment
+kubectl describe deployment [deployment_name]
+# delete a deployment
+kubectl delete deployment [deployment_name]
+# apply rolling update on a deployment
+kubectl rollout restart deployment [deployment_name]
+~~~
 
 ## Mongo
 
