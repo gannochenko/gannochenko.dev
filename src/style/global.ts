@@ -1,10 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 import { theme } from './theme';
-import { fonts } from './fonts';
 
 export const GlobalStyle = createGlobalStyle<{ theme: typeof theme }>`
-    ${fonts};
-
     html {
         font-size: 16px;
         cursor: default;

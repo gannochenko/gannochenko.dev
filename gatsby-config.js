@@ -11,18 +11,17 @@ module.exports = {
         siteUrl: 'https://gannochenko.dev',
     },
     plugins: [
-        // {
-        //     resolve: `gatsby-plugin-google-fonts`,
-        //     options: {
-        //         fonts: [
-        //             'roboto',
-        //             'sriracha',
-        //             'oswald',
-        //             // `source sans pro\:300,400,400i,700`
-        //         ],
-        //         display: 'swap',
-        //     },
-        // },
+        {
+            resolve: `gatsby-plugin-google-fonts`,
+            options: {
+                fonts: [
+                    'roboto:300,400',
+                    `sriracha:400`,
+                    'oswald:400',
+                    // `source sans pro\:300,400,400i,700`
+                ],
+            },
+        },
         {
             resolve: 'gatsby-source-filesystem',
             options: {

@@ -7,7 +7,7 @@ import { theme, GlobalStyle } from '../../style';
 import { markdownComponents } from './markdown-components';
 
 export const Providers: FunctionComponent<{ element: ReactNode }> = ({
-    element,
+    children,
 }) => {
     return (
         <ImageViewContextProvider>
@@ -15,7 +15,7 @@ export const Providers: FunctionComponent<{ element: ReactNode }> = ({
                 <ThemeProvider theme={theme}>
                     <>
                         <GlobalStyle />
-                        {element}
+                        {children}
                     </>
                 </ThemeProvider>
             </MDXProvider>

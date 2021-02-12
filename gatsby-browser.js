@@ -11,7 +11,10 @@ import { Layout } from './src/components/Layout';
 
 startEffects();
 
-export const wrapRootElement = Providers;
 export const wrapPageElement = ({ element, props }) => {
-    return <Layout props={props}>{element}</Layout>;
+    return (
+        <Providers>
+            <Layout props={props}>{element}</Layout>
+        </Providers>
+    );
 };

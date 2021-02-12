@@ -2,11 +2,7 @@ import { useContext } from 'react';
 import { ThemeContext } from 'styled-components';
 import { colorWhite, makeTheme, grid, cell } from '@gannochenko/etc';
 import { ObjectLiteral } from '../type';
-import {
-    // fontFamilyRaleway,
-    fontFamilyRoboto,
-    fontFamilyOswald,
-} from './tokens';
+import { fontFamilyRoboto, fontFamilyOswald } from './tokens';
 
 export const theme = makeTheme({
     color: {
