@@ -86,11 +86,13 @@ zip -r folder.zip folder/
 
 ```bash
 # make a total package upgrade
-yarn upgrade <package-name> --major
+yarn upgrade [package_name] --major
 # find out why the package was installed
-yarn why <package-name>
+yarn why [package_name]
 # get the latest version of a package that exists on NPM
-yarn info <package-name> | grep version:
+yarn info [package_name] | grep version:
+# install a package only for a current user
+yarn global add [package_name] --prefix ~/.node
 ```
 
 ## Docker
