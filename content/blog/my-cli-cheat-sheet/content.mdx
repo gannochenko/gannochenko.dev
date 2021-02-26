@@ -147,6 +147,10 @@ kubectl describe deployment [deployment_name]
 kubectl delete deployment [deployment_name]
 # apply rolling update on a deployment
 kubectl rollout restart deployment [deployment_name]
+# list all namespaces
+kubectl get namespace
+# list services in a particular namespace
+kubectl get services -n [namespace]
 ~~~
 
 ## Mongo
