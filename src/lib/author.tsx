@@ -6,7 +6,7 @@ export const AuthorIntro = () => (
     <>
         Business-oriented fullstack engineer, in ❤️ with Tech.
         <br />
-        React, Node, Docker, AWS.
+        React, Node, Docker, AWS, Jamstack.
         <br />
         15+ years in dev.
     </>
