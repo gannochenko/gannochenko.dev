@@ -97,9 +97,9 @@ Every component has a `scope of responsibility`. It other words, a component is 
 ~~~typescript jsx
 ...
 
-import React, { forwardRef, FC } from 'react';
+import React, { forwardRef } from 'react';
 
-export const SignInForm: FC = forwardRef(
+export const SignInForm = forwardRef(
     function SignInForm(props, ref) {
         // every component should have a root node
         // also,I am forwarding ref to the root node
@@ -143,8 +143,6 @@ So, the props could be:
 ~~~typescript jsx
 import { HTMLAttributes } from 'react';
 
-type ObjectLiteralType<V = any> = { [k: string]: V };
-
 type ThemeType = {}; // replace this with your own theme type
 
 type StylePropType = {
@@ -154,20 +152,18 @@ type StylePropType = {
 export type SignInFormPropType =
     // first, take all native props for a desired type of DOM node
     HTMLAttributes<HTMLFormElement> &
-    // declare all custom props here
+    // then declare all custom props here
     Partial<{
       loading: boolean;
       onSubmit: (result: { login: string; password: string }) => void;
       enablePasswordLess: boolean;
-    }> &
-    // allow any other custom props, like data- props to pass as well
-    ObjectLiteralType;
+    }>;
 
 export type SignInFormRootPropType = StylePropType & SignInFormPropType;
 
-export type SignInFormInputPropType = StylePropType & ObjectLiteralType;
+export type SignInFormInputPropType = StylePropType;
 
-export type SignInFormSubmitButtonPropType = StylePropType & ObjectLiteralType;
+export type SignInFormSubmitButtonPropType = StylePropType;
 ~~~
 
 ## Styling
@@ -283,23 +279,41 @@ With react hooks it became really easy to decouple the code.
 I am gonna put all the logic into a hook `useSignInForm` located in a separate file.
 UI stays pretty clean and easily perceivable by just quick glancing at.
 
-The result of the hook is a structure that contains props forwarded to the UI elements.
+Before doing so, I am gonna make an auxiliary hook to handle references in `hooks/useRootRef.ts`:
 
 ~~~typescript
-import { Ref, useCallback } from 'react';
-import { SignInFormPropType } from './types';
+import { useRef, ForwardedRef } from "react";
 
-export const useSignInForm = (
-    ref: Ref<unknown>,
+export const useRootRef = <E extends HTMLElement>(ref: ForwardedRef<E>) => {
+  const localRef = useRef<E>(null);
+
+  return ref || localRef;
+};
+~~~
+
+The result of the main hook is a structure that contains props forwarded to the UI elements.
+
+~~~typescript
+import { Ref, useCallback, ForwardedRef } from 'react';
+import { SignInFormPropType } from './types';
+import { useRootRef } from '../../../hooks/useRootRef';
+
+export const useSignInForm = <E extends HTMLDivElement>(
+    ref: ForwardedRef<E>,
     {
         loading,
         onSubmit,
         enablePasswordLess,
-        ...props
+        ...restProps
     }: SignInFormPropType
 ) => {
     // put all your logic here: call some useMemo, useEffect or useCallback, or any other custom hook
     // ...
+
+    // you can use an externally set ref, as well as the local one
+    const rootRef = useRootRef<E>(ref);
+    // now you can do different cool things with rootRef, because
+    // it will always be defined after the very first render
 
     // for example,
     const onSubmitClick = useCallback(() => {
@@ -308,8 +322,8 @@ export const useSignInForm = (
 
     return {
         rootProps: {
-            ...props, // rest props go to the root node, as before
-            ref, // same for the ref
+            ...restProps, // rest props go to the root node, as before
+            ref: rootRef, // same for the ref
         },
         loginInputProps: {
             disabled: loading,
@@ -336,7 +350,7 @@ Then I consume the hook in `SignInForm.tsx`:
 
 import { useSignInForm } from './hooks/useSignInForm.ts';
 
-export const SignInForm: FC<SignInFormPropType> = forwardRef(
+export const SignInForm = forwardRef<HTMLDivElement, SignInFormPropType>(
     function SignInForm(props, ref) {
 
         const {
@@ -345,7 +359,7 @@ export const SignInForm: FC<SignInFormPropType> = forwardRef(
             passwordInputProps,
             submitButtonProps,
             showPasswordInput
-        } = useSignInForm(ref, props);
+        } = useSignInForm<HTMLDivElement>(ref, props);
 
         return (
             <SignInFormRoot {...rootProps}>
@@ -395,8 +409,8 @@ Then I consume the hook right next to the first one:
 ~~~typescript jsx
 import { useSignInFormClassNames } from './hooks/useSignInFormClassNames';
 
-export const SignInForm: FC<SignInFormPropType> = forwardRef(
-    function SignInForm({ className, ...props}, ref) {
+export const SignInForm = forwardRef<HTMLDivElement, SignInFormPropType>(
+    function SignInForm(props, ref) {
 
         const {
             rootProps,
@@ -404,7 +418,7 @@ export const SignInForm: FC<SignInFormPropType> = forwardRef(
             passwordInputProps,
             submitButtonProps,
             showPasswordInput
-        } = useSignInForm(ref, props);
+        } = useSignInForm<HTMLDivElement>(ref, props);
 
         const classNames = useSignInFormClassNames('SignInForm', className);
 
@@ -522,14 +536,13 @@ To types:
 import { MarginPropType } from '../style/getMarginStyle';
 
 type SignInFormPropType =
-    HTMLFormElement & 
+    HTMLAttributes<HTMLFormElement> &
     Partial<{
         loading: boolean;
         onSubmit: ({ login: string; password: string; }) => void;
         enablePasswordLess: boolean;
     }> &
-    MarginPropType & // <-- injected here
-    ObjectLiteralType;
+    MarginPropType; // <-- injected here
 ~~~
 
 When this is done, the atomic props become available:

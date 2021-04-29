@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ForwardedRef } from 'react';
 import { Avatar } from '../Avatar';
 import {
     AboutAuthorBackground,
