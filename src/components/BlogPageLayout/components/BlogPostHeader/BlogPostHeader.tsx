@@ -10,6 +10,7 @@ import {
     DateStripe,
     InfoStripeContainer,
     BlackLink,
+    Dates,
 } from './style';
 import { Props } from './type';
 import { Container } from '../../../Container';
@@ -22,7 +23,7 @@ export const BlogPostHeader: FunctionComponent<Props> = ({ data }) => {
         return data.frontmatter.images.find((image: any) => image.is_cover);
     }, [data]);
 
-    const { title, date, published } = data.frontmatter;
+    const { title, date, published, updatedAt } = data.frontmatter;
 
     return (
         <BlogPostHeaderContainer>
@@ -41,7 +42,14 @@ export const BlogPostHeader: FunctionComponent<Props> = ({ data }) => {
                             >
                                 &larr; Back to list
                             </BlackLink>
-                            <Date>{formatDate(date)}</Date>
+                            <Dates>
+                                {!!updatedAt && (
+                                    <Date update>
+                                        Upd: {formatDate(updatedAt)}
+                                    </Date>
+                                )}
+                                <Date>{formatDate(date)}</Date>
+                            </Dates>
                         </InfoStripeContainer>
                     </DateStripe>
                 </IntroBlock>

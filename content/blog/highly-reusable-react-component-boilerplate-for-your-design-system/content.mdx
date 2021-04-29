@@ -4,6 +4,7 @@ description: "While working on a design system, I have experimented a lot, and c
 keywords: react, components, design systems, architecture, ui
 path: "/blog/highly-reusable-react-component-boilerplate-for-your-design-system-"
 date: 2020-12-12
+updatedAt: 2021-04-28
 published: true
 images:
     - author: Francisco Moreno
@@ -245,21 +246,241 @@ export const SignInFormRoot = styled.form<SignInFormRootPropType>`
 ...
 ~~~
 
+## Properties forwarding
+
 When a custom property goes through a cabbage of wrappers and lands on the DOM node, React starts polluting the console with a bunch of annoying warnings like &laquo;Warning: React does not recognize the `loading` prop on a DOM element. Blah, blah...&raquo;
 To prevent this, `styled-components` starting from v5 has a helper called `shouldForwardProp`.
+
+Let's make a separate file called `utils/propBlocker.ts`:
+
+~~~typescript
+import { ReactText } from 'react';
+
+// shouldForwardProp blocks everything that matches a set of standard HTML attributes plus children, ref and dangerouslySetHTML
+// in order to allow event handlers to be passed down to the react elements, we need to explicitly allow them against a white
+// list of known events:
+const allowedEventProps = {
+    // Clipboard Events
+    onCopy: true,
+    onCopyCapture: true,
+    onCut: true,
+    onCutCapture: true,
+    onPaste: true,
+    onPasteCapture: true,
+
+    // Composition Events
+    onCompositionEnd: true,
+    onCompositionEndCapture: true,
+    onCompositionStart: true,
+    onCompositionStartCapture: true,
+    onCompositionUpdate: true,
+    onCompositionUpdateCapture: true,
+
+    // Focus Events
+    onFocus: true,
+    onFocusCapture: true,
+    onBlur: true,
+    onBlurCapture: true,
+
+    // Form Events
+    onChange: true,
+    onChangeCapture: true,
+    onBeforeInput: true, // https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/beforeinput_event
+    onBeforeInputCapture: true,
+    onInput: true,
+    onInputCapture: true,
+    onReset: true,
+    onResetCapture: true,
+    onSubmit: true,
+    onSubmitCapture: true,
+    onInvalid: true,
+    onInvalidCapture: true,
+
+    // Image Events
+    onLoad: true,
+    onLoadCapture: true,
+    onError: true, // also a Media Event
+    onErrorCapture: true, // also a Media Event
+
+    // Keyboard Events
+    onKeyDown: true,
+    onKeyDownCapture: true,
+    onKeyPress: true,
+    onKeyPressCapture: true,
+    onKeyUp: true,
+    onKeyUpCapture: true,
+
+    // Media Events
+    onAbort: true,
+    onAbortCapture: true,
+    onCanPlay: true,
+    onCanPlayCapture: true,
+    onCanPlayThrough: true,
+    onCanPlayThroughCapture: true,
+    onDurationChange: true,
+    onDurationChangeCapture: true,
+    onEmptied: true,
+    onEmptiedCapture: true,
+    onEncrypted: true,
+    onEncryptedCapture: true,
+    onEnded: true,
+    onEndedCapture: true,
+    onLoadedData: true,
+    onLoadedDataCapture: true,
+    onLoadedMetadata: true,
+    onLoadedMetadataCapture: true,
+    onLoadStart: true,
+    onLoadStartCapture: true,
+    onPause: true,
+    onPauseCapture: true,
+    onPlay: true,
+    onPlayCapture: true,
+    onPlaying: true,
+    onPlayingCapture: true,
+    onProgress: true,
+    onProgressCapture: true,
+    onRateChange: true,
+    onRateChangeCapture: true,
+    onSeeked: true,
+    onSeekedCapture: true,
+    onSeeking: true,
+    onSeekingCapture: true,
+    onStalled: true,
+    onStalledCapture: true,
+    onSuspend: true,
+    onSuspendCapture: true,
+    onTimeUpdate: true,
+    onTimeUpdateCapture: true,
+    onVolumeChange: true,
+    onVolumeChangeCapture: true,
+    onWaiting: true,
+    onWaitingCapture: true,
+
+    // MouseEvents
+    onAuxClick: true, // https://developer.mozilla.org/en-US/docs/Web/API/Element/auxclick_event
+    onAuxClickCapture: true,
+    onClick: true,
+    onClickCapture: true,
+    onContextMenu: true,
+    onContextMenuCapture: true,
+    onDoubleClick: true,
+    onDoubleClickCapture: true,
+    onDrag: true,
+    onDragCapture: true,
+    onDragEnd: true,
+    onDragEndCapture: true,
+    onDragEnter: true,
+    onDragEnterCapture: true,
+    onDragExit: true,
+    onDragExitCapture: true,
+    onDragLeave: true,
+    onDragLeaveCapture: true,
+    onDragOver: true,
+    onDragOverCapture: true,
+    onDragStart: true,
+    onDragStartCapture: true,
+    onDrop: true,
+    onDropCapture: true,
+    onMouseDown: true,
+    onMouseDownCapture: true,
+    onMouseEnter: true,
+    onMouseLeave: true,
+    onMouseMove: true,
+    onMouseMoveCapture: true,
+    onMouseOut: true,
+    onMouseOutCapture: true,
+    onMouseOver: true,
+    onMouseOverCapture: true,
+    onMouseUp: true,
+    onMouseUpCapture: true,
+
+    // // Selection Events
+    onSelect: true,
+    onSelectCapture: true,
+
+    // yep, it is a long one...
+
+    // Touch Events
+    onTouchCancel: true,
+    onTouchCancelCapture: true,
+    onTouchEnd: true,
+    onTouchEndCapture: true,
+    onTouchMove: true,
+    onTouchMoveCapture: true,
+    onTouchStart: true,
+    onTouchStartCapture: true,
+
+    // Pointer Events
+    onPointerDown: true,
+    onPointerDownCapture: true,
+    onPointerMove: true,
+    onPointerMoveCapture: true,
+    onPointerUp: true,
+    onPointerUpCapture: true,
+    onPointerCancel: true,
+    onPointerCancelCapture: true,
+    onPointerEnter: true,
+    onPointerEnterCapture: true,
+    onPointerLeave: true,
+    onPointerLeaveCapture: true,
+    onPointerOver: true,
+    onPointerOverCapture: true,
+    onPointerOut: true,
+    onPointerOutCapture: true,
+    onGotPointerCapture: true,
+    onGotPointerCaptureCapture: true,
+    onLostPointerCapture: true,
+    onLostPointerCaptureCapture: true,
+
+    // UI Events
+    onScroll: true,
+    onScrollCapture: true,
+
+    // Wheel Events
+    onWheel: true,
+    onWheelCapture: true,
+
+    // Animation Events
+    onAnimationStart: true,
+    onAnimationStartCapture: true,
+    onAnimationEnd: true,
+    onAnimationEndCapture: true,
+    onAnimationIteration: true,
+    onAnimationIterationCapture: true,
+
+    // Transition Events
+    onTransitionEnd: true,
+    onTransitionEndCapture: true,
+};
+
+// finally...
+
+export const propsBlocker = {
+    shouldForwardProp: (
+        propertyName: ReactText | boolean,
+        validateProperty: (propertyName: any) => boolean,
+    ) => {
+        if (
+            typeof propertyName === 'string' &&
+            (propertyName in allowedEventProps)
+        ) {
+            return true;
+        }
+
+        // https://github.com/emotion-js/emotion/blob/main/packages/is-prop-valid/src/props.js
+        return validateProperty(propertyName);
+    },
+};
+~~~
+
+And then I use it like this:
 
 ~~~typescript
 // ...
 
-// all unwanted custom props should be blacklisted
-const customProps = {
-    loading: true,
-    disabled: true,
-};
+import { propsBlocker } from '../../../utils/propBlocker';
 
-export const SignInFormRoot = styled.div.withConfig({
-    shouldForwardProp: prop => !(prop in customProps),
-})<SignInFormRootPropType>`
+export const SignInFormRoot = styled.div.withConfig(propsBlocker)<SignInFormRootPropType>`
     ${getResetStyle};
     padding: 1rem;
     ${getRootStyle};
@@ -267,6 +488,8 @@ export const SignInFormRoot = styled.div.withConfig({
 
 // ...
 ~~~
+
+This guarantees no custom property is going to leak through the logic to the underlying react element.
 
 ## View and controller separation
 
@@ -282,12 +505,13 @@ UI stays pretty clean and easily perceivable by just quick glancing at.
 Before doing so, I am gonna make an auxiliary hook to handle references in `hooks/useRootRef.ts`:
 
 ~~~typescript
-import { useRef, ForwardedRef } from "react";
+import { useRef, ForwardedRef, RefObject } from "react";
 
 export const useRootRef = <E extends HTMLElement>(ref: ForwardedRef<E>) => {
   const localRef = useRef<E>(null);
 
-  return ref || localRef;
+  // we only allow modern reference syntax
+  return (ref as RefObject<E>) || localRef;
 };
 ~~~
 
@@ -515,12 +739,12 @@ export const getMarginStyle = ({
 
 Then plug the mixin into the component.
 
-To styles:
+To the styles:
 
 ~~~typescript
 import { getMarginStyle } from '../../utils/getMarginStyle';
 
-const SignInFormRoot = styled.div.withConfig({
+export const SignInFormRoot = styled.div.withConfig({
     shouldForwardProp: prop => !(prop in customProps),
 })<SignInFormRootPropType>`
     ${getResetStyle};
@@ -530,12 +754,12 @@ const SignInFormRoot = styled.div.withConfig({
 `;
 ~~~
 
-To types:
+To the types:
 
 ~~~typescript
 import { MarginPropType } from '../style/getMarginStyle';
 
-type SignInFormPropType =
+export type SignInFormPropType =
     HTMLAttributes<HTMLFormElement> &
     Partial<{
         loading: boolean;

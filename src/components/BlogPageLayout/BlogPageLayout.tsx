@@ -47,6 +47,7 @@ export const blogPageQuery = graphql`
             frontmatter {
                 title
                 date
+                updatedAt
                 keywords
                 description
                 published

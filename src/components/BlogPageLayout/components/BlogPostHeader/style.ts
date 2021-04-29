@@ -42,7 +42,7 @@ export const Date = styled.div`
     color: ${props => props.theme.color.backgroundSecondary};
     font-size: ${props => props.theme.fontSize.standard};
     font-weight: bold;
-    background-color: white;
+    background-color: ${({ update }) => (update ? '#ffff67' : 'white')};
     padding: 0.3rem 1rem;
 `;
 
@@ -61,4 +61,8 @@ export const BlackLink = styled(Link)`
     padding: 0.3rem 1rem 0.3rem 0;
     text-decoration: none;
     font-weight: normal;
+`;
+
+export const Dates = styled.div`
+    display: flex;
 `;
