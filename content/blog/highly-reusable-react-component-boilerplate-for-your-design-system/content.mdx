@@ -553,7 +553,7 @@ export const useSignInForm = <E extends HTMLDivElement>(
             disabled: loading,
             onChange: onLoginInputChange, // defined somewhere above
         },
-        passwordInputProps: {
+        getPasswordInputProps: () => { // I use a getter here, because the password field is optional
             type: 'password',
             disabled: loading,
             onChange: onPasswordInputChange, // defined somewhere above
@@ -580,7 +580,7 @@ export const SignInForm = forwardRef<HTMLDivElement, SignInFormPropType>(
         const {
             rootProps,
             loginInputProps,
-            passwordInputProps,
+            getPasswordInputProps,
             submitButtonProps,
             showPasswordInput
         } = useSignInForm<HTMLDivElement>(ref, props);
@@ -591,7 +591,7 @@ export const SignInForm = forwardRef<HTMLDivElement, SignInFormPropType>(
                 {
                     showPasswordInput
                     &&
-                    <SignInInput {...passwordInputProps} />
+                    <SignInInput {...getPasswordInputProps()} />
                 }
                 <SignInFormSubmitButton {...submitButtonProps}>
                     Sign-in
