@@ -31,9 +31,11 @@ export const Listing: FunctionComponent<ListingPropsType> = ({ children }) => {
     }
 
     let file = '';
-    const match = metastring.match(/file:([^\s]+)/);
-    if (match[1]) {
-        file = match[1];
+    if (metastring) {
+        const match = metastring.match(/file:([^\s]+)/);
+        if (match && match[1]) {
+            file = match[1];
+        }
     }
 
     const onCopyClick = useCallback(() => {
