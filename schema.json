@@ -16398,21 +16398,21 @@
                         "defaultValue": null
                     },
                     {
-                        "name": "show_title",
-                        "description": "",
-                        "type": {
-                            "kind": "INPUT_OBJECT",
-                            "name": "IntQueryOperatorInput",
-                            "ofType": null
-                        },
-                        "defaultValue": null
-                    },
-                    {
                         "name": "images",
                         "description": "",
                         "type": {
                             "kind": "INPUT_OBJECT",
                             "name": "SitePageContextFrontmatterImagesFilterListInput",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    },
+                    {
+                        "name": "show_title",
+                        "description": "",
+                        "type": {
+                            "kind": "INPUT_OBJECT",
+                            "name": "IntQueryOperatorInput",
                             "ofType": null
                         },
                         "defaultValue": null
@@ -18090,18 +18090,6 @@
                         "deprecationReason": null
                     },
                     {
-                        "name": "show_title",
-                        "description": null,
-                        "args": [],
-                        "type": {
-                            "kind": "SCALAR",
-                            "name": "Int",
-                            "ofType": null
-                        },
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
                         "name": "images",
                         "description": null,
                         "args": [],
@@ -18113,6 +18101,18 @@
                                 "name": "SitePageContextFrontmatterImages",
                                 "ofType": null
                             }
+                        },
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
+                        "name": "show_title",
+                        "description": null,
+                        "args": [],
+                        "type": {
+                            "kind": "SCALAR",
+                            "name": "Int",
+                            "ofType": null
                         },
                         "isDeprecated": false,
                         "deprecationReason": null
@@ -20472,12 +20472,6 @@
                         "deprecationReason": null
                     },
                     {
-                        "name": "context___frontmatter___show_title",
-                        "description": null,
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
                         "name": "context___frontmatter___images",
                         "description": null,
                         "isDeprecated": false,
@@ -20491,6 +20485,12 @@
                     },
                     {
                         "name": "context___frontmatter___images___is_cover",
+                        "description": null,
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
+                        "name": "context___frontmatter___show_title",
                         "description": null,
                         "isDeprecated": false,
                         "deprecationReason": null
