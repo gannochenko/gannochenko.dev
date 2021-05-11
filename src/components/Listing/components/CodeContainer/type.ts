@@ -6,4 +6,5 @@ export interface Props {
     codeKeyColor: string;
     blockKey: string;
     wide?: boolean;
+    file?: string;
 }

@@ -1,4 +1,4 @@
-import React, { useCallback, FunctionComponent } from 'react';
+import React, { useCallback, FunctionComponent, useState } from 'react';
 import Highlight, { defaultProps } from 'prism-react-renderer';
 import copy from 'copy-to-clipboard';
 
@@ -8,6 +8,7 @@ import { listingBashTheme, listingDefaultTheme } from './prism-theme';
 import { CodeContainer } from './components/CodeContainer';
 
 export const Listing: FunctionComponent<ListingPropsType> = ({ children }) => {
+    const [copied, setCopied] = useState(false);
     const { props } = children;
 
     const className = props.className || '';
@@ -19,7 +20,7 @@ export const Listing: FunctionComponent<ListingPropsType> = ({ children }) => {
     const theme = lang === 'bash' ? listingBashTheme : listingDefaultTheme;
     const wide = lang === 'bash' || linesCount > 30;
     const keyColor = theme.styles[3].style.color;
-    const { bashRoot } = props;
+    const { bashRoot, metastring } = props;
 
     let blockKey = '';
     if (lang === 'bash') {
@@ -29,9 +30,16 @@ export const Listing: FunctionComponent<ListingPropsType> = ({ children }) => {
         }
     }
 
+    let file = '';
+    const match = metastring.match(/file:([^\s]+)/);
+    if (match[1]) {
+        file = match[1];
+    }
+
     const onCopyClick = useCallback(() => {
         copy(props.children);
-    }, []);
+        setCopied(true);
+    }, [setCopied, copy]);
 
     return (
         <CodeContainer
@@ -39,8 +47,9 @@ export const Listing: FunctionComponent<ListingPropsType> = ({ children }) => {
             wide={wide}
             codeKeyColor={keyColor!}
             blockKey={blockKey}
+            file={file}
         >
-            <Copy onClick={onCopyClick} />
+            <Copy onClick={onCopyClick} copied={copied} />
             <Highlight
                 {...defaultProps}
                 theme={theme}
