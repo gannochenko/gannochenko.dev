@@ -1,0 +1,47 @@
+---
+title: "Altstadtkirche of Königsberg"
+description:
+keywords:
+path: "/projects/altstadtkirche-of-konigsberg-"
+date: 2016-01-01
+published: true
+released: false
+images:
+    - image: ./cover.jpg
+      is_cover: 1
+      galleryId: 0
+    - image: ./images/1.2.1.jpg
+      galleryId: 1
+    - image: ./images/2.2.jpg
+      galleryId: 1
+    - image: ./images/3.jpg
+      galleryId: 1
+    - image: ./images/3.1.jpg
+      galleryId: 1
+    - image: ./images/3.2.jpg
+      galleryId: 1
+    - image: ./images/3.3.jpg
+      galleryId: 1
+    - image: ./images/2.3.jpg
+      galleryId: 1
+    - image: ./images/1.1.jpg
+      galleryId: 1
+---
+
+import { ProjectReleaseDate } from 'components/ProjectDetailsPageLayout/components/ProjectReleaseDate';
+import { ProjectLinks } from 'components/ProjectDetailsPageLayout/components/ProjectLinks';
+import { ProjectGallery } from 'components/ProjectDetailsPageLayout/components/ProjectGallery';
+
+# Altstadtkirche of Königsberg
+
+<ProjectReleaseDate date={props.pageContext.frontmatter.date} released={false} />
+
+I am actually a fan of the East European X-XIX traditional architecture. After I moved to Kaliningrad, I literary fell in love with the medieval and modern historical period of the city.
+Before the WWII the city belonged to germans, and was called Königsberg.
+Today it is a post-soviet, rather gray place, where all the beautiful pre-war architecture was almost entirely lost due to the bombing by British air force and the follow-up ideological Russians barbarity.
+
+Nevertheless, we still have the historical pictures ❤️
+
+I found some pictures of a gorgeous XIX church which used to be in the center of the historical part of the town, and decided to make a 3D-model.
+
+<ProjectGallery galleryId={1} images={props.pageContext.frontmatter.images} />
