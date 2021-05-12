@@ -15,9 +15,11 @@ images:
 
 import { Container } from 'components/Container';
 
-TypeScript became essential part of my professional activity. It got to the point that if I see pure *JavaScript* code, I simply can't acknowledge that. I immediately start asking myself "How is that possible for a language to not to have types?".
+TypeScript became essential part of my professional activity.
+It got to the point that if I see pure *JavaScript* code, I simply can't acknowledge that.
+I immediately start asking myself "How is that possible for a language to not to have types?".
 
-So in this article I will keep collecting all the tricks I have learned so far, as well as any cool projects I managed to find on the TypeScript topic.
+There are some tips and tricks I don't use quite often, so I decided to write down some notes, so I could always have them available.
 
 ## Extend one complex type from another
 
@@ -83,7 +85,48 @@ export class CommandRun {
 }
 ~~~
 
-## Typeof
+## Indexed vs Mapped Object vs Record
+
+~~~
+type MyMappedObjectType = {
+    [k in string | number]: unknown;
+};
+
+type MyIndexedType = {
+    [k: string]: unknown;
+};
+
+type MyRecord = Record<string, unknown>;
+~~~
+
+## Assign argument types
+
+If I have multiple functions of the same signature, I don't have to specify argument types every time. Instead, I make a type declaration once
+and just assign it to many functions. TS is smart enough to figure argument types in this case.
+
+~~~
+type SomeFunctionType = (foo: number, bar: string, baz: boolean) => void;
+
+const funA: SomeFunctionType = (a, b, c) => { ... };
+const funB: SomeFunctionType = (a, b, c) => { ... };
+const funC: SomeFunctionType = (a, b, c) => { ... };
+~~~
+
+## Create types from types
+
+There is a [nice article about that](https://www.typescriptlang.org/docs/handbook/2/types-from-types.html) ([old version](https://www.typescriptlang.org/docs/handbook/advanced-types.html)).
+
+### Generics
+
+It is possible to use generics to make a dependency between types of function arguments:
+
+~~~
+function pluck<T, K extends keyof T>(o: T, propertyNames: K[]): T[K][] {
+    return propertyNames.map((n) => o[n]);
+}
+~~~
+
+### Typeof
 
 Sometimes I can't import types from a third-party library, or I simply don't have types explicitly defined. Nevertheless, there is a way to declare a variable to be of the same type as the other variable:
 
@@ -94,18 +137,6 @@ const data = [
 ];
 
 const crewMember: typeof data[0] | undefined;
-~~~
-
-## Indexed vs Mapped Object
-
-~~~
-type MyMappedObjectType = {
-    [k in string | number]: string;
-};
-
-type MyIndexedType = {
-    [k: string]: string;
-};
 ~~~
 
 ***
