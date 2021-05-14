@@ -20,7 +20,7 @@ export const InnerContainer = styled(Container)`
 `;
 
 export const Items = styled.nav`
-    ${gap(null, '1rem')}
+    ${gap(null, '1.5rem')}
     ${align('center', 'right')}
     ${({ theme }) =>
         theme.util.media({

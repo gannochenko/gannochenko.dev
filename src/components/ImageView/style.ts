@@ -66,7 +66,6 @@ export const ImageViewRelative = styled.div<ImageViewInnerNodePropsType>`
 export const ImageViewImage = styled.img`
     max-height: 95vh;
     max-width: calc(100vw - 100px);
-    border: 1px solid #fdfdfd;
     border-radius: 2px;
     overflow: hidden;
 `;

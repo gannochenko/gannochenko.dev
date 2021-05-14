@@ -1,0 +1,41 @@
+---
+title: "Ren39 - the list of old building of Kaliningrad assigned to be torn down"
+description:
+keywords: ren39, urban activism, kaliningrad, history
+path: "/projects/ren39-"
+date: 2021-01-03
+published: true
+released: true
+images:
+    - image: ./cover.png
+      is_cover: 1
+      galleryId: 0
+    - image: ./images/01.jpg
+      is_cover: 0
+      galleryId: 1
+    - image: ./images/03.jpg
+      is_cover: 0
+      galleryId: 1
+    - image: ./images/05.jpg
+      is_cover: 0
+      galleryId: 1
+    - image: ./images/02.jpg
+      is_cover: 0
+      galleryId: 1
+---
+
+import { ProjectReleaseDate } from 'components/ProjectDetailsPageLayout/components/ProjectReleaseDate';
+import { ProjectLinks } from 'components/ProjectDetailsPageLayout/components/ProjectLinks';
+import { ProjectGallery } from 'components/ProjectDetailsPageLayout/components/ProjectGallery';
+
+# Ren39 - the list of old building of Kaliningrad assigned to be torn down
+
+<ProjectReleaseDate date={props.pageContext.frontmatter.date} released={props.pageContext.frontmatter.released} />
+
+Since I have become a fan of history of Kaliningrad, at some point I have decided to make a difference and start doing some urban activism.
+
+The [Ren39 project](https://ren39.ru/) tells about the valuable historical buildings soon to be demolished and torn down. Yes, it is in Russian :) And it has the same design as this blog, this is because I used the same template :) But who cares?:)
+
+Almost every building you can see at the website will soon turn into an empty place. At least we have photos.
+
+<ProjectGallery galleryId={1} images={props.pageContext.frontmatter.images} />
