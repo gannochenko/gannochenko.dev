@@ -69,3 +69,15 @@ fi
 ~~~
 
 [Other different file test operators](https://tldp.org/LDP/abs/html/fto.html).
+
+## Read environment variables from a file and define them
+
+The variables will be only visible to the current process.
+
+~~~bash
+if [ -f .env ]
+then
+  export $(cat .env | xargs)
+fi
+~~~
+
