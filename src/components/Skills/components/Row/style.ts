@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { withEffects } from '@gannochenko/ui';
 
 const factor = 1.5;
 const height = 4;
@@ -10,7 +9,7 @@ export const RowContainer = styled.div`
     flex-wrap: wrap;
 `;
 
-export const Cell = withEffects(styled.div<{
+export const Cell = styled.div<{
     last?: boolean;
     firstShift?: boolean;
     enableEffect?: boolean;
@@ -23,7 +22,4 @@ export const Cell = withEffects(styled.div<{
 
     ${props => (props.last ? 'margin-right: 0;' : '')}
     ${props => (props.firstShift ? 'margin-left: 5.2rem;' : '')}
-
-    // @ts-ignore
-    ${props => (props.enableEffect ? props.runStandardEffect() : '')}
-`);
+`;

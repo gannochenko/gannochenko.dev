@@ -10,7 +10,7 @@ export const SkillsContainer = styled.div`
 `;
 
 export const InnerContainer = styled.div`
-    ${align('top', 'center')}
+    ${align('top', 'left')}
     ${gap('1rem')}
 `;
 

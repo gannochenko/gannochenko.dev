@@ -38,6 +38,8 @@ const csharp = require('./logo/csharp.svg') as string;
 const auth0 = require('./logo/auth0.svg') as string;
 const netlify = require('./logo/netlify.svg') as string;
 const vercel = require('./logo/vercel.svg') as string;
+const kotlin = require('./logo/kotlin.svg') as string;
+const reactquery = require('./logo/reactquery.svg') as string;
 
 export const logo = {
     apollo,
@@ -80,4 +82,6 @@ export const logo = {
     auth0,
     netlify,
     vercel,
+    kotlin,
+    reactquery,
 };

@@ -1,53 +1,40 @@
 import { logo } from './assets';
 
 export const skills = {
+    // primary: [
+    //     {
+    //         key: 'reactjs',
+    //         logo: logo.reactjs,
+    //         title: 'React',
+    //         size: '4rem',
+    //     },
+    //     {
+    //         key: 'expressjs',
+    //         logo: logo.expressjs,
+    //         title: 'Express',
+    //         size: '4rem',
+    //     },
+    //     {
+    //         key: 'typescript',
+    //         logo: logo.typescript,
+    //         title: 'TypeScript',
+    //         size: '3.5rem',
+    //         isRound: true,
+    //     },
+    //     {
+    //         key: 'nodejs',
+    //         logo: logo.nodejs,
+    //         title: 'Node',
+    //         size: '2.5rem',
+    //         width: '4rem',
+    //     },
+    // ],
     primary: [
         {
             key: 'reactjs',
             logo: logo.reactjs,
             title: 'React',
             size: '4rem',
-        },
-        {
-            key: 'expressjs',
-            logo: logo.expressjs,
-            title: 'Express',
-            size: '4rem',
-        },
-        {
-            key: 'typescript',
-            logo: logo.typescript,
-            title: 'TypeScript',
-            size: '3.5rem',
-            isRound: true,
-        },
-        {
-            key: 'nodejs',
-            logo: logo.nodejs,
-            title: 'Node',
-            size: '2.5rem',
-            width: '4rem',
-        },
-        {
-            key: 'docker',
-            logo: logo.docker,
-            title: 'Docker',
-            size: '4.5rem',
-        },
-    ],
-    frontend: [
-        {
-            key: 'reactjs',
-            logo: logo.reactjs,
-            title: 'React',
-            size: '4rem',
-        },
-        {
-            key: 'styledcomponents',
-            logo: logo.styledcomponents,
-            title: 'Styled Components',
-            size: '4.0rem',
-            fontSize: 'small',
         },
         {
             key: 'typescript',
@@ -92,14 +79,48 @@ export const skills = {
             title: 'MobX',
             size: '3.5rem',
         },
-    ],
-    devops: [
+        {
+            key: 'reactquery',
+            logo: logo.reactquery,
+            title: 'React query',
+            size: '3.5rem',
+            //width: '3rem',
+        },
+        {
+            key: 'styledcomponents',
+            logo: logo.styledcomponents,
+            title: 'Styled Components',
+            size: '4.0rem',
+            fontSize: 'small',
+        },
+        {
+            key: 'git',
+            logo: logo.git,
+            title: 'GIT',
+            size: '4rem',
+        },
+        {
+            key: 'vercel',
+            logo: logo.vercel,
+            title: 'Vercel',
+            size: '2.5rem',
+            width: '3.0rem',
+        },
+        {
+            key: 'nodejs',
+            logo: logo.nodejs,
+            title: 'Node',
+            size: '2.5rem',
+            width: '4rem',
+        },
         {
             key: 'docker',
             logo: logo.docker,
             title: 'Docker',
             size: '4.5rem',
         },
+    ],
+    secondary: [
         {
             key: 'terraform',
             logo: logo.terraform,
@@ -121,112 +142,10 @@ export const skills = {
             isRound: true,
         },
         {
-            key: 'vagrant',
-            logo: logo.vagrant,
-            title: 'Vagrant',
-            size: '1.15rem',
-            width: '4.4rem',
-        },
-    ],
-    saas: [
-        {
             key: 'aws',
             logo: logo.aws,
             title: 'AWS',
             size: '4.5rem',
-        },
-        {
-            key: 'auth0',
-            logo: logo.auth0,
-            title: 'Auth0',
-            size: '3rem',
-            width: '2.7rem',
-        },
-        {
-            key: 'netlify',
-            logo: logo.netlify,
-            title: 'Netlify',
-            size: '3.5rem',
-            width: '3.5rem',
-        },
-        {
-            key: 'vercel',
-            logo: logo.vercel,
-            title: 'Vercel',
-            size: '2.5rem',
-            width: '3.0rem',
-        },
-    ],
-    dated: [
-        {
-            key: '1cbitrix',
-            logo: logo.bitrix,
-            title: '1C Bitrix',
-            size: '3.5rem',
-        },
-        {
-            key: 'meteorjs',
-            logo: logo.meteorjs,
-            title: 'Meteor',
-            size: '4rem',
-        },
-        {
-            key: 'php',
-            logo: logo.php,
-            title: 'PHP',
-            size: '3.5rem',
-            isRound: true,
-        },
-        {
-            key: 'sass',
-            logo: logo.sass,
-            title: 'SASS',
-            size: '2.5rem',
-            width: '4rem',
-        },
-        {
-            key: 'less',
-            logo: logo.less,
-            title: 'LESS',
-            size: '2.0rem',
-            width: '4.5rem',
-        },
-        {
-            key: 'redux',
-            logo: logo.redux,
-            title: 'Redux',
-            size: '4rem',
-        },
-        {
-            key: 'saga',
-            logo: logo.saga,
-            title: 'Redux Saga',
-            size: '2.2rem',
-            width: '3.6rem',
-        },
-    ],
-    util: [
-        {
-            key: 'git',
-            logo: logo.git,
-            title: 'GIT',
-            size: '4rem',
-        },
-        {
-            key: 'hg',
-            logo: logo.hg,
-            title: 'Mercurial',
-            size: '3rem',
-            width: '3.1rem',
-        },
-    ],
-    backend: [
-        {
-            key: 'nodejs',
-            logo: logo.nodejs,
-            title: 'Node',
-            size: '2.5rem',
-            width: '4rem',
         },
         {
             key: 'expressjs',
@@ -279,8 +198,69 @@ export const skills = {
             size: '4rem',
             offsetX: '0.7rem',
         },
+        {
+            key: 'sass',
+            logo: logo.sass,
+            title: 'SASS',
+            size: '2.5rem',
+            width: '4rem',
+        },
+        {
+            key: 'less',
+            logo: logo.less,
+            title: 'LESS',
+            size: '2.0rem',
+            width: '4.5rem',
+        },
+        {
+            key: 'redux',
+            logo: logo.redux,
+            title: 'Redux',
+            size: '4rem',
+        },
+        {
+            key: 'saga',
+            logo: logo.saga,
+            title: 'Redux Saga',
+            size: '2.2rem',
+            width: '3.6rem',
+        },
+        {
+            key: 'vagrant',
+            logo: logo.vagrant,
+            title: 'Vagrant',
+            size: '1.15rem',
+            width: '4.4rem',
+        },
     ],
     familiar: [
+        {
+            key: 'auth0',
+            logo: logo.auth0,
+            title: 'Auth0',
+            size: '3rem',
+            width: '2.7rem',
+        },
+        {
+            key: 'netlify',
+            logo: logo.netlify,
+            title: 'Netlify',
+            size: '3.5rem',
+            width: '3.5rem',
+        },
+        {
+            key: 'meteorjs',
+            logo: logo.meteorjs,
+            title: 'Meteor',
+            size: '4rem',
+        },
+        {
+            key: 'php',
+            logo: logo.php,
+            title: 'PHP',
+            size: '3.5rem',
+            isRound: true,
+        },
         {
             key: 'angular',
             logo: logo.angularjs,
@@ -307,6 +287,30 @@ export const skills = {
             title: 'Python',
             size: '1.2rem',
             width: '4rem',
+        },
+        {
+            key: 'kotlin',
+            logo: logo.kotlin,
+            title: 'Kotlin',
+            size: '2.5rem',
+            //width: '3rem',
+        },
+    ],
+    dated: [
+        {
+            key: '1cbitrix',
+            logo: logo.bitrix,
+            title: '1C Bitrix',
+            size: '3.5rem',
+        },
+    ],
+    util: [
+        {
+            key: 'hg',
+            logo: logo.hg,
+            title: 'Mercurial',
+            size: '3rem',
+            width: '3.1rem',
         },
     ],
 };
