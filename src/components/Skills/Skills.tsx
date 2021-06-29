@@ -12,10 +12,18 @@ import { detectRange, getGrid } from './util';
 import { ThemeType } from '@gannochenko/etc';
 
 export const Skills: FunctionComponent<Props> = ({
-    type,
+    list,
     enableEffect = true,
 }) => {
-    const data = skills[type] || [];
+    const selected = useMemo(
+        () =>
+            list
+                .split(',')
+                .map(item => item.trim())
+                .filter(item => !!item),
+        [list],
+    );
+
     const theme = useTheme() as ThemeType;
     const [range, setRange] = useState(detectRange(theme));
 
@@ -37,8 +45,11 @@ export const Skills: FunctionComponent<Props> = ({
     }, [theme]);
 
     const grid = useMemo(() => {
-        return getGrid(data, range);
-    }, [data, range]);
+        return getGrid(
+            selected.map(skill => skills[skill]),
+            range,
+        );
+    }, [selected, range]);
 
     return (
         <SkillsContainer>

@@ -139,6 +139,19 @@ const data = [
 const crewMember: typeof data[0] | undefined;
 ~~~
 
+### Pulling out the type of an element of an array
+
+Using `typeof` + `infer` + `conditional` is ass-saving when it's too lazy to describe a type, or simply don't have access to library types.
+
+~~~
+const data = [
+    { name: 'Alex', position: 'pilot', customField: '1' },
+    { name: 'Amos', position: 'tech', otherCustomField: true },
+];
+
+const ElementType = typeof data extends (infer U)[] ? U : unknown;
+~~~
+
 ***
 
 No rest for an engineer, so, yeh, to be continued...

@@ -40,6 +40,8 @@ const netlify = require('./logo/netlify.svg') as string;
 const vercel = require('./logo/vercel.svg') as string;
 const kotlin = require('./logo/kotlin.svg') as string;
 const reactquery = require('./logo/reactquery.svg') as string;
+const autodesk = require('./logo/3dsmax.svg') as string;
+const vray = require('./logo/vray.svg') as string;
 
 export const logo = {
     apollo,
@@ -84,4 +86,6 @@ export const logo = {
     vercel,
     kotlin,
     reactquery,
+    autodesk,
+    vray,
 };

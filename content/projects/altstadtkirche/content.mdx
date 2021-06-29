@@ -31,6 +31,8 @@ images:
 import { ProjectReleaseDate } from 'components/ProjectDetailsPageLayout/components/ProjectReleaseDate';
 import { ProjectLinks } from 'components/ProjectDetailsPageLayout/components/ProjectLinks';
 import { ProjectGallery } from 'components/ProjectDetailsPageLayout/components/ProjectGallery';
+import { Container } from 'components/Container';
+import { Skills } from 'components/Skills';
 
 # Altstadtkirche of Königsberg
 
@@ -59,6 +61,12 @@ But the good thing is, there are always some takeaways in the end:
 
 👉 Use right tools and follow best practices to save time.
 
-Here are some renders:
+## Screenshots
 
 <ProjectGallery galleryId={1} images={props.pageContext.frontmatter.images} />
+
+## Built with
+
+<Container>
+    <Skills list="3dsmax,vray" />
+</Container>

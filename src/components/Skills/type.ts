@@ -1,5 +1,5 @@
 export interface Props {
-    type: 'primary' | 'frontend' | 'backend' | 'devops' | 'familiar' | 'util';
+    list: string;
     enableEffect?: boolean;
 }
 

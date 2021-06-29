@@ -27,6 +27,8 @@ images:
 import { ProjectReleaseDate } from 'components/ProjectDetailsPageLayout/components/ProjectReleaseDate';
 import { ProjectLinks } from 'components/ProjectDetailsPageLayout/components/ProjectLinks';
 import { ProjectGallery } from 'components/ProjectDetailsPageLayout/components/ProjectGallery';
+import { Container } from 'components/Container';
+import { Skills } from 'components/Skills';
 
 # Ren39 - the list of old building of Kaliningrad assigned to be torn down
 
@@ -38,4 +40,12 @@ The [Ren39 project](https://ren39.ru/) tells about the valuable historical build
 
 Almost every building you can see at the website will soon turn into an empty place. At least we have photos.
 
+## Screenshots
+
 <ProjectGallery galleryId={1} images={props.pageContext.frontmatter.images} />
+
+## Built with
+
+<Container>
+    <Skills list="reactjs,gatsbyjs,typescript,styledcomponents,aws,terraform,reactquery" />
+</Container>

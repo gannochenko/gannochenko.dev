@@ -43,6 +43,8 @@ images:
 import { ProjectReleaseDate } from 'components/ProjectDetailsPageLayout/components/ProjectReleaseDate';
 import { ProjectLinks } from 'components/ProjectDetailsPageLayout/components/ProjectLinks';
 import { ProjectGallery } from 'components/ProjectDetailsPageLayout/components/ProjectGallery';
+import { Container } from 'components/Container';
+import { Skills } from 'components/Skills';
 
 # New Sunrise: a mod for CnC3:KW
 
@@ -79,6 +81,12 @@ Yeh, I wish I was more experienced back then. Anyway, here is the link to the mo
     moddb="https://www.moddb.com/mods/a-new-sunrise"
 />
 
-And a few screenshots:
+## Screenshots
 
 <ProjectGallery galleryId={1} images={props.pageContext.frontmatter.images} />
+
+## Built with
+
+<Container>
+    <Skills list="3dsmax" />
+</Container>
