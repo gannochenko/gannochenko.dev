@@ -288,6 +288,12 @@ const skillList = [
         title: 'VRay',
         size: '5rem',
     },
+    {
+        key: 'jamstack',
+        logo: logo.jamstack,
+        title: 'Jamstack',
+        size: '3rem',
+    },
 ];
 
 export const skills: Record<

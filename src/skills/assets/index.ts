@@ -42,6 +42,7 @@ const kotlin = require('./logo/kotlin.svg') as string;
 const reactquery = require('./logo/reactquery.svg') as string;
 const autodesk = require('./logo/3dsmax.svg') as string;
 const vray = require('./logo/vray.svg') as string;
+const jamstack = require('./logo/jamstack.svg') as string;
 
 export const logo = {
     apollo,
@@ -88,4 +89,5 @@ export const logo = {
     reactquery,
     autodesk,
     vray,
+    jamstack,
 };
